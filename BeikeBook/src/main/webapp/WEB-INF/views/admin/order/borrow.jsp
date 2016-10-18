@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -63,59 +65,59 @@
                 <ul class="nav pull-right">
                     <li id="fat-menu" class="dropdown">
                         <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-user"></i>深圳-深圳大学
+                            <i class="icon-user"></i><c:out value="${districtAddrStr}" default="广州-中山大学-斋区托管点" />
                             <i class="icon-caret-down"></i>
                         </a>
 
                         <ul class="dropdown-menu">
                             <li><a tabindex="-1" href="#">我的账户信息</a></li>
-                            <li><a tabindex="-1" href="sign-in.html">退出</a></li>
+                            <li><a tabindex="-1" href="sign-in.jsp">退出</a></li>
                         </ul>
                     </li>
                 </ul>
-                <a class="brand" href="../index.html"><span class="second">贝壳易书管理后台</span></a>
+                <a class="brand" href="../index.jsp"><span class="second">贝壳易书管理后台</span></a>
         </div>
     </div>
 
     <div class="sidebar-nav">
         <a href="#user-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>用户管理<i class="icon-chevron-up"></i></a>
         <ul id="user-menu" class="nav nav-list collapse">
-            <li ><a href="../user/users.html">用户管理</a></li>
+            <li ><a href="../user/users.jsp">用户管理</a></li>
         </ul>
 
         <a href="#city-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-map-marker"></i>托管点管理<i class="icon-chevron-up"></i></a>
         <ul id="city-menu" class="nav nav-list collapse">
-            <li ><a href="../city/city.html">城市管理</a></li>
-            <li ><a href="../city/school.html">学校管理</a></li>
-            <li ><a href="../city/district.html">托管点管理</a></li>
+            <li ><a href="../city/city.jsp">城市管理</a></li>
+            <li ><a href="../city/school.jsp">学校管理</a></li>
+            <li ><a href="../city/district.jsp">托管点管理</a></li>
         </ul>
 
         <a href="#book-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-book"></i>书籍管理<i class="icon-chevron-up"></i></a>
         <ul id="book-menu" class="nav nav-list collapse">
-            <li ><a href="../book/class.html">书类</a></li>
-            <li ><a href="../book/books.html">书单</a></li>
-            <li ><a href="../book/bookadd.html">添加书本</a></li>
+            <li ><a href="../book/class.jsp">书类</a></li>
+            <li ><a href="../book/books.jsp">书单</a></li>
+            <li ><a href="../book/bookadd.jsp">添加书本</a></li>
         </ul>
 
         <a href="#order-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>订单情况<i class="icon-chevron-up"></i></a>
         <ul id="order-menu" class="nav nav-list collapse">
-            <li ><a href="../order/sell.html">买书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/borrow.html">租书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/allorder.html">全部订单（买书）</a></li>
-            <li ><a href="../order/allorder_borrow.html">全部订单（租书）</a></li>
+            <li ><a href="../order/sell.jsp">买书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
+            <li ><a href="../order/borrow.jsp">租书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
+            <li ><a href="../order/allorder.jsp">全部订单（买书）</a></li>
+            <li ><a href="../order/allorder_borrow.jsp">全部订单（租书）</a></li>
         </ul>
 
-        <a href="../banner/banner.html" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
+        <a href="../banner/banner.jsp" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
 
         <a href="#money-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>提现申请<i class="icon-chevron-up"></i></a>
         <ul id="money-menu" class="nav nav-list collapse">
-            <li ><a href="../money/money.html">未结算</a></li>
-            <li ><a href="../money/all_money.html">所有提现</a></li>
+            <li ><a href="../money/money.jsp">未结算</a></li>
+            <li ><a href="../money/all_money.jsp">所有提现</a></li>
         </ul>
 
-        <a href="../method/method.html" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
+        <a href="../method/method.jsp" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
 
-        <a href="../announ/announ.html" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
+        <a href="../announ/announ.jsp" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
     </div>
     
     
@@ -125,7 +127,7 @@
         </div>
         
         <ul class="breadcrumb">
-            <li><a href="../index.html">首页</a><span class="divider">/</span></li>
+            <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
             <li>订单管理<span class="divider">/</span></li>
             <li class="active">租书</li>
         </ul>
@@ -156,33 +158,38 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>毛泽东与邓小平理论知识毛泽东与邓小平理论知识</td>
-              <td>林泽鹏</td>
-              <td>1</td>
-              <td>4.5元</td>
-              <td>上门配送（凌霄斋）</td>
-              <td>2016122110</td>
-              <td>2016-12-21 12:32:12</td>
-              <td><span class="btn-danger" style="padding:5px;">未出租</span></td>
-              <td>
-                  <a href="orderword.html"><i class="icon-edit"></i><span> 生成订单</span></a>
-                  <a href="isSend.php"><i class="icon-star"></i><span> 已出租</span></a>
-                  
-              </td>
-            </tr>
+          	<c:forEach items="${rentInfos}" var="i" begin="<c:out value="${pageNo*3}"/>" end="<c:out value="${pageNo*3 + 3}"/>">
+				<tr>
+					<td><c:out value="${i.id}" /></td>
+					<td><c:out value="${i.rentBookName}" /></td>
+					<td><c:out value="${i.userName}" /></td>
+					<td><c:out value="${i.rentNum}" /></td>
+					<td><c:out value="${i.money}" /></td>
+					<td><c:out value="${i.method}" /></td>
+					<td><c:out value="${i.takeBookNum}" /></td>
+					<td><c:out value="${i.rentTime}" /></td>
+					<td><span class="btn-danger" style="padding:5px;">
+						<c:choose>
+							<c:when test="${sendStatus}">已配送</c:when>
+							<c:otherwise>未配送</c:otherwise>
+						</c:choose></span>
+					</td>
+					<td>
+						<a href="orderword_borrow.jsp"><i class="icon-edit"></i><span> 生成订单</span></a>
+					</td>
+				</tr>
+			</c:forEach>
           </tbody>
         </table>
 
   <div class="pagination">
       <ul>
-          <li><a href="#">Prev</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">Next</a></li>
+          <li><a href="borrow.jsp?pageNo=<c:out value="${pageNo}"/>">Prev</a></li>
+          <li><span><c:out value="${pageNo}"/></span>
+          <li><a href="borrow.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo + 1}"/></a></li>
+          <li><a href="borrow.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo + 1}"/></a></li>
+          <li><a href="borrow.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo + 1}"/></a></li>
+          <li><a href="borrow.jsp?pageNo=<c:out value="${pageNo}"/>">Next</a></li>
       </ul>
   </div>
 

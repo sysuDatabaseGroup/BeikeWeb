@@ -1,3 +1,6 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8" errorPage="404.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -39,8 +42,17 @@
           padding-top: 5px;
         }
     </style>
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<script type="text/javascript">
+		function saveUser() {
+			var city = document.getElementById("DropDownCity").value;
+			var cityNum = city.options[city.selectedIndex].value;
+			var school = document.getElementById("DropDownSchool").value;
+			var cityNum = school.options[school.selectedIndex].value;
+			var domitory = document.getElementById("DropDownDorm").value;
+			var dorm = domitory.options[domitory.selectedIndex].value;
+		}
+	</script>
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -66,59 +78,59 @@
                 <ul class="nav pull-right">
                     <li id="fat-menu" class="dropdown">
                         <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-user"></i>深圳-深圳大学-斋区托管点
+                            <i class="icon-user"></i><c:out value="${districtAddrStr}" default="广州-中山大学-斋区托管点" />
                             <i class="icon-caret-down"></i>
                         </a>
 
                         <ul class="dropdown-menu">
                             <li><a tabindex="-1" href="#">我的账户信息</a></li>
-                            <li><a tabindex="-1" href="sign-in.html">退出</a></li>
+                            <li><a tabindex="-1" href="sign-in.jsp">退出</a></li>
                         </ul>
                     </li>
                 </ul>
-                <a class="brand" href="../index.html"><span class="second">贝壳易书管理后台</span></a>
+                <a class="brand" href="../index.jsp"><span class="second">贝壳易书管理后台</span></a>
         </div>
     </div>
 
     <div class="sidebar-nav">
         <a href="#user-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>用户管理<i class="icon-chevron-up"></i></a>
         <ul id="user-menu" class="nav nav-list collapse">
-            <li ><a href="../user/users.html">用户管理</a></li>
+            <li ><a href="../user/users.jsp">用户管理</a></li>
         </ul>
 
         <a href="#city-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-map-marker"></i>托管点管理<i class="icon-chevron-up"></i></a>
         <ul id="city-menu" class="nav nav-list collapse">
-            <li ><a href="../city/city.html">城市管理</a></li>
-            <li ><a href="../city/school.html">学校管理</a></li>
-            <li ><a href="../city/district.html">托管点管理</a></li>
+            <li ><a href="../city/city.jsp">城市管理</a></li>
+            <li ><a href="../city/school.jsp">学校管理</a></li>
+            <li ><a href="../city/district.jsp">托管点管理</a></li>
         </ul>
 
         <a href="#book-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-book"></i>书籍管理<i class="icon-chevron-up"></i></a>
         <ul id="book-menu" class="nav nav-list collapse">
-            <li ><a href="../book/class.html">书类</a></li>
-            <li ><a href="../book/books.html">书单</a></li>
-            <li ><a href="../book/bookadd.html">添加书本</a></li>
+            <li ><a href="../book/class.jsp">书类</a></li>
+            <li ><a href="../book/books.jsp">书单</a></li>
+            <li ><a href="../book/bookadd.jsp">添加书本</a></li>
         </ul>
 
         <a href="#order-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>订单情况<i class="icon-chevron-up"></i></a>
         <ul id="order-menu" class="nav nav-list collapse">
-            <li ><a href="../order/sell.html">买书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/borrow.html">租书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/allorder.html">全部订单（买书）</a></li>
-            <li ><a href="../order/allorder_borrow.html">全部订单（租书）</a></li>
+            <li ><a href="../order/sell.jsp">买书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
+            <li ><a href="../order/borrow.jsp">租书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
+            <li ><a href="../order/allorder.jsp">全部订单（买书）</a></li>
+            <li ><a href="../order/allorder_borrow.jsp">全部订单（租书）</a></li>
         </ul>
 
-        <a href="../banner/banner.html" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
+        <a href="../banner/banner.jsp" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
 
         <a href="#money-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>提现申请<i class="icon-chevron-up"></i></a>
         <ul id="money-menu" class="nav nav-list collapse">
-            <li ><a href="../money/money.html">未结算</a></li>
-            <li ><a href="../money/all_money.html">所有提现</a></li>
+            <li ><a href="../money/money.jsp">未结算</a></li>
+            <li ><a href="../money/all_money.jsp">所有提现</a></li>
         </ul>
 
-        <a href="../method/method.html" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
+        <a href="../method/method.jsp" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
 
-        <a href="../announ/announ.html" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
+        <a href="../announ/announ.jsp" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
     </div>
     
 <div class="content">
@@ -126,8 +138,8 @@
     <h1 class="page-title">用户编辑</h1>
   </div>
   <ul class="breadcrumb">
-    <li><a href="../index.html">首页</a> <span class="divider">/</span></li>
-    <li><a href="users.html">用户管理</a> <span class="divider">/</span></li>
+    <li><a href="../index.jsp">首页</a> <span class="divider">/</span></li>
+    <li><a href="users.jsp">用户管理</a> <span class="divider">/</span></li>
     <li class="active">用户编辑</li>
   </ul>
 
@@ -141,28 +153,28 @@
           <div class="tab-pane active in" id="home">
           <form id="user">
               <label>用户名</label>
-              <strong>mark</strong>
+              <strong><c:out value="${userName}"/></strong>
 
               <label>用户编号</label>
-              <strong>00000012</strong>
+              <strong><c:out value="${userNo}"/></strong>
 
               <label>城市</label>
               <select name="DropDownTimezone" id="DropDownCity" class="input-xlarge">
-                <option value="深圳">深圳</option>
-                <option value="广州">广州</option>
+                <option value="0">未选择</option>
+                <option value="1" selected="<c:if test="${cityNum == 1}">selected</c:if>">广州</option>
               </select>
 
               <label>学校</label>
               <select name="DropDownTimezone" id="DropDownSchool" class="input-xlarge">
-                <option value="11.0">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
-                <option value="12.0">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
+                <option value="0">未选择</option>
+                <option value="1" selected="<c:if test="${schoolNum == 1}">selected</c:if>">中山大学</option>
               </select>
 
               <label>宿舍</label>
               <select name="DropDownTimezone" id="DropDownDorm" class="input-xlarge">
-                <option value="10.0">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
-                <option value="11.0">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
-                <option value="12.0">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
+                <option value="0">未选择</option>
+                <option value="1" selected="<c:if test="${fn:contains(domitory, '至善园1号')}"><c:out value="selected"/></c:if>">至善园1号</option>
+                <option value="2" selected="<c:if test="${fn:contains(domitory, '至善园2号')}"><c:out value="selected"/></c:if>">至善园2号</option>
               </select>
           </form>
           </div>

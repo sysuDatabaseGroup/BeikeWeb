@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8" errorPage="404.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,7 +63,7 @@
                 <ul class="nav pull-right">
                     
                 </ul>
-                <a class="brand" href="index.html"><span class="first">Your</span> <span class="second">Company</span></a>
+                <a class="brand" href="index.jsp"><span class="first">Your</span> <span class="second">Company</span></a>
         </div>
     </div>
     
@@ -80,14 +82,14 @@
                     <input type="text" class="span12">
                     <label>Password</label>
                     <input type="password" class="span12">
-                    <a href="index.html" class="btn btn-primary pull-right">Sign In</a>
+                    <a href="index.jsp" class="btn btn-primary pull-right">Sign In</a>
                     <label class="remember-me"><input type="checkbox"> Remember me</label>
                     <div class="clearfix"></div>
                 </form>
             </div>
         </div>
-        <p class="pull-right" style=""><a href="#" target="blank">Theme by Portnine</a></p>
-        <p><a href="reset-password.html">Forgot your password?</a></p>
+        <p class="pull-right" style=""><a href="" target="blank">Theme by Portnine</a></p>
+        <p><a href="reset-password.jsp">Forgot your password?</a></p>
     </div>
 </div>
 
