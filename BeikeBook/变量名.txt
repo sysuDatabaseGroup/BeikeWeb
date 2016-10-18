@@ -1,0 +1,75 @@
+admin/index.jsp										loginStatus					登录的状态
+																	districtAddrStr			广州-中山大学-斋区托管点
+																	numRentBook					租书的总数
+																	numSellBook					买书的总数
+																	numUsers						用户总数
+																	dataTime						数据更新的时间
+																	circulatingFund			总金额
+																	rentInfos						租书信息
+																		rentUser						用户名
+																		rentBookName				书名
+																		rentStatus					是否已领取
+																	announContent				成员公告
+																	sellInfos						买书信息
+																		sellUser							买书用户
+																		sellPrice							金额
+																		sellTime							时间
+
+admin/sign-in.jsp													提交的方法
+admin/sign-up.jsp													提交的方法
+
+admin/user/users.jsp							districtAddrStr			广州-中山大学-斋区托管点
+																	userInfos						用户信息
+																		id								自增编号
+																		userName					用户名
+																		userNo						用户编号
+																		city							城市
+																		school						学校
+																		domitory					宿舍
+																	pageNo							当前的列表的页号
+
+admin/user/useredit.jsp						districtAddrStr			广州-中山大学-斋区托管点
+																	userInfos						用户信息
+																		userName					用户名
+																		userNo						用户编号
+																		cityNum						城市编号
+																		schoolNum					学校编号
+																		domitory					宿舍
+
+admin/order/sell.jsp							districtAddrStr			广州-中山大学-斋区托管点
+																	sellInfos						用户买书信息
+																		id								自增编号	
+																		sellBookName			书名
+																		userName					用户名
+																		sellNum						买书的数量
+																		money							收费
+																		method						配送方式
+																		takeBookNum				取书号
+																		sellTime					购买时间
+																		sendStatus				状态
+																	pageNo							当前的列表的页号
+
+admin/order/orderword.jsp					districtAddrStr			广州-中山大学-斋区托管点
+																	takeBookNum					取书号
+																	sellBookName				书名
+																	sellNum							买书的数量
+																	method							配送方式
+
+admin/order/orderword_borrow.jsp	districtAddrStr			广州-中山大学-斋区托管点
+																	takeBookNum					取书号
+																	rentBookName				书名
+																	rentNum							买书的数量
+																	method							配送方式
+
+admin/order/borrow.jsp						districtAddrStr			广州-中山大学-斋区托管点
+																	rentInfos						用户买书信息
+																		id								自增编号	
+																		rentBookName			书名
+																		userName					用户名
+																		rentNum						买书的数量
+																		money							收费
+																		method						配送方式
+																		takeBookNum				取书号
+																		rentTime					购买时间
+																		sendStatus				状态
+																	pageNo							当前的列表的页号
