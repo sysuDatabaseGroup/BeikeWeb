@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.fortest.dao.ICityDao">
+	<select id="getCity" parameterType="com.databasegroup.fortest.pojo.City"
+		resultType="com.databasegroup.fortest.pojo.City">
+		SELECT * FROM bk_city WHERE cityNum=#{cityNum}
+	</select>
+	<insert id="addCity" parameterType="com.databasegroup.fortest.pojo.City"
+		flushCache="true">
+		INSERT INTO bk_city (cityName,cityNum) VALUES
+		(#{cityName},#{cityNum})
+	</insert>
+	<!-- 
+		<update id="updateUser" parameterType="com.springMyBatis.system.model.User">
+			UPDATE user SET password=#{password} WHERE id=#{id}
+		</update>
+		<delete id="deleteUser" parameterType="int">
+			DELETE FROM user WHERE id=#{id}
+		</delete> 
+	-->
+</mapper>

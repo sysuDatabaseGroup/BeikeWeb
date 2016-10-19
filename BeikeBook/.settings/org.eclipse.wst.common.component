@@ -6,6 +6,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/test/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/test/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources/mapper"/>
         <property name="context-root" value="BeikeBook"/>
         <property name="java-output-path" value="/BeikeBook/target/classes"/>
     </wb-module>
