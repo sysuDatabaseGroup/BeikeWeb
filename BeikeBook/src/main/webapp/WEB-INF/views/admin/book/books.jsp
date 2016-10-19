@@ -33,6 +33,11 @@
             color: #fff;
             font-weight: bold;
         }
+
+        tr>td>img{
+          width: 100px;
+          height: auto;
+        }
     </style>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -60,78 +65,79 @@
                 <ul class="nav pull-right">
                     <li id="fat-menu" class="dropdown">
                         <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-user"></i>深圳-深圳大学-斋区托管点
+                            <i class="icon-user"></i><c:out value="${districtAddrStr}" default="广州-中山大学-斋区托管点" />
                             <i class="icon-caret-down"></i>
                         </a>
 
                         <ul class="dropdown-menu">
                             <li><a tabindex="-1" href="#">我的账户信息</a></li>
-                            <li><a tabindex="-1" href="sign-in.html">退出</a></li>
+                            <li><a tabindex="-1" href="sign-in.jsp">退出</a></li>
                         </ul>
                     </li>
                 </ul>
-                <a class="brand" href="../index.html"><span class="second">贝壳易书管理后台</span></a>
+                <a class="brand" href="../index.jsp"><span class="second">贝壳易书管理后台</span></a>
         </div>
     </div>
 
     <div class="sidebar-nav">
         <a href="#user-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>用户管理<i class="icon-chevron-up"></i></a>
         <ul id="user-menu" class="nav nav-list collapse">
-            <li ><a href="../user/users.html">用户管理</a></li>
+            <li ><a href="../user/users.jsp">用户管理</a></li>
         </ul>
 
         <a href="#city-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-map-marker"></i>托管点管理<i class="icon-chevron-up"></i></a>
         <ul id="city-menu" class="nav nav-list collapse">
-            <li ><a href="../city/city.html">城市管理</a></li>
-            <li ><a href="../city/school.html">学校管理</a></li>
-            <li ><a href="../city/district.html">托管点管理</a></li>
+            <li ><a href="../city/city.jsp">城市管理</a></li>
+            <li ><a href="../city/school.jsp">学校管理</a></li>
+            <li ><a href="../city/district.jsp">托管点管理</a></li>
         </ul>
 
         <a href="#book-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-book"></i>书籍管理<i class="icon-chevron-up"></i></a>
         <ul id="book-menu" class="nav nav-list collapse">
-            <li ><a href="../book/class.html">书类</a></li>
-            <li ><a href="../book/books.html">书单</a></li>
-            <li ><a href="../book/bookadd.html">添加书本</a></li>
+            <li ><a href="../book/class.jsp">书类</a></li>
+            <li ><a href="../book/books.jsp">书单</a></li>
+            <li ><a href="../book/bookadd.jsp">添加书本</a></li>
         </ul>
 
         <a href="#order-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>订单情况<i class="icon-chevron-up"></i></a>
         <ul id="order-menu" class="nav nav-list collapse">
-            <li ><a href="../order/sell.html">买书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/borrow.html">租书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/allorder.html">全部订单（买书）</a></li>
-            <li ><a href="../order/allorder_borrow.html">全部订单（租书）</a></li>
+            <li ><a href="../order/sell.jsp">买书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
+            <li ><a href="../order/borrow.jsp">租书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
+            <li ><a href="../order/allorder.jsp">全部订单（买书）</a></li>
+            <li ><a href="../order/allorder_borrow.jsp">全部订单（租书）</a></li>
         </ul>
 
-        <a href="../banner/banner.html" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
+        <a href="../banner/banner.jsp" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
 
         <a href="#money-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>提现申请<i class="icon-chevron-up"></i></a>
         <ul id="money-menu" class="nav nav-list collapse">
-            <li ><a href="../money/money.html">未结算</a></li>
-            <li ><a href="../money/all_money.html">所有提现</a></li>
+            <li ><a href="../money/money.jsp">未结算</a></li>
+            <li ><a href="../money/all_money.jsp">所有提现</a></li>
         </ul>
 
-        <a href="../method/method.html" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
+        <a href="../method/method.jsp" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
 
-        <a href="../announ/announ.html" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
+        <a href="../announ/announ.jsp" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
     </div>
     
     
     <div class="content">
         <div class="header">
-            <h1 class="page-title">配送方式</h1>
+            <h1 class="page-title">书单</h1>
         </div>
         
         <ul class="breadcrumb">
-            <li><a href="../index.html">首页</a><span class="divider">/</span></li>
-            <li>配送管理<span class="divider">/</span></li>
-            <li class="active">配送方式</li>
+            <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
+            <li>书籍管理<span class="divider">/</span></li>
+            <li class="active">书单</li>
         </ul>
 
         <div class="container-fluid">
             <div class="row-fluid">
                     
 <div class="btn-toolbar">
-    <button class="btn btn-primary"><a href="methodadd.html" style="color:#fff;"><i class="icon-plus"></i> 增加方式</a></button>
+    <a href="booksadd.jsp" style="color:#fff;"><button class="btn btn-primary"><i class="icon-plus"></i> 增加书单</button></a>
+    <a href="bookadd.jsp" style="color:#fff;"><button class="btn btn-danger"><i class="icon-plus"></i> 增加书本</button></a>
 </div>
 
 <div class="well">
@@ -139,51 +145,56 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>配送方式</th>
-          <th>收费</th>
-          <th style="width: 100px;">操作</th>
+          <th width="150px">书名</th>
+          <th>封面</th>
+          <th>作者</th>
+          <th>出版社</th>
+          <th>版本</th>
+          <th>出售参考价</th>
+          <th>出租参考价（年）</th>
+          <th>数量</th>
+          <th style="width:100px;">操作</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>自取</td>
-          <td>0</td>
-          <td>
-              <a href="methodedit.html"><i class="icon-pencil"></i><span>编辑</span></a>
-              <a href="#myModal" role="button" data-toggle="modal" style="margin-left:5px;"><i class="icon-remove"></i><span>删除</span></a>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>上门送书</td>
-          <td>2</td>
-          <td>
-              <a href="methodedit.html"><i class="icon-pencil"></i><span>编辑</span></a>
-              <a href="#myModal" role="button" data-toggle="modal" style="margin-left:5px;"><i class="icon-remove"></i><span>删除</span></a>
-          </td>
-        </tr>
+		<c:forEach items="${bookInfos}" var="i" begin="<c:out value="${pageNo*5}"/>" end="<c:out value="${pageNo*5 + 5}"/>">
+			<tr>
+				<td><c:out value="${i.bookClassID}" /></td>
+				<td><c:out value="${i.bookClassName}" /></td>
+				<td><img src='booksimages/<c:out value="${i.bookClassImg}" />' alt="" /></td>
+				<td><c:out value="${i.author}" /></td>
+				<td><c:out value="${i.company}" /></td>
+				<td><c:out value="${i.version}" /></td>
+				<td><c:out value="${i.sellPrice}" /></td>
+				<td><c:out value="${i.borrowPrice}" /></td>
+				<td><c:out value="${i.bookNum}" /></td>
+				<td>
+				    <a href="booksedit.jsp"><i class="icon-pencil"></i><span>编辑</span></a>
+				    <a href="#myModal" role="button" data-toggle="modal" style="margin-left:5px;"><i class="icon-remove"></i><span>删除</span></a>
+				</td>
+			</tr>
+		</c:forEach>
       </tbody>
     </table>
 </div>
 <div class="pagination">
     <ul>
-        <li><a href="#">Prev</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">Next</a></li>
+        <li><a href="books.jsp?pageNo=<c:out value="${pageNo}"/>">Prev</a></li>
+        <li><a href="books.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo}"/></a></li>
+        <li><a href="books.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo+1}"/></a></li>
+        <li><a href="books.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo+2}"/></a></li>
+        <li><a href="books.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo+3}"/></a></li>
+        <li><a href="books.jsp?pageNo=<c:out value="${pageNo}"/>">Next</a></li>
     </ul>
 </div>
 
 <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">删除配送方式？</h3>
+        <h3 id="myModalLabel">删除书单？</h3>
     </div>
     <div class="modal-body">
-        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>确认删除配送方式［自取］？</p>
+        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>确认删除书单［毛泽东与邓小平理论知识］？</p>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>

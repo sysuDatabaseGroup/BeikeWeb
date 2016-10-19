@@ -189,15 +189,15 @@
 								<tr>
 									<td><c:out value="${i.id}" />
 									</td>
-									<td><c:out value="${i.userName}" />
+									<td><c:out value="${i.userNum}" />
 									</td>
 									<td><c:out value="${i.userNo}" />
 									</td>
-									<td><c:out value="${i.city}" />
+									<td><c:out value="${i.cityName}" />
 									</td>
-									<td><c:out value="${i.school}" />
+									<td><c:out value="${i.schoolName}" />
 									</td>
-									<td><c:out value="${i.domitory}" />
+									<td><c:out value="${i.dorm}" />
 									</td>
 									<td><a href="useredit.jsp?userNo=<c:out value="${i.userNo}"/>"><i class="icon-pencil"></i><span>编辑</span>
 									</a></td>

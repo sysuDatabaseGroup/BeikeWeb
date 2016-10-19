@@ -141,9 +141,9 @@
 <div class="well">
     <span>★买书订单★</span>
     <span>取书号：<c:out value="${takeBookNum}"/></span>
-    <span>书名：<c:out value="${rentBookName}"/></span>
-    <span>数量：<c:out value="${rentNum}"/> 本</span>
-    <span><c:out value="${method}"/></span>
+    <span>书名：<c:out value="${bookClassName}"/></span>
+    <span>数量：<c:out value="${num}"/> 本</span>
+    <span><c:out value="${methodName}"/></span>
 </div>
   </body>
 </html>

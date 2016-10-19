@@ -60,59 +60,59 @@
                 <ul class="nav pull-right">
                     <li id="fat-menu" class="dropdown">
                         <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-user"></i>总服务台
+                            <i class="icon-user"></i><c:out value="${districtAddrStr}" default="广州-中山大学-斋区托管点" />
                             <i class="icon-caret-down"></i>
                         </a>
 
                         <ul class="dropdown-menu">
                             <li><a tabindex="-1" href="#">我的账户信息</a></li>
-                            <li><a tabindex="-1" href="sign-in.html">退出</a></li>
+                            <li><a tabindex="-1" href="sign-in.jsp">退出</a></li>
                         </ul>
                     </li>
                 </ul>
-                <a class="brand" href="../index.html"><span class="second">贝壳易书管理后台</span></a>
+                <a class="brand" href="../index.jsp"><span class="second">贝壳易书管理后台</span></a>
         </div>
     </div>
 
     <div class="sidebar-nav">
         <a href="#user-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>用户管理<i class="icon-chevron-up"></i></a>
         <ul id="user-menu" class="nav nav-list collapse">
-            <li ><a href="../user/users.html">用户管理</a></li>
+            <li ><a href="../user/users.jsp">用户管理</a></li>
         </ul>
 
         <a href="#city-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-map-marker"></i>托管点管理<i class="icon-chevron-up"></i></a>
         <ul id="city-menu" class="nav nav-list collapse">
-            <li ><a href="../city/city.html">城市管理</a></li>
-            <li ><a href="../city/school.html">学校管理</a></li>
-            <li ><a href="../city/district.html">托管点管理</a></li>
+            <li ><a href="../city/city.jsp">城市管理</a></li>
+            <li ><a href="../city/school.jsp">学校管理</a></li>
+            <li ><a href="../city/district.jsp">托管点管理</a></li>
         </ul>
 
         <a href="#book-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-book"></i>书籍管理<i class="icon-chevron-up"></i></a>
         <ul id="book-menu" class="nav nav-list collapse">
-            <li ><a href="../book/class.html">书类</a></li>
-            <li ><a href="../book/books.html">书单</a></li>
-            <li ><a href="../book/bookadd.html">添加书本</a></li>
+            <li ><a href="../book/class.jsp">书类</a></li>
+            <li ><a href="../book/books.jsp">书单</a></li>
+            <li ><a href="../book/bookadd.jsp">添加书本</a></li>
         </ul>
 
         <a href="#order-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>订单情况<i class="icon-chevron-up"></i></a>
         <ul id="order-menu" class="nav nav-list collapse">
-            <li ><a href="../order/sell.html">买书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/borrow.html">租书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/allorder.html">全部订单（买书）</a></li>
-            <li ><a href="../order/allorder_borrow.html">全部订单（租书）</a></li>
+            <li ><a href="../order/sell.jsp">买书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
+            <li ><a href="../order/borrow.jsp">租书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
+            <li ><a href="../order/allorder.jsp">全部订单（买书）</a></li>
+            <li ><a href="../order/allorder_borrow.jsp">全部订单（租书）</a></li>
         </ul>
 
-        <a href="../banner/banner.html" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
+        <a href="../banner/banner.jsp" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
 
         <a href="#money-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>提现申请<i class="icon-chevron-up"></i></a>
         <ul id="money-menu" class="nav nav-list collapse">
-            <li ><a href="../money/money.html">未结算</a></li>
-            <li ><a href="../money/all_money.html">所有提现</a></li>
+            <li ><a href="../money/money.jsp">未结算</a></li>
+            <li ><a href="../money/all_money.jsp">所有提现</a></li>
         </ul>
 
-        <a href="../method/method.html" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
+        <a href="../method/method.jsp" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
 
-        <a href="../announ/announ.html" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
+        <a href="../announ/announ.jsp" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
     </div>
     
     
@@ -122,7 +122,7 @@
         </div>
         
         <ul class="breadcrumb">
-            <li><a href="../index.html">首页</a><span class="divider">/</span></li>
+            <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
             <li>托管点管理<span class="divider">/</span></li>
             <li class="active">托管点</li>
         </ul>
@@ -131,7 +131,7 @@
             <div class="row-fluid">
                     
 <div class="btn-toolbar">
-    <button class="btn btn-primary"><a href="districtadd.html" style="color:#fff;"><i class="icon-plus"></i> 增加托管点</a></button>
+    <a href="districtadd.jsp" style="color:#fff;"><button class="btn btn-primary"><i class="icon-plus"></i> 增加托管点</button></a>
 </div>
 
 <div class="well">
@@ -148,50 +148,30 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>斋区托管点</td>
-          <td>深圳大学</td>
-          <td>凌霄斋宿舍502（靠近校医院）</td>
-          <td>林泽鹏</td>
-          <td>15875571529</td>
-          <td>
-              <a href="districtedit.html"><i class="icon-pencil"></i><span>编辑</span></a>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>西南托管点</td>
-          <td>深圳大学</td>
-          <td>凌霄斋宿舍502（靠近校医院）</td>
-          <td>林泽鹏</td>
-          <td>15875571529</td>
-          <td>
-              <a href="districtedit.html"><i class="icon-pencil"></i><span>编辑</span></a>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>南区托管点</td>
-          <td>深圳大学</td>
-          <td>凌霄斋宿舍502（靠近校医院）</td>
-          <td>林泽鹏</td>
-          <td>15875571529</td>
-          <td>
-              <a href="districtedit.html"><i class="icon-pencil"></i><span>编辑</span></a>
-          </td>
-        </tr>
+      <c:forEach items="${districtInfos}" var="i" begin="<c:out value="${pageNo*5}"/>" end="<c:out value="${pageNo*5 + 5}"/>">
+			<tr>
+				<td><c:out value="${i.districtNum}" /></td>
+				<td><c:out value="${i.districtName}" /></td>
+				<td><c:out value="${i.schoolName}" /></td>
+				<td><c:out value="${i.address}" /></td>
+				<td><c:out value="${i.deliverName}" /></td>
+				<td><c:out value="${i.deliverPhone}" /></td>
+				<td>
+				    <a href="districtedit.jsp"><i class="icon-pencil"></i><span>编辑</span></a>
+				</td>
+			</tr>
+		</c:forEach>
       </tbody>
     </table>
 </div>
 <div class="pagination">
     <ul>
-        <li><a href="#">Prev</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">Next</a></li>
+        <li><a href="district.jsp?pageNo=<c:out value="${pageNo}"/>">Prev</a></li>
+        <li><a href="district.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo}"/></a></li>
+        <li><a href="district.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo+1}"/></a></li>
+        <li><a href="district.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo+2}"/></a></li>
+        <li><a href="district.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo+3}"/></a></li>
+        <li><a href="district.jsp?pageNo=<c:out value="${pageNo}"/>">Next</a></li>
     </ul>
 </div>
             </div>

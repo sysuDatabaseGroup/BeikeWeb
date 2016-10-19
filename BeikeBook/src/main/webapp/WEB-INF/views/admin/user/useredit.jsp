@@ -153,7 +153,7 @@
           <div class="tab-pane active in" id="home">
           <form id="user">
               <label>用户名</label>
-              <strong><c:out value="${userName}"/></strong>
+              <strong><c:out value="${userNum}"/></strong>
 
               <label>用户编号</label>
               <strong><c:out value="${userNo}"/></strong>
@@ -173,8 +173,8 @@
               <label>宿舍</label>
               <select name="DropDownTimezone" id="DropDownDorm" class="input-xlarge">
                 <option value="0">未选择</option>
-                <option value="1" selected="<c:if test="${fn:contains(domitory, '至善园1号')}"><c:out value="selected"/></c:if>">至善园1号</option>
-                <option value="2" selected="<c:if test="${fn:contains(domitory, '至善园2号')}"><c:out value="selected"/></c:if>">至善园2号</option>
+                <option value="1" selected="<c:if test="${fn:contains(dorm, '至善园1号')}"><c:out value="selected"/></c:if>">至善园1号</option>
+                <option value="2" selected="<c:if test="${fn:contains(dorm, '至善园2号')}"><c:out value="selected"/></c:if>">至善园2号</option>
               </select>
           </form>
           </div>
