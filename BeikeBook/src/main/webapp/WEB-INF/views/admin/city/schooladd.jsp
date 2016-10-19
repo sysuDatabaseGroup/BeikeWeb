@@ -60,71 +60,71 @@
                 <ul class="nav pull-right">
                     <li id="fat-menu" class="dropdown">
                         <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-user"></i>深圳-深圳大学-斋区托管点
+                            <i class="icon-user"></i><c:out value="${districtAddrStr}" default="广州-中山大学-斋区托管点" />
                             <i class="icon-caret-down"></i>
                         </a>
 
                         <ul class="dropdown-menu">
                             <li><a tabindex="-1" href="#">我的账户信息</a></li>
-                            <li><a tabindex="-1" href="sign-in.html">退出</a></li>
+                            <li><a tabindex="-1" href="sign-in.jsp">退出</a></li>
                         </ul>
                     </li>
                 </ul>
-                <a class="brand" href="../index.html"><span class="second">贝壳易书管理后台</span></a>
+                <a class="brand" href="../index.jsp"><span class="second">贝壳易书管理后台</span></a>
         </div>
     </div>
 
     <div class="sidebar-nav">
         <a href="#user-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>用户管理<i class="icon-chevron-up"></i></a>
         <ul id="user-menu" class="nav nav-list collapse">
-            <li ><a href="../user/users.html">用户管理</a></li>
+            <li ><a href="../user/users.jsp">用户管理</a></li>
         </ul>
 
         <a href="#city-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-map-marker"></i>托管点管理<i class="icon-chevron-up"></i></a>
         <ul id="city-menu" class="nav nav-list collapse">
-            <li ><a href="../city/city.html">城市管理</a></li>
-            <li ><a href="../city/school.html">学校管理</a></li>
-            <li ><a href="../city/district.html">托管点管理</a></li>
+            <li ><a href="../city/city.jsp">城市管理</a></li>
+            <li ><a href="../city/school.jsp">学校管理</a></li>
+            <li ><a href="../city/district.jsp">托管点管理</a></li>
         </ul>
 
         <a href="#book-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-book"></i>书籍管理<i class="icon-chevron-up"></i></a>
         <ul id="book-menu" class="nav nav-list collapse">
-            <li ><a href="../book/class.html">书类</a></li>
-            <li ><a href="../book/books.html">书单</a></li>
-            <li ><a href="../book/bookadd.html">添加书本</a></li>
+            <li ><a href="../book/class.jsp">书类</a></li>
+            <li ><a href="../book/books.jsp">书单</a></li>
+            <li ><a href="../book/bookadd.jsp">添加书本</a></li>
         </ul>
 
         <a href="#order-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>订单情况<i class="icon-chevron-up"></i></a>
         <ul id="order-menu" class="nav nav-list collapse">
-            <li ><a href="../order/sell.html">买书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/borrow.html">租书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/allorder.html">全部订单（买书）</a></li>
-            <li ><a href="../order/allorder_borrow.html">全部订单（租书）</a></li>
+            <li ><a href="../order/sell.jsp">买书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
+            <li ><a href="../order/borrow.jsp">租书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
+            <li ><a href="../order/allorder.jsp">全部订单（买书）</a></li>
+            <li ><a href="../order/allorder_borrow.jsp">全部订单（租书）</a></li>
         </ul>
 
-        <a href="../banner/banner.html" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
+        <a href="../banner/banner.jsp" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
 
         <a href="#money-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>提现申请<i class="icon-chevron-up"></i></a>
         <ul id="money-menu" class="nav nav-list collapse">
-            <li ><a href="../money/money.html">未结算</a></li>
-            <li ><a href="../money/all_money.html">所有提现</a></li>
+            <li ><a href="../money/money.jsp">未结算</a></li>
+            <li ><a href="../money/all_money.jsp">所有提现</a></li>
         </ul>
 
-        <a href="../method/method.html" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
+        <a href="../method/method.jsp" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
 
-        <a href="../announ/announ.html" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
+        <a href="../announ/announ.jsp" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
     </div>
     
     <div class="content">
         <div class="header">
-            <h1 class="page-title">托管点</h1>
+            <h1 class="page-title">学校</h1>
         </div>
         
         <ul class="breadcrumb">
-            <li><a href="../index.html">首页</a><span class="divider">/</span></li>
+            <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
             <li>托管点管理<span class="divider">/</span></li>
-            <li><a href="district.html">托管点</a><span class="divider">/</span></li>
-            <li class="active">增加托管点</li>
+            <li><a href="school.jsp">学校</a><span class="divider">/</span></li>
+            <li class="active">增加学校</li>
         </ul>
 
         <div class="container-fluid">
@@ -136,23 +136,27 @@
 <div class="well">
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active in" id="home">
-        <form id="district">
-            <label>托管点名</label>
-            <input type="text" class="input-xlarge" placeholder="格式：xx托管点">
-             <label>所在学校</label>
+        <form id="school">
+            <label>学校</label>
+            <input type="text" class="input-xlarge">
+            <label>学校缩写</label>
+            <input type="text" class="input-xlarge">
+            <label>所在城市</label>
             <select name="DropDownTimezone" id="DropDownDorm" class="input-xlarge">
+              <option value="未选择" selected="selected">未选择</option>
               <option value="深圳">深圳</option>
               <option value="广州">广州</option>
             </select>
-            <label>托管点地址</label>
-            <input type="text" class="input-xlarge" placeholder="格式：xx宿舍xx室">
-            <label>配送员</label>
+            <label>管理账号</label>
             <input type="text" class="input-xlarge">
-            <label>手机号码</label>
-            <input type="text" class="input-xlarge" placeholder="格式：长号/校园短号">        
+            <label>密码</label>
+            <input type="password" id="password" class="input-xlarge">
+            <label>确认密码</label>
+            <input type="password" id="repassword" class="input-xlarge">
         </form>
       </div>
-    </div>
+  </div>
+
 </div>
             </div>
         </div>

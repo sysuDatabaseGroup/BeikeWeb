@@ -237,9 +237,9 @@
 								<tbody id="newbook-list">
 									<c:forEach items="${rentInfos}" var="i" begin="0" end="5">
 										<tr>
-											<td><c:out value="${i.rentUser}" /></td>
-											<td><c:out value="${i.rentBookName}" /></td>
-											<td><c:out value="${i.rentStatus}" /></td>
+											<td><c:out value="${i.userNum}" /></td>
+											<td><c:out value="${i.bookClassName}" /></td>
+											<td><c:out value="${i.isTake}" /></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -275,11 +275,11 @@
 											<td>
 												<p>
 													<i class="icon-user"></i>
-													<c:out value="${i.sellUser}" />
+													<c:out value="${i.userNum}" />
 												</p>
 											</td>
 											<td>费用: ￥<c:out value="${i.sellPrice}" /></td>
-											<td>购买时间: <c:out value="${i.sellTime}" /></td>
+											<td>购买时间: <c:out value="${i.datetime}" /></td>
 										</tr>
 									</c:forEach>
 								</tbody>

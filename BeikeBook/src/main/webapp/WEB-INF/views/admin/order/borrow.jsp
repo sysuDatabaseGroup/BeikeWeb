@@ -161,13 +161,13 @@
           	<c:forEach items="${rentInfos}" var="i" begin="<c:out value="${pageNo*3}"/>" end="<c:out value="${pageNo*3 + 3}"/>">
 				<tr>
 					<td><c:out value="${i.id}" /></td>
-					<td><c:out value="${i.rentBookName}" /></td>
-					<td><c:out value="${i.userName}" /></td>
-					<td><c:out value="${i.rentNum}" /></td>
-					<td><c:out value="${i.money}" /></td>
-					<td><c:out value="${i.method}" /></td>
+					<td><c:out value="${i.bookClassName}" /></td>
+					<td><c:out value="${i.userNum}" /></td>
+					<td><c:out value="${i.num}" /></td>
+					<td><c:out value="${i.prices}" /></td>
+					<td><c:out value="${i.methodName}" /></td>
 					<td><c:out value="${i.takeBookNum}" /></td>
-					<td><c:out value="${i.rentTime}" /></td>
+					<td><c:out value="${i.datetime}" /></td>
 					<td><span class="btn-danger" style="padding:5px;">
 						<c:choose>
 							<c:when test="${sendStatus}">已配送</c:when>
