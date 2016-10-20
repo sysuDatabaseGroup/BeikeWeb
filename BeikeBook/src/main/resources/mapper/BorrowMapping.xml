@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.IBorrowDao">
+	
+	<sql id="columns">borrowID, userID, methodID, bookID, num,
+		datetime, takeBookNum, isTake, isBack</sql>
+	
+	<select id="getById" parameterType="int"
+		resultType="com.databasegroup.model.Borrow">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_borrow WHERE borrowID=#{id}
+	</select>
+	
+	<select id="getAll"
+		resultType="com.databasegroup.model.Borrow">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_borrow
+	</select>
+	
+	<insert id="insert" parameterType="com.databasegroup.model.Borrow"
+		flushCache="true">
+		INSERT INTO bk_borrow (userID, methodID, bookID, num,
+		datetime, takeBookNum, isTake, isBack) VALUES
+		(#{userID},#{methodID},#{bookID},#{num},
+		#{datetime},#{takeBookNum},#{isTake},#{isBack})
+	</insert>
+	
+	<update id="update" parameterType="com.databasegroup.model.Borrow">
+		UPDATE bk_borrow SET
+		userID=#{userID},
+		methodID=#{methodID},
+		bookID=#{bookID},
+		num=#{num},
+		datetime=#{datetime},
+		takeBookNum=#{takeBookNum},
+		isTake=#{isTake},
+		isBack=#{isBack}
+		WHERE borrowID=#{borrowID}
+	</update>
+	
+	<delete id="delete" parameterType="com.databasegroup.model.Borrow">
+		DELETE
+		FROM bk_borrow
+		WHERE borrowID=#{borrowID}
+	</delete> 
+</mapper>

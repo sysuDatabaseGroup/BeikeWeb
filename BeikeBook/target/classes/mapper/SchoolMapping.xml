@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.ISchoolDao">
+	
+	<sql id="columns">schoolID, schoolName, schoolNum, schoolAdmin,
+		schoolPassword, cityID</sql>
+	
+	<select id="getById" parameterType="int"
+		resultType="com.databasegroup.model.School">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_school WHERE schoolID=#{id}
+	</select>
+	
+	<select id="getAll"
+		resultType="com.databasegroup.model.School">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_school
+	</select>
+	
+	<insert id="insert" parameterType="com.databasegroup.model.School"
+		flushCache="true">
+		INSERT INTO bk_school (schoolName, schoolNum, schoolAdmin,
+			schoolPassword, cityID) VALUES
+		(#{schoolName},#{schoolNum},#{schoolAdmin},
+		#{schoolPassword},#{cityID})
+	</insert>
+	
+	<update id="update" parameterType="com.databasegroup.model.School">
+		UPDATE bk_school SET
+		schoolName=#{schoolName},
+		schoolNum=#{schoolNum},
+		schoolAdmin=#{schoolAdmin},
+		schoolPassword=#{schoolPassword},
+		cityID=#{cityID}
+		WHERE schoolID=#{schoolID}
+	</update>
+	
+	<delete id="delete" parameterType="com.databasegroup.model.School">
+		DELETE
+		FROM bk_school
+		WHERE schoolID=#{schoolID}
+	</delete> 
+</mapper>

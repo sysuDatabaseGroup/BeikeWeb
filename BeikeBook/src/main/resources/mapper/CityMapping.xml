@@ -2,22 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.databasegroup.fortest.dao.ICityDao">
-	<select id="getCity" parameterType="com.databasegroup.fortest.pojo.City"
-		resultType="com.databasegroup.fortest.pojo.City">
-		SELECT * FROM bk_city WHERE cityNum=#{cityNum}
+<mapper namespace="com.databasegroup.dao.ICityDao">
+	
+	<sql id="columns">cityID, cityName, cityNum</sql>
+	
+	<select id="getById" parameterType="int"
+		resultType="com.databasegroup.model.City">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_city WHERE cityID=#{id}
 	</select>
-	<insert id="addCity" parameterType="com.databasegroup.fortest.pojo.City"
+	
+	<select id="getAll"
+		resultType="com.databasegroup.model.City">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_city
+	</select>
+	
+	<insert id="insert" parameterType="com.databasegroup.model.City"
 		flushCache="true">
-		INSERT INTO bk_city (cityName,cityNum) VALUES
+		INSERT INTO bk_city (cityName, cityNum) VALUES
 		(#{cityName},#{cityNum})
 	</insert>
-	<!-- 
-		<update id="updateUser" parameterType="com.springMyBatis.system.model.User">
-			UPDATE user SET password=#{password} WHERE id=#{id}
-		</update>
-		<delete id="deleteUser" parameterType="int">
-			DELETE FROM user WHERE id=#{id}
-		</delete> 
-	-->
+	
+	<update id="update" parameterType="com.databasegroup.model.City">
+		UPDATE bk_city SET
+		cityName=#{cityName},
+		cityNum=#{cityNum}
+		WHERE cityID=#{cityID}
+	</update>
+	
+	<delete id="delete" parameterType="com.databasegroup.model.City">
+		DELETE
+		FROM bk_city
+		WHERE cityID=#{cityID}
+	</delete> 
 </mapper>

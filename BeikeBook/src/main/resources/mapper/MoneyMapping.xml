@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.IMoneyDao">
+	
+	<sql id="columns">moneyID, alipayAccount, alipayName,
+		moneyNum, phone</sql>
+	
+	<select id="getById" parameterType="int"
+		resultType="com.databasegroup.model.Money">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_money WHERE moneyID=#{id}
+	</select>
+	
+	<select id="getAll"
+		resultType="com.databasegroup.model.Money">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_money
+	</select>
+	
+	<insert id="insert" parameterType="com.databasegroup.model.Money"
+		flushCache="true">
+		INSERT INTO bk_money (alipayAccount, alipayName,
+			moneyNum, phone) VALUES
+		(#{alipayAccount},#{alipayName},#{moneyNum},#{phone})
+	</insert>
+	
+	<update id="update" parameterType="com.databasegroup.model.Money">
+		UPDATE bk_money SET
+		alipayAccount=#{alipayAccount},
+		alipayName=#{alipayName},
+		moneyNum=#{moneyNum},
+		phone=#{phone}
+		WHERE moneyID=#{moneyID}
+	</update>
+	
+	<delete id="delete" parameterType="com.databasegroup.model.Money">
+		DELETE
+		FROM bk_money
+		WHERE moneyID=#{moneyID}
+	</delete> 
+</mapper>
