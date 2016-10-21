@@ -27,7 +27,7 @@ public class TestAnnounDao {
 		assertNotNull(announDao);
 		
 		Announ announ = announDao.getById(2);
-		announ.setAnnounContent("Update");
+		announ.setAnnounContent("Update2");
 		announDao.update(announ);
 		
 //		Announ announ = new Announ();
