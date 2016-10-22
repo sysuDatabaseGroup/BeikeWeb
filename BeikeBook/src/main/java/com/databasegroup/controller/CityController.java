@@ -20,12 +20,9 @@ public class CityController {
 	
 	@RequestMapping(method=GET)
 	public String getCity(HttpServletRequest request, Model model) {
-		City city = new City();
-		int cityID = Integer.valueOf(request.getParameter("cityID"));
-		city.setCityID(cityID);
-		model.addAttribute("cityName", 
-				cityService.getById(city.getCityID()).getCityName());
-		
+		String cityNum = request.getParameter("cityNum");
+		model.addAttribute("cities", 
+				cityService.getCityByCityNum(cityNum));
 		return "/fortest/showCity";
 	}
 }

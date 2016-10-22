@@ -20,6 +20,14 @@
 		FROM bk_city
 	</select>
 	
+	<select id="getCityByCityNum" parameterType="String"
+		resultType="com.databasegroup.model.City">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_city
+		WHERE cityNum=#{cityNum}
+	</select>
+	
 	<insert id="insert" parameterType="com.databasegroup.model.City"
 		flushCache="true">
 		INSERT INTO bk_city (cityName, cityNum) VALUES

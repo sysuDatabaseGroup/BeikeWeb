@@ -35,4 +35,9 @@ public class CityServiceImpl implements ICityService {
 	public List<City> getAll() {
 		return cityDao.getAll();
 	}
+
+	public List<City> getCityByCityNum(String cityNum) {
+		// TODO Auto-generated method stub
+		return cityDao.getCityByCityNum(cityNum);
+	}
 }
