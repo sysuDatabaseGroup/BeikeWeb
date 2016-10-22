@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.IMethodDao">
+	
+	<sql id="columns">methodID, methodName, price</sql>
+	
+	<select id="getById" parameterType="int"
+		resultType="com.databasegroup.model.Method">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_method WHERE methodID=#{id}
+	</select>
+	
+	<select id="getAll"
+		resultType="com.databasegroup.model.Method">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_method
+	</select>
+	
+	<insert id="insert" parameterType="com.databasegroup.model.Method"
+		flushCache="true">
+		INSERT INTO bk_method (methodName, price) VALUES
+		(#{methodName},#{price})
+	</insert>
+	
+	<update id="update" parameterType="com.databasegroup.model.Method">
+		UPDATE bk_method SET
+		methodName=#{methodName},
+		price=#{price}
+		WHERE methodID=#{methodID}
+	</update>
+	
+	<delete id="delete" parameterType="com.databasegroup.model.Method">
+		DELETE
+		FROM bk_method
+		WHERE methodID=#{methodID}
+	</delete> 
+</mapper>

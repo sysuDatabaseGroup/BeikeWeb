@@ -12,6 +12,6 @@ public class HelloController {
 	@RequestMapping(method=GET)
 	public String home(Model model) {
 		model.addAttribute("message", "Hello World!");
-		return "/hello";
+		return "/fortest/hello";
 	}
 }
