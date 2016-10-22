@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8" errorPage="404.jsp"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,11 +32,6 @@
         .brand .second {
             color: #fff;
             font-weight: bold;
-        }
-
-        tr>td>img{
-          width: 100px;
-          height: auto;
         }
     </style>
 
@@ -120,82 +115,42 @@
         <a href="../announ/announ.jsp" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
     </div>
     
-    
     <div class="content">
         <div class="header">
-            <h1 class="page-title">未解决订单（）</h1>
+            <h1 class="page-title">新增公告</h1>
         </div>
         
         <ul class="breadcrumb">
             <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
-            <li>订单管理<span class="divider">/</span></li>
-            <li class="active">买书</li>
+            <li>公告管理<span class="divider">/</span></li>
+            <li><a href="announ.jsp">公告</a><span class="divider">/</span></li>
+            <li class="active">增加公告</li>
         </ul>
 
-<div class="container-fluid">
-<div class="row-fluid">
+        <div class="container-fluid">
+            <div class="row-fluid">
                     
 <div class="btn-toolbar">
-<!--     <button class="btn btn-primary"><a href="booksadd.html" style="color:#fff;"><i class="icon-plus"></i> 增加书单</a></button>
-    <button class="btn btn-danger"><a href="bookadd.html" style="color:#fff;"><i class="icon-plus"></i> 增加书本</a></button> -->
+    <button class="btn btn-primary"><i class="icon-save"></i> 添加</button>
 </div>
-
 <div class="well">
-
-        <table class="table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th width="150px">书名</th>
-              <th>购买者</th>
-              <th>数量</th>
-              <th>收费</th>
-              <th>配送方式</th>
-              <th>取书号</th>
-              <th>购买时间</th>
-              <th width="80px;">状态</th>
-              <th style="width:150px;">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-			<c:forEach items="${sellInfos}" var="i" begin="${pageNo*3}" end="${pageNo*3 + 3}">
-				<tr>
-					<td><c:out value="${i.id}" /></td>
-					<td><c:out value="${i.bookClassName}" /></td>
-					<td><c:out value="${i.userNum}" /></td>
-					<td><c:out value="${i.num}" /></td>
-					<td><c:out value="${i.prices}" /></td>
-					<td><c:out value="${i.methodName}" /></td>
-					<td><c:out value="${i.takeBookNum}" /></td>
-					<td><c:out value="${i.datetime}" /></td>
-					<td><span class="btn-danger" style="padding:5px;">
-						<c:choose>
-							<c:when test="${sendStatus}">已配送</c:when>
-							<c:otherwise>未配送</c:otherwise>
-						</c:choose></span>
-					</td>
-					<td>
-						<a href="orderword.jsp"><i class="icon-edit"></i><span> 生成订单</span></a>
-					</td>
-				</tr>
-			</c:forEach>
-          </tbody>
-        </table>
-
-  <div class="pagination">
-      <ul>
-          <li><a href="sell.jsp?pageNo=${pageNo - 1}">Prev</a></li>
-          <li><span><c:out value="${pageNo}"/></span>
-          <li><a href="sell.jsp?pageNo=${pageNo + 1}"><c:out value="${pageNo + 1}"/></a></li>
-          <li><a href="sell.jsp?pageNo=${pageNo + 2}"><c:out value="${pageNo + 2}"/></a></li>
-          <li><a href="sell.jsp?pageNo=${pageNo + 3}"><c:out value="${pageNo + 3}"/></a></li>
-          <li><a href="sell.jsp?pageNo=${pageNo + 1}">Next</a></li>
-      </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane active in" id="home">
+        <form id="announ">
+            <label>公告标题</label>
+            <input type="text" class="input-xlarge">
+            <label>内容</label>
+            <textarea class="input-xlarge"></textarea>
+        </form>
+      </div>
   </div>
 
 </div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
+    
+
   </body>
 </html>
 

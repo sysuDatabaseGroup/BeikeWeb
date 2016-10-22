@@ -144,17 +144,17 @@
       <div class="tab-pane active in" id="home">
         <form id="books">
             <label>书名</label>
-            <input type="text" value='<c:out value="${bookClassName}"/>' class="input-xlarge">
+            <input type="text" value="${bookClassName}" class="input-xlarge">
             <label>作者</label>
-            <input type="text" value='<c:out value="${author}"/>' class="input-xlarge">
+            <input type="text" value="${author}" class="input-xlarge">
             <label>出版社</label>
-            <input type="text" value='<c:out value="${company}"/>' class="input-xlarge">
+            <input type="text" value="${company}" class="input-xlarge">
             <label>版本</label>
-            <input type="text" value='<c:out value="${version}"/>' class="input-xlarge">
+            <input type="text" value="${version}" class="input-xlarge">
             <label>出售参考价</label>
-            <input type="text" value='<c:out value="${sellPrice}"/>' class="input-large"><span style="padding:0 10px">元</span>
+            <input type="text" value="${sellPrice}" class="input-large"><span style="padding:0 10px">元</span>
             <label>出租参考价（年）</label>
-            <input type="text" value='<c:out value="${borrowPrice}"/>' class="input-large"><span style="padding:0 10px">元</span>
+            <input type="text" value="${borrowPrice}" class="input-large"><span style="padding:0 10px">元</span>
         </form>
       </div>
       <div class="tab-pane fade" id="profile">

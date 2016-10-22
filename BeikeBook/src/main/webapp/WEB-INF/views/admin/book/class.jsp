@@ -150,11 +150,11 @@
         </tr>
       </thead>
       <tbody>
-		<c:forEach items="${classInfos}" var="i" begin="<c:out value="${pageNo*5}"/>" end="<c:out value="${pageNo*5 + 5}"/>">
+		<c:forEach items="${classInfos}" var="i" begin="${pageNo*5}" end="${pageNo*5 + 5}">
 			<tr>
 				<td><c:out value="${i.classID}" /></td>
 				<td><c:out value="${i.className}" /></td>
-				<td><img src="bookimages/<c:out value="${i.classImg}"/>" alt="" /></td>
+				<td><img src="bookimages/${i.classImg}" alt="" /></td>
 				<td>
 				    <a href="classedit.jsp"><i class="icon-pencil"></i><span>编辑</span></a>
 				    <a href="#myModal" role="button" data-toggle="modal" style="margin-left:5px;"><i class="icon-remove"></i><span>删除</span></a>
@@ -166,12 +166,12 @@
 </div>
 <div class="pagination">
     <ul>
-        <li><a href="class.jsp?pageNo=<c:out value="${pageNo}"/>">Prev</a></li>
-        <li><a href="class.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo}"/></a></li>
-        <li><a href="class.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo+1}"/></a></li>
-        <li><a href="class.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo+2}"/></a></li>
-        <li><a href="class.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo+3}"/></a></li>
-        <li><a href="class.jsp?pageNo=<c:out value="${pageNo}"/>">Next</a></li>
+        <li><a href="class.jsp?pageNo=${pageNo - 1}">Prev</a></li>
+        <li><span><c:out value="${pageNo}"/></span></li>
+        <li><a href="class.jsp?pageNo=${pageNo + 1}"><c:out value="${pageNo+1}"/></a></li>
+        <li><a href="class.jsp?pageNo=${pageNo + 2}"><c:out value="${pageNo+2}"/></a></li>
+        <li><a href="class.jsp?pageNo=${pageNo + 3}"><c:out value="${pageNo+3}"/></a></li>
+        <li><a href="class.jsp?pageNo=${pageNo + 1}">Next</a></li>
     </ul>
 </div>
 

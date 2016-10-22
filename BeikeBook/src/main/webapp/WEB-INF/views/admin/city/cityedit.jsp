@@ -140,9 +140,9 @@
       <div class="tab-pane active in" id="home">
         <form id="city">
             <label>城市名</label>
-            <input type="text" value='<c:out value="${cityName}"/>' class="input-xlarge">
+            <input type="text" value="${cityName}" class="input-xlarge">
             <label>城市缩写</label>
-            <input type="text" value='<c:out value="${cityAbbreviate}"/>' class="input-xlarge">
+            <input type="text" value="${cityAbbreviate}" class="input-xlarge">
         </form>
       </div>
   </div>

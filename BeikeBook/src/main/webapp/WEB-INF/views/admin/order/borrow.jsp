@@ -158,7 +158,7 @@
             </tr>
           </thead>
           <tbody>
-          	<c:forEach items="${rentInfos}" var="i" begin="<c:out value="${pageNo*3}"/>" end="<c:out value="${pageNo*3 + 3}"/>">
+          	<c:forEach items="${rentInfos}" var="i" begin="${pageNo*3}" end="${pageNo*3 + 3}">
 				<tr>
 					<td><c:out value="${i.id}" /></td>
 					<td><c:out value="${i.bookClassName}" /></td>
@@ -184,12 +184,12 @@
 
   <div class="pagination">
       <ul>
-          <li><a href="borrow.jsp?pageNo=<c:out value="${pageNo}"/>">Prev</a></li>
+          <li><a href="borrow.jsp?pageNo=${pageNo - 1}">Prev</a></li>
           <li><span><c:out value="${pageNo}"/></span>
-          <li><a href="borrow.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo + 1}"/></a></li>
-          <li><a href="borrow.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo + 1}"/></a></li>
-          <li><a href="borrow.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo + 1}"/></a></li>
-          <li><a href="borrow.jsp?pageNo=<c:out value="${pageNo}"/>">Next</a></li>
+          <li><a href="borrow.jsp?pageNo=${pageNo + 1}"><c:out value="${pageNo + 1}"/></a></li>
+          <li><a href="borrow.jsp?pageNo=${pageNo + 2}"><c:out value="${pageNo + 2}"/></a></li>
+          <li><a href="borrow.jsp?pageNo=${pageNo + 3}"><c:out value="${pageNo + 3}"/></a></li>
+          <li><a href="borrow.jsp?pageNo=${pageNo + 1}">Next</a></li>
       </ul>
   </div>
 

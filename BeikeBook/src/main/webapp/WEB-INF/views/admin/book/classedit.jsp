@@ -144,7 +144,7 @@
       <div class="tab-pane active in" id="home">
         <form id="tab">
             <label>书类</label>
-            <input type="text" value='<c:out value="${className}"/>' class="input-xlarge">
+            <input type="text" value="${className}" class="input-xlarge">
         </form>
       </div>
       <div class="tab-pane fade" id="profile">

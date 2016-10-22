@@ -185,7 +185,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${userInfos}" var="i" begin="<c:out value="${pageNo*5}"/>" end="<c:out value="${pageNo*5 + 5}"/>">
+							<c:forEach items="${userInfos}" var="i" begin="${pageNo*5}" end="${pageNo*5 + 5}">
 								<tr>
 									<td><c:out value="${i.id}" />
 									</td>
@@ -199,7 +199,7 @@
 									</td>
 									<td><c:out value="${i.dorm}" />
 									</td>
-									<td><a href="useredit.jsp?userNo=<c:out value="${i.userNo}"/>"><i class="icon-pencil"></i><span>编辑</span>
+									<td><a href="useredit.jsp?userNo=${i.userNo}"><i class="icon-pencil"></i><span>编辑</span>
 									</a></td>
 								</tr>
 							</c:forEach>
@@ -209,17 +209,17 @@
 
 				<div class="pagination">
 					<ul>
-						<li><a href="user.jsp?pageNo=<c:out value="${pageNo}"/>">Prev</a>
+						<li><a href="user.jsp?pageNo=${pageNo - 1}">Prev</a>
 						</li>
 						<li><span><c:out value="${pageNo}"/></span>
 						</li>
-						<li><a href="user.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo+1}"/></a>
+						<li><a href="user.jsp?pageNo=${pageNo + 1}"><c:out value="${pageNo+1}"/></a>
 						</li>
-						<li><a href="user.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo+2}"/></a>
+						<li><a href="user.jsp?pageNo=${pageNo +　2}"><c:out value="${pageNo+2}"/></a>
 						</li>
-						<li><a href="user.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo+3}"/></a>
+						<li><a href="user.jsp?pageNo=${pageNo + 3}"><c:out value="${pageNo+3}"/></a>
 						</li>
-						<li><a href="user.jsp?pageNo=<c:out value="${pageNo}"/>">Next</a>
+						<li><a href="user.jsp?pageNo=${pageNo + 1}">Next</a>
 						</li>
 					</ul>
 				</div>

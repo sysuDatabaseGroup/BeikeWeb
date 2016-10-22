@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8" errorPage="404.jsp"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,11 +32,6 @@
         .brand .second {
             color: #fff;
             font-weight: bold;
-        }
-
-        tr>td>img{
-          width: 100px;
-          height: auto;
         }
     </style>
 
@@ -120,82 +115,67 @@
         <a href="../announ/announ.jsp" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
     </div>
     
-    
     <div class="content">
         <div class="header">
-            <h1 class="page-title">未解决订单（）</h1>
+            <h1 class="page-title">编辑活动</h1>
         </div>
-        
+
         <ul class="breadcrumb">
             <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
-            <li>订单管理<span class="divider">/</span></li>
-            <li class="active">买书</li>
+            <li>活动推广<span class="divider">/</span></li>
+            <li><a href="banner.jsp">活动列表</a><span class="divider">/</span></li>
+            <li class="active">活动编辑</li>
         </ul>
 
-<div class="container-fluid">
-<div class="row-fluid">
+        <div class="container-fluid">
+            <div class="row-fluid">
                     
 <div class="btn-toolbar">
-<!--     <button class="btn btn-primary"><a href="booksadd.html" style="color:#fff;"><i class="icon-plus"></i> 增加书单</a></button>
-    <button class="btn btn-danger"><a href="bookadd.html" style="color:#fff;"><i class="icon-plus"></i> 增加书本</a></button> -->
+    <button class="btn btn-primary"><i class="icon-save"></i> 修改</button>
+    <a href="#myModal" data-toggle="modal" class="btn">删除</a>
 </div>
 
 <div class="well">
-
-        <table class="table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th width="150px">书名</th>
-              <th>购买者</th>
-              <th>数量</th>
-              <th>收费</th>
-              <th>配送方式</th>
-              <th>取书号</th>
-              <th>购买时间</th>
-              <th width="80px;">状态</th>
-              <th style="width:150px;">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-			<c:forEach items="${sellInfos}" var="i" begin="${pageNo*3}" end="${pageNo*3 + 3}">
-				<tr>
-					<td><c:out value="${i.id}" /></td>
-					<td><c:out value="${i.bookClassName}" /></td>
-					<td><c:out value="${i.userNum}" /></td>
-					<td><c:out value="${i.num}" /></td>
-					<td><c:out value="${i.prices}" /></td>
-					<td><c:out value="${i.methodName}" /></td>
-					<td><c:out value="${i.takeBookNum}" /></td>
-					<td><c:out value="${i.datetime}" /></td>
-					<td><span class="btn-danger" style="padding:5px;">
-						<c:choose>
-							<c:when test="${sendStatus}">已配送</c:when>
-							<c:otherwise>未配送</c:otherwise>
-						</c:choose></span>
-					</td>
-					<td>
-						<a href="orderword.jsp"><i class="icon-edit"></i><span> 生成订单</span></a>
-					</td>
-				</tr>
-			</c:forEach>
-          </tbody>
-        </table>
-
-  <div class="pagination">
-      <ul>
-          <li><a href="sell.jsp?pageNo=${pageNo - 1}">Prev</a></li>
-          <li><span><c:out value="${pageNo}"/></span>
-          <li><a href="sell.jsp?pageNo=${pageNo + 1}"><c:out value="${pageNo + 1}"/></a></li>
-          <li><a href="sell.jsp?pageNo=${pageNo + 2}"><c:out value="${pageNo + 2}"/></a></li>
-          <li><a href="sell.jsp?pageNo=${pageNo + 3}"><c:out value="${pageNo + 3}"/></a></li>
-          <li><a href="sell.jsp?pageNo=${pageNo + 1}">Next</a></li>
-      </ul>
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#home" data-toggle="tab">活动</a></li>
+      <li><a href="#profile" data-toggle="tab">更新活动图片</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane active in" id="home">
+        <form id="banner">
+            <label>活动标题</label>
+            <input type="text" value="${bannerTitle}" class="input-xlarge">
+            <label>活动链接</label>
+            <input type="text" value="${link}" class="input-xlarge">
+            <label>排序</label>
+            <input type="text" value="2" class="input-small">
+        </form>
+      </div>
+      <div class="tab-pane fade" id="profile">
+        <form id="tab2">
+            <label>活动封面图</label>
+            <input type="file" class="file" value="浏览" >
+        </form>
+      </div>
   </div>
+</div>
 
+<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">删除活动？</h3>
+  </div>
+  <div class="modal-body">
+    <p class="error-text"><i class="icon-warning-sign modal-icon"></i>确认删除活动［义务助学活动］？</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+    <button class="btn btn-danger" data-dismiss="modal">删除</button>
+  </div>
 </div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
   </body>
 </html>
 

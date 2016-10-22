@@ -140,9 +140,9 @@
       <div class="tab-pane active in">
         <form id="method">
             <label>配送方式</label>
-            <input type="text" class="input-xlarge" value='<c:out value="${methodName}"/>'>
+            <input type="text" class="input-xlarge" value="${methodName}">
             <label>收费价格</label>
-            <input type="text" class="input-small" value='<c:out value="${price}"/>'><span> 元</span>
+            <input type="text" class="input-small" value="${methodName}"><span> 元</span>
         </form>
       </div>
   </div>

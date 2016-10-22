@@ -161,20 +161,24 @@
               <label>城市</label>
               <select name="DropDownTimezone" id="DropDownCity" class="input-xlarge">
                 <option value="0">未选择</option>
-                <option value="1" selected="<c:if test="${cityNum == 1}">selected</c:if>">广州</option>
+                <option value="1" <c:if test="${cityNum == 1}"><c:out value='selected="selected"'/></c:if>>广州</option>
+                <option value="1" <c:if test="${cityNum == 2}"><c:out value='selected="selected"'/></c:if>>上海</option>
+                <option value="1" <c:if test="${cityNum == 3}"><c:out value='selected="selected"'/></c:if>>深圳</option>
               </select>
 
               <label>学校</label>
               <select name="DropDownTimezone" id="DropDownSchool" class="input-xlarge">
                 <option value="0">未选择</option>
-                <option value="1" selected="<c:if test="${schoolNum == 1}">selected</c:if>">中山大学</option>
+                <option value="1" <c:if test="${schoolNum == 1}"><c:out value='selected="selected"'/></c:if>>中山大学</option>
+                <option value="1" <c:if test="${schoolNum == 2}"><c:out value='selected="selected"'/></c:if>>华南理工大学</option>
+                <option value="1" <c:if test="${schoolNum == 3}"><c:out value='selected="selected"'/></c:if>>深圳大学</option>
               </select>
 
               <label>宿舍</label>
               <select name="DropDownTimezone" id="DropDownDorm" class="input-xlarge">
                 <option value="0">未选择</option>
-                <option value="1" selected="<c:if test="${fn:contains(dorm, '至善园1号')}"><c:out value="selected"/></c:if>">至善园1号</option>
-                <option value="2" selected="<c:if test="${fn:contains(dorm, '至善园2号')}"><c:out value="selected"/></c:if>">至善园2号</option>
+                <option value="1" <c:if test="${fn:contains(dorm, '至善园1号')}"><c:out value='selected="selected"'/></c:if>>至善园1号</option>
+                <option value="2" <c:if test="${fn:contains(dorm, '至善园2号')}"><c:out value='selected="selected"'/></c:if>>至善园2号</option>
               </select>
           </form>
           </div>

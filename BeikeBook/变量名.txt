@@ -155,6 +155,7 @@ admin/city/districtadd.jsp				districtAddrStr			广州-中山大学-斋区托管点
 
 admin/city/districtedit.jsp				districtAddrStr			广州-中山大学-斋区托管点
 																	districtName				托管点名
+																	cityNum							城市编号
 																	address							地址
 																	deliverName					配送员
 																	deliverPhone				电话号码
@@ -172,6 +173,8 @@ admin/city/schooladd.jsp					districtAddrStr			广州-中山大学-斋区托管点
 
 admin/city/schooledit.jsp					districtAddrStr			广州-中山大学-斋区托管点
 																	schoolName					学校名字
+																	cityName						城市名
+																	schoolAdmin					学校账号
 																	schoolAbbreviate		学校缩写
 
 admin/book/books.jsp							districtAddrStr			广州-中山大学-斋区托管点
@@ -217,14 +220,27 @@ admin/banner/banner.jsp						districtAddrStr			广州-中山大学-斋区托管点
 																		bannerID						活动id
 																		bannerTitle					活动标题
 																		bannerPic						活动图片
-																		link						活动链接
+																		link							活动链接
 																		datetime					添加日期
 																	pageNo							当前的列表的页号
 
-admin/book/classadd.jsp						districtAddrStr			广州-中山大学-斋区托管点
+admin/banner/banneradd.jsp				districtAddrStr			广州-中山大学-斋区托管点
 
-admin/book/classedit.jsp					districtAddrStr			广州-中山大学-斋区托管点
-																	className						书类名
+admin/banner/banneredit.jsp				districtAddrStr			广州-中山大学-斋区托管点
+																	bannerTitle					活动标题
+																	link								活动链接
 
+admin/announ/announ.jsp						districtAddrStr			广州-中山大学-斋区托管点
+																	announInfos					公告信息
+																		announID						公告id
+																		announTitle					公告标题
+																		announContent				公告内容
+																	pageNo							当前的列表的页号
+
+admin/announ/announadd.jsp				districtAddrStr			广州-中山大学-斋区托管点
+
+admin/announ/announedit.jsp				districtAddrStr			广州-中山大学-斋区托管点
+																	announTitle					公告标题
+																	announContent				公告内容
 
 

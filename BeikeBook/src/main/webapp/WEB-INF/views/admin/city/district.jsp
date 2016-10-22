@@ -148,7 +148,7 @@
         </tr>
       </thead>
       <tbody>
-      <c:forEach items="${districtInfos}" var="i" begin="<c:out value="${pageNo*5}"/>" end="<c:out value="${pageNo*5 + 5}"/>">
+      <c:forEach items="${districtInfos}" var="i" begin="${pageNo*5}" end="${pageNo*5 + 5}">
 			<tr>
 				<td><c:out value="${i.districtNum}" /></td>
 				<td><c:out value="${i.districtName}" /></td>
@@ -166,12 +166,12 @@
 </div>
 <div class="pagination">
     <ul>
-        <li><a href="district.jsp?pageNo=<c:out value="${pageNo}"/>">Prev</a></li>
-        <li><a href="district.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo}"/></a></li>
-        <li><a href="district.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo+1}"/></a></li>
-        <li><a href="district.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo+2}"/></a></li>
-        <li><a href="district.jsp?pageNo=<c:out value="${pageNo}"/>"><c:out value="${pageNo+3}"/></a></li>
-        <li><a href="district.jsp?pageNo=<c:out value="${pageNo}"/>">Next</a></li>
+        <li><a href="district.jsp?pageNo=${pageNo - 1}">Prev</a></li>
+        <li><span><c:out value="${pageNo}"/></span></li>
+        <li><a href="district.jsp?pageNo=${pageNo + 1}"><c:out value="${pageNo+1}"/></a></li>
+        <li><a href="district.jsp?pageNo=${pageNo + 2}"><c:out value="${pageNo+2}"/></a></li>
+        <li><a href="district.jsp?pageNo=${pageNo + 3}"><c:out value="${pageNo+3}"/></a></li>
+        <li><a href="district.jsp?pageNo=${pageNo + 1}">Next</a></li>
     </ul>
 </div>
             </div>

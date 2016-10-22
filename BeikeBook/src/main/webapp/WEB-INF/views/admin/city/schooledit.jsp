@@ -144,17 +144,18 @@
       <div class="tab-pane active in" id="home">
         <form id="school">
             <label>学校</label>
-            <input type="text" value='<c:out value="${schoolName}"/>' class="input-xlarge">
+            <input type="text" value="${schoolName}" class="input-xlarge">
             <label>学校缩写</label>
-            <input type="text" value='<c:out value="${schoolAbbreviate}"/>' class="input-xlarge">
+            <input type="text" value="${schoolAbbreviate}" class="input-xlarge">
             <label>所在城市</label>
             <select name="DropDownTimezone" id="DropDownDorm" class="input-xlarge">
-              <option value="未选择" selected="selected">未选择</option>
-              <option value="深圳">深圳</option>
-              <option value="广州">广州</option>
+              <option value="0">未选择</option>
+              <option value="1" <c:if test="${cityNum == 1}"><c:out value='selected="selected"'/></c:if>>广州</option>
+              <option value="2" <c:if test="${cityNum == 2}"><c:out value='selected="selected"'/></c:if>>上海</option>
+              <option value="3" <c:if test="${cityNum == 3}"><c:out value='selected="selected"'/></c:if>>深圳</option>
             </select>
             <label>管理账号</label>
-            <strong>beike-szsz</strong>
+            <strong><c:out value="${schoolAdmin}"/></strong>
         </form>
       </div>
       <div class="tab-pane fade" id="profile">

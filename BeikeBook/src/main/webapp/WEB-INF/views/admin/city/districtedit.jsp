@@ -139,19 +139,20 @@
       <div class="tab-pane active in" id="home">
         <form id="district">
             <label>托管点名</label>
-            <input type="text" value='<c:out value="${districtName}"/>' class="input-xlarge">
+            <input type="text" value="${districtName}" class="input-xlarge">
              <label>所在学校</label>
             <select name="DropDownTimezone" id="DropDownDorm" class="input-xlarge">
-              <option value="未选择" selected="selected">未选择</option>
-              <option value="深圳">深圳</option>
-              <option value="广州">广州</option>
+              <option value="0">未选择</option>
+              <option value="1" <c:if test="${cityNum == 1}"><c:out value='selected="selected"'/></c:if>>广州</option>
+              <option value="2" <c:if test="${cityNum == 2}"><c:out value='selected="selected"'/></c:if>>上海</option>
+              <option value="3" <c:if test="${cityNum == 3}"><c:out value='selected="selected"'/></c:if>>深圳</option>
             </select>
             <label>托管点地址</label>
-            <input type="text" value='<c:out value="${address}"/>' class="input-xlarge">
+            <input type="text" value="${address}" class="input-xlarge">
             <label>配送员</label>
-            <input type="text" value='<c:out value="${deliverName}"/>' class="input-xlarge">
+            <input type="text" value="${deliverName}" class="input-xlarge">
             <label>手机号码</label>
-            <input type="text" value='<c:out value="${deliverPhone}"/>' class="input-xlarge">        
+            <input type="text" value="${deliverPhone}" class="input-xlarge">        
         </form>
       </div>
     </div>
