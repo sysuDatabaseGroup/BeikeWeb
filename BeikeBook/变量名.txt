@@ -243,4 +243,85 @@ admin/announ/announedit.jsp				districtAddrStr			广州-中山大学-斋区托管点
 																	announTitle					公告标题
 																	announContent				公告内容
 
+index.jsp													bookTypes						书类信息
+																		className						书类名
+																	bookInfo						书籍列表/根据书类别
+																		bookClassID				书ID
+																		sellPrice					出售参考价
 
+center.jsp												wx_photo						微信头像
+																	userNum							用户名
+																	rsBookNum						买书和租书的总数
+																	bkBookNum						托管的书数量
+																	moneyNum						提现费用
+																	cityName						城市名
+																	schoolName					学校名
+																	dorm								宿舍
+
+buy_rent.jsp											rsBookInfo					买书和租书的信息
+																		isRent							买书还是租书的标记
+																		bookClassImg				书的封面名
+																		price								买书或租书的价格
+																		bookClassName				书名
+																		bookNum							书编号
+																		datetime						买书或租书的时间
+																		num									买书或租书的数量
+																		duringTime					已租用时间
+																		money								已付费用
+
+detail.jsp													bookClassImg				书的封面名
+																		sellPrice						买书的价格
+																		bookClassName				书名
+																		version							版本
+																		author							作者
+																		company							出版社
+																		districtInfo				托管点信息
+																			districtName			托管点名称
+																			num								托管点的书数量
+
+books.jsp														noSellBookInfo			未售书的信息
+																			bookClassImg				书的封面名
+																			bookClassName				书名
+																			bookNum							书编号
+																			schoolName					学校名
+																			districtName				托管点名称
+																			datetime						托管的时间
+																		selledBookInfo			已售书的信息
+																			bookClassImg				书的封面名
+																			sellPrice						售价
+																			bookClassName				书名
+																			bookNum							书编号
+																			datetime						出售的时间
+
+alipay.jsp													moneyNum						提现费用
+
+alipay_none.jsp											moneyNum						提现费用
+
+pay.jsp															schoolName					学校名
+																		districtName				托管点名称
+																		bookClassImg				书的封面名
+																		bookClassName				书名
+																		bookNum							书编号
+																		sellPrice						售价
+																		price								配送方式的收费
+
+rent.jsp														schoolName					学校名
+																		districtName				托管点名称
+																		bookClassImg				书的封面名
+																		bookClassName				书名
+																		bookNum							书编号
+																		borrowPrice					租价
+																		//price								配送方式的收费
+
+success.jsp													districtName				托管点名称
+																		bookClassImg				书的封面名
+																		bookClassName				书名
+																		takeBookNum					取书号
+																		address							托管点地址
+
+success_rent.jsp										districtName				托管点名称
+																		bookClassImg				书的封面名
+																		bookClassName				书名
+																		takeBookNum					取书号
+																		deliverName					配送员姓名
+																		deliverPhone				配送员手机

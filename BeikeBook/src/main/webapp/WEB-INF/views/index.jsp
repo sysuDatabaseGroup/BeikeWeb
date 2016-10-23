@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8" errorPage="404.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,22 +74,20 @@ $(function(){
 <body>
 <div class="bookClass">
 	<ul id="bookClass_ul">
-		<a href="#"><li><span>公选课</span></li></a>
-		<a href="#"><li><span>公选课</span></li></a>
-		<a href="#"><li><span>公选课</span></li></a>
-		<a href="#"><li><span>公选课</span></li></a>
-		<a href="#"><li><span>公选课</span></li></a>
-		<a href="#"><li><span>公选课</span></li></a>
+		<c:forEach items="${bookTypes}" var="i">
+		<a href="#"><li><span><c:out value="${i.className}"/></span></li></a>
+		</c:forEach>
 	</ul>
 </div>
 	<header class="header">
 		<span id="header_class"></span>
 		<input type="search" name="search" id="header_search" placeholder="热门搜索：大英 毛概 高数" required="required" />
-		<a href="center.html"><span id="header_center"></span></a>
+		<a href="center.jsp"><span id="header_center"></span></a>
 	</div>
 	<div class="slider">
 		<div id="slider_pic">
 			<ul id="pic_ul">
+				<!-- 需要替换images/pic.jpg -->
 				<li><img src="images/pic.jpg" alt="" /></li>
 				<li><img src="images/pic.jpg" alt="" /></li>
 				<li><img src="images/pic.jpg" alt="" /></li>
@@ -95,6 +95,7 @@ $(function(){
 		</div>
 		<div id="slider_list">
 			<ul id="list_ul">
+				<!-- 需要替换str -->
 				<li class="on"><p>募捐爱心书籍活动</p></li>
 				<li><p>募捐爱心书籍活动</p></li>
 				<li><p>募捐爱心书籍活动</p></li>
@@ -106,42 +107,17 @@ $(function(){
 		<span>书籍支持上门自取或校内配送</span>
 	</div>
 	<article class="article">
-		<a href="detail.html">
-		<div class="card">
-			<div id="card_img">
-				<img src="images/books/pic01.jpg" alt="" />
+		<c:forEach items="${bookInfo}" var="i">
+			<a href="detail.jsp?bookClassID=${i.bookClassID}">
+			<div class="card">
+				<div id="card_img">
+					<img src="images/books/${i.bookClassImg}" alt="" />
+				</div>
+				<h3>￥<c:out value="${i.sellPrice}"/><em>起</em></h3>
+				<span><c:out value="${i.bookClassName}"/></span>
 			</div>
-			<h3>￥4.00<em>起</em></h3>
-			<span>毛泽东思想和中国特色社会主义理论体系概论</span>
-		</div>
-		</a>
-		<a href="detail.html">
-		<div class="card">
-			<div id="card_img">
-				<img src="images/books/pic01.jpg" alt="" />
-			</div>
-			<h3>￥4.00<em>起</em></h3>
-			<span>毛泽东思想和中国特色社会主义理论体系概论</span>
-		</div>
-		</a>
-		<a href="detail.html">
-		<div class="card">
-			<div id="card_img">
-				<img src="images/books/pic01.jpg" alt="" />
-			</div>
-			<h3>￥4.00<em>起</em></h3>
-			<span>毛泽东思想和中国特色社会主义理论体系概论</span>
-		</div>
-		</a>
-		<a href="detail.html">
-		<div class="card">
-			<div id="card_img">
-				<img src="images/books/pic01.jpg" alt="" />
-			</div>
-			<h3>￥4.00<em>起</em></h3>
-			<span>毛泽东思想和中国特色社会主义理论体系概论</span>
-		</div>
-		</a>
+			</a>
+		</c:forEach>
 	</article>
 	<div class="clearbox"></div>
 	<footer class="footer">

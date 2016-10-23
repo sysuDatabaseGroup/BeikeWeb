@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8" errorPage="404.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,24 +34,24 @@
 
 <div class="option">
 	<span id="option_what"></span>
-	<a href="pay.html"><span id="option_buy">购买旧书</span></a>
-	<a href="rent.html"><span id="option_rent">租书（热）</span></a>
+	<a href="pay.jsp"><span id="option_buy">购买旧书</span></a>
+	<a href="rent.jsp"><span id="option_rent">租书（热）</span></a>
 </div>
 
 <div class="container">
 	<div class="detail">
 		<div id="detail_img">
-			<img src="images/books/pic01.jpg" alt="" />
+			<img src="images/books/${bookClassImg}" alt="" />
 		</div>
 		<div id="detail_info">
-			<h4>毛泽东思想和中国特色社会主义理论体系概论</h4>
-			<span id="info_price"><em>￥</em>5.00 <em>/本</em></span>
+			<h4><c:out value="${bookClassName}"/></h4>
+			<span id="info_price"><em>￥</em><c:out value="${sellPrice}"/> <em>/本</em></span>
 			<span id="info_service">支持： 上门配送 ｜ 自取 ｜ 租用</span>
 		</div>
 		<div id="detail_book">
-			<span>版本：<em>2010版</em></span>
-			<span>作者：<em>张三</em></span>
-			<span>出版社：<em>人民出版社</em></span>
+			<span>版本：<em><c:out value="${version}"/></em></span>
+			<span>作者：<em><c:out value="${author}"/></em></span>
+			<span>出版社：<em><c:out value="${company}"/></em></span>
 		</div>
 	</div>
 
@@ -60,21 +62,20 @@
 		</div>
 		<div class="place_num">
 			<ul id="place_num_ul">
-				<li>
-					<h5>1</h5>
-					<span>斋区托管点</span>
-					<em>10本</em>
-				</li>
-				<li>
-					<h5>2</h5>
-					<span>西南托管点</span>
-					<em>20本</em>
-				</li>
-				<li>
-					<h5>3</h5>
-					<span>南区托管点</span>
-					<em>暂无</em>
-				</li>
+				<c:forEach items="${districtInfo}" var="i">
+					<li>
+						<h5><c:out value="${i}"/></h5>
+						<span><c:out value="${i.districtName}"/></span>
+						<c:choose>
+							<c:when test="${i.num > 0}">
+								<em><c:out value="${i.num}"/>本</em>
+							</c:when>
+							<c:otherwise>
+								<em>暂无</em>
+							</c:otherwise>
+						</c:choose>
+					</li>
+				</c:forEach>
 			</ul>		
 			<div class="clearbox"></div>	
 		</div>
