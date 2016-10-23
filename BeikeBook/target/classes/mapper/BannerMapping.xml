@@ -8,27 +8,27 @@
 		link, datetime, prior</sql>
 	
 	<select id="getById" parameterType="int"
-		resultType="com.databasegroup.model.Banner">
+		resultType="Banner">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_banner WHERE bannerID=#{id}
 	</select>
 	
 	<select id="getAll"
-		resultType="com.databasegroup.model.Banner">
+		resultType="Banner">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_banner
 	</select>
 	
-	<insert id="insert" parameterType="com.databasegroup.model.Banner"
+	<insert id="insert" parameterType="Banner"
 		flushCache="true">
 		INSERT INTO bk_banner (bannerPic, bannerTitle,
 			link, datetime, prior) VALUES
 		(#{bannerPic},#{bannerTitle},#{link},#{datetime},#{prior})
 	</insert>
 	
-	<update id="update" parameterType="com.databasegroup.model.Banner">
+	<update id="update" parameterType="Banner">
 		UPDATE bk_banner SET
 		bannerPic=#{bannerPic},
 		bannerTitle=#{bannerTitle},
@@ -38,7 +38,7 @@
 		WHERE bannerID=#{bannerID}
 	</update>
 	
-	<delete id="delete" parameterType="com.databasegroup.model.Banner">
+	<delete id="delete" parameterType="Banner">
 		DELETE
 		FROM bk_banner
 		WHERE bannerID=#{bannerID}

@@ -7,41 +7,41 @@
 	<sql id="columns">cityID, cityName, cityNum</sql>
 	
 	<select id="getById" parameterType="int"
-		resultType="com.databasegroup.model.City">
+		resultType="City">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_city WHERE cityID=#{id}
 	</select>
 	
 	<select id="getAll"
-		resultType="com.databasegroup.model.City">
+		resultType="City">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_city
 	</select>
 	
 	<select id="getCityByCityNum" parameterType="String"
-		resultType="com.databasegroup.model.City">
+		resultType="City">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_city
 		WHERE cityNum=#{cityNum}
 	</select>
 	
-	<insert id="insert" parameterType="com.databasegroup.model.City"
+	<insert id="insert" parameterType="City"
 		flushCache="true">
 		INSERT INTO bk_city (cityName, cityNum) VALUES
 		(#{cityName},#{cityNum})
 	</insert>
 	
-	<update id="update" parameterType="com.databasegroup.model.City">
+	<update id="update" parameterType="City">
 		UPDATE bk_city SET
 		cityName=#{cityName},
 		cityNum=#{cityNum}
 		WHERE cityID=#{cityID}
 	</update>
 	
-	<delete id="delete" parameterType="com.databasegroup.model.City">
+	<delete id="delete" parameterType="City">
 		DELETE
 		FROM bk_city
 		WHERE cityID=#{cityID}

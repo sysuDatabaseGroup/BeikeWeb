@@ -8,20 +8,20 @@
 		num, datetime, takeBookNum, isMoney</sql>
 	
 	<select id="getById" parameterType="int"
-		resultType="com.databasegroup.model.Sell">
+		resultType="Sell">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_sell WHERE sellID=#{id}
 	</select>
 	
 	<select id="getAll"
-		resultType="com.databasegroup.model.Sell">
+		resultType="Sell">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_sell
 	</select>
 	
-	<insert id="insert" parameterType="com.databasegroup.model.Sell"
+	<insert id="insert" parameterType="Sell"
 		flushCache="true">
 		INSERT INTO bk_sell (userID, methodID, bookID, num, 
 			datetime, takeBookNum, isMoney) VALUES
@@ -29,7 +29,7 @@
 		#{datetime},#{takeBookNum},#{isMoney})
 	</insert>
 	
-	<update id="update" parameterType="com.databasegroup.model.Sell">
+	<update id="update" parameterType="Sell">
 		UPDATE bk_sell SET
 		userID=#{userID},
 		methodID=#{methodID},
@@ -41,7 +41,7 @@
 		WHERE sellID=#{sellID}
 	</update>
 	
-	<delete id="delete" parameterType="com.databasegroup.model.Sell">
+	<delete id="delete" parameterType="Sell">
 		DELETE
 		FROM bk_sell
 		WHERE sellID=#{sellID}
