@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.IClassDao">
+	
+	<sql id="columns">classID, className, classImg</sql>
+	
+	<select id="getById" parameterType="int"
+		resultType="com.databasegroup.model.Class">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_class WHERE classID=#{id}
+	</select>
+	
+	<select id="getAll"
+		resultType="com.databasegroup.model.Class">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_class
+	</select>
+	
+	<insert id="insert" parameterType="com.databasegroup.model.Class"
+		flushCache="true">
+		INSERT INTO bk_class (className, classImg) VALUES
+		(#{className},#{classImg})
+	</insert>
+	
+	<update id="update" parameterType="com.databasegroup.model.Class">
+		UPDATE bk_class SET
+		className=#{className},
+		classImg=#{classImg}
+		WHERE classID=#{classID}
+	</update>
+	
+	<delete id="delete" parameterType="com.databasegroup.model.Class">
+		DELETE
+		FROM bk_class
+		WHERE classID=#{classID}
+	</delete> 
+</mapper>

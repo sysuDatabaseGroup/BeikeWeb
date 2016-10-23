@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.IAnnounDao">
+	
+	<sql id="columns">announID, announContent</sql>
+	
+	<select id="getById" parameterType="int"
+		resultType="com.databasegroup.model.Announ">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_announ WHERE announID=#{id}
+	</select>
+	
+	<select id="getAll"
+		resultType="com.databasegroup.model.Announ">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_announ
+	</select>
+	
+	<insert id="insert" parameterType="com.databasegroup.model.Announ"
+		flushCache="true">
+		INSERT INTO bk_announ (announContent) VALUES
+		(#{announContent})
+	</insert>
+	
+	<update id="update" parameterType="com.databasegroup.model.Announ">
+		UPDATE bk_announ SET
+		announContent=#{announContent}
+		WHERE announID=#{announID}
+	</update>
+	
+	<delete id="delete" parameterType="com.databasegroup.model.Announ">
+		DELETE
+		FROM bk_announ
+		WHERE announID=#{announID}
+	</delete> 
+</mapper>

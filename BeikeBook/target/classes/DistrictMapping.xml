@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.IDistrictDao">
+	
+	<sql id="columns">districtID, districtName, districtNum, address,
+		deliverName, deliverPhone, schoolID</sql>
+	
+	<select id="getById" parameterType="int"
+		resultType="com.databasegroup.model.District">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_district WHERE districtID=#{id}
+	</select>
+	
+	<select id="getAll"
+		resultType="com.databasegroup.model.District">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_district
+	</select>
+	
+	<insert id="insert" parameterType="com.databasegroup.model.District"
+		flushCache="true">
+		INSERT INTO bk_district (districtName, districtNum, address,
+			deliverName, deliverPhone, schoolID) VALUES
+		(#{districtName},#{districtNum},#{address},
+		#{deliverName},#{deliverPhone},#{schoolID})
+	</insert>
+	
+	<update id="update" parameterType="com.databasegroup.model.District">
+		UPDATE bk_district SET
+		districtName=#{districtName},
+		districtNum=#{districtNum},
+		address=#{address},
+		deliverName=#{deliverName},
+		deliverPhone=#{deliverPhone},
+		schoolID=#{schoolID}
+		WHERE districtID=#{districtID}
+	</update>
+	
+	<delete id="delete" parameterType="com.databasegroup.model.City">
+		DELETE
+		FROM bk_district
+		WHERE districtID=#{districtID}
+	</delete> 
+</mapper>

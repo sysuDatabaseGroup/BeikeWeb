@@ -10,8 +10,8 @@
                         http://www.springframework.org/schema/mvc    
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
                         
-	<!-- com.databasegroup.fortest下的组件（bean），并排除controller -->
-	<context:component-scan base-package="com.databasegroup.fortest">
+	<!-- com.databasegroup下的组件（bean），并排除controller -->
+	<context:component-scan base-package="com.databasegroup">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
     
@@ -26,20 +26,20 @@
 	<!-- mybatis 配置2：数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="${driver}" />
-		<property name="url" value="${url}" />
-		<property name="username" value="${username}" />
-		<property name="password" value="${password}" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="${initialSize}"></property>
+		<property name="initialSize" value="${jdbc.initialSize}"></property>
 		<!-- 连接池最大数量 -->
-		<property name="maxActive" value="${maxActive}"></property>
+		<property name="maxActive" value="${jdbc.maxActive}"></property>
 		<!-- 连接池最大空闲 -->
-		<property name="maxIdle" value="${maxIdle}"></property>
+		<property name="maxIdle" value="${jdbc.maxIdle}"></property>
 		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="${minIdle}"></property>
+		<property name="minIdle" value="${jdbc.minIdle}"></property>
 		<!-- 获取连接最大等待时间 -->
-		<property name="maxWait" value="${maxWait}"></property>
+		<property name="maxWait" value="${jdbc.maxWait}"></property>
 	</bean>
 
 	<!-- spring和MyBatis整合，不需要mybatis的配置映射文件 -->
@@ -51,7 +51,7 @@
 
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.databasegroup.fortest.dao" />
+		<property name="basePackage" value="com.databasegroup.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.IUserDao">
+	
+	<sql id="columns">userID, wx_photo, wx_name, userNum,
+		cityID, schoolID, dorm</sql>
+	
+	<select id="getById" parameterType="int"
+		resultType="com.databasegroup.model.User">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_user WHERE userID=#{id}
+	</select>
+	
+	<select id="getAll"
+		resultType="com.databasegroup.model.User">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_user
+	</select>
+	
+	<insert id="insert" parameterType="com.databasegroup.model.User"
+		flushCache="true">
+		INSERT INTO bk_user (wx_photo, wx_name, userNum,
+			cityID, schoolID, dorm) VALUES
+		(#{wx_photo},#{wx_name},#{userNum},
+		#{cityID},#{schoolID},#{dorm})
+	</insert>
+	
+	<update id="update" parameterType="com.databasegroup.model.User">
+		UPDATE bk_user SET
+		wx_photo=#{wx_photo},
+		wx_name=#{wx_name},
+		userNum=#{userNum},
+		cityID=#{cityID},
+		schoolID=#{schoolID},
+		dorm=#{dorm}
+		WHERE userID=#{userID}
+	</update>
+	
+	<delete id="delete" parameterType="com.databasegroup.model.User">
+		DELETE
+		FROM bk_user
+		WHERE userID=#{userID}
+	</delete> 
+</mapper>

@@ -9,7 +9,14 @@
 <title>showCity</title>
 </head>
 <body>
-<c:out value="${cityName}" /> <br>
-${cityName}
+<table>
+	<c:forEach items="${cities}" var="city">
+		<tr>
+			<td><c:out value="${city.cityID}" /></td>
+			<td><c:out value="${city.cityName}" /></td>
+			<td><c:out value="${city.cityNum}" /></td>
+		</tr>
+	</c:forEach>
+</table>
 </body>
 </html>

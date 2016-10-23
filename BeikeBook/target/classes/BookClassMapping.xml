@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.IBookClassDao">
+	
+	<sql id="columns">bookClassID, classID, bookClassName,
+		bookClassImg, methodID, company, author, version,
+		sellPrice, borrowPrice</sql>
+	
+	<select id="getById" parameterType="int"
+		resultType="com.databasegroup.model.BookClass">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_bookclass WHERE bookClassID=#{id}
+	</select>
+	
+	<select id="getAll"
+		resultType="com.databasegroup.model.BookClass">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_bookclass
+	</select>
+	
+	<insert id="insert" parameterType="com.databasegroup.model.BookClass"
+		flushCache="true">
+		INSERT INTO bk_bookclass (classID, bookClassName,
+			bookClassImg, methodID, company, author, version,
+			sellPrice, borrowPrice) VALUES
+		(#{classID},#{bookClassName},#{bookClassImg},
+		#{methodID},#{company},#{author},
+		#{version},#{sellPrice},#{borrowPrice})
+	</insert>
+	
+	<update id="update" parameterType="com.databasegroup.model.BookClass">
+		UPDATE bk_bookclass SET
+		classID=#{classID},
+		bookClassName=#{bookClassName},
+		bookClassImg=#{bookClassImg},
+		methodID=#{methodID},
+		company=#{company},
+		author=#{author},
+		version=#{version},
+		sellPrice=#{sellPrice},
+		borrowPrice=#{borrowPrice}
+		WHERE bookClassID=#{bookClassID}
+	</update>
+	
+	<delete id="delete" parameterType="com.databasegroup.model.BookClass">
+		DELETE
+		FROM bk_bookclass
+		WHERE bookClassID=#{bookClassID}
+	</delete> 
+</mapper>
