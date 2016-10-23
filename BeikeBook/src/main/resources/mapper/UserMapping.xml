@@ -8,20 +8,20 @@
 		cityID, schoolID, dorm</sql>
 	
 	<select id="getById" parameterType="int"
-		resultType="com.databasegroup.model.User">
+		resultType="User">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_user WHERE userID=#{id}
 	</select>
 	
 	<select id="getAll"
-		resultType="com.databasegroup.model.User">
+		resultType="User">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_user
 	</select>
 	
-	<insert id="insert" parameterType="com.databasegroup.model.User"
+	<insert id="insert" parameterType="User"
 		flushCache="true">
 		INSERT INTO bk_user (wx_photo, wx_name, userNum,
 			cityID, schoolID, dorm) VALUES
@@ -29,7 +29,7 @@
 		#{cityID},#{schoolID},#{dorm})
 	</insert>
 	
-	<update id="update" parameterType="com.databasegroup.model.User">
+	<update id="update" parameterType="User">
 		UPDATE bk_user SET
 		wx_photo=#{wx_photo},
 		wx_name=#{wx_name},
@@ -40,7 +40,7 @@
 		WHERE userID=#{userID}
 	</update>
 	
-	<delete id="delete" parameterType="com.databasegroup.model.User">
+	<delete id="delete" parameterType="User">
 		DELETE
 		FROM bk_user
 		WHERE userID=#{userID}

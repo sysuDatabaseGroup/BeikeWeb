@@ -7,33 +7,33 @@
 	<sql id="columns">methodID, methodName, price</sql>
 	
 	<select id="getById" parameterType="int"
-		resultType="com.databasegroup.model.Method">
+		resultType="Method">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_method WHERE methodID=#{id}
 	</select>
 	
 	<select id="getAll"
-		resultType="com.databasegroup.model.Method">
+		resultType="Method">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_method
 	</select>
 	
-	<insert id="insert" parameterType="com.databasegroup.model.Method"
+	<insert id="insert" parameterType="Method"
 		flushCache="true">
 		INSERT INTO bk_method (methodName, price) VALUES
 		(#{methodName},#{price})
 	</insert>
 	
-	<update id="update" parameterType="com.databasegroup.model.Method">
+	<update id="update" parameterType="Method">
 		UPDATE bk_method SET
 		methodName=#{methodName},
 		price=#{price}
 		WHERE methodID=#{methodID}
 	</update>
 	
-	<delete id="delete" parameterType="com.databasegroup.model.Method">
+	<delete id="delete" parameterType="Method">
 		DELETE
 		FROM bk_method
 		WHERE methodID=#{methodID}

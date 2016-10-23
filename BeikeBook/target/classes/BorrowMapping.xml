@@ -8,20 +8,20 @@
 		datetime, takeBookNum, isTake, isBack</sql>
 	
 	<select id="getById" parameterType="int"
-		resultType="com.databasegroup.model.Borrow">
+		resultType="Borrow">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_borrow WHERE borrowID=#{id}
 	</select>
 	
 	<select id="getAll"
-		resultType="com.databasegroup.model.Borrow">
+		resultType="Borrow">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_borrow
 	</select>
 	
-	<insert id="insert" parameterType="com.databasegroup.model.Borrow"
+	<insert id="insert" parameterType="Borrow"
 		flushCache="true">
 		INSERT INTO bk_borrow (userID, methodID, bookID, num,
 		datetime, takeBookNum, isTake, isBack) VALUES
@@ -29,7 +29,7 @@
 		#{datetime},#{takeBookNum},#{isTake},#{isBack})
 	</insert>
 	
-	<update id="update" parameterType="com.databasegroup.model.Borrow">
+	<update id="update" parameterType="Borrow">
 		UPDATE bk_borrow SET
 		userID=#{userID},
 		methodID=#{methodID},
@@ -42,7 +42,7 @@
 		WHERE borrowID=#{borrowID}
 	</update>
 	
-	<delete id="delete" parameterType="com.databasegroup.model.Borrow">
+	<delete id="delete" parameterType="Borrow">
 		DELETE
 		FROM bk_borrow
 		WHERE borrowID=#{borrowID}

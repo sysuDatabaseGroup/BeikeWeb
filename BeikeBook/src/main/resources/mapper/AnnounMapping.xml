@@ -7,32 +7,32 @@
 	<sql id="columns">announID, announContent</sql>
 	
 	<select id="getById" parameterType="int"
-		resultType="com.databasegroup.model.Announ">
+		resultType="Announ">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_announ WHERE announID=#{id}
 	</select>
 	
 	<select id="getAll"
-		resultType="com.databasegroup.model.Announ">
+		resultType="Announ">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_announ
 	</select>
 	
-	<insert id="insert" parameterType="com.databasegroup.model.Announ"
+	<insert id="insert" parameterType="Announ"
 		flushCache="true">
 		INSERT INTO bk_announ (announContent) VALUES
 		(#{announContent})
 	</insert>
 	
-	<update id="update" parameterType="com.databasegroup.model.Announ">
+	<update id="update" parameterType="Announ">
 		UPDATE bk_announ SET
 		announContent=#{announContent}
 		WHERE announID=#{announID}
 	</update>
 	
-	<delete id="delete" parameterType="com.databasegroup.model.Announ">
+	<delete id="delete" parameterType="Announ">
 		DELETE
 		FROM bk_announ
 		WHERE announID=#{announID}

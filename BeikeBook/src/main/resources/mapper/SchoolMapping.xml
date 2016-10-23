@@ -8,20 +8,20 @@
 		schoolPassword, cityID</sql>
 	
 	<select id="getById" parameterType="int"
-		resultType="com.databasegroup.model.School">
+		resultType="School">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_school WHERE schoolID=#{id}
 	</select>
 	
 	<select id="getAll"
-		resultType="com.databasegroup.model.School">
+		resultType="School">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_school
 	</select>
 	
-	<insert id="insert" parameterType="com.databasegroup.model.School"
+	<insert id="insert" parameterType="School"
 		flushCache="true">
 		INSERT INTO bk_school (schoolName, schoolNum, schoolAdmin,
 			schoolPassword, cityID) VALUES
@@ -29,7 +29,7 @@
 		#{schoolPassword},#{cityID})
 	</insert>
 	
-	<update id="update" parameterType="com.databasegroup.model.School">
+	<update id="update" parameterType="School">
 		UPDATE bk_school SET
 		schoolName=#{schoolName},
 		schoolNum=#{schoolNum},
@@ -39,7 +39,7 @@
 		WHERE schoolID=#{schoolID}
 	</update>
 	
-	<delete id="delete" parameterType="com.databasegroup.model.School">
+	<delete id="delete" parameterType="School">
 		DELETE
 		FROM bk_school
 		WHERE schoolID=#{schoolID}

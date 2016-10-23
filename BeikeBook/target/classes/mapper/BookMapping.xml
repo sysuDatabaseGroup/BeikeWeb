@@ -8,20 +8,20 @@
 		borrowPrice, districtID, userID, datetime, isSell</sql>
 	
 	<select id="getById" parameterType="int"
-		resultType="com.databasegroup.model.Book">
+		resultType="Book">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_book WHERE bookID=#{id}
 	</select>
 	
 	<select id="getAll"
-		resultType="com.databasegroup.model.Book">
+		resultType="Book">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_book
 	</select>
 	
-	<insert id="insert" parameterType="com.databasegroup.model.Book"
+	<insert id="insert" parameterType="Book"
 		flushCache="true">
 		INSERT INTO bk_book (bookClassID, bookNum, sellPrice,
 			borrowPrice, districtID, userID, datetime, isSell) VALUES
@@ -29,7 +29,7 @@
 		#{districtID},#{userID},#{datetime},#{isSell})
 	</insert>
 	
-	<update id="update" parameterType="com.databasegroup.model.Book">
+	<update id="update" parameterType="Book">
 		UPDATE bk_book SET
 		bookClassID=#{bookClassID},
 		bookNum=#{bookNum},
@@ -42,7 +42,7 @@
 		WHERE bookID=#{bookID}
 	</update>
 	
-	<delete id="delete" parameterType="com.databasegroup.model.Book">
+	<delete id="delete" parameterType="Book">
 		DELETE
 		FROM bk_book
 		WHERE bookID=#{bookID}

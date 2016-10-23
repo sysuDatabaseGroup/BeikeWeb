@@ -30,7 +30,7 @@ public class TestBannerDao {
 		assertNotNull(bannerDao);
 		
 		Banner banner = bannerDao.getById(2);
-		banner.setBannerTitle("update");
+		banner.setBannerTitle("update110");
 		bannerDao.update(banner);
 		
 //		Banner banner = new Banner();

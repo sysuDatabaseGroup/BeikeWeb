@@ -8,20 +8,20 @@
 		deliverName, deliverPhone, schoolID</sql>
 	
 	<select id="getById" parameterType="int"
-		resultType="com.databasegroup.model.District">
+		resultType="District">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_district WHERE districtID=#{id}
 	</select>
 	
 	<select id="getAll"
-		resultType="com.databasegroup.model.District">
+		resultType="District">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_district
 	</select>
 	
-	<insert id="insert" parameterType="com.databasegroup.model.District"
+	<insert id="insert" parameterType="District"
 		flushCache="true">
 		INSERT INTO bk_district (districtName, districtNum, address,
 			deliverName, deliverPhone, schoolID) VALUES
@@ -29,7 +29,7 @@
 		#{deliverName},#{deliverPhone},#{schoolID})
 	</insert>
 	
-	<update id="update" parameterType="com.databasegroup.model.District">
+	<update id="update" parameterType="District">
 		UPDATE bk_district SET
 		districtName=#{districtName},
 		districtNum=#{districtNum},
@@ -40,7 +40,7 @@
 		WHERE districtID=#{districtID}
 	</update>
 	
-	<delete id="delete" parameterType="com.databasegroup.model.City">
+	<delete id="delete" parameterType="District">
 		DELETE
 		FROM bk_district
 		WHERE districtID=#{districtID}
