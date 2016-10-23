@@ -8,16 +8,13 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
     <!-- 扫描com.databasegroup.fortest.controller下的controller -->
-    <context:component-scan base-package="com.databasegroup.controller"
-		use-default-filters="false">
+    <context:component-scan base-package="com.databasegroup.controller">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	
     <!-- 注解驱动 -->
     <mvc:annotation-driven />
-    
-    
 	
 	<!-- 这个bean还不是很懂 -->  
     <bean  
