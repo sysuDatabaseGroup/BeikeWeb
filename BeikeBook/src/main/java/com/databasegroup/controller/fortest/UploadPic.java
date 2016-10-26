@@ -5,12 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
-import java.io.File;
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.web.multipart.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.databasegroup.utils.uploadFile;
 
