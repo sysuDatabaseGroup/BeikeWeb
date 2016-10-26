@@ -7,11 +7,11 @@ import org.junit.Test;
 
 public class TestLog4J {
 	
-	private static Logger logger = Logger.getLogger(TestLog4J.class);  
+	//private static Logger logger = Logger.getLogger(TestLog4J.class);  
 	
 	public static void main(String[] args) {
-		logger.debug("debug information");
-		logger.info("info information");
-		logger.error("error information");
+//		logger.debug("debug information");
+//		logger.info("info information");
+//		logger.error("error information");
 	}
 }
