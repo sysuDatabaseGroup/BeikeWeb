@@ -1,4 +1,4 @@
-package com.databasegroup.controller;
+package com.databasegroup.controller.fortest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +34,7 @@ public class UploadPic {
 			e.printStackTrace();
 		}
 		model.addAttribute("message", "uploaded successfully!");
+		model.addAttribute("imageFile", picFile.getOriginalFilename());
 		return "/fortest/showMessage";
 	}
 }

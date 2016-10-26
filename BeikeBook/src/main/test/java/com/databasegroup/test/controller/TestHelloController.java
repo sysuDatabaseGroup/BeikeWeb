@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.*;
 
-import com.databasegroup.controller.HelloController;
+import com.databasegroup.controller.fortest.HelloController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:servlet-context.xml")

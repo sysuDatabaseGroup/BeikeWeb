@@ -3,20 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
     <title>Bootstrap Admin</title>
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
-    
-    <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
-
-    <script src="lib/jquery-1.7.2.min.js" type="text/javascript"></script>
-
+	<%@ include file="meta_link_script.jsp"  %>
     <!-- Demo page code -->
 
     <style type="text/css">
@@ -63,7 +51,7 @@
         <h1>Oops!</h1>
         <p class="info">This page doesn't exist.</p>
         <p><i class="icon-home"></i></p>
-        <p><a href="index.jsp">Back to the home page</a></p>
+        <p><a href="index">Back to the home page</a></p>
     </div>
 </div>
 

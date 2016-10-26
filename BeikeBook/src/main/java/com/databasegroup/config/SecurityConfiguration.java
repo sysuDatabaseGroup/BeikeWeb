@@ -23,7 +23,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
       http
       	.authorizeRequests()
-      		.anyRequest().authenticated() //限制所有网站都要经过认证
+      		.antMatchers("/home").authenticated() //限制所有网站都要经过认证
+      		.anyRequest().permitAll()
       		.and()
       	.formLogin()
       		.loginPage("/authLogin") // 认证页面

@@ -1,21 +1,10 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8" errorPage="404.jsp"%>
+<%@ page pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>贝壳易书</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; maximum-scale=1.0;" />
-	<meta http-equiv="X-UA-Compatible" content="IE=9" />
-	<meta name="format-detection" content="telephone=no" />
-	<meta name="format-detection" content="email=no" />
-	<meta name="format-detection" content="address=no;">
-	<meta name="keywords" content="大学生,二手书,大学教材" />
-	<meta name="description" content="大学生自己的二手书阁" />
-	<meta name="author" content="Pang Lin" />
-<link rel="stylesheet" type="text/css" href="css/CSS.css">
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<!-- <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script> -->
+	<title>贝壳易书</title>
+	<%@ include file="meta_css_js.jsp"  %>
 </head>
 <body>
 	<div class="success">
@@ -37,8 +26,8 @@
 	</div>
 
 	<div class="success_btn">
-		<a href="index.jsp"><span id="continue">继续购买</span></a>
-		<a href="center.jsp"><span id="center">个人中心</span></a>
+		<a href="index"><span id="continue">继续购买</span></a>
+		<a href="center"><span id="center">个人中心</span></a>
 	</div>
 </body>	
 </html>

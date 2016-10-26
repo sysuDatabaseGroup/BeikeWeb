@@ -5,6 +5,24 @@
 
 	<display-name>Archetype Created Web Application</display-name>
 
+	<!--  为了能够处理中文的post请求，再配置一个encodingFilter，以避免post请求中文出现乱码情况 -->
+	<filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 	<!-- SpringMVC配置文件 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -37,7 +55,7 @@
 		<load-on-startup>1</load-on-startup>
 		<!-- multipart配置，上传文件的配置 -->
 		<multipart-config>
-			<location>/tmp/pic</location>
+			<location>/images/</location>
 			<max-file-size>2097152</max-file-size>
 			<max-request-size>4194304</max-request-size>
 		</multipart-config>
@@ -47,4 +65,12 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	
+    
+    <!-- 指定404错误页面 -->
+    <error-page>
+    	<error-code>404</error-code>
+    	<location>/WEB-INF/views/admin/404.jsp</location>
+    </error-page>
 </web-app>

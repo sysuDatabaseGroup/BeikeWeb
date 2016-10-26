@@ -15,6 +15,11 @@
 	
     <!-- 注解驱动 -->
     <mvc:annotation-driven />
+    
+    <mvc:resources location="/WEB-INF/views/css/" mapping="/css/**"/>  
+    <mvc:resources location="/WEB-INF/views/js/" mapping="/js/**"/>  
+    <mvc:resources location="/images/" mapping="/images/**"/>
+    <mvc:resources location="/WEB-INF/views/admin/" mapping="/admin/**"/>  
 	
 	<!-- 这个bean还不是很懂 -->  
     <bean  
@@ -29,5 +34,20 @@
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    
+    <!-- 中文乱码解决 -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >  
+    <property name="messageConverters">   
+        <list>   
+            <bean class = "org.springframework.http.converter.StringHttpMessageConverter">   
+                <property name = "supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>   
+                    </list>   
+                </property>   
+            </bean>   
+        </list>   
+   </property>  
+</bean>
 
 </beans>
