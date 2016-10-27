@@ -24,29 +24,28 @@ public class TestCityDao {
 	public void cityDaoShouldNotBeNull() {
 		assertNotNull(cityDao);
 		
-		City city = cityDao.getById(1);
-		city.setCityName("HongKong");
-		city.setCityNum("HK");
-		
-		cityDao.update(city);
+//		City city = cityDao.getById(2);
+//		city.setName("HongKong");
+//		city.setNum("HK");
+//		
+//		cityDao.update(city);
 //		
 //		City city = cityDao.getById(1);
 //		System.out.println(city);
 		
-//		City city = new City();
-//		city.setCityName("Beijing");
-//		city.setCityNum("BJ");
-//		cityDao.insert(city);
-//		city.setCityName("Shanghai");
-//		city.setCityNum("SH");
-//		cityDao.insert(city);
+		City city = new City();
+		city.setName("Beijing");
+		city.setNum("BJ");
+		cityDao.insert(city);
+
+		System.out.println(cityDao.getById(1));
+		System.out.println(cityDao.getAll());
 		
-//		List<City> cities = cityDao.getAll();
-//		for (City city : cities) {
-//			System.out.println(city.getCityName() + ' ' + city.getCityNum());
-//		}
+		cityDao.delete(1);
 		
-//		cityDao.delete(2);
-//		cityDao.delete(3);
+		System.out.println(cityDao.getAll());
+		
+		cityDao.insert(city);
+		
 	}
 }

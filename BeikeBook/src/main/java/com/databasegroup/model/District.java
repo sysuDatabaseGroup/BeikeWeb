@@ -1,104 +1,116 @@
 package com.databasegroup.model;
 
 public class District {
-	private int districtID;
-	private String districtName;
-	private int districtNum;
+	private int id;
+	private String name;
+	private int num;
 	private String address;
 	private String deliverName;
 	private String deliverPhone;
-	private int schoolID;
+	private int schoolId;
 	
 	@Override
 	public String toString() {
-		return "" + districtID + ' ' + districtName + ' ' + districtNum + ' ' +
-				address + ' ' + deliverName + ' ' + deliverPhone + ' ' + schoolID;
+		return "" + id + ' ' + name + ' ' + num + ' ' + address + ' ' 
+				+ deliverName + ' ' + deliverPhone + ' ' + schoolId;
 	}
-	
+
 	/**
-	 * @return the districtID
+	 * @return the id
 	 */
-	public int getDistrictID() {
-		return districtID;
+	public int getId() {
+		return id;
 	}
+
 	/**
-	 * @param districtID the districtID to set
+	 * @param id the id to set
 	 */
-	public void setDistrictID(int districtID) {
-		this.districtID = districtID;
+	public void setId(int id) {
+		this.id = id;
 	}
+
 	/**
-	 * @return the districtName
+	 * @return the name
 	 */
-	public String getDistrictName() {
-		return districtName;
+	public String getName() {
+		return name;
 	}
+
 	/**
-	 * @param districtName the districtName to set
+	 * @param name the name to set
 	 */
-	public void setDistrictName(String districtName) {
-		this.districtName = districtName;
+	public void setName(String name) {
+		this.name = name;
 	}
+
 	/**
-	 * @return the districtNum
+	 * @return the num
 	 */
-	public int getDistrictNum() {
-		return districtNum;
+	public int getNum() {
+		return num;
 	}
+
 	/**
-	 * @param districtNum the districtNum to set
+	 * @param num the num to set
 	 */
-	public void setDistrictNum(int districtNum) {
-		this.districtNum = districtNum;
+	public void setNum(int num) {
+		this.num = num;
 	}
+
 	/**
 	 * @return the address
 	 */
 	public String getAddress() {
 		return address;
 	}
+
 	/**
 	 * @param address the address to set
 	 */
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	/**
 	 * @return the deliverName
 	 */
 	public String getDeliverName() {
 		return deliverName;
 	}
+
 	/**
 	 * @param deliverName the deliverName to set
 	 */
 	public void setDeliverName(String deliverName) {
 		this.deliverName = deliverName;
 	}
+
 	/**
 	 * @return the deliverPhone
 	 */
 	public String getDeliverPhone() {
 		return deliverPhone;
 	}
+
 	/**
 	 * @param deliverPhone the deliverPhone to set
 	 */
 	public void setDeliverPhone(String deliverPhone) {
 		this.deliverPhone = deliverPhone;
 	}
+
 	/**
-	 * @return the schoolID
+	 * @return the schoolId
 	 */
-	public int getSchoolID() {
-		return schoolID;
+	public int getSchoolId() {
+		return schoolId;
 	}
+
 	/**
-	 * @param schoolID the schoolID to set
+	 * @param schoolId the schoolId to set
 	 */
-	public void setSchoolID(int schoolID) {
-		this.schoolID = schoolID;
+	public void setSchoolId(int schoolId) {
+		this.schoolId = schoolId;
 	}
-	
 	
 }

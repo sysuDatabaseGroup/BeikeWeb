@@ -30,20 +30,20 @@ public class TestBannerDao {
 		assertNotNull(bannerDao);
 		
 		Banner banner = bannerDao.getById(2);
-		banner.setBannerTitle("update110");
+		banner.setTitle("update110");
 		bannerDao.update(banner);
 		
 //		Banner banner = new Banner();
 //		
-//		banner.setBannerPic("c:\\");
-//		banner.setBannerTitle("banner 1");
+//		banner.setPicPath("c:\\");
+//		banner.setTitle("banner 1");
 //		banner.setDatetime(new Date());
 //		banner.setLink("www.hao123.com");
 //		banner.setPrior(3);
 //		
 //		bannerDao.insert(banner);
 //		
-//		banner = bannerDao.getById(2);
+//		banner = bannerDao.getById(1);
 //		
 //		System.out.println(banner);
 //		

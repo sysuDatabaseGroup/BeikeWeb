@@ -27,11 +27,13 @@ public class TestAnnounDao {
 		assertNotNull(announDao);
 		
 		Announ announ = announDao.getById(2);
-		announ.setAnnounContent("Update3");
+		announ.setTitle("title2");
+		announ.setContent("content2");
 		announDao.update(announ);
-		
+//		
 //		Announ announ = new Announ();
-//		announ.setAnnounContent("This is Announ");
+//		announ.setTitle("title");
+//		announ.setContent("content");
 //
 //		announDao.insert(announ);
 //		

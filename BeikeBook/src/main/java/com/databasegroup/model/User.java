@@ -1,103 +1,135 @@
 package com.databasegroup.model;
 
 public class User {
-	private int userID;
-	private String wx_photo;
-	private String wx_name;
+	private int id;
+	private String wxPhoto;
+	private String wxName;
 	private String userNum;
-	private int cityID;
-	private int schoolID;
+	private String password;
+	private int cityId;
+	private int schoolId;
 	private String dorm;
 	
 	@Override
 	public String toString() {
-		return "" + userID + ' ' + wx_photo + ' ' + wx_name + ' ' +
-				userNum + ' ' + cityID + ' ' + schoolID + ' ' + dorm;
+		return "" + id + ' ' + wxPhoto + ' ' + wxName + ' ' +
+				userNum + ' ' + password + ' ' + + cityId + ' ' + 
+				schoolId + ' ' + dorm;
 	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	
+
 	/**
-	 * @return the userID
+	 * @return the wxPhoto
 	 */
-	public int getUserID() {
-		return userID;
+	public String getWxPhoto() {
+		return wxPhoto;
 	}
+
 	/**
-	 * @param userID the userID to set
+	 * @param wxPhoto the wxPhoto to set
 	 */
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setWxPhoto(String wxPhoto) {
+		this.wxPhoto = wxPhoto;
 	}
+
 	/**
-	 * @return the wx_photo
+	 * @return the wxName
 	 */
-	public String getWx_photo() {
-		return wx_photo;
+	public String getWxName() {
+		return wxName;
 	}
+
 	/**
-	 * @param wx_photo the wx_photo to set
+	 * @param wxName the wxName to set
 	 */
-	public void setWx_photo(String wx_photo) {
-		this.wx_photo = wx_photo;
+	public void setWxName(String wxName) {
+		this.wxName = wxName;
 	}
-	/**
-	 * @return the wx_name
-	 */
-	public String getWx_name() {
-		return wx_name;
-	}
-	/**
-	 * @param wx_name the wx_name to set
-	 */
-	public void setWx_name(String wx_name) {
-		this.wx_name = wx_name;
-	}
+
 	/**
 	 * @return the userNum
 	 */
 	public String getUserNum() {
 		return userNum;
 	}
+
 	/**
 	 * @param userNum the userNum to set
 	 */
 	public void setUserNum(String userNum) {
 		this.userNum = userNum;
 	}
+
 	/**
-	 * @return the cityID
+	 * @return the password
 	 */
-	public int getCityID() {
-		return cityID;
+	public String getPassword() {
+		return password;
 	}
+
 	/**
-	 * @param cityID the cityID to set
+	 * @param password the password to set
 	 */
-	public void setCityID(int cityID) {
-		this.cityID = cityID;
+	public void setPassword(String password) {
+		this.password = password;
 	}
+
 	/**
-	 * @return the schoolID
+	 * @return the cityId
 	 */
-	public int getSchoolID() {
-		return schoolID;
+	public int getCityId() {
+		return cityId;
 	}
+
 	/**
-	 * @param schoolID the schoolID to set
+	 * @param cityId the cityId to set
 	 */
-	public void setSchoolID(int schoolID) {
-		this.schoolID = schoolID;
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
 	}
+
+	/**
+	 * @return the schoolId
+	 */
+	public int getSchoolId() {
+		return schoolId;
+	}
+
+	/**
+	 * @param schoolId the schoolId to set
+	 */
+	public void setSchoolId(int schoolId) {
+		this.schoolId = schoolId;
+	}
+
 	/**
 	 * @return the dorm
 	 */
 	public String getDorm() {
 		return dorm;
 	}
+
 	/**
 	 * @param dorm the dorm to set
 	 */
 	public void setDorm(String dorm) {
 		this.dorm = dorm;
 	}
+	
 	
 }

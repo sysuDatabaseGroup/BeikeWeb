@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.databasegroup.model.Class;
+import com.databasegroup.model.BookCategory;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,6 +20,11 @@ public class IndexController {
 	@RequestMapping(value={"/","/index"},method=GET)
 	public String index() {
 		return "index";
+	}
+	
+	@RequestMapping(value="sign-in",method=GET)
+	public String signIn() {
+		return "admin/sign-in";
 	}
 	
 }

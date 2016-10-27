@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.IEncashmentDao">
+
+	<resultMap id="encashmentResultMap" type="Encashment">
+		<id property="id" column="id"/>
+		<result property="alipayAccount" column="alipay_account" />
+		<result property="alipayName" column="alipay_name" />
+		<result property="encashingAmount" column="encashing_amount" />
+		<result property="phone" column="phone" />
+	</resultMap>
+	
+	<sql id="columns">id, alipay_account, alipay_name,
+		encashing_amount, phone</sql>
+	
+	<select id="getById" parameterType="int"
+		resultMap="encashmentResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_encashment WHERE id=#{id}
+	</select>
+	
+	<select id="getAll"
+		resultMap="encashmentResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_encashment
+	</select>
+	
+	<insert id="insert" parameterType="Encashment" >
+		INSERT INTO bk_encashment (alipay_account, alipay_name,
+			encashing_amount, phone) VALUES
+		(#{alipayAccount},#{alipayName},#{encashingAmount},#{phone})
+	</insert>
+	
+	<update id="update" parameterType="Encashment">
+		UPDATE bk_encashment SET
+		alipay_account=#{alipayAccount},
+		alipay_name=#{alipayName},
+		encashing_amount=#{encashingAmount},
+		phone=#{phone}
+		WHERE id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="Encashment">
+		DELETE
+		FROM bk_encashment
+		WHERE id=#{id}
+	</delete> 
+</mapper>

@@ -12,14 +12,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.*;
 
 import com.databasegroup.dao.IAnnounDao;
-import com.databasegroup.dao.IBookClassDao;
 import com.databasegroup.dao.IBookDao;
+import com.databasegroup.dao.IDealedBookDao;
 import com.databasegroup.dao.ICityDao;
-import com.databasegroup.dao.IClassDao;
+import com.databasegroup.dao.IBookCategoryDao;
 import com.databasegroup.dao.IUserDao;
+import com.databasegroup.model.DealedBook;
 import com.databasegroup.model.Book;
-import com.databasegroup.model.BookClass;
-import com.databasegroup.model.Class;
+import com.databasegroup.model.BookCategory;
 import com.databasegroup.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,18 +34,19 @@ public class TestUserDao {
 		assertNotNull(userDao);
 		
 		User user = userDao.getById(2);
-		user.setWx_name("update");
+		user.setWxName("update");
 		userDao.update(user);
-//		
+		System.out.println(user);
+		
 //		User user = new User();
-//		user.setCityID(1);
+//		user.setCityId(2);
 //		user.setDorm("Dorm");
-//		user.setSchoolID(2);
+//		user.setSchoolId(3);
 //		user.setUserNum("UserNum");
-//		user.setWx_name("wx_name");
-//		user.setWx_photo("wx_photo");
+//		user.setPassword("Password");
+//		user.setWxName("wx_name");
+//		user.setWxPhoto("wx_photo");
 //		
-////		
 //		userDao.insert(user);
 //		
 //		user = userDao.getById(1);

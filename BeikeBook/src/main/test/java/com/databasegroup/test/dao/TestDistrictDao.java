@@ -12,14 +12,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.*;
 
 import com.databasegroup.dao.IAnnounDao;
-import com.databasegroup.dao.IBookClassDao;
-import com.databasegroup.dao.IBorrowDao;
+import com.databasegroup.dao.IBookDao;
+import com.databasegroup.dao.IRentingOrderDao;
 import com.databasegroup.dao.ICityDao;
-import com.databasegroup.dao.IClassDao;
+import com.databasegroup.dao.IBookCategoryDao;
 import com.databasegroup.dao.IDistrictDao;
-import com.databasegroup.model.BookClass;
-import com.databasegroup.model.Borrow;
-import com.databasegroup.model.Class;
+import com.databasegroup.model.Book;
+import com.databasegroup.model.RentingOrder;
+import com.databasegroup.model.BookCategory;
 import com.databasegroup.model.District;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -41,9 +41,9 @@ public class TestDistrictDao {
 //		district.setAddress("Address");
 //		district.setDeliverName("Deliv");
 //		district.setDeliverPhone("Deliv");
-//		district.setDistrictName("Distri");
-//		district.setDistrictNum(2);
-//		district.setSchoolID(2);
+//		district.setName("Distri");
+//		district.setNum(2);
+//		district.setSchoolId(3);
 //		
 //		
 //		districtDao.insert(district);

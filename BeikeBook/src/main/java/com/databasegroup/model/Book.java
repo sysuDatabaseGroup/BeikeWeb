@@ -1,131 +1,162 @@
 package com.databasegroup.model;
 
-import java.util.Date;
-
 public class Book {
-	private int bookID;
-	private int bookClassID;
-	private String bookNum;
-	private double sellPrice;
-	private double borrowPrice;
-	private int districtID;
-	private int userID;
-	private Date datetime;
-	private int isSell;
+	private int id;
+	private int bookCategoryId;
+	private String title;
+	private String coverPath;
+	private int deliveryMethodId;
+	private String press;
+	private String author;
+	private String edition;
+	private double sellingPrice;
+	private double rentalPrice;
 	
 	@Override
 	public String toString() {
-		return "" + bookID + ' ' + bookClassID + ' ' + bookNum + ' ' +
-				sellPrice + ' ' + borrowPrice + ' ' + districtID + ' ' +
-				userID + ' ' + datetime + ' ' + isSell;
+		return "" + id + ' ' + bookCategoryId + ' ' + title + ' ' +
+				coverPath + ' ' + deliveryMethodId + ' ' + press + ' ' +
+				author + ' ' + edition + ' ' + sellingPrice + ' ' + rentalPrice;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the bookCategoryId
+	 */
+	public int getBookCategoryId() {
+		return bookCategoryId;
+	}
+
+	/**
+	 * @param bookCategoryId the bookCategoryId to set
+	 */
+	public void setBookCategoryId(int bookCategoryId) {
+		this.bookCategoryId = bookCategoryId;
+	}
+
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	/**
+	 * @return the coverPath
+	 */
+	public String getCoverPath() {
+		return coverPath;
+	}
+
+	/**
+	 * @param coverPath the coverPath to set
+	 */
+	public void setCoverPath(String coverPath) {
+		this.coverPath = coverPath;
+	}
+
+	/**
+	 * @return the deliveryMethodId
+	 */
+	public int getDeliveryMethodId() {
+		return deliveryMethodId;
+	}
+
+	/**
+	 * @param deliveryMethodId the deliveryMethodId to set
+	 */
+	public void setDeliveryMethodId(int deliveryMethodId) {
+		this.deliveryMethodId = deliveryMethodId;
+	}
+
+	/**
+	 * @return the press
+	 */
+	public String getPress() {
+		return press;
+	}
+
+	/**
+	 * @param press the press to set
+	 */
+	public void setPress(String press) {
+		this.press = press;
+	}
+
+	/**
+	 * @return the author
+	 */
+	public String getAuthor() {
+		return author;
+	}
+
+	/**
+	 * @param author the author to set
+	 */
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	/**
+	 * @return the edition
+	 */
+	public String getEdition() {
+		return edition;
+	}
+
+	/**
+	 * @param edition the edition to set
+	 */
+	public void setEdition(String edition) {
+		this.edition = edition;
+	}
+
+	/**
+	 * @return the sellingPrice
+	 */
+	public double getSellingPrice() {
+		return sellingPrice;
+	}
+
+	/**
+	 * @param sellingPrice the sellingPrice to set
+	 */
+	public void setSellingPrice(double sellingPrice) {
+		this.sellingPrice = sellingPrice;
+	}
+
+	/**
+	 * @return the rentalPrice
+	 */
+	public double getRentalPrice() {
+		return rentalPrice;
+	}
+
+	/**
+	 * @param rentalPrice the rentalPrice to set
+	 */
+	public void setRentalPrice(double rentalPrice) {
+		this.rentalPrice = rentalPrice;
 	}
 	
-	/**
-	 * @return the bookID
-	 */
-	public int getBookID() {
-		return bookID;
-	}
-	/**
-	 * @param bookID the bookID to set
-	 */
-	public void setBookID(int bookID) {
-		this.bookID = bookID;
-	}
-	/**
-	 * @return the bookClassID
-	 */
-	public int getBookClassID() {
-		return bookClassID;
-	}
-	/**
-	 * @param bookClassID the bookClassID to set
-	 */
-	public void setBookClassID(int bookClassID) {
-		this.bookClassID = bookClassID;
-	}
-	/**
-	 * @return the bookNum
-	 */
-	public String getBookNum() {
-		return bookNum;
-	}
-	/**
-	 * @param bookNum the bookNum to set
-	 */
-	public void setBookNum(String bookNum) {
-		this.bookNum = bookNum;
-	}
-	/**
-	 * @return the sellPrice
-	 */
-	public double getSellPrice() {
-		return sellPrice;
-	}
-	/**
-	 * @param sellPrice the sellPrice to set
-	 */
-	public void setSellPrice(double sellPrice) {
-		this.sellPrice = sellPrice;
-	}
-	/**
-	 * @return the borrowPrice
-	 */
-	public double getBorrowPrice() {
-		return borrowPrice;
-	}
-	/**
-	 * @param borrowPrice the borrowPrice to set
-	 */
-	public void setBorrowPrice(double borrowPrice) {
-		this.borrowPrice = borrowPrice;
-	}
-	/**
-	 * @return the districtID
-	 */
-	public int getDistrictID() {
-		return districtID;
-	}
-	/**
-	 * @param districtID the districtID to set
-	 */
-	public void setDistrictID(int districtID) {
-		this.districtID = districtID;
-	}
-	/**
-	 * @return the userID
-	 */
-	public int getUserID() {
-		return userID;
-	}
-	/**
-	 * @param userID the userID to set
-	 */
-	public void setUserID(int userID) {
-		this.userID = userID;
-	}
-	/**
-	 * @return the datetime
-	 */
-	public Date getDatetime() {
-		return datetime;
-	}
-	/**
-	 * @param datetime the datetime to set
-	 */
-	public void setDatetime(Date datetime) {
-		this.datetime = datetime;
-	}
-	/**
-	 * @return the isSell
-	 */
-	public int getIsSell() {
-		return isSell;
-	}
-	/**
-	 * @param isSell the isSell to set
-	 */
-	public void setIsSell(int isSell) {
-		this.isSell = isSell;
-	}
 }

@@ -4,46 +4,52 @@
 
 <mapper namespace="com.databasegroup.dao.ICityDao">
 	
-	<sql id="columns">cityID, cityName, cityNum</sql>
+	<resultMap id="cityResultMap" type="City">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="num" column="num" />
+	</resultMap>
+	
+	<sql id="columns">id, name, num</sql>
 	
 	<select id="getById" parameterType="int"
-		resultType="City">
+		resultMap="cityResultMap">
 		SELECT
 		<include refid="columns"></include>
-		FROM bk_city WHERE cityID=#{id}
+		FROM bk_city WHERE id=#{id}
 	</select>
 	
 	<select id="getAll"
-		resultType="City">
+		resultMap="cityResultMap">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_city
 	</select>
 	
 	<select id="getCityByCityNum" parameterType="String"
-		resultType="City">
+		resultMap="cityResultMap">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_city
-		WHERE cityNum=#{cityNum}
+		WHERE num=#{num}
 	</select>
 	
 	<insert id="insert" parameterType="City"
 		flushCache="true">
-		INSERT INTO bk_city (cityName, cityNum) VALUES
-		(#{cityName},#{cityNum})
+		INSERT INTO bk_city (name, num) VALUES
+		(#{name},#{num})
 	</insert>
 	
 	<update id="update" parameterType="City">
 		UPDATE bk_city SET
-		cityName=#{cityName},
-		cityNum=#{cityNum}
-		WHERE cityID=#{cityID}
+		name=#{name},
+		num=#{num}
+		WHERE id=#{id}
 	</update>
 	
 	<delete id="delete" parameterType="City">
 		DELETE
 		FROM bk_city
-		WHERE cityID=#{cityID}
+		WHERE id=#{id}
 	</delete> 
 </mapper>

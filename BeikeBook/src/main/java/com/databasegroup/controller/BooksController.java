@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.databasegroup.model.Class;
+import com.databasegroup.model.BookCategory;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 

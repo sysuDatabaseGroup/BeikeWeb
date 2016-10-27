@@ -1,90 +1,100 @@
 package com.databasegroup.model;
 
 public class School {
-	private int schoolID;
-	private String schoolName;
-	private String schoolNum;
-	private String schoolAdmin;
-	private String schoolPassword;
-	private int cityID;
+	private int id;
+	private String name;
+	private String num;
+	private String admin;
+	private String password;
+	private int cityId;
 	
 	@Override
 	public String toString() {
-		return "" + schoolID + ' ' + schoolName + ' ' + schoolNum + ' ' +
-				schoolAdmin + ' ' + schoolPassword + ' ' + cityID;
+		return "" + id + ' ' + name + ' ' + num + ' ' +
+				admin + ' ' + password + ' ' + cityId;
 	}
-	
+
 	/**
-	 * @return the schoolID
+	 * @return the id
 	 */
-	public int getSchoolID() {
-		return schoolID;
+	public int getId() {
+		return id;
 	}
+
 	/**
-	 * @param schoolID the schoolID to set
+	 * @param id the id to set
 	 */
-	public void setSchoolID(int schoolID) {
-		this.schoolID = schoolID;
+	public void setId(int id) {
+		this.id = id;
 	}
+
 	/**
-	 * @return the schoolName
+	 * @return the name
 	 */
-	public String getSchoolName() {
-		return schoolName;
+	public String getName() {
+		return name;
 	}
+
 	/**
-	 * @param schoolName the schoolName to set
+	 * @param name the name to set
 	 */
-	public void setSchoolName(String schoolName) {
-		this.schoolName = schoolName;
+	public void setName(String name) {
+		this.name = name;
 	}
+
 	/**
-	 * @return the schoolNum
+	 * @return the num
 	 */
-	public String getSchoolNum() {
-		return schoolNum;
+	public String getNum() {
+		return num;
 	}
+
 	/**
-	 * @param schoolNum the schoolNum to set
+	 * @param num the num to set
 	 */
-	public void setSchoolNum(String schoolNum) {
-		this.schoolNum = schoolNum;
+	public void setNum(String num) {
+		this.num = num;
 	}
+
 	/**
-	 * @return the schoolAdmin
+	 * @return the admin
 	 */
-	public String getSchoolAdmin() {
-		return schoolAdmin;
+	public String getAdmin() {
+		return admin;
 	}
+
 	/**
-	 * @param schoolAdmin the schoolAdmin to set
+	 * @param admin the admin to set
 	 */
-	public void setSchoolAdmin(String schoolAdmin) {
-		this.schoolAdmin = schoolAdmin;
+	public void setAdmin(String admin) {
+		this.admin = admin;
 	}
+
 	/**
-	 * @return the schoolPassword
+	 * @return the password
 	 */
-	public String getSchoolPassword() {
-		return schoolPassword;
+	public String getPassword() {
+		return password;
 	}
+
 	/**
-	 * @param schoolPassword the schoolPassword to set
+	 * @param password the password to set
 	 */
-	public void setSchoolPassword(String schoolPassword) {
-		this.schoolPassword = schoolPassword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
+
 	/**
-	 * @return the cityID
+	 * @return the cityId
 	 */
-	public int getCityID() {
-		return cityID;
+	public int getCityId() {
+		return cityId;
 	}
+
 	/**
-	 * @param cityID the cityID to set
+	 * @param cityId the cityId to set
 	 */
-	public void setCityID(int cityID) {
-		this.cityID = cityID;
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
 	}
-	
 }

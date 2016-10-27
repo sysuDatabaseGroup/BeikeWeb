@@ -3,45 +3,50 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.databasegroup.dao.ISchoolDao">
-	
-	<sql id="columns">schoolID, schoolName, schoolNum, schoolAdmin,
-		schoolPassword, cityID</sql>
+	<resultMap id="schoolResultMap" type="School">
+		<id property="id" column="id"/>
+		<result property="name" column="name" />
+		<result property="num" column="num" />
+		<result property="admin" column="admin" />
+		<result property="password" column="password" />
+		<result property="cityId" column="city_id" />
+	</resultMap>
+	<sql id="columns">id, name, num, admin,
+		password, city_id</sql>
 	
 	<select id="getById" parameterType="int"
-		resultType="School">
+		resultMap="schoolResultMap">
 		SELECT
 		<include refid="columns"></include>
-		FROM bk_school WHERE schoolID=#{id}
+		FROM bk_school WHERE id=#{id}
 	</select>
 	
-	<select id="getAll"
-		resultType="School">
+	<select id="getAll" resultMap="schoolResultMap">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_school
 	</select>
 	
-	<insert id="insert" parameterType="School"
-		flushCache="true">
-		INSERT INTO bk_school (schoolName, schoolNum, schoolAdmin,
-			schoolPassword, cityID) VALUES
-		(#{schoolName},#{schoolNum},#{schoolAdmin},
-		#{schoolPassword},#{cityID})
+	<insert id="insert" parameterType="School" >
+		INSERT INTO bk_school (name, num, admin,
+			password, city_id) VALUES
+		(#{name},#{num},#{admin},
+		#{password},#{cityId})
 	</insert>
 	
 	<update id="update" parameterType="School">
 		UPDATE bk_school SET
-		schoolName=#{schoolName},
-		schoolNum=#{schoolNum},
-		schoolAdmin=#{schoolAdmin},
-		schoolPassword=#{schoolPassword},
-		cityID=#{cityID}
-		WHERE schoolID=#{schoolID}
+		name=#{name},
+		num=#{num},
+		admin=#{admin},
+		password=#{password},
+		city_id=#{cityId}
+		WHERE id=#{id}
 	</update>
 	
 	<delete id="delete" parameterType="School">
 		DELETE
 		FROM bk_school
-		WHERE schoolID=#{schoolID}
+		WHERE id=#{id}
 	</delete> 
 </mapper>

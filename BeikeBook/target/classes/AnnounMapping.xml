@@ -4,17 +4,23 @@
 
 <mapper namespace="com.databasegroup.dao.IAnnounDao">
 	
-	<sql id="columns">announID, announContent</sql>
+	<resultMap id="announResultMap" type="Announ">
+		<id property="id" column="id"/>
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+	</resultMap>
+	
+	<sql id="columns">id, title, content</sql>
 	
 	<select id="getById" parameterType="int"
-		resultType="Announ">
+		resultMap="announResultMap">
 		SELECT
 		<include refid="columns"></include>
-		FROM bk_announ WHERE announID=#{id}
+		FROM bk_announ WHERE id=#{id}
 	</select>
 	
 	<select id="getAll"
-		resultType="Announ">
+		resultMap="announResultMap">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_announ
@@ -22,19 +28,20 @@
 	
 	<insert id="insert" parameterType="Announ"
 		flushCache="true">
-		INSERT INTO bk_announ (announContent) VALUES
-		(#{announContent})
+		INSERT INTO bk_announ (title, content) VALUES
+		(#{title}, #{content})
 	</insert>
 	
 	<update id="update" parameterType="Announ">
 		UPDATE bk_announ SET
-		announContent=#{announContent}
-		WHERE announID=#{announID}
+		title=#{title},
+		content=#{content}
+		WHERE id=#{id}
 	</update>
 	
 	<delete id="delete" parameterType="Announ">
 		DELETE
 		FROM bk_announ
-		WHERE announID=#{announID}
+		WHERE id=#{id}
 	</delete> 
 </mapper>

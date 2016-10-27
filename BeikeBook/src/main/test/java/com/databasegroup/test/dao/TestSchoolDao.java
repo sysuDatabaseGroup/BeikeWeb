@@ -12,14 +12,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.*;
 
 import com.databasegroup.dao.IAnnounDao;
-import com.databasegroup.dao.IBookClassDao;
 import com.databasegroup.dao.IBookDao;
+import com.databasegroup.dao.IDealedBookDao;
 import com.databasegroup.dao.ICityDao;
-import com.databasegroup.dao.IClassDao;
+import com.databasegroup.dao.IBookCategoryDao;
 import com.databasegroup.dao.ISchoolDao;
+import com.databasegroup.model.DealedBook;
 import com.databasegroup.model.Book;
-import com.databasegroup.model.BookClass;
-import com.databasegroup.model.Class;
+import com.databasegroup.model.BookCategory;
 import com.databasegroup.model.School;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,18 +33,19 @@ public class TestSchoolDao {
 	public void schoolDaoShouldNotBeNull() {
 		assertNotNull(schoolDao);
 		
-		School school = schoolDao.getById(2);
-		school.setSchoolName("update");
+		School school = schoolDao.getById(3);
+		school.setName("update");
 		schoolDao.update(school);
+		System.out.println(schoolDao.getById(3));
 		
 //		School school = new School();
 //		
-//		school.setSchoolAdmin("SchoolAdmin");
-//		school.setCityID(1);
-//		school.setSchoolName("SchoolName");
-//		school.setSchoolNum("SchoolNum");
-//		school.setSchoolPassword("SchoolPass");
-////		
+//		school.setAdmin("SchoolAdmin");
+//		school.setCityId(2);
+//		school.setName("SchoolName");
+//		school.setNum("SchoolNum");
+//		school.setPassword("SchoolPass");
+//		
 //		schoolDao.insert(school);
 //		
 //		System.out.println(schoolDao.getById(1));

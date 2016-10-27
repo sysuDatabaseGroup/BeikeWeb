@@ -3,89 +3,102 @@ package com.databasegroup.model;
 import java.util.Date;
 
 public class Banner {
-	private int bannerID;
-	private String bannerPic;
-	private String bannerTitle;
+	private int id;
+	private String picPath;
+	private String title;
 	private String link;
 	private Date datetime;
 	private int prior;
 	
 	@Override
 	public String toString() {
-		return "" + bannerID + ' ' + bannerPic + ' ' + bannerTitle + ' ' +
+		return "" + id + ' ' + picPath + ' ' + title + ' ' +
 				link + ' ' + datetime + ' ' + prior;
 	}
-	
+
 	/**
-	 * @return the bannerID
+	 * @return the id
 	 */
-	public int getBannerID() {
-		return bannerID;
+	public int getId() {
+		return id;
 	}
+
 	/**
-	 * @param bannerID the bannerID to set
+	 * @param id the id to set
 	 */
-	public void setBannerID(int bannerID) {
-		this.bannerID = bannerID;
+	public void setId(int id) {
+		this.id = id;
 	}
+
 	/**
-	 * @return the bannerPic
+	 * @return the picPath
 	 */
-	public String getBannerPic() {
-		return bannerPic;
+	public String getPicPath() {
+		return picPath;
 	}
+
 	/**
-	 * @param bannerPic the bannerPic to set
+	 * @param picPath the picPath to set
 	 */
-	public void setBannerPic(String bannerPic) {
-		this.bannerPic = bannerPic;
+	public void setPicPath(String picPath) {
+		this.picPath = picPath;
 	}
+
 	/**
-	 * @return the bannerTitle
+	 * @return the title
 	 */
-	public String getBannerTitle() {
-		return bannerTitle;
+	public String getTitle() {
+		return title;
 	}
+
 	/**
-	 * @param bannerTitle the bannerTitle to set
+	 * @param title the title to set
 	 */
-	public void setBannerTitle(String bannerTitle) {
-		this.bannerTitle = bannerTitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
+
 	/**
 	 * @return the link
 	 */
 	public String getLink() {
 		return link;
 	}
+
 	/**
 	 * @param link the link to set
 	 */
 	public void setLink(String link) {
 		this.link = link;
 	}
+
 	/**
 	 * @return the datetime
 	 */
 	public Date getDatetime() {
 		return datetime;
 	}
+
 	/**
 	 * @param datetime the datetime to set
 	 */
 	public void setDatetime(Date datetime) {
 		this.datetime = datetime;
 	}
+
 	/**
 	 * @return the prior
 	 */
 	public int getPrior() {
 		return prior;
 	}
+
 	/**
 	 * @param prior the prior to set
 	 */
 	public void setPrior(int prior) {
 		this.prior = prior;
 	}
+	
+	
 }

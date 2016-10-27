@@ -3,44 +3,54 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.databasegroup.dao.IBannerDao">
+
+	<resultMap id="bannerResultMap" type="Banner">
+		<id property="id" column="id" />
+		<result property="picPath" column="pic_path" />
+		<result property="title" column="title" />
+		<result property="link" column="link" />
+		<result property="datetime" column="datetime" />
+		<result property="prior" column="prior" />
+	</resultMap>
 	
-	<sql id="columns">bannerID, bannerPic, bannerTitle,
-		link, datetime, prior</sql>
-	
-	<select id="getById" parameterType="int"
-		resultType="Banner">
+	<sql id="columns">id, pic_path, title,
+		link, datetime, prior
+	</sql>
+
+	<select id="getById" parameterType="int" 
+		resultMap="bannerResultMap">
 		SELECT
 		<include refid="columns"></include>
-		FROM bk_banner WHERE bannerID=#{id}
+		FROM bk_banner WHERE id=#{id}
 	</select>
-	
-	<select id="getAll"
-		resultType="Banner">
+
+	<select id="getAll" resultMap="bannerResultMap">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_banner
 	</select>
-	
-	<insert id="insert" parameterType="Banner"
-		flushCache="true">
-		INSERT INTO bk_banner (bannerPic, bannerTitle,
-			link, datetime, prior) VALUES
-		(#{bannerPic},#{bannerTitle},#{link},#{datetime},#{prior})
+
+	<insert id="insert" parameterType="Banner" >
+		INSERT
+		INTO bk_banner (pic_path, title,
+		link, datetime, prior) VALUES
+		(#{picPath},#{title},#{link},#{datetime},#{prior})
 	</insert>
-	
+
 	<update id="update" parameterType="Banner">
 		UPDATE bk_banner SET
-		bannerPic=#{bannerPic},
-		bannerTitle=#{bannerTitle},
+		pic_path=#{picPath},
+		title=#{title},
 		link=#{link},
 		datetime=#{datetime},
 		prior=#{prior}
-		WHERE bannerID=#{bannerID}
+		WHERE id=#{id}
 	</update>
-	
+
 	<delete id="delete" parameterType="Banner">
 		DELETE
 		FROM bk_banner
-		WHERE bannerID=#{bannerID}
-	</delete> 
+		WHERE
+		id=#{id}
+	</delete>
 </mapper>

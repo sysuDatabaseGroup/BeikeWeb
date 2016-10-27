@@ -3,46 +3,54 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.databasegroup.dao.IUserDao">
-	
-	<sql id="columns">userID, wx_photo, wx_name, userNum,
-		cityID, schoolID, dorm</sql>
+	<resultMap id="userResultMap" type="User">
+		<id property="id" column="id"/>
+		<result property="wxPhoto" column="wx_photo" />
+		<result property="wxName" column="wx_name" />
+		<result property="userNum" column="user_num" />
+		<result property="password" column="password" />
+		<result property="cityId" column="city_id" />
+		<result property="schoolId" column="school_id" />
+		<result property="dorm" column="dorm" />
+	</resultMap>
+	<sql id="columns">id, wx_photo, wx_name, user_num, password,
+		city_id, school_id, dorm</sql>
 	
 	<select id="getById" parameterType="int"
-		resultType="User">
+		resultMap="userResultMap">
 		SELECT
 		<include refid="columns"></include>
-		FROM bk_user WHERE userID=#{id}
+		FROM bk_user WHERE id=#{id}
 	</select>
 	
-	<select id="getAll"
-		resultType="User">
+	<select id="getAll" resultMap="userResultMap">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_user
 	</select>
 	
-	<insert id="insert" parameterType="User"
-		flushCache="true">
-		INSERT INTO bk_user (wx_photo, wx_name, userNum,
-			cityID, schoolID, dorm) VALUES
-		(#{wx_photo},#{wx_name},#{userNum},
-		#{cityID},#{schoolID},#{dorm})
+	<insert id="insert" parameterType="User">
+		INSERT INTO bk_user (wx_photo, wx_name, user_num, password,
+		city_id, school_id, dorm) VALUES
+		(#{wxPhoto},#{wxName},#{userNum},#{password},
+		#{cityId},#{schoolId},#{dorm})
 	</insert>
 	
 	<update id="update" parameterType="User">
 		UPDATE bk_user SET
-		wx_photo=#{wx_photo},
-		wx_name=#{wx_name},
-		userNum=#{userNum},
-		cityID=#{cityID},
-		schoolID=#{schoolID},
+		wx_photo=#{wxPhoto},
+		wx_name=#{wxName},
+		user_num=#{userNum},
+		password=#{password},
+		city_id=#{cityId},
+		school_id=#{schoolId},
 		dorm=#{dorm}
-		WHERE userID=#{userID}
+		WHERE id=#{id}
 	</update>
 	
 	<delete id="delete" parameterType="User">
 		DELETE
 		FROM bk_user
-		WHERE userID=#{userID}
+		WHERE id=#{id}
 	</delete> 
 </mapper>

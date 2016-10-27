@@ -3,48 +3,64 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.databasegroup.dao.IBookDao">
+
+	<resultMap id="bookResultMap" type="Book">
+		<id property="id" column="id"/>
+		<result property="bookCategoryId" column="book_category_id" />
+		<result property="title" column="title" />
+		<result property="coverPath" column="cover_path" />
+		<result property="deliveryMethodId" column="delivery_method_id" />
+		<result property="press" column="press" />
+		<result property="author" column="author" />
+		<result property="edition" column="edition" />
+		<result property="sellingPrice" column="selling_price" />
+		<result property="rentalPrice" column="rental_price" />
+	</resultMap>
 	
-	<sql id="columns">bookID, bookClassID, bookNum, sellPrice,
-		borrowPrice, districtID, userID, datetime, isSell</sql>
+	<sql id="columns">id, book_category_id, title,
+		cover_path, delivery_method_id, press, author, edition,
+		selling_price, rental_price</sql>
 	
 	<select id="getById" parameterType="int"
-		resultType="Book">
+		resultMap="bookResultMap">
 		SELECT
 		<include refid="columns"></include>
-		FROM bk_book WHERE bookID=#{id}
+		FROM bk_book WHERE id=#{id}
 	</select>
 	
 	<select id="getAll"
-		resultType="Book">
+		resultMap="bookResultMap">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_book
 	</select>
 	
-	<insert id="insert" parameterType="Book"
-		flushCache="true">
-		INSERT INTO bk_book (bookClassID, bookNum, sellPrice,
-			borrowPrice, districtID, userID, datetime, isSell) VALUES
-		(#{bookClassID},#{bookNum},#{sellPrice},#{borrowPrice},
-		#{districtID},#{userID},#{datetime},#{isSell})
+	<insert id="insert" parameterType="Book" >
+		INSERT INTO bk_book (book_category_id, title,
+			cover_path, delivery_method_id, press, author, edition,
+			selling_price, rental_price) VALUES
+		(#{bookCategoryId},#{title},#{coverPath},
+		#{deliveryMethodId},#{press},#{author},
+		#{edition},#{sellingPrice},#{rentalPrice})
 	</insert>
 	
 	<update id="update" parameterType="Book">
 		UPDATE bk_book SET
-		bookClassID=#{bookClassID},
-		bookNum=#{bookNum},
-		sellPrice=#{sellPrice},
-		borrowPrice=#{borrowPrice},
-		districtID=#{districtID},
-		userID=#{userID},
-		datetime=#{datetime},
-		isSell=#{isSell}
-		WHERE bookID=#{bookID}
+		book_category_id=#{bookCategoryId},
+		title=#{title},
+		cover_path=#{coverPath},
+		delivery_method_id=#{deliveryMethodId},
+		press=#{press},
+		author=#{author},
+		edition=#{edition},
+		selling_price=#{sellingPrice},
+		rental_price=#{sellingPrice}
+		WHERE id=#{id}
 	</update>
 	
 	<delete id="delete" parameterType="Book">
 		DELETE
 		FROM bk_book
-		WHERE bookID=#{bookID}
+		WHERE id=#{ud}
 	</delete> 
 </mapper>

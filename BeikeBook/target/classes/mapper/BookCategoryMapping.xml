@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.IBookCategoryDao">
+
+	<resultMap id="bookCategoryResultMap" type="BookCategory">
+		<id property="id" column="id"/>
+		<result property="title" column="title" />
+		<result property="iconPath" column="icon_path" />
+	</resultMap>
+	
+	<sql id="columns">id, title, icon_path</sql>
+	
+	<select id="getById" parameterType="int"
+		resultMap="bookCategoryResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_book_category WHERE id=#{id}
+	</select>
+	
+	<select id="getAll"
+		resultMap="bookCategoryResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_book_category
+	</select>
+	
+	<insert id="insert" parameterType="BookCategory">
+		INSERT INTO bk_book_category (title, icon_path) VALUES
+		(#{title},#{iconPath})
+	</insert>
+	
+	<update id="update" parameterType="BookCategory">
+		UPDATE bk_book_category SET
+		title=#{title},
+		icon_path=#{iconPath}
+		WHERE id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="BookCategory">
+		DELETE
+		FROM bk_book_category
+		WHERE id=#{id}
+	</delete> 
+</mapper>

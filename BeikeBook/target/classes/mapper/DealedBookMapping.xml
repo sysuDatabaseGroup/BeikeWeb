@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.IDealedBookDao">
+	<resultMap id="dealedBookResultMap" type="DealedBook">
+		<id property="id" column="id"/>
+		<result property="bookId" column="book_id" />
+		<result property="dealedNum" column="dealed_num" />
+		<result property="sellingPrice" column="selling_price" />
+		<result property="rentalPrice" column="rental_price" />
+		<result property="districtId" column="district_id" />
+		<result property="userId" column="user_id" />
+		<result property="datetime" column="datetime" />
+		<result property="selled" column="selled" />
+	</resultMap>
+	<sql id="columns">id, book_id, dealed_num, selling_price,
+		rental_price, district_id, user_id, datetime, selled</sql>
+	
+	<select id="getById" parameterType="int"
+		resultMap="dealedBookResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_dealed_book WHERE id=#{id}
+	</select>
+	
+	<select id="getAll"
+		resultMap="dealedBookResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_dealed_book
+	</select>
+	
+	<insert id="insert" parameterType="DealedBook" >
+		INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price,
+			rental_price, district_id, user_id, datetime, selled) VALUES
+		(#{bookId},#{dealedNum},#{sellingPrice},#{rentalPrice},
+		#{districtId},#{userId},#{datetime},#{selled})
+	</insert>
+	
+	<update id="update" parameterType="DealedBook">
+		UPDATE bk_dealed_book SET
+		book_id=#{bookId},
+		dealed_num=#{dealedNum},
+		selling_price=#{sellingPrice},
+		rental_price=#{rentalPrice},
+		district_id=#{districtId},
+		user_id=#{userId},
+		datetime=#{datetime},
+		selled=#{selled}
+		WHERE id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="DealedBook">
+		DELETE
+		FROM bk_dealed_book
+		WHERE id=#{id}
+	</delete> 
+</mapper>

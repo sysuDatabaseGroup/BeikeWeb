@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.IRentingOrderDao">
+	<resultMap id="rentingOrderResultMap" type="RentingOrder">
+		<id property="id" column="id"/>
+		<result property="userId" column="user_id" />
+		<result property="deliveryMethodId" column="delivery_method_id" />
+		<result property="dealedBookId" column="dealed_book_id" />
+		<result property="amount" column="amount" />
+		<result property="datetime" column="datetime" />
+		<result property="takingBookNum" column="taking_book_num" />
+		<result property="took" column="took" />
+		<result property="returned" column="returned" />
+	</resultMap>
+	<sql id="columns">id, user_id, delivery_method_id, dealed_book_id, 
+			amount, datetime, taking_book_num, took, returned</sql>
+	
+	<select id="getById" parameterType="int"
+		resultMap="rentingOrderResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_renting_order WHERE id=#{id}
+	</select>
+	
+	<select id="getAll"
+		resultMap="rentingOrderResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_renting_order
+	</select>
+	
+	<insert id="insert" parameterType="RentingOrder" >
+		INSERT INTO bk_renting_order (user_id, delivery_method_id, 
+		dealed_book_id, amount, datetime, taking_book_num, took, 
+		returned) VALUES
+		(#{userId},#{deliveryMethodId},#{dealedBookId},#{amount},
+		#{datetime},#{takingBookNum},#{took},#{returned})
+	</insert>
+	
+	<update id="update" parameterType="RentingOrder">
+		UPDATE bk_renting_order SET
+		user_id=#{userId},
+		delivery_method_id=#{deliveryMethodId},
+		dealed_book_id=#{dealedBookId},
+		amount=#{amount},
+		datetime=#{datetime},
+		taking_book_num=#{takingBookNum},
+		took=#{took},
+		returned=#{returned}
+		WHERE id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="RentingOrder">
+		DELETE
+		FROM bk_renting_order
+		WHERE id=#{id}
+	</delete> 
+</mapper>

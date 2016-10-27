@@ -3,46 +3,57 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.databasegroup.dao.IDistrictDao">
+
+	<resultMap id="districtResultMap" type="District">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="num" column="num" />
+		<result property="address" column="address" />
+		<result property="deliverName" column="deliver_name" />
+		<result property="deliverPhone" column="deliver_phone" />
+		<result property="schoolId" column="school_id" />
+	</resultMap>
 	
-	<sql id="columns">districtID, districtName, districtNum, address,
-		deliverName, deliverPhone, schoolID</sql>
-	
-	<select id="getById" parameterType="int"
-		resultType="District">
+	<sql id="columns">id, name, num, address,
+		deliver_name, deliver_phone,
+		school_id
+	</sql>
+
+	<select id="getById" parameterType="int" resultMap="districtResultMap">
 		SELECT
 		<include refid="columns"></include>
-		FROM bk_district WHERE districtID=#{id}
+		FROM bk_district WHERE id=#{id}
 	</select>
-	
-	<select id="getAll"
-		resultType="District">
+
+	<select id="getAll" resultMap="districtResultMap">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_district
 	</select>
-	
-	<insert id="insert" parameterType="District"
-		flushCache="true">
-		INSERT INTO bk_district (districtName, districtNum, address,
-			deliverName, deliverPhone, schoolID) VALUES
-		(#{districtName},#{districtNum},#{address},
-		#{deliverName},#{deliverPhone},#{schoolID})
+
+	<insert id="insert" parameterType="District">
+		INSERT
+		INTO bk_district (name, num, address,
+		deliver_name, deliver_phone, school_id) VALUES
+		(#{name},#{num},#{address},
+		#{deliverName},#{deliverPhone},#{schoolId})
 	</insert>
-	
+
 	<update id="update" parameterType="District">
 		UPDATE bk_district SET
-		districtName=#{districtName},
-		districtNum=#{districtNum},
+		name=#{name},
+		num=#{num},
 		address=#{address},
-		deliverName=#{deliverName},
-		deliverPhone=#{deliverPhone},
-		schoolID=#{schoolID}
-		WHERE districtID=#{districtID}
+		deliver_name=#{deliverName},
+		deliver_phone=#{deliverPhone},
+		school_id=#{schoolId}
+		WHERE id=#{id}
 	</update>
-	
+
 	<delete id="delete" parameterType="District">
 		DELETE
 		FROM bk_district
-		WHERE districtID=#{districtID}
-	</delete> 
+		WHERE
+		id=#{id}
+	</delete>
 </mapper>
