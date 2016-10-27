@@ -40,7 +40,7 @@ public class LoginController {
 			System.out.print("#");
 			return "redirect:/";
 		} else {
-			model.addAttribute("message", "ÕËºÅÃÜÂë´íÎó£¡");
+			model.addAttribute("message", "è´¦å·å¯†ç é”™è¯¯ï¼");
 			return "/login";
 		}
 	}

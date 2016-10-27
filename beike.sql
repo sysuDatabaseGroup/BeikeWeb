@@ -201,4 +201,28 @@ CREATE TABLE `bk_USER` (
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+--  Table structure for `bk_ADMIN`
+-- ----------------------------
+DROP TABLE IF EXISTS `bk_ADMIN`;
+CREATE TABLE `bk_ADMIN` (
+  `adminID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `districtAddr` varchar(255) NOT NULL,
+  `type` int(2) NOT NULL,
+    PRIMARY KEY (`userID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `bk_BILL`
+-- ----------------------------
+DROP TABLE IF EXISTS `bk_BILL`;
+CREATE TABLE `bk_BILL` (
+  `billID` int(11) NOT NULL AUTO_INCREMENT,
+  `info` text NOT NULL,
+  `amount` int NOT NULL,
+  PRIMARY KEY (`billID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 SET FOREIGN_KEY_CHECKS = 1;

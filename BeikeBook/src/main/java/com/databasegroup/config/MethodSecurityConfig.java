@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
   
-// ·½·¨¼¶±ðµÄ°²È«ÐÔ
+// æ–¹æ³•çº§åˆ«çš„å®‰å…¨æ€§
 //@Configuration
 //@EnableGlobalMethodSecurity(jsr250Enabled=true)
 public class MethodSecurityConfig extends WebSecurityConfigurerAdapter {

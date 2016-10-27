@@ -24,7 +24,7 @@ CREATE TABLE `bk_announ` (
 DROP TABLE IF EXISTS `bk_banner`;
 CREATE TABLE `bk_banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pic_path` varchar(200) NOT NULL,
+  `pic_path` varchar(200) NOT NULL DEFAULT '/images/banner/default.png',
   `title` varchar(30) NOT NULL,
   `link` varchar(255) NOT NULL,
   `datetime` date NOT NULL,
@@ -40,7 +40,7 @@ DROP TABLE IF EXISTS `bk_book_category`;  -- 旧表名：Class
 CREATE TABLE `bk_book_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(10) NOT NULL, 
-  `icon_path` varchar(100) NOT NULL, 
+  `icon_path` varchar(100) NOT NULL DEFAULT '/images/bookCategory/default.png', 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -52,7 +52,7 @@ CREATE TABLE `bk_book` (
   `id` int(11) NOT NULL AUTO_INCREMENT, 
   `book_category_id` int(11) NOT NULL, 
   `title` varchar(50) NOT NULL, 
-  `cover_path` varchar(100) NOT NULL, 
+  `cover_path` varchar(100) NOT NULL DEFAULT '/images/book/default.png', 
   `delivery_method_id` int(11) NOT NULL, -- ?????????????
   `press` varchar(30) NOT NULL,  
   `author` varchar(10) NOT NULL,
@@ -147,7 +147,8 @@ CREATE TABLE `bk_school` (
   `password` varchar(20) DEFAULT NULL,
   `city_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (city_id) REFERENCES bk_city(id) ON DELETE NO ACTION ON UPDATE NO ACTION
+  FOREIGN KEY (city_id) REFERENCES bk_city(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  UNIQUE(admin)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -195,7 +196,7 @@ CREATE TABLE `bk_renting_order` (
 DROP TABLE IF EXISTS `bk_user`;
 CREATE TABLE `bk_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `wx_photo` varchar(255) DEFAULT NULL,
+  `wx_photo` varchar(255) DEFAULT NULL DEFAULT '/images/user/default.png',
   `wx_name` varchar(50) DEFAULT NULL,
   `user_num` varchar(20) NOT NULL,
   `password` varchar(50) DEFAULT NULL, -- 临时
@@ -204,7 +205,32 @@ CREATE TABLE `bk_user` (
   `dorm` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (city_id) REFERENCES bk_city(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY (school_id) REFERENCES bk_school(id) ON DELETE NO ACTION ON UPDATE NO ACTION
+  FOREIGN KEY (school_id) REFERENCES bk_school(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  UNIQUE(user_num)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `bk_ADMIN`
+-- ----------------------------
+DROP TABLE IF EXISTS `bk_admin`;
+CREATE TABLE `bk_admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `districtAddr` varchar(255) NOT NULL,
+  `type` int(2) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `bk_BILL`
+-- ----------------------------
+DROP TABLE IF EXISTS `bk_bill`;
+CREATE TABLE `bk_bill` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `info` text NOT NULL,
+  `amount` double(5,0) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;

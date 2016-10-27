@@ -1,0 +1,327 @@
+admin/index.jsp										loginStatus					登录的状态
+																	districtAddrStr			广州-中山大学-斋区托管点
+																	numRentBook					租书的总数
+																	numSellBook					买书的总数
+																	numUsers						用户总数
+																	dataTime						数据更新的时间
+																	circulatingFund			总金额
+																	rentInfos						租书信息
+																		userNum							用户名
+																		bookClassName				书名
+																		isTake							是否已领取
+																	announContent				成员公告
+																	sellInfos						买书信息
+																		userNum							买书用户
+																		sellPrice						金额
+																		datetime						时间
+
+admin/sign-in.jsp													提交的方法
+admin/sign-up.jsp													提交的方法
+
+admin/user/users.jsp							districtAddrStr			广州-中山大学-斋区托管点
+																	userInfos						用户信息
+																		id								自增编号
+																		userNum							用户名
+																		userNo							用户编号
+																		cityName						城市
+																		schoolName					学校
+																		dorm								宿舍
+																	pageNo							当前的列表的页号
+
+admin/user/useredit.jsp						districtAddrStr			广州-中山大学-斋区托管点
+																	userInfos						用户信息
+																		userNum							用户名
+																		userNo							用户编号
+																		cityNum							城市编号
+																		schoolNum						学校编号
+																		dorm								宿舍
+
+admin/order/sell.jsp							districtAddrStr			广州-中山大学-斋区托管点
+																	sellInfos						用户买书信息
+																		id									自增编号	
+																		bookClassName				书名
+																		userNum							用户名
+																		num									买书的数量
+																		prices							收费
+																		methodName					配送方式
+																		takeBookNum					取书号
+																		datetime						购买时间
+																		sendStatus					状态
+																	pageNo							当前的列表的页号
+
+admin/order/orderword.jsp					districtAddrStr			广州-中山大学-斋区托管点
+																	takeBookNum					取书号
+																	bookClassName				书名
+																	num									买书的数量
+																	methodName					配送方式
+
+admin/order/orderword_borrow.jsp	districtAddrStr			广州-中山大学-斋区托管点
+																	takeBookNum					取书号
+																	bookClassName				书名
+																	num									租书的数量
+																	methodName					配送方式
+
+admin/order/borrow.jsp						districtAddrStr			广州-中山大学-斋区托管点
+																	rentInfos						用户买书信息
+																		id									自增编号	
+																		bookClassName				书名
+																		userNum							用户名
+																		num									租书的数量
+																		prices							收费
+																		methodName					配送方式
+																		takeBookNum					取书号
+																		datetime						租书时间
+																		sendStatus					状态
+																	pageNo							当前的列表的页号
+
+admin/order/allorder.jsp					districtAddrStr			广州-中山大学-斋区托管点
+																	orderInfos						用户买书信息
+																		id									自增编号	
+																		bookClassName				书名
+																		userNum							用户名
+																		num									租书的数量
+																		prices							收费
+																		methodName					配送方式
+																		takeBookNum					取书号
+																		datetime						租书时间
+																		sendStatus					状态
+																	pageNo							当前的列表的页号
+
+admin/order/allorder_borrow.jsp		districtAddrStr			广州-中山大学-斋区托管点
+																	rentInfos						用户买书信息
+																		id									自增编号	
+																		bookClassName				书名
+																		userNum							用户名
+																		num									租书的数量
+																		prices							收费
+																		methodName					配送方式
+																		takeBookNum					取书号
+																		datetime						租书时间
+																		sendStatus					状态
+																	pageNo							当前的列表的页号
+
+admin/money/money.jsp							districtAddrStr			广州-中山大学-斋区托管点
+																	id									自增编号
+																	alipayName					支付宝姓名
+																	alipayAccount				支付宝账号
+																	moneyNum						提现费用
+																	phone								手机号码
+
+admin/money/all_money.jsp					districtAddrStr			广州-中山大学-斋区托管点
+																	id									自增编号
+																	alipayName					支付宝姓名
+																	alipayAccount				支付宝账号
+																	moneyNum						提现费用
+																	phone								手机号码
+
+admin/method/method.jsp						districtAddrStr			广州-中山大学-斋区托管点
+																	methodInfos					配送方法信息
+																		methodID						配送方式id
+																		methodName					配送方式
+																		price								收费
+
+admin/method/methodedit.jsp				districtAddrStr			广州-中山大学-斋区托管点
+																	methodID						配送方式id
+																	methodName					配送方式
+																	price								收费
+
+admin/method/methodadd.jsp				districtAddrStr			广州-中山大学-斋区托管点
+
+admin/city/city.jsp								districtAddrStr			广州-中山大学-斋区托管点
+																		cityNum							城市编号
+																		cityName						城市名
+																		cityAbbreviate			城市缩写
+																	pageNo							当前的列表的页号
+
+admin/city/cityadd.jsp						districtAddrStr			广州-中山大学-斋区托管点
+
+admin/city/cityedit.jsp						districtAddrStr			广州-中山大学-斋区托管点
+																	cityInfos						城市信息
+																		cityNum							城市编号
+																		cityName						城市名
+																		cityAbbreviate			城市缩写
+
+admin/city/district.jsp						districtAddrStr			广州-中山大学-斋区托管点
+																	districtInfos				托管点信息
+																		districtNum					编号
+																		districtName				托管点名
+																		schoolName					学校
+																		address							地址
+																		deliverName					配送员
+																		deliverPhone				电话号码
+																	pageNo							当前的列表的页号
+
+admin/city/districtadd.jsp				districtAddrStr			广州-中山大学-斋区托管点
+
+admin/city/districtedit.jsp				districtAddrStr			广州-中山大学-斋区托管点
+																	districtName				托管点名
+																	cityNum							城市编号
+																	address							地址
+																	deliverName					配送员
+																	deliverPhone				电话号码
+
+admin/city/school.jsp							districtAddrStr			广州-中山大学-斋区托管点
+																	schoolInfos					学校信息
+																		schoolNum						学校编号
+																		schoolName					学校名字
+																		cityName						城市名
+																		schoolAbbreviate		学校缩写
+																		schoolAdmin					学校管理账号
+																	pageNo							当前的列表的页号
+
+admin/city/schooladd.jsp					districtAddrStr			广州-中山大学-斋区托管点
+
+admin/city/schooledit.jsp					districtAddrStr			广州-中山大学-斋区托管点
+																	schoolName					学校名字
+																	cityName						城市名
+																	schoolAdmin					学校账号
+																	schoolAbbreviate		学校缩写
+
+admin/book/books.jsp							districtAddrStr			广州-中山大学-斋区托管点
+																	bookInfos						学校信息
+																		bookClassID					书id
+																		bookClassName				书名
+																		bookClassImg				书封面
+																		author							作者
+																		company							出版社
+																		version							版本号
+																		sellPrice						出售参考价
+																		borrowPrice					出租参考价
+																		bookNum							数量
+																	pageNo							当前的列表的页号
+
+admin/book/bookadd.jsp						districtAddrStr			广州-中山大学-斋区托管点
+
+admin/book/booksadd.jsp						districtAddrStr			广州-中山大学-斋区托管点
+
+admin/book/booksdit.jsp						districtAddrStr			广州-中山大学-斋区托管点
+																	bookClassName				书名
+																	bookClassImg				书封面
+																	author							作者
+																	company							出版社
+																	version							版本号
+																	sellPrice						出售参考价
+																	borrowPrice					出租参考价
+
+admin/book/class.jsp							districtAddrStr			广州-中山大学-斋区托管点
+																	classInfos					书类别信息
+																		classID							书类别id
+																		className						书类名
+																		classImg						书类图标
+																	pageNo							当前的列表的页号
+
+admin/book/classadd.jsp						districtAddrStr			广州-中山大学-斋区托管点
+
+admin/book/classedit.jsp					districtAddrStr			广州-中山大学-斋区托管点
+																	className						书类名
+
+admin/banner/banner.jsp						districtAddrStr			广州-中山大学-斋区托管点
+																	bannerInfos					活动信息
+																		bannerID						活动id
+																		bannerTitle					活动标题
+																		bannerPic						活动图片
+																		link							活动链接
+																		datetime					添加日期
+																	pageNo							当前的列表的页号
+
+admin/banner/banneradd.jsp				districtAddrStr			广州-中山大学-斋区托管点
+
+admin/banner/banneredit.jsp				districtAddrStr			广州-中山大学-斋区托管点
+																	bannerTitle					活动标题
+																	link								活动链接
+
+admin/announ/announ.jsp						districtAddrStr			广州-中山大学-斋区托管点
+																	announInfos					公告信息
+																		announID						公告id
+																		announTitle					公告标题
+																		announContent				公告内容
+																	pageNo							当前的列表的页号
+
+admin/announ/announadd.jsp				districtAddrStr			广州-中山大学-斋区托管点
+
+admin/announ/announedit.jsp				districtAddrStr			广州-中山大学-斋区托管点
+																	announTitle					公告标题
+																	announContent				公告内容
+
+index.jsp													bookTypes						书类信息
+																		className						书类名
+																	bookInfo						书籍列表/根据书类别
+																		bookClassID				书ID
+																		sellPrice					出售参考价
+
+center.jsp												wx_photo						微信头像
+																	userNum							用户名
+																	rsBookNum						买书和租书的总数
+																	bkBookNum						托管的书数量
+																	moneyNum						提现费用
+																	cityName						城市名
+																	schoolName					学校名
+																	dorm								宿舍
+
+buy_rent.jsp											rsBookInfo					买书和租书的信息
+																		isRent							买书还是租书的标记
+																		bookClassImg				书的封面名
+																		price								买书或租书的价格
+																		bookClassName				书名
+																		bookNum							书编号
+																		datetime						买书或租书的时间
+																		num									买书或租书的数量
+																		duringTime					已租用时间
+																		money								已付费用
+
+detail.jsp													bookClassImg				书的封面名
+																		sellPrice						买书的价格
+																		bookClassName				书名
+																		version							版本
+																		author							作者
+																		company							出版社
+																		districtInfo				托管点信息
+																			districtName			托管点名称
+																			num								托管点的书数量
+
+books.jsp														noSellBookInfo			未售书的信息
+																			bookClassImg				书的封面名
+																			bookClassName				书名
+																			bookNum							书编号
+																			schoolName					学校名
+																			districtName				托管点名称
+																			datetime						托管的时间
+																		selledBookInfo			已售书的信息
+																			bookClassImg				书的封面名
+																			sellPrice						售价
+																			bookClassName				书名
+																			bookNum							书编号
+																			datetime						出售的时间
+
+alipay.jsp													moneyNum						提现费用
+
+alipay_none.jsp											moneyNum						提现费用
+
+pay.jsp															schoolName					学校名
+																		districtName				托管点名称
+																		bookClassImg				书的封面名
+																		bookClassName				书名
+																		bookNum							书编号
+																		sellPrice						售价
+																		price								配送方式的收费
+
+rent.jsp														schoolName					学校名
+																		districtName				托管点名称
+																		bookClassImg				书的封面名
+																		bookClassName				书名
+																		bookNum							书编号
+																		borrowPrice					租价
+																		//price								配送方式的收费
+
+success.jsp													districtName				托管点名称
+																		bookClassImg				书的封面名
+																		bookClassName				书名
+																		takeBookNum					取书号
+																		address							托管点地址
+
+success_rent.jsp										districtName				托管点名称
+																		bookClassImg				书的封面名
+																		bookClassName				书名
+																		takeBookNum					取书号
+																		deliverName					配送员姓名
+																		deliverPhone				配送员手机
