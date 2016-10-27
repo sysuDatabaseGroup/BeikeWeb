@@ -14,8 +14,8 @@ public class SellingOrder {
 
 	@Override
 	public String toString() {
-		return "" + id + ' ' + userId + ' ' + deliveryMethodId + ' ' + dealedBookId + ' ' + num + ' ' + datetime + ' '
-				+ ' ' + takingBookNum + ' ' + payed;
+		return "[" + id + ' ' + userId + ' ' + deliveryMethodId + ' ' + dealedBookId + ' ' + num + ' ' + datetime + ' '
+				+ ' ' + takingBookNum + ' ' + payed + ']';
 	}
 
 	/**

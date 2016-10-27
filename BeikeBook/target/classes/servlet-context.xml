@@ -49,8 +49,12 @@
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/detail"/>
-			<mvc:exclude-mapping path="/login"/>
+			<mvc:mapping path="/alipay/*"/>
+			<mvc:mapping path="/buy_rent"/>
+			<mvc:mapping path="/center"/>
+			<mvc:mapping path="/pay"/>
+			<mvc:mapping path="/rent"/>
+			<mvc:mapping path="/success/*"/>
 			<bean class="com.databasegroup.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

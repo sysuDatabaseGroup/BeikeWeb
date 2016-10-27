@@ -8,7 +8,7 @@ public class Announ {
 	
 	@Override
 	public String toString() {
-		return "" + id + ' ' + title + ' ' + content;
+		return "[" + id + ' ' + title + ' ' + content + ']';
 	}
 
 	/**

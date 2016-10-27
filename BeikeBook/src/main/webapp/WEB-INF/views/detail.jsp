@@ -29,17 +29,17 @@
 <div class="container">
 	<div class="detail">
 		<div id="detail_img">
-			<img src="images/books/${bookClassImg}" alt="" />
+			<img src="<c:url value='${book.coverPath}' />" alt="" />
 		</div>
 		<div id="detail_info">
-			<h4><c:out value="${bookClassName}"/></h4>
-			<span id="info_price"><em>￥</em><c:out value="${sellPrice}"/> <em>/本</em></span>
+			<h4><c:out value="${book.title}"/></h4>
+			<span id="info_price"><em>￥</em><c:out value="${book.sellingPrice}"/> <em>/本</em></span>
 			<span id="info_service">支持： 上门配送 ｜ 自取 ｜ 租用</span>
 		</div>
 		<div id="detail_book">
-			<span>版本：<em><c:out value="${version}"/></em></span>
-			<span>作者：<em><c:out value="${author}"/></em></span>
-			<span>出版社：<em><c:out value="${company}"/></em></span>
+			<span>版本：<em><c:out value="${book.edition}"/></em></span>
+			<span>作者：<em><c:out value="${book.author}"/></em></span>
+			<span>出版社：<em><c:out value="${book.press}"/></em></span>
 		</div>
 	</div>
 

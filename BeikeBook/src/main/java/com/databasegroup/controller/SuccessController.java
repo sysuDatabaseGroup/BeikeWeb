@@ -14,7 +14,7 @@ import com.databasegroup.model.BookCategory;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "success")
+@RequestMapping(value = "/success")
 public class SuccessController {
 
 	@RequestMapping(method = GET)

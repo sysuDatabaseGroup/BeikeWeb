@@ -61,8 +61,8 @@ $(function(){
 <body>
 <div class="bookClass">
 	<ul id="bookClass_ul">
-		<c:forEach items="${bookTypes}" var="i">
-		<li><a href="#"><span><c:out value="${i.className}"/></span></a></li>
+		<c:forEach items="${bookCategories}" var="i">
+		<li><a href="#"><span><c:out value="${i.title}"/></span></a></li>
 		</c:forEach>
 	</ul>
 </div>
@@ -75,9 +75,9 @@ $(function(){
 		<div id="slider_pic">
 			<ul id="pic_ul">
 				<!-- 需要替换images/pic.jpg -->
-				<li><img src="<c:url value='images/pic.jpg'/>" alt="" /></li>
-				<li><img src="images/user/photo.jpg" alt="" /></li>
-				<li><img src="images/pic.jpg" alt="" /></li>
+				<li><img src="<c:url value='/images/banner/default.png'/>" alt="" /></li>
+				<li><img src="<c:url value='/images/banner/default.png'/>" alt="" /></li>
+				<li><img src="<c:url value='/images/banner/default.png'/>" alt="" /></li>
 			</ul>
 		</div>
 		<div id="slider_list">
@@ -94,14 +94,14 @@ $(function(){
 		<span>书籍支持上门自取或校内配送</span>
 	</div>
 	<article class="article">
-		<c:forEach items="${bookInfo}" var="i">
-			<a href="detail?bookClassID='${i.bookClassID}'">
+		<c:forEach items="${bookInfos}" var="i">
+			<a href="detail/${i.book.id}">
 			<div class="card">
 				<div id="card_img">
-					<img src="images/books/${i.bookClassImg}" alt="" />
+					<img src="<c:url value='${i.book.coverPath}'/>" alt="" />
 				</div>
-				<h3>￥<c:out value="${i.sellPrice}"/><em>起</em></h3>
-				<span><c:out value="${i.bookClassName}"/></span>
+				<h3>￥<c:out value="${i.sellingPrice}"/><em>起</em></h3>
+				<span><c:out value="${i.book.title}"/></span>
 			</div>
 			</a>
 		</c:forEach>

@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.databasegroup.model.BookCategory;
+import com.databasegroup.service.IUserService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,22 +19,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController {
 	
+	@Autowired
+	private IUserService userService;
+	
 	@RequestMapping(value="/login",method=GET)
-	public String login1() {
+	public String login() {
 		return "login";
 	}
 	
 	@RequestMapping(value="/login",method=POST)
-	public String login2(
+	public String loginAuth(
 			HttpServletRequest request,
 			@RequestParam String username,
-			@RequestParam String password) {
-		if (username.equals("admin") && password.equals("admin")) {
-			//request.getSession().setAttribute("loginReply", "ÓÃ»§Ãû´íÎó, ÇëÖØÐÂµÇÂ¼");
-			request.getSession().setAttribute("username", "admin");
-			request.getSession().setAttribute("message", "µÇÂ¼³É¹¦£¡");
-			return "/fortest/showMessage";
+			@RequestParam String password,
+			Model model) {
+		if (userService.authUser(username, password)) {
+			request.getSession()
+					.setAttribute("user", 
+					userService.getUserByUserNum(username));
+			System.out.print("#");
+			return "redirect:/";
+		} else {
+			model.addAttribute("message", "ÕËºÅÃÜÂë´íÎó£¡");
+			return "/login";
 		}
-		return "login";
+	}
+	
+	@RequestMapping(value="/logout",method=GET)
+	public String logout(
+			HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "redirect:/";
 	}
 }

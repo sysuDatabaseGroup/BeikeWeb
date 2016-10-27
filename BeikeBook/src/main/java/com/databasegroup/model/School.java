@@ -10,8 +10,8 @@ public class School {
 	
 	@Override
 	public String toString() {
-		return "" + id + ' ' + name + ' ' + num + ' ' +
-				admin + ' ' + password + ' ' + cityId;
+		return "[" + id + ' ' + name + ' ' + num + ' ' +
+				admin + ' ' + password + ' ' + cityId + ']';
 	}
 
 	/**

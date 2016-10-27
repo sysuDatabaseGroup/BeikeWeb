@@ -9,8 +9,8 @@ public class Encashment {
 	
 	@Override
 	public String toString() {
-		return "" + id + ' ' + alipayAccount + ' ' + 
-				alipayName + ' ' + encashingAmount + ' ' + phone;
+		return "[" + id + ' ' + alipayAccount + ' ' + 
+				alipayName + ' ' + encashingAmount + ' ' + phone + ']';
 	}
 
 	/**

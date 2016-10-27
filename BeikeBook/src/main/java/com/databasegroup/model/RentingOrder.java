@@ -15,8 +15,9 @@ public class RentingOrder {
 	
 	@Override
 	public String toString() {
-		return "" + id + ' ' + userId + ' ' + deliveryMethodId + ' ' + dealedBookId + ' ' +
-				amount + ' ' + datetime + ' ' + takingBookNum + ' ' + took + ' ' + returned;
+		return "[" + id + ' ' + userId + ' ' + deliveryMethodId + ' '
+				+ dealedBookId + ' ' + amount + ' ' + datetime + ' ' +
+				takingBookNum + ' ' + took + ' ' + returned + ']';
 	}
 
 	/**

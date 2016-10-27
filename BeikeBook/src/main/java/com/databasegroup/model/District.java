@@ -11,8 +11,9 @@ public class District {
 	
 	@Override
 	public String toString() {
-		return "" + id + ' ' + name + ' ' + num + ' ' + address + ' ' 
-				+ deliverName + ' ' + deliverPhone + ' ' + schoolId;
+		return "[" + id + ' ' + name + ' ' + num + ' ' + address + ' ' 
+				+ deliverName + ' ' + deliverPhone + ' ' + 
+				schoolId + ']';
 	}
 
 	/**

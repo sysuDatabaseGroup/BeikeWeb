@@ -14,7 +14,7 @@ import com.databasegroup.model.BookCategory;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value="buy_rent")
+@RequestMapping(value="/buy_rent")
 public class BuyRentController {
 	
 	@RequestMapping(method=GET)

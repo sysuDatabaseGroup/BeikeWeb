@@ -6,15 +6,15 @@ public class User {
 	private String wxName;
 	private String userNum;
 	private String password;
-	private int cityId;
-	private int schoolId;
+	private City city;
+	private School school;
 	private String dorm;
 	
 	@Override
 	public String toString() {
-		return "" + id + ' ' + wxPhoto + ' ' + wxName + ' ' +
-				userNum + ' ' + password + ' ' + + cityId + ' ' + 
-				schoolId + ' ' + dorm;
+		return "[" + id + ' ' + wxPhoto + ' ' + wxName + ' ' +
+				userNum + ' ' + password + ' ' + city + ' ' + 
+				school + ' ' + dorm + ']';
 	}
 
 	/**
@@ -89,32 +89,34 @@ public class User {
 		this.password = password;
 	}
 
+	
+
 	/**
-	 * @return the cityId
+	 * @return the city
 	 */
-	public int getCityId() {
-		return cityId;
+	public City getCity() {
+		return city;
 	}
 
 	/**
-	 * @param cityId the cityId to set
+	 * @param city the city to set
 	 */
-	public void setCityId(int cityId) {
-		this.cityId = cityId;
+	public void setCity(City city) {
+		this.city = city;
 	}
 
 	/**
-	 * @return the schoolId
+	 * @return the school
 	 */
-	public int getSchoolId() {
-		return schoolId;
+	public School getSchool() {
+		return school;
 	}
 
 	/**
-	 * @param schoolId the schoolId to set
+	 * @param school the school to set
 	 */
-	public void setSchoolId(int schoolId) {
-		this.schoolId = schoolId;
+	public void setSchool(School school) {
+		this.school = school;
 	}
 
 	/**

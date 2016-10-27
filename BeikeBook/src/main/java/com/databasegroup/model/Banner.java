@@ -12,8 +12,8 @@ public class Banner {
 	
 	@Override
 	public String toString() {
-		return "" + id + ' ' + picPath + ' ' + title + ' ' +
-				link + ' ' + datetime + ' ' + prior;
+		return "[" + id + ' ' + picPath + ' ' + title + ' ' +
+				link + ' ' + datetime + ' ' + prior + ']';
 	}
 
 	/**

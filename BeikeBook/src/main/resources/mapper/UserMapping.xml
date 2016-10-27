@@ -9,9 +9,11 @@
 		<result property="wxName" column="wx_name" />
 		<result property="userNum" column="user_num" />
 		<result property="password" column="password" />
-		<result property="cityId" column="city_id" />
-		<result property="schoolId" column="school_id" />
 		<result property="dorm" column="dorm" />
+		<association property="city" column="city_id"
+			select="com.databasegroup.dao.ICityDao.getById" />
+		<association property="school" column="school_id" 
+			select="com.databasegroup.dao.ISchoolDao.getById"/>
 	</resultMap>
 	<sql id="columns">id, wx_photo, wx_name, user_num, password,
 		city_id, school_id, dorm</sql>
@@ -53,4 +55,16 @@
 		FROM bk_user
 		WHERE id=#{id}
 	</delete> 
+	
+	<select id="authUser" resultMap="userResultMap">
+		SELECT *
+		FROM bk_user
+		WHERE user_num=#{userNum} and password=#{password}
+	</select>
+	
+	<select id="getUserByUserNum" resultMap="userResultMap">
+		SELECT *
+		FROM bk_user
+		WHERE user_num=#{userNum}
+	</select>
 </mapper>

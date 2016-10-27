@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class DealedBook {
 	private int id;
-	private int bookId;
+	private Book book;
 	private String dealedNum;
 	private double sellingPrice;
 	private double rentalPrice;
@@ -15,9 +15,9 @@ public class DealedBook {
 	
 	@Override
 	public String toString() {
-		return "" + id + ' ' + bookId + ' ' + dealedNum + ' ' +
+		return "[" + id + ' ' + book + ' ' + dealedNum + ' ' +
 				sellingPrice + ' ' + rentalPrice + ' ' + districtId + ' ' +
-				userId + ' ' + datetime + ' ' + selled;
+				userId + ' ' + datetime + ' ' + selled + ']';
 	}
 
 	/**
@@ -34,18 +34,20 @@ public class DealedBook {
 		this.id = id;
 	}
 
+	
+
 	/**
-	 * @return the bookId
+	 * @return the book
 	 */
-	public int getBookId() {
-		return bookId;
+	public Book getBook() {
+		return book;
 	}
 
 	/**
-	 * @param bookId the bookId to set
+	 * @param book the book to set
 	 */
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
+	public void setBook(Book book) {
+		this.book = book;
 	}
 
 	/**

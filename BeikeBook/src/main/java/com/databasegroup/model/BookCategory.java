@@ -7,7 +7,7 @@ public class BookCategory {
 	
 	@Override
 	public String toString() {
-		return "" + id + ' ' + title + ' ' + iconPath;
+		return "[" + id + ' ' + title + ' ' + iconPath + ']';
 	}
 
 	/**

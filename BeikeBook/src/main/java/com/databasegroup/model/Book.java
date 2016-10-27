@@ -14,9 +14,10 @@ public class Book {
 	
 	@Override
 	public String toString() {
-		return "" + id + ' ' + bookCategoryId + ' ' + title + ' ' +
+		return "[" + id + ' ' + bookCategoryId + ' ' + title + ' ' +
 				coverPath + ' ' + deliveryMethodId + ' ' + press + ' ' +
-				author + ' ' + edition + ' ' + sellingPrice + ' ' + rentalPrice;
+				author + ' ' + edition + ' ' + sellingPrice + ' ' + 
+				rentalPrice + ']';
 	}
 
 	/**

@@ -10,16 +10,20 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.databasegroup.model.BookCategory;
+import com.databasegroup.model.User;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping(value="center")
+@RequestMapping(value="/center")
 public class CenterController {
 	
 	@RequestMapping(method=GET)
-	public String center() {
+	public String center(HttpServletRequest request,
+			Model model) {
+		User user = (User) request.getSession().getAttribute("user");
+		model.addAttribute("user", user);
 		return "center";
 	}
 }

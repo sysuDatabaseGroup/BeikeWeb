@@ -7,7 +7,7 @@ public class City {
 	
 	@Override
 	public String toString() {
-		return "" + id + ' ' + name + ' ' + num;
+		return "[" + id + ' ' + name + ' ' + num + ']';
 	}
 
 	/**

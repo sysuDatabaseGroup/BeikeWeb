@@ -12,13 +12,23 @@ public class LoginInterceptor extends HandlerInterceptorAdapter  {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String uri = request.getRequestURI();
-		System.out.println("TAG:" + uri);
-		System.out.println("TAG:" + request.getSession().getAttribute("username"));
-		System.out.println("TAG:" + request.getContextPath());
-		if (request.getSession().getAttribute("username") == null) {
-			response.sendRedirect(request.getContextPath() + "/login");
+		
+		// 进入登录页面，判断session中是否有key，有的话重定向到首页，否则进入登录界面
+		  if(uri.contains("login")) {
+		      if(request.getSession().getAttribute("user") != null) {
+		         response.sendRedirect(request.getContextPath());//默认根路径为首页
+		      } else {
+		         return true;//继续登陆请求
+		      }
+		  }
+		  
+		// 其他情况判断session是否有key，有的话继续用户操作
+		if (request.getSession().getAttribute("user") != null) {
+			return true;
 		}
-		System.out.println("TAG: endOfPreHandle()");
+		
+		// 最后只剩下登录界面
+		response.sendRedirect(request.getContextPath() + "/login");
 		return true;
 	}
 

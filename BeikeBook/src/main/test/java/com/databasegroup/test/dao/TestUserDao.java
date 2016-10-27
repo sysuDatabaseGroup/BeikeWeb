@@ -33,10 +33,13 @@ public class TestUserDao {
 	public void userDaoShouldNotBeNull() {
 		assertNotNull(userDao);
 		
-		User user = userDao.getById(2);
-		user.setWxName("update");
-		userDao.update(user);
-		System.out.println(user);
+//		User user = userDao.authUser("usernum", "password");
+//		System.out.println(user);
+		
+//		User user = userDao.getById(2);
+//		user.setWxName("update");
+//		userDao.update(user);
+//		System.out.println(user);
 		
 //		User user = new User();
 //		user.setCityId(2);

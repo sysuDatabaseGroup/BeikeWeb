@@ -13,6 +13,6 @@
 	<input type="submit" value="登录" >
 	<input name="_csrf" type="hidden">
 </form>
-
+<h2>${message}</h2>
 </body>
 </html>

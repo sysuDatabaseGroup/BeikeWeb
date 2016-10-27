@@ -14,7 +14,7 @@ import com.databasegroup.model.BookCategory;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value="books")
+@RequestMapping(value="/books")
 public class BooksController {
 	
 	@RequestMapping(method=GET)

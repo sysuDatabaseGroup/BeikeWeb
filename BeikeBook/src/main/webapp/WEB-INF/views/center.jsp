@@ -10,9 +10,9 @@
 	<div class="center">
 		<div id="center_top">
 			<span id="center_photo">
-				<img src="images/user/${wx_photo}" alt="" />
+				<img src="<c:url value='${user.wxPhoto}' />" alt="" />
 			</span>
-			<span id="center_username"><c:out value="${userNum}"/></span>
+			<span id="center_username"><c:out value="${user.wxName}"/></span>
 		</div>
 		<div id="center_bottom">
 			<ul id="center_ul">
@@ -41,15 +41,15 @@
 		<ul id="center_info_ul">
 			<li>
 				<span>城市</span>
-				<span id="city" class="center_info_item"><c:out value="${cityName}"/></span>
+				<span id="city" class="center_info_item"><c:out value="${user.city.name}"/></span>
 			</li>
 			<li>
 				<span>学校</span>
-				<span id="school" class="center_info_item"><c:out value="${schoolName}"/></span>
+				<span id="school" class="center_info_item"><c:out value="${user.school.name}"/></span>
 			</li>
 			<li>
 				<span>宿舍</span>
-				<span id="dorm" class="center_info_item"><c:out value="${dorm}"/></span>
+				<span id="dorm" class="center_info_item"><c:out value="${user.dorm}"/></span>
 			</li>
 		</ul>
 	</div>

@@ -10,6 +10,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.databasegroup.model.BookCategory;
+import com.databasegroup.service.IBookCategoryService;
+import com.databasegroup.service.IDealedBookService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,14 +19,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 	
-	@RequestMapping(value={"/","/index"},method=GET)
-	public String index() {
-		return "index";
-	}
+	@Autowired
+	private IBookCategoryService bookCategoryService;
 	
-	@RequestMapping(value="sign-in",method=GET)
-	public String signIn() {
-		return "admin/sign-in";
+	@Autowired
+	private IDealedBookService dealedBookService;
+	
+	@RequestMapping(value={"/","/index"},method=GET)
+	public String index(Model model) {
+		model.addAttribute("bookCategories", 
+				bookCategoryService.getAll());
+		model.addAttribute("bookInfos", 
+				dealedBookService.getAll());
+		return "index";
 	}
 	
 }

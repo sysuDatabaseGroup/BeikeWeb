@@ -5,7 +5,6 @@
 <mapper namespace="com.databasegroup.dao.IDealedBookDao">
 	<resultMap id="dealedBookResultMap" type="DealedBook">
 		<id property="id" column="id"/>
-		<result property="bookId" column="book_id" />
 		<result property="dealedNum" column="dealed_num" />
 		<result property="sellingPrice" column="selling_price" />
 		<result property="rentalPrice" column="rental_price" />
@@ -13,7 +12,10 @@
 		<result property="userId" column="user_id" />
 		<result property="datetime" column="datetime" />
 		<result property="selled" column="selled" />
+		<association property="book" column="book_id"
+			select="com.databasegroup.dao.IBookDao.getById" />
 	</resultMap>
+	
 	<sql id="columns">id, book_id, dealed_num, selling_price,
 		rental_price, district_id, user_id, datetime, selled</sql>
 	

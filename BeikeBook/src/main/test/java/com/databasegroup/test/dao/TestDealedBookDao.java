@@ -31,9 +31,9 @@ public class TestDealedBookDao {
 	public void bookDaoShouldNotBeNull() {
 		assertNotNull(bookDao);
 		
-		DealedBook book = bookDao.getById(2);
-		book.setDealedNum("update");
-		bookDao.update(book);
+		DealedBook book = bookDao.getById(1);
+//		book.setDealedNum("update");
+//		bookDao.update(book);
 		System.out.println(book);
 		
 //		DealedBook book = new DealedBook();
