@@ -32,6 +32,8 @@ public class AdminController {
 	private IBookService bookService;
 	@Autowired
 	private IDealedBookService dealedBookService;
+	@Autowired
+	private IAnnounService announService;
 
 	@RequestMapping(value="/index",method=GET)
 	public String index(Model model, HttpServletRequest request) {
@@ -85,6 +87,9 @@ public class AdminController {
 			sellInfos.add(m);
 		}
 		model.addAttribute("sellInfos",sellInfos);
+		List<Announ> announs = announService.getAll();
+		String announContent = announs.get(announs.size()-1).getContent();
+		model.addAttribute("announContent",announContent);
 
 		return "/admin/index";
 	}
