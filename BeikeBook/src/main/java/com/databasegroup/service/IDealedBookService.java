@@ -9,4 +9,5 @@ import com.databasegroup.model.DealedBook;
 import com.databasegroup.model.User;
 
 public interface IDealedBookService extends IBaseService<DealedBook> {
+	DealedBook getNoSelledAndNoRentedBookByBookId(int id);
 }

@@ -40,4 +40,9 @@ public class DistrictServiceImpl implements IDistrictService {
 	public List<District> getAll() {
 		return districtDao.getAll();
 	}
+
+	@Override
+	public List<District> getDistrictBySchoolId(int id) {
+		return districtDao.getDistrictBySchoolId(id);
+	}
 }

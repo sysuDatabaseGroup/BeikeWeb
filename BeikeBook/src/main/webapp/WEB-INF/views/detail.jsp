@@ -22,24 +22,24 @@
 
 <div class="option">
 	<span id="option_what"></span>
-	<a href="pay"><span id="option_buy">购买旧书</span></a>
-	<a href="rent"><span id="option_rent">租书（热）</span></a>
+	<a href="<c:url value='/pay/${bookInfo.id}'/>"><span id="option_buy">购买旧书</span></a>
+	<a href="<c:url value='/rent/${bookInfo.id}'/>"><span id="option_rent">租书（热）</span></a>
 </div>
 
 <div class="container">
 	<div class="detail">
 		<div id="detail_img">
-			<img src="<c:url value='${book.coverPath}' />" alt="" />
+			<img src="<c:url value='${bookInfo.book.coverPath}' />" alt="" />
 		</div>
 		<div id="detail_info">
-			<h4><c:out value="${book.title}"/></h4>
-			<span id="info_price"><em>￥</em><c:out value="${book.sellingPrice}"/> <em>/本</em></span>
+			<h4><c:out value="${bookInfo.book.title}"/></h4>
+			<span id="info_price"><em>￥</em><c:out value="${bookInfo.sellingPrice}"/> <em>/本</em></span>
 			<span id="info_service">支持： 上门配送 ｜ 自取 ｜ 租用</span>
 		</div>
 		<div id="detail_book">
-			<span>版本：<em><c:out value="${book.edition}"/></em></span>
-			<span>作者：<em><c:out value="${book.author}"/></em></span>
-			<span>出版社：<em><c:out value="${book.press}"/></em></span>
+			<span>版本：<em><c:out value="${bookInfo.book.edition}"/></em></span>
+			<span>作者：<em><c:out value="${bookInfo.book.author}"/></em></span>
+			<span>出版社：<em><c:out value="${bookInfo.book.press}"/></em></span>
 		</div>
 	</div>
 
@@ -50,18 +50,10 @@
 		</div>
 		<div class="place_num">
 			<ul id="place_num_ul">
-				<c:forEach items="${districtInfo}" var="i">
+				<c:forEach items="${districts}" var="i" varStatus="count">
 					<li>
-						<h5><c:out value="${i}"/></h5>
-						<span><c:out value="${i.districtName}"/></span>
-						<c:choose>
-							<c:when test="${i.num > 0}">
-								<em><c:out value="${i.num}"/>本</em>
-							</c:when>
-							<c:otherwise>
-								<em>暂无</em>
-							</c:otherwise>
-						</c:choose>
+						<h5><c:out value="${count.index+1}"/></h5>
+						<span><c:out value="${i.address}"/></span>
 					</li>
 				</c:forEach>
 			</ul>		

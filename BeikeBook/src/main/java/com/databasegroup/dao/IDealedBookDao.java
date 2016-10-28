@@ -6,5 +6,5 @@ import com.databasegroup.model.DealedBook;
 
 @Repository
 public interface IDealedBookDao extends IBaseDao<DealedBook> {
-
+	DealedBook getNoSelledAndNoRentedBookByBookId(int id);
 }

@@ -12,12 +12,13 @@
 		<result property="userId" column="user_id" />
 		<result property="datetime" column="datetime" />
 		<result property="selled" column="selled" />
+		<result property="rented" column="rented" />
 		<association property="book" column="book_id"
 			select="com.databasegroup.dao.IBookDao.getById" />
 	</resultMap>
 	
 	<sql id="columns">id, book_id, dealed_num, selling_price,
-		rental_price, district_id, user_id, datetime, selled</sql>
+		rental_price, district_id, user_id, datetime, selled, rented</sql>
 	
 	<select id="getById" parameterType="int"
 		resultMap="dealedBookResultMap">
@@ -33,11 +34,20 @@
 		FROM bk_dealed_book
 	</select>
 	
+	<select id="getNoSelledAndNoRentedBookByBookId" parameterType="int"
+		resultMap="dealedBookResultMap">
+		SELECT *
+		FROM bk_dealed_book
+		WHERE selled=0 AND rented=0 AND book_id=#{id}
+		ORDER BY selling_price
+		LIMIT 1;
+	</select>
+	
 	<insert id="insert" parameterType="DealedBook" >
 		INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price,
-			rental_price, district_id, user_id, datetime, selled) VALUES
+			rental_price, district_id, user_id, datetime, selled, rented) VALUES
 		(#{bookId},#{dealedNum},#{sellingPrice},#{rentalPrice},
-		#{districtId},#{userId},#{datetime},#{selled})
+		#{districtId},#{userId},#{datetime},#{selled}, #{rented})
 	</insert>
 	
 	<update id="update" parameterType="DealedBook">
@@ -49,7 +59,8 @@
 		district_id=#{districtId},
 		user_id=#{userId},
 		datetime=#{datetime},
-		selled=#{selled}
+		selled=#{selled},
+		rented=#{rented}
 		WHERE id=#{id}
 	</update>
 	

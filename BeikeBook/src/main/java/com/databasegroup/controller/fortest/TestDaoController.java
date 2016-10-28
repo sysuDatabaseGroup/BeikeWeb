@@ -1,4 +1,4 @@
-package com.databasegroup.controller;
+package com.databasegroup.controller.fortest;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

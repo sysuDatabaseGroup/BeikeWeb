@@ -57,6 +57,7 @@ CREATE TABLE `bk_BOOK` (
   `userID` int(11) NOT NULL,
   `datetime` date NOT NULL,
   `isSell` int(1) NOT NULL DEFAULT '0',
+  `rented` int(1) NOT NULL DEFAULT '0', 
   PRIMARY KEY (`bookID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -47,5 +47,11 @@ public class DealedBookServiceImpl implements IDealedBookService {
 		return dealedBookDao.getAll();
 	}
 
+	@Override
+	public DealedBook getNoSelledAndNoRentedBookByBookId(int id) {
+		// TODO Auto-generated method stub
+		return dealedBookDao.getNoSelledAndNoRentedBookByBookId(id);
+	}
+
 
 }

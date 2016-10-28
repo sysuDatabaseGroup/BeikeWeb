@@ -12,6 +12,7 @@ public class DealedBook {
 	private int userId;
 	private Date datetime;
 	private int selled;
+	private int rented;
 	
 	@Override
 	public String toString() {
@@ -147,6 +148,19 @@ public class DealedBook {
 	public void setSelled(int selled) {
 		this.selled = selled;
 	}
-	
+
+	/**
+	 * @return the rented
+	 */
+	public int getRented() {
+		return rented;
+	}
+
+	/**
+	 * @param rented the rented to set
+	 */
+	public void setRented(int rented) {
+		this.rented = rented;
+	}
 	
 }

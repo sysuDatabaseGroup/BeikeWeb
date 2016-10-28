@@ -12,7 +12,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.databasegroup.model.BookCategory;
+import com.databasegroup.model.District;
+import com.databasegroup.model.User;
 import com.databasegroup.service.IBookService;
+import com.databasegroup.service.IDealedBookService;
+import com.databasegroup.service.IDistrictService;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +28,24 @@ import org.springframework.web.bind.annotation.RequestPart;
 public class DetailController {
 	
 	@Autowired
-	private IBookService bookService;
+	private IDealedBookService dealedBookService;
+	
+	@Autowired
+	private IDistrictService districtService;
 
-	@RequestMapping(value="/{bookId}",method = GET)
-	public String detail(@PathVariable int bookId,
+	@RequestMapping(value="/{id}",method = GET)
+	public String detail(@PathVariable int id,
+				HttpServletRequest request,
 				Model model) {
-		model.addAttribute("book", bookService.getById(bookId));
+		model.addAttribute("bookInfo", 
+				dealedBookService.getNoSelledAndNoRentedBookByBookId(id));
+		List<District> districts = 
+				(List<District>) request.getSession().getAttribute("districts");
+		if (districts == null) {
+			districts = districtService.getAll();
+			request.getSession().setAttribute("districts", districts);
+		}
+		model.addAttribute("districts", districts);
 		return "detail";
 	}
 }

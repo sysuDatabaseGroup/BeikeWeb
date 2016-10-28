@@ -10,4 +10,5 @@ import com.databasegroup.model.City;
 import com.databasegroup.model.User;
 
 public interface IBookService extends IBaseService<Book> {
+	List<Book> getNoSelledAndNoRentedBooks();
 }

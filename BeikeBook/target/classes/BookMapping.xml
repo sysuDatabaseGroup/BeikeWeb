@@ -9,12 +9,13 @@
 		<result property="bookCategoryId" column="book_category_id" />
 		<result property="title" column="title" />
 		<result property="coverPath" column="cover_path" />
-		<result property="deliveryMethodId" column="delivery_method_id" />
 		<result property="press" column="press" />
 		<result property="author" column="author" />
 		<result property="edition" column="edition" />
 		<result property="sellingPrice" column="selling_price" />
 		<result property="rentalPrice" column="rental_price" />
+		<association property="method" column="delivery_method_id"
+			select="com.databasegroup.dao.IDeliveryMethodDao.getById" />
 	</resultMap>
 	
 	<sql id="columns">id, book_category_id, title,
@@ -33,6 +34,15 @@
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_book
+	</select>
+	
+	<select id="getNoSelledAndNoRentedBooks"
+		resultMap="bookResultMap">
+		SELECT distinct(bb.id), bb.book_category_id, bb.title, bb.cover_path, 
+			bb.delivery_method_id, bb.press, bb.author, bb.edition,
+			bb.selling_price, bb.rental_price
+		FROM bk_book bb JOIN bk_dealed_book bdb ON bb.id=bdb.book_id
+		WHERE bdb.selled=0 AND bdb.rented=0;
 	</select>
 	
 	<insert id="insert" parameterType="Book" >

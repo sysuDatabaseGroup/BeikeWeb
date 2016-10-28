@@ -25,13 +25,15 @@ public class TestBookDao {
 	private IBookDao bookDao;
 	
 	@Test
-	public void bookClassDaoShouldNotBeNull() {
+	public void bookDaoShouldNotBeNull() {
 		assertNotNull(bookDao);
 		
-		Book book = bookDao.getById(2);
-		book.setAuthor("update");
-		bookDao.update(book);
-		System.out.println(book);
+		System.out.println(bookDao.getNoSelledAndNoRentedBooks());
+		
+//		Book book = bookDao.getById(1);
+//		book.setAuthor("update");
+//		bookDao.update(book);
+//		System.out.println(book);
 		
 //		Book book = new Book();
 //		book.setBookCategoryId(2);

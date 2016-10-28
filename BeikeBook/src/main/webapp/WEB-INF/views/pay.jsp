@@ -30,16 +30,16 @@ $(function(){
 <body>
 	<div class="pay_address">
 		<span>填写收书宿舍点</span>
-		<span id="address"><c:out value="${schoolName}${districtName}"/></span>
+		<span id="address"><c:out value="${user.school.name}  ${user.dorm}"/></span>
 	</div>
 	<div class="pay_info">
 		<div id="pay_info_top">
 			<div id="info_img">
-				<img src="images/books/${bookClassImg}" alt="" />
+				<img src="<c:url value='${dealedBook.book.coverPath}' />" alt="" />
 			</div>
 			<div id="info_detail">
-				<h5><c:out value="${bookClassName}"/></h5>
-				<span>编号：<c:out value="${bookNum}"/></span>
+				<h5><c:out value="${dealedBook.book.title}"/></h5>
+				<span>编号：<c:out value="${dealedBook.dealedNum}"/></span>
 				<div id="bookNum">
 					<span id="reduce">-</span>
 					<span id="add">+</span>
@@ -47,7 +47,7 @@ $(function(){
 				</div>
 			</div>
 			<div id="info_bookNum">
-				<span id="info_bookNum_price">￥<c:out value="${sellPrice}"/>/本</span>
+				<span id="info_bookNum_price">￥<c:out value="${dealedBook.sellingPrice}"/>/本</span>
 			</div>
 			<div class="clearbox"></div>
 		</div>
@@ -62,7 +62,7 @@ $(function(){
 	<div class="pay_method">
 		<div id="pay_method_top">
 			<span>总价</span>
-			<span id="method_sum">￥<em id="method_sum_price"><c:out value="${sellPrice+price}"/></em>.00</span>
+			<span id="method_sum">￥<em id="method_sum_price"><c:out value="${dealedBook.sellingPrice+price}"/></em>.00</span>
 		</div>
 		<div id="pay_method_bottom">
 			<a href="success"><input type="submit" id="paying" name="paying" value="在线支付" /></a>

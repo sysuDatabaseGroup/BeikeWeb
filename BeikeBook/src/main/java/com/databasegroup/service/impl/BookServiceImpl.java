@@ -50,4 +50,10 @@ public class BookServiceImpl implements IBookService {
 		return bookDao.getAll();
 	}
 
+	@Override
+	public List<Book> getNoSelledAndNoRentedBooks() {
+		// TODO Auto-generated method stub
+		return bookDao.getNoSelledAndNoRentedBooks();
+	}
+
 }

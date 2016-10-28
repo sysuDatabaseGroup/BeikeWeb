@@ -1,11 +1,13 @@
 package com.databasegroup.model;
 
+import java.util.List;
+
 public class Book {
 	private int id;
 	private int bookCategoryId;
 	private String title;
 	private String coverPath;
-	private int deliveryMethodId;
+	private DeliveryMethod method;
 	private String press;
 	private String author;
 	private String edition;
@@ -15,7 +17,7 @@ public class Book {
 	@Override
 	public String toString() {
 		return "[" + id + ' ' + bookCategoryId + ' ' + title + ' ' +
-				coverPath + ' ' + deliveryMethodId + ' ' + press + ' ' +
+				coverPath + ' ' + method + ' ' + press + ' ' +
 				author + ' ' + edition + ' ' + sellingPrice + ' ' + 
 				rentalPrice + ']';
 	}
@@ -76,18 +78,19 @@ public class Book {
 		this.coverPath = coverPath;
 	}
 
+	
 	/**
-	 * @return the deliveryMethodId
+	 * @return the method
 	 */
-	public int getDeliveryMethodId() {
-		return deliveryMethodId;
+	public DeliveryMethod getMethod() {
+		return method;
 	}
 
 	/**
-	 * @param deliveryMethodId the deliveryMethodId to set
+	 * @param method the method to set
 	 */
-	public void setDeliveryMethodId(int deliveryMethodId) {
-		this.deliveryMethodId = deliveryMethodId;
+	public void setMethod(DeliveryMethod method) {
+		this.method = method;
 	}
 
 	/**

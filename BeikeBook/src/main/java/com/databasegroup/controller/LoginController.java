@@ -37,7 +37,6 @@ public class LoginController {
 			request.getSession()
 					.setAttribute("user", 
 					userService.getUserByUserNum(username));
-			System.out.print("#");
 			return "redirect:/";
 		} else {
 			model.addAttribute("message", "账号密码错误！");

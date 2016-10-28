@@ -83,9 +83,9 @@ $(function(){
 		<div id="slider_list">
 			<ul id="list_ul">
 				<!-- 需要替换str -->
-				<li class="on"><p>募捐爱心书籍活动</p></li>
-				<li><p>募捐爱心书籍活动</p></li>
-				<li><p>募捐爱心书籍活动</p></li>
+				<li class="on"><p>活动1</p></li>
+				<li><p>活动2</p></li>
+				<li><p>活动3</p></li>
 			</ul>
 		</div>
 	</div>
@@ -95,13 +95,13 @@ $(function(){
 	</div>
 	<article class="article">
 		<c:forEach items="${bookInfos}" var="i">
-			<a href="detail/${i.book.id}">
+			<a href="<c:url value='/detail/${i.id}'/>">
 			<div class="card">
 				<div id="card_img">
-					<img src="<c:url value='${i.book.coverPath}'/>" alt="" />
+					<img src="<c:url value='${i.coverPath}'/>" alt="" />
 				</div>
 				<h3>￥<c:out value="${i.sellingPrice}"/><em>起</em></h3>
-				<span><c:out value="${i.book.title}"/></span>
+				<span><c:out value="${i.title}"/></span>
 			</div>
 			</a>
 		</c:forEach>

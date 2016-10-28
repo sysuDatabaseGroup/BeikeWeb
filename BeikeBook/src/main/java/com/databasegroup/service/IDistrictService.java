@@ -9,4 +9,5 @@ import com.databasegroup.model.District;
 import com.databasegroup.model.User;
 
 public interface IDistrictService extends IBaseService<District> {
+	List<District> getDistrictBySchoolId(int id);
 }

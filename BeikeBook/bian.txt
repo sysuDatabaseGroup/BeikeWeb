@@ -275,9 +275,10 @@ detail.jsp													bookClassImg				书的封面名
 																		version							版本
 																		author							作者
 																		company							出版社
-																		districtInfo				托管点信息
-																			districtName			托管点名称
-																			num								托管点的书数量
+																		districts				托管点信息
+																			address			托管点地址
+																			num								托管点的编号
+																			count	托管点下标
 
 books.jsp														noSellBookInfo			未售书的信息
 																			bookClassImg				书的封面名

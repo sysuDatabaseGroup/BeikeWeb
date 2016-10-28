@@ -30,6 +30,15 @@
 		<include refid="columns"></include>
 		FROM bk_district
 	</select>
+	
+	<select id="getDistrictBySchoolId" parameterType="int"
+		resultMap="districtResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_district
+		WHERE school_id=#{id}
+	</select>
+	
 
 	<insert id="insert" parameterType="District">
 		INSERT
