@@ -12,38 +12,40 @@ public class LoginInterceptor extends HandlerInterceptorAdapter  {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String uri = request.getRequestURI();
+		// ä¿å­˜ç™»å½•å‰çš„é¡µé¢
+		request.getSession().setAttribute("lastPage",
+				request.getServletPath());
 		
-		// ½øÈëµÇÂ¼Ò³Ãæ£¬ÅĞ¶ÏsessionÖĞÊÇ·ñÓĞkey£¬ÓĞµÄ»°ÖØ¶¨Ïòµ½Ê×Ò³£¬·ñÔò½øÈëµÇÂ¼½çÃæ
+		// åˆ¤æ–­æ˜¯å¦æ˜¯ç™»å½•é¡µé¢
 		  if(uri.contains("login")) {
 		      if(request.getSession().getAttribute("user") != null) {
-		         response.sendRedirect(request.getContextPath());//Ä¬ÈÏ¸ùÂ·¾¶ÎªÊ×Ò³
+		         response.sendRedirect(request.getContextPath());// å·²ç™»å½•å°±è·³åˆ°æ ¹ç›®å½•
 		      } else {
-		         return true;//¼ÌĞøµÇÂ½ÇëÇó
+		         return true;// æœªç™»å½•å°±ç»§ç»­
 		      }
 		  }
 		  
-		// ÆäËûÇé¿öÅĞ¶ÏsessionÊÇ·ñÓĞkey£¬ÓĞµÄ»°¼ÌĞøÓÃ»§²Ù×÷
+		// å·²ç™»å½•å°±ç»§ç»­åŸæ“ä½œ
 		if (request.getSession().getAttribute("user") != null) {
 			return true;
 		}
-		
-		// ×îºóÖ»Ê£ÏÂµÇÂ¼½çÃæ
+		// å…¶ä»–æƒ…å†µå°±æ˜¯ç™»å½•é¡µé¢
 		response.sendRedirect(request.getContextPath() + "/login");
 		return true;
 	}
 
-	//Õû¸öÇëÇóÍê³É£¬¼´ÊÓÍ¼äÖÈ¾½áÊøºóµ÷ÓÃ£¬Õâ¸öÊ±ºò¿ÉÒÔ×öĞ©×ÊÔ´ÇåÀí¹¤×÷£¬»òÈÕÖ¾¼ÇÂ¼µÈ
+	// æ•´ä¸ªè¯·æ±‚ç»“æŸä¹‹åçš„æ“ä½œï¼Œæ¸²æŸ“è§†å›¾ä¹‹å
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		super.afterCompletion(request, response, handler, ex);
+//		System.out.println("afterCompletion");
 	}
 
-	//ÔÚ¿ØÖÆÆ÷·½·¨µ÷ÓÃºó£¬½âÎöÊÓÍ¼Ç°µ÷ÓÃ£¬ÎÒÃÇ¿ÉÒÔ¶ÔÊÓÍ¼ºÍÄ£ĞÍ×ö½øÒ»²½äÖÈ¾»òĞŞ¸Ä
+	// æ§åˆ¶å™¨æ–¹æ³•è°ƒç”¨åï¼Œè§£æè§†å›¾å‰è°ƒç”¨
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		super.postHandle(request, response, handler, modelAndView);
+//		System.out.println("postHandle");
 	}
 	
 	

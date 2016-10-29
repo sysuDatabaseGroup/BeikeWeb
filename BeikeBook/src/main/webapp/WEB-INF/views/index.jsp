@@ -69,7 +69,7 @@ $(function(){
 	<header class="header">
 		<span id="header_class"></span>
 		<input type="search" name="search" id="header_search" placeholder="热门搜索：大英 毛概 高数" required="required" />
-		<a href="center"><span id="header_center"></span></a>
+		<a href="<c:url value='/center'/>"><span id="header_center"></span></a>
 	</header>>
 	<div class="slider">
 		<div id="slider_pic">

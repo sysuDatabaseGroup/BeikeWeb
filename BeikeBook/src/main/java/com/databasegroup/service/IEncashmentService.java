@@ -9,4 +9,5 @@ import com.databasegroup.model.Encashment;
 import com.databasegroup.model.User;
 
 public interface IEncashmentService extends IBaseService<Encashment> {
+	double getEncashingAmountById(int id);
 }

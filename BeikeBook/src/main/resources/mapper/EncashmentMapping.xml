@@ -29,6 +29,13 @@
 		FROM bk_encashment
 	</select>
 	
+	<select id="getEncashingAmountById" parameterType="int"
+		resultType="double">
+		SELECT IFNULL(SUM(encashing_amount),0)
+		FROM bk_encashment
+		WHERE id=#{id};
+	</select>
+	
 	<insert id="insert" parameterType="Encashment" >
 		INSERT INTO bk_encashment (alipay_account, alipay_name,
 			encashing_amount, phone) VALUES

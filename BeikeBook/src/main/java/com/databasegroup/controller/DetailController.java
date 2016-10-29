@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.databasegroup.model.BookCategory;
 import com.databasegroup.model.District;
+import com.databasegroup.model.DistrictStoredSituation;
 import com.databasegroup.model.User;
 import com.databasegroup.service.IBookService;
 import com.databasegroup.service.IDealedBookService;
@@ -26,26 +27,20 @@ import org.springframework.web.bind.annotation.RequestPart;
 @Controller
 @RequestMapping(value = "/detail")
 public class DetailController {
-	
+
 	@Autowired
 	private IDealedBookService dealedBookService;
-	
+
 	@Autowired
 	private IDistrictService districtService;
 
-	@RequestMapping(value="/{id}",method = GET)
-	public String detail(@PathVariable int id,
-				HttpServletRequest request,
-				Model model) {
-		model.addAttribute("bookInfo", 
-				dealedBookService.getNoSelledAndNoRentedBookByBookId(id));
-		List<District> districts = 
-				(List<District>) request.getSession().getAttribute("districts");
-		if (districts == null) {
-			districts = districtService.getAll();
-			request.getSession().setAttribute("districts", districts);
-		}
-		model.addAttribute("districts", districts);
+	@RequestMapping(value = "/{id}", method = GET)
+	public String detail(@PathVariable int id, HttpServletRequest request, Model model) {
+		model.addAttribute("bookInfo", dealedBookService.getNoSelledAndNoRentedBookByBookId(id));
+		List<DistrictStoredSituation> districtSituation = 
+				districtService.getSituationByBookId(id);
+		model.addAttribute("districtSituation", 
+				districtSituation);
 		return "detail";
 	}
 }

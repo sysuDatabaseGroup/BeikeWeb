@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.IDeliveryMethodDao">
+	<resultMap id="deliveryMethodResultMap" type="DeliveryMethod">
+		<id property="id" column="id"/>
+		<result property="name" column="name" />
+		<result property="price" column="price" />
+	</resultMap>
+	<sql id="columns">id, name, price</sql>
+	
+	<select id="getById" parameterType="int"
+		resultMap="deliveryMethodResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_delivery_method WHERE id=#{id}
+	</select>
+	
+	<select id="getAll"
+		resultMap="deliveryMethodResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_delivery_method
+	</select>
+	
+	<insert id="insert" parameterType="DeliveryMethod" >
+		INSERT INTO bk_delivery_method (name, price) VALUES
+		(#{name},#{price})
+	</insert>
+	
+	<update id="update" parameterType="DeliveryMethod">
+		UPDATE bk_delivery_method SET
+		name=#{name},
+		price=#{price}
+		WHERE id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="DeliveryMethod">
+		DELETE
+		FROM bk_delivery_method
+		WHERE id=#{id}
+	</delete> 
+</mapper>

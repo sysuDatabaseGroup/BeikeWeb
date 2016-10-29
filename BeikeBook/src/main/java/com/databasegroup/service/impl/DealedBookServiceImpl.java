@@ -11,6 +11,7 @@ import com.databasegroup.dao.IDealedBookDao;
 import com.databasegroup.dao.IUserDao;
 import com.databasegroup.model.City;
 import com.databasegroup.model.DealedBook;
+import com.databasegroup.model.SelledBookFromUser;
 import com.databasegroup.model.User;
 import com.databasegroup.service.ICityService;
 import com.databasegroup.service.IDealedBookService;
@@ -49,8 +50,27 @@ public class DealedBookServiceImpl implements IDealedBookService {
 
 	@Override
 	public DealedBook getNoSelledAndNoRentedBookByBookId(int id) {
-		// TODO Auto-generated method stub
 		return dealedBookDao.getNoSelledAndNoRentedBookByBookId(id);
+	}
+
+	@Override
+	public int getAmountOfNoDealedBookBookId(int id) {
+		return dealedBookDao.getAmountOfNoDealedBookBookId(id);
+	}
+
+	@Override
+	public int getAmountOfBookUserId(int id) {
+		return dealedBookDao.getAmountOfBookUserId(id);
+	}
+
+	@Override
+	public List<DealedBook> getNoSelledBookByUserId(int id) {
+		return dealedBookDao.getNoSelledBookByUserId(id);
+	}
+
+	@Override
+	public List<SelledBookFromUser> getSelledBookByUserId(int id) {
+		return dealedBookDao.getSelledBookByUserId(id);
 	}
 
 

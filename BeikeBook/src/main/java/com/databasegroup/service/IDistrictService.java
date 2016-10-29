@@ -6,8 +6,10 @@ import org.apache.ibatis.annotations.Param;
 
 import com.databasegroup.model.City;
 import com.databasegroup.model.District;
+import com.databasegroup.model.DistrictStoredSituation;
 import com.databasegroup.model.User;
 
 public interface IDistrictService extends IBaseService<District> {
 	List<District> getDistrictBySchoolId(int id);
+	List<DistrictStoredSituation> getSituationByBookId(int id);
 }

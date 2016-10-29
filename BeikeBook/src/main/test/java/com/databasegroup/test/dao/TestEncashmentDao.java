@@ -33,10 +33,12 @@ public class TestEncashmentDao {
 	public void moneyDaoShouldNotBeNull() {
 		assertNotNull(encashmentDao);
 		
-		Encashment money = encashmentDao.getById(2);
-		money.setAlipayAccount("update");
-		encashmentDao.update(money);
-		System.out.println(money);
+		System.out.println(encashmentDao.getEncashingAmountById(2));
+		
+//		Encashment money = encashmentDao.getById(2);
+//		money.setAlipayAccount("update");
+//		encashmentDao.update(money);
+//		System.out.println(money);
 		
 //		Encashment money = new Encashment();
 //		money.setAlipayAccount("alipayaccount");

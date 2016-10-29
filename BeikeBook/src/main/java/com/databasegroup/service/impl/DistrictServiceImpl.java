@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.databasegroup.dao.IDistrictDao;
 import com.databasegroup.model.District;
+import com.databasegroup.model.DistrictStoredSituation;
 import com.databasegroup.service.IDistrictService;
 
 @Service("districtService")
@@ -44,5 +45,10 @@ public class DistrictServiceImpl implements IDistrictService {
 	@Override
 	public List<District> getDistrictBySchoolId(int id) {
 		return districtDao.getDistrictBySchoolId(id);
+	}
+
+	@Override
+	public List<DistrictStoredSituation> getSituationByBookId(int id) {
+		return districtDao.getSituationByBookId(id);
 	}
 }

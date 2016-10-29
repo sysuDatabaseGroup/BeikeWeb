@@ -40,4 +40,9 @@ public class RentingOrderServiceImpl implements IRentingOrderService {
 	public List<RentingOrder> getAll() {
 		return rentingOrderDao.getAll();
 	}
+
+	@Override
+	public List<RentingOrder> getRentingOrdersByUserId(int id) {
+		return rentingOrderDao.getRentingOrdersByUserId(id);
+	}
 }

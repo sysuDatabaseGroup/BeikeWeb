@@ -17,6 +17,16 @@
 			select="com.databasegroup.dao.IBookDao.getById" />
 	</resultMap>
 	
+	<resultMap id="selledBookFrUResultMap" type="SelledBookFromUser">
+		<result property="sellingPrice" column="selling_price" />
+		<result property="title" column="title" />
+		<result property="dealedNum" column="dealed_num" />
+		<result property="datetime" column="datetime" />
+		<result property="coverPath" column="cover_path" />
+	</resultMap>
+	
+	
+	
 	<sql id="columns">id, book_id, dealed_num, selling_price,
 		rental_price, district_id, user_id, datetime, selled, rented</sql>
 	
@@ -40,7 +50,40 @@
 		FROM bk_dealed_book
 		WHERE selled=0 AND rented=0 AND book_id=#{id}
 		ORDER BY selling_price
-		LIMIT 1;
+		LIMIT 1
+	</select>
+	
+	<select id="getAmountOfNoDealedBookBookId" parameterType="int"
+		resultType="int">
+		SELECT count(*)
+		FROM bk_dealed_book
+		WHERE selled=0 AND rented =0 AND book_id = #{id}
+	</select>
+	
+	<select id="getAmountOfBookUserId" parameterType="int"
+		resultType="int">
+		SELECT count(*)
+		FROM bk_dealed_book
+		WHERE selled=0 AND user_id = #{id}
+	</select>
+	
+	<select id="getNoSelledBookByUserId" parameterType="int"
+		resultMap="dealedBookResultMap">
+		SELECT 
+		<include refid="columns"></include>
+		FROM bk_dealed_book
+		WHERE selled=0 AND user_id = #{id}
+	</select>
+	
+	<select id="getSelledBookByUserId" parameterType="int"
+		resultMap="selledBookFrUResultMap">
+		SELECT bdb.selling_price, bb.title, bdb.dealed_num, 
+			bso.datetime, bb.cover_path
+		FROM bk_selling_order bso JOIN bk_dealed_book bdb 
+			ON bso.dealed_book_id = bdb.id 
+			JOIN bk_book bb
+			ON bdb.book_id = bb.id
+		WHERE bdb.user_id=#{id}
 	</select>
 	
 	<insert id="insert" parameterType="DealedBook" >

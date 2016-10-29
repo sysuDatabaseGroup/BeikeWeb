@@ -21,6 +21,7 @@ import com.databasegroup.model.Book;
 import com.databasegroup.model.RentingOrder;
 import com.databasegroup.model.BookCategory;
 import com.databasegroup.model.District;
+import com.databasegroup.model.DistrictStoredSituation;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-mybatis.xml")
@@ -33,9 +34,13 @@ public class TestDistrictDao {
 	public void districtDaoShouldNotBeNull() {
 		assertNotNull(districtDao);
 		
-		District district = districtDao.getById(2);
-		district.setAddress("update");
-		districtDao.update(district);
+		List<DistrictStoredSituation> list = 
+				districtDao.getSituationByBookId(2);
+		System.out.println(list);
+		
+//		District district = districtDao.getById(2);
+//		district.setAddress("update");
+//		districtDao.update(district);
 		
 //		District district = new District();
 //		district.setAddress("Address");

@@ -9,4 +9,5 @@ import com.databasegroup.model.RentingOrder;
 import com.databasegroup.model.User;
 
 public interface IRentingOrderService extends IBaseService<RentingOrder> {
+	List<RentingOrder> getRentingOrdersByUserId(int id);
 }

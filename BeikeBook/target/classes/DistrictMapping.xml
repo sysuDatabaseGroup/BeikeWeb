@@ -14,6 +14,13 @@
 		<result property="schoolId" column="school_id" />
 	</resultMap>
 	
+	<resultMap id="situationMap" type="DistrictStoredSituation">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="bookId" column="book_id" />
+		<result property="amount" column="amount" />
+	</resultMap>
+	
 	<sql id="columns">id, name, num, address,
 		deliver_name, deliver_phone,
 		school_id
@@ -37,6 +44,15 @@
 		<include refid="columns"></include>
 		FROM bk_district
 		WHERE school_id=#{id}
+	</select>
+	
+	<select id="getSituationByBookId" parameterType="int"
+		resultMap="situationMap">
+		SELECT bd.id, bd.name, #{id} book_id, count(nnn.id) amount
+		FROM bk_district bd LEFT JOIN (SELECT *
+						FROM bk_dealed_book
+						WHERE selled=0 AND rented=0 AND book_id=#{id}) nnn on bd.id=nnn.district_id
+		GROUP BY bd.id
 	</select>
 	
 

@@ -18,19 +18,19 @@
 			<ul id="center_ul">
 				<a href="buy_rent">
 				<li>
-					<h6><c:out value="${rsBookNum}"/></h6>
+					<h6><c:out value="${amountOfboughtAndRentedBook}"/></h6>
 					<span>购书｜租书</span>
 				</li>
 				</a>
 				<a href="books">
 				<li>
-					<h6><c:out value="${bkBookNum}"/></h6>
+					<h6><c:out value="${amountOfBook}"/></h6>
 					<span>托管出售的书</span>
 				</li>
 				</a>
 				<a href="alipay">
 				<li>
-					<h6><c:out value="${moneyNum}"/></h6>
+					<h6><c:out value="${encashingAmount}"/></h6>
 					<span>可提现费用</span>
 				</li>
 				</a>

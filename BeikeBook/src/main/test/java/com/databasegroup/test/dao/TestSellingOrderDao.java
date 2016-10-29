@@ -33,9 +33,11 @@ public class TestSellingOrderDao {
 	public void sellDaoShouldNotBeNull() {
 		assertNotNull(sellingOrderDao);
 		
-		SellingOrder sell = sellingOrderDao.getById(2);
-		sell.setTakingBookNum("update");
-		sellingOrderDao.update(sell);
+//		SellingOrder sell = sellingOrderDao.getById(2);
+//		sell.setTakingBookNum("update");
+//		sellingOrderDao.update(sell);
+		
+		System.out.println(sellingOrderDao.getById(1));
 		
 //		SellingOrder sell = new SellingOrder();
 //		sell.setDealedBookId(2);

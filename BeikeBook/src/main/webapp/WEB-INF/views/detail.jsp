@@ -50,10 +50,11 @@
 		</div>
 		<div class="place_num">
 			<ul id="place_num_ul">
-				<c:forEach items="${districts}" var="i" varStatus="count">
+				<c:forEach items="${districtSituation}" var="i" varStatus="count">
 					<li>
 						<h5><c:out value="${count.index+1}"/></h5>
-						<span><c:out value="${i.address}"/></span>
+						<span><c:out value="${i.name}"/></span>
+						<em><c:out value="${i.amount}"/>本</em>
 					</li>
 				</c:forEach>
 			</ul>		

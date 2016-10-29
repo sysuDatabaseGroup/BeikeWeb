@@ -40,4 +40,9 @@ public class EncashmentServiceImpl implements IEncashmentService {
 	public List<Encashment> getAll() {
 		return encashmentDao.getAll();
 	}
+
+	@Override
+	public double getEncashingAmountById(int id) {
+		return encashmentDao.getEncashingAmountById(id);
+	}
 }

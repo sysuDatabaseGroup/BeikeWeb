@@ -24,6 +24,7 @@ CREATE TABLE `bk_announ` (
 DROP TABLE IF EXISTS `bk_banner`;
 CREATE TABLE `bk_banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+
   `pic_path` varchar(200) NOT NULL DEFAULT '/images/banner/default.png',
   `title` varchar(30) NOT NULL,
   `link` varchar(255) NOT NULL,
@@ -77,8 +78,8 @@ CREATE TABLE `bk_dealed_book` (
   `district_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `datetime` date NOT NULL,
-  `selled` int(1) NOT NULL DEFAULT '0',
-  `rented` int(1) NOT NULL DEFAULT '0',  
+  `selled` int(1) NOT NULL DEFAULT '0', 
+  `rented` int(1) NOT NULL DEFAULT '0',  -- 
   PRIMARY KEY (`id`),
   FOREIGN KEY (book_id) REFERENCES bk_book(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (district_id) REFERENCES bk_district(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -161,7 +162,7 @@ CREATE TABLE `bk_selling_order` (
   `user_id` int(11) NOT NULL,
   `delivery_method_id` int(11) NOT NULL,  
   `dealed_book_id` int(11) NOT NULL,  
-  `num` int(3) NOT NULL, -- amount
+  `amount` int(3) NOT NULL, -- amount
   `datetime` date NOT NULL,
   `taking_book_num` varchar(20) NOT NULL, 
   `payed` int(11) NOT NULL DEFAULT '0', 
@@ -187,7 +188,7 @@ CREATE TABLE `bk_renting_order` (
   `returned` int(1) NOT NULL DEFAULT '0', 
   PRIMARY KEY (`id`),
   FOREIGN KEY (user_id) REFERENCES bk_user(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY (delivery_method_id) REFERENCES bk_dealed_book(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY (delivery_method_id) REFERENCES bk_delivery_method(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (dealed_book_id) REFERENCES bk_dealed_book(id) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -201,6 +202,7 @@ CREATE TABLE `bk_user` (
   `wx_name` varchar(50) DEFAULT NULL,
   `user_num` varchar(20) NOT NULL,
   `password` varchar(50) DEFAULT NULL, -- 临时
+  `withdrawalAmount` double(5,0) DEFAULT NULL, -- 临时
   `city_id` int(11) DEFAULT NULL,
   `school_id` int(11) DEFAULT NULL,
   `dorm` varchar(10) DEFAULT NULL,

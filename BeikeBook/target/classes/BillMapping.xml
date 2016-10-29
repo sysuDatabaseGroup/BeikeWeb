@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.IBillDao">
+
+	<resultMap id="billResultMap" type="Bill">
+		<id property="billID" column="id"/>
+		<result property="info" column="info" />
+		<result property="amount" column="amount" />
+	</resultMap>
+
+	<sql id="columns">id, info,amount</sql>
+
+	<select id="getById" parameterType="int"
+		resultMap="billResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_bill WHERE id=#{id}
+	</select>
+
+	<select id="getAll"
+		resultMap="billResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_bill
+	</select>
+
+	<select id="getTotal"
+		resultType="double">
+		SELECT
+		SUM(amount)
+		FROM bk_bill
+	</select>
+
+	<insert id="insert" parameterType="Bill"
+		flushCache="true">
+		INSERT INTO bk_bill (info,amount) VALUES
+		(#{info},#{amount})
+	</insert>
+
+	<update id="update" parameterType="Bill">
+		UPDATE bk_bill SET
+		info=#{info},amount=#{amount}
+		WHERE id=#{billID}
+	</update>
+
+	<delete id="delete" parameterType="Bill">
+		DELETE
+		FROM bk_bill
+		WHERE id=#{billID}
+	</delete>
+</mapper>

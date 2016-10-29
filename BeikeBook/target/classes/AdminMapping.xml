@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.databasegroup.dao.IAdminDao">
+	
+	<resultMap id="adminResultMap" type="Admin">
+		<id property="adminID" column="id"/>
+		<result property="name" column="name" />
+		<result property="password" column="password" />
+		<result property="districtAddr" column="districtAddr" />
+		<result property="type" column="type" />
+	</resultMap>
+	
+	<sql id="columns">id, name, password, districtAddr, type</sql>
+	
+	<select id="getById" parameterType="int"
+		resultMap="adminResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_admin WHERE id=#{id}
+	</select>
+
+	<select id="getByName" parameterType="String"
+		resultMap="adminResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_admin WHERE name=#{name}
+	</select>
+	
+	<select id="getAll"
+		resultMap="adminResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_admin
+	</select>
+	
+	<insert id="insert" parameterType="Admin"
+		flushCache="true">
+		INSERT INTO bk_admin (name, password, districtAddr, type) VALUES
+		(#{name}, #{password}, #{districtAddr}, #{type})
+	</insert>
+	
+	<update id="update" parameterType="Admin">
+		UPDATE bk_admin SET
+		name=#{name}, password=#{password}, districtAddr=#{districtAddr}, type=#{type}
+		WHERE id=#{adminID}
+	</update>
+	
+	<delete id="delete" parameterType="Admin">
+		DELETE
+		FROM bk_admin
+		WHERE id=#{adminID}
+	</delete> 
+</mapper>

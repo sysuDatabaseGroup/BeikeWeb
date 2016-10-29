@@ -12,9 +12,11 @@ $(function(){
 	/* 购买书本书添加 */
 	$('#add').click(function(){
 		var $value=parseInt($('#bookNum_input').val())+1;
-		$('#bookNum_input').val($value);
-		$('#num').html($value);
-		$('#method_sum_price').html($value*12);
+		if ($value <= <c:out value="${amountOfBooks}"/>) {
+			$('#bookNum_input').val($value);
+			$('#num').html($value);
+			$('#method_sum_price').html($value*<c:out value="${dealedBook.rentalPrice}"/>);
+		}
 	});
 	$('#reduce').click(function(){
 		var $value=$('#bookNum_input').val();
@@ -22,9 +24,10 @@ $(function(){
 			var $value=parseInt($('#bookNum_input').val())-1;
 			$('#bookNum_input').val($value);
 			$('#num').html($value);
-			$('#method_sum_price').html($value*12);
+			$('#method_sum_price').html($value*<c:out value="${dealedBook.rentalPrice}"/>);
 		}
 	});
+	
 });
 
 </script>
@@ -45,30 +48,40 @@ $(function(){
 
 	<div class="pay_address">
 		<span>填写收书宿舍点</span>
-		<span id="address"><c:out value="${schoolName}${districtName}"/></span>
+		<span id="address"><c:out value="${user.school.name}  ${user.dorm}"/></span>
 	</div>
+	
+	<form action="<c:url value='/success_rent' />" method="POST">
+	<c:set var="dealedBook" value="${dealedBook}"  scope="session"/>
+	
 	<div class="pay_info">
 		<div id="pay_info_top">
 			<div id="info_img">
-				<img src="images/books/${bookClassImg}" alt="" />
+				<img src="<c:url value='${dealedBook.book.coverPath}' />" alt="" />
 			</div>
 			<div id="info_detail" class="rent_detail">
-				<h5><c:out value="${bookClassName}"/></h5>
-				<span>编号：<c:out value="${bookNum}"/></span>
+				<h5><c:out value="${dealedBook.book.title}"/></h5>
+				<span>编号：<c:out value="${dealedBook.dealedNum}"/></span>
 				<div id="bookNum">
 					<span id="reduce">-</span>
 					<span id="add">+</span>
 					<input type="text" name="bookNum_input" id="bookNum_input" value="1" />
 				</div>
+				<span>库存： <c:out value="${amountOfBooks}" /> 本书</span>
 			</div>
 			<div id="info_bookNum">
-				<span id="info_bookNum_price">￥<c:out value="${borrowPrice}"/>/本</span>
+				<span id="info_bookNum_price">￥<c:out value="${dealedBook.rentalPrice}"/>/本</span>
 			</div>
 			<div class="clearbox"></div>
 		</div>
 		<div id="pay_info_bottom">
 			<span>配送方式</span>
-			<span id="delivery">上门配送  推广期间不收费</span>			
+			<span id="delivery">
+				<select name="delieryMethodId">
+				  <option value ="0">自提  ￥<c:out value="0"/></option>
+				  <option value ="1">上门配送  ￥<c:out value="5"/></option>
+				</select>
+			</span>		
 		</div>
 	</div>
 
@@ -77,16 +90,18 @@ $(function(){
 	<div class="pay_method">
 		<div id="pay_method_top">
 			<span>总价</span>
-			<span id="method_sum">￥<em id="method_sum_price"><c:out value="${borrowPrice}"/></em></span>
+			<span id="method_sum">￥<em id="method_sum_price"><c:out value="${dealedBook.rentalPrice+price}"/></em></span>
 		</div>
 		<div id="pay_method_bottom">
 			<span id="rent_tip">＊至租书日起，每一个月扣除1元，超出15天算0.5元</span>
 
-			<a href="success_rent"><input type="submit" id="paying" name="paying" value="在线支付" /></a>
+			<input type="submit" id="paying" name="paying" value="在线支付" />
 			<span>现只支持微信支付</span>
 		</div>
 	</div>
 
+	</form>
+	
 	<footer class="footer">
 		<div id="logo"></div>
 	</footer>

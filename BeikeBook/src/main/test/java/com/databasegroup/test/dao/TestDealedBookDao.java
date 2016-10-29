@@ -31,10 +31,13 @@ public class TestDealedBookDao {
 	public void bookDaoShouldNotBeNull() {
 		assertNotNull(bookDao);
 		
-		DealedBook book = bookDao.getById(1);
+//		System.out.println(
+//				bookDao.getAmountONoDealedfBookBookId(2));;
+		
+//		DealedBook book = bookDao.getById(1);
 //		book.setDealedNum("update");
 //		bookDao.update(book);
-		System.out.println(book);
+//		System.out.println(book);
 		
 //		DealedBook book = new DealedBook();
 //		book.setBookId(2);

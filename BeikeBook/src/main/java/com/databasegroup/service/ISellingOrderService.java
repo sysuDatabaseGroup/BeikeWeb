@@ -9,4 +9,5 @@ import com.databasegroup.model.SellingOrder;
 import com.databasegroup.model.User;
 
 public interface ISellingOrderService extends IBaseService<SellingOrder> {
+	List<SellingOrder> getSellingOrdersByUserId(int id);
 }

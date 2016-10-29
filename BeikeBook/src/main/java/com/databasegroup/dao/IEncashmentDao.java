@@ -6,4 +6,5 @@ import com.databasegroup.model.Encashment;
 
 @Repository
 public interface IEncashmentDao extends IBaseDao<Encashment> {
+	double getEncashingAmountById(int id);
 }

@@ -37,7 +37,15 @@ public class LoginController {
 			request.getSession()
 					.setAttribute("user", 
 					userService.getUserByUserNum(username));
-			return "redirect:/";
+			if(request.getSession()
+					.getAttribute("lastPage") != null) {
+				String uri = request.getSession()
+						.getAttribute("lastPage").toString();
+				request.getSession().removeAttribute("lastPage");
+				return "redirect:"+uri;
+			} else {
+				return "redirect:/";
+			}
 		} else {
 			model.addAttribute("message", "账号密码错误！");
 			return "/login";

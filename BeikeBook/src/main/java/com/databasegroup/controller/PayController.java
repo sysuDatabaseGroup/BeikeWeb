@@ -29,7 +29,10 @@ public class PayController {
 			Model model) {
 		DealedBook dealedBook = 
 				dealedBookService.getById(dealedBookId);
-		request.setAttribute("dealedBook", dealedBook);
+		int amountOfBooks = dealedBookService
+				.getAmountOfNoDealedBookBookId(dealedBook.getBook().getId());
+		model.addAttribute("dealedBook", dealedBook);
+		model.addAttribute("amountOfBooks", amountOfBooks);
 		return "pay";
 	}
 }

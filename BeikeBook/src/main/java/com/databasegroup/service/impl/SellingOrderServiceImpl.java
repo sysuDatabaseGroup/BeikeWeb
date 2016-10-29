@@ -40,4 +40,9 @@ public class SellingOrderServiceImpl implements ISellingOrderService {
 	public List<SellingOrder> getAll() {
 		return sellingOrderDao.getAll();
 	}
+
+	@Override
+	public List<SellingOrder> getSellingOrdersByUserId(int id) {
+		return sellingOrderDao.getSellingOrdersByUserId(id);
+	}
 }
