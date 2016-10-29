@@ -1,100 +1,67 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" errorPage="404.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Bootstrap Admin</title>
-    <%@ include file="meta_link_script.jsp"  %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <!-- Demo page code -->
+<title>贝壳图书管理后台登陆</title>
+<link href="/admin/stylesheets/style_log.css" rel="stylesheet" type="text/css">
+<style>
+.rem_sub{
+display: inline-block;
+width: 100%;
+margin-top: 15px;
+text-align: center;
+}
+html{
+font-family: '微软雅黑';
+}
+body{
+font-family: '微软雅黑';
+}
+input{
+font-family: '微软雅黑' !important;
+}
+.login_m{
+margin-top: 180px;
+}
+.login_boder h2{
+font-size: 15px;
+}
+.error_msg{
+color: red;
+font-size: 12px;
+}
+.error_msg:before{
+content: "*";
+}
+</style>
+</head>
 
-    <style type="text/css">
-        #line-chart {
-            height:300px;
-            width:800px;
-            margin: 0px auto;
-            margin-top: 1em;
-        }
-        .brand { font-family: georgia, serif; }
-        .brand .first {
-            color: #ccc;
-            font-style: italic;
-        }
-        .brand .second {
-            color: #fff;
-            font-weight: bold;
-        }
-    </style>
+<body class="login" mycollectionplug="bind">
+	<div class="login_m">
+		<div style="text-align: center; font-size: 30px;font-family: '微软雅黑';margin-bottom: 15px;">贝壳图书管理后台</div>
+		<form class="login_boder" action="/backend/login" method="POST">
+			<div class="login_padding" id="login_model">
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-  </head>
-
-  <!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
-  <!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
-  <!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->
-  <!--[if IE 9 ]> <body class="ie ie9 "> <![endif]-->
-  <!--[if (gt IE 9)|!(IE)]><!--> 
-  <body class=""> 
-  <!--<![endif]-->
-    
-    <div class="navbar">
-        <div class="navbar-inner">
-                <ul class="nav pull-right">
-                    
-                </ul>
-                <a class="brand" href="index.jsp"><span class="first">Your</span> <span class="second">Company</span></a>
-        </div>
-    </div>
-    
-
-
-    
-
-    
-        <div class="row-fluid">
-    <div class="dialog">
-        <div class="block">
-            <p class="block-heading">Sign In</p>
-            <div class="block-body">
-                <form>
-                    <label>Username</label>
-                    <input type="text" class="span12">
-                    <label>Password</label>
-                    <input type="password" class="span12">
-                    <a href="index.jsp" class="btn btn-primary pull-right">Sign In</a>
-                    <label class="remember-me"><input type="checkbox"> Remember me</label>
-                    <div class="clearfix"></div>
-                </form>
-            </div>
-        </div>
-        <p class="pull-right" style=""><a href="" target="blank">Theme by Portnine</a></p>
-        <p><a href="reset-password.jsp">Forgot your password?</a></p>
-    </div>
-</div>
-
-
-    
-
-
-    <script src="lib/bootstrap/js/bootstrap.js"></script>
-    <script type="text/javascript">
-        $("[rel=tooltip]").tooltip();
-        $(function() {
-            $('.demo-cancel-click').click(function(){return false;});
-        });
-    </script>
-    
-  </body>
-</html>
-
-
+				<h2>用户名</h2>
+				<label>
+					<input type="text" id="username" name="name" class="txt_input txt_input2" placeholder="请输入用户名">
+				</label>
+				<h2>密码</h2>
+				<label>
+					<input type="password" name="password" id="userpwd" class="txt_input" value="" placeholder="请输入密码">
+				</label>
+				<c:if test="${! empty error_msg}">
+				<p class="error_msg">${error_msg}</p>
+				</c:if>
+				<div class="rem_sub">
+					<label>
+						<input type="submit" class="sub_button" name="button" id="button" value="登陆" style="opacity: 0.7;float: none;">
+					</label>
+				</div>
+			</div>
+		</form>
+	</div>
+</body></html>

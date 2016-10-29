@@ -82,7 +82,7 @@
 
 					<ul class="dropdown-menu">
 						<li><a tabindex="-1" href="#">我的账户信息</a></li>
-						<li><a tabindex="-1" href="sign-in.jsp">退出</a></li>
+						<li><a tabindex="-1" href="/backend/logout">退出</a></li>
 					</ul>
 				</li>
 			</ul>
