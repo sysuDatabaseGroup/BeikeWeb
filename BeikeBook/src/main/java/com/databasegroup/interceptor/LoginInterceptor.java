@@ -13,33 +13,33 @@ public class LoginInterceptor extends HandlerInterceptorAdapter  {
 			throws Exception {
 		String uri = request.getRequestURI();
 		
-		// ½øÈëµÇÂ¼Ò³Ãæ£¬ÅĞ¶ÏsessionÖĞÊÇ·ñÓĞkey£¬ÓĞµÄ»°ÖØ¶¨Ïòµ½Ê×Ò³£¬·ñÔò½øÈëµÇÂ¼½çÃæ
+		// è¿›å…¥ç™»å½•é¡µé¢ï¼Œåˆ¤æ–­sessionä¸­æ˜¯å¦æœ‰keyï¼Œæœ‰çš„è¯é‡å®šå‘åˆ°é¦–é¡µï¼Œå¦åˆ™è¿›å…¥ç™»å½•ç•Œé¢
 		  if(uri.contains("login")) {
 		      if(request.getSession().getAttribute("user") != null) {
-		         response.sendRedirect(request.getContextPath());//Ä¬ÈÏ¸ùÂ·¾¶ÎªÊ×Ò³
+		         response.sendRedirect(request.getContextPath());//é»˜è®¤æ ¹è·¯å¾„ä¸ºé¦–é¡µ
 		      } else {
-		         return true;//¼ÌĞøµÇÂ½ÇëÇó
+		         return true;//ç»§ç»­ç™»é™†è¯·æ±‚
 		      }
 		  }
 		  
-		// ÆäËûÇé¿öÅĞ¶ÏsessionÊÇ·ñÓĞkey£¬ÓĞµÄ»°¼ÌĞøÓÃ»§²Ù×÷
+		// å…¶ä»–æƒ…å†µåˆ¤æ–­sessionæ˜¯å¦æœ‰keyï¼Œæœ‰çš„è¯ç»§ç»­ç”¨æˆ·æ“ä½œ
 		if (request.getSession().getAttribute("user") != null) {
 			return true;
 		}
 		
-		// ×îºóÖ»Ê£ÏÂµÇÂ¼½çÃæ
+		// æœ€ååªå‰©ä¸‹ç™»å½•ç•Œé¢
 		response.sendRedirect(request.getContextPath() + "/login");
 		return true;
 	}
 
-	//Õû¸öÇëÇóÍê³É£¬¼´ÊÓÍ¼äÖÈ¾½áÊøºóµ÷ÓÃ£¬Õâ¸öÊ±ºò¿ÉÒÔ×öĞ©×ÊÔ´ÇåÀí¹¤×÷£¬»òÈÕÖ¾¼ÇÂ¼µÈ
+	//æ•´ä¸ªè¯·æ±‚å®Œæˆï¼Œå³è§†å›¾æ¸²æŸ“ç»“æŸåè°ƒç”¨ï¼Œè¿™ä¸ªæ—¶å€™å¯ä»¥åšäº›èµ„æºæ¸…ç†å·¥ä½œï¼Œæˆ–æ—¥å¿—è®°å½•ç­‰
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		super.afterCompletion(request, response, handler, ex);
 	}
 
-	//ÔÚ¿ØÖÆÆ÷·½·¨µ÷ÓÃºó£¬½âÎöÊÓÍ¼Ç°µ÷ÓÃ£¬ÎÒÃÇ¿ÉÒÔ¶ÔÊÓÍ¼ºÍÄ£ĞÍ×ö½øÒ»²½äÖÈ¾»òĞŞ¸Ä
+	//åœ¨æ§åˆ¶å™¨æ–¹æ³•è°ƒç”¨åï¼Œè§£æè§†å›¾å‰è°ƒç”¨ï¼Œæˆ‘ä»¬å¯ä»¥å¯¹è§†å›¾å’Œæ¨¡å‹åšè¿›ä¸€æ­¥æ¸²æŸ“æˆ–ä¿®æ”¹
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {

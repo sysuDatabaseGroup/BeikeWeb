@@ -6,8 +6,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-// JavaÅäÖÃ
-// WebÓ¦ÓÃ¼¶±ğµÄ°²È«ĞÔ
+// Javaé…ç½®
+// Webåº”ç”¨çº§åˆ«çš„å®‰å…¨æ€§
 //@Configuration
 //@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -16,23 +16,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
 			.withUser("admin").password("admin").roles("USER");
-		// ÁÙÊ±ÈÏÖ¤ÕËºÅÃÜÂë
+		// ä¸´æ—¶è®¤è¯è´¦å·å¯†ç 
 	}
 
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
       http
       	.authorizeRequests()
-      		.antMatchers("/home").authenticated() //ÏŞÖÆËùÓĞÍøÕ¾¶¼Òª¾­¹ıÈÏÖ¤
+      		.antMatchers("/home").authenticated() //é™åˆ¶æ‰€æœ‰ç½‘ç«™éƒ½è¦ç»è¿‡è®¤è¯
       		.anyRequest().permitAll()
       		.and()
       	.formLogin()
-      		.loginPage("/authLogin") // ÈÏÖ¤Ò³Ãæ
+      		.loginPage("/authLogin") // è®¤è¯é¡µé¢
       		.permitAll()
       		.and()
       	.httpBasic()
       		.and()
-      	.csrf().disable(); // csrf ¿ÉÒÔ²»ÓÃ¹Ü
+      	.csrf().disable(); // csrf å¯ä»¥ä¸ç”¨ç®¡
       
 //        .and()
 //        .requiresChannel()
