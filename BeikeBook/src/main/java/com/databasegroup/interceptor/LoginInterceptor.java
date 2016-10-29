@@ -34,14 +34,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter  {
 		return true;
 	}
 
-	// 整个请求结束之后的操作，渲染视图之后
+	//整个请求完成，即视图渲染结束后调用，这个时候可以做些资源清理工作，或日志记录等
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 //		System.out.println("afterCompletion");
 	}
 
-	// 控制器方法调用后，解析视图前调用
+	//在控制器方法调用后，解析视图前调用，我们可以对视图和模型做进一步渲染或修改
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
