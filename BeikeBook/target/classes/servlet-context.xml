@@ -58,6 +58,11 @@
 			<mvc:mapping path="/success/**"/>
 			<bean class="com.databasegroup.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**"/>
+			<mvc:exclude-mapping path="/admin/login"/>
+			<bean class="com.databasegroup.interceptor.AdminLoginInterceptor"></bean>
+		</mvc:interceptor>
 	</mvc:interceptors>
 
 </beans>
