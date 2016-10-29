@@ -54,14 +54,16 @@ public class AdminController {
 		Date dateTime = new Date();
 		SimpleDateFormat time=new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
 		model.addAttribute("dataTime",time.format(dateTime));
-		double totalAmount = billService.getTotal();
+		double totalAmount = 0;
 		model.addAttribute("circulatingFund",totalAmount);
 		List<HashMap<String , String> > rentinfos = new ArrayList<HashMap<String,String> >();
 		for(RentingOrder rent:rentingOrders){
 			int userId = rent.getUserId();
 			String userNum = userService.getById(userId).getUserNum();
 			int dealedBookId = rent.getDealedBookId();
-			Book book = dealedBookService.getById(dealedBookId).getBook();
+			DealedBook dealedBook = dealedBookService.getById(dealedBookId);
+			totalAmount = totalAmount + dealedBook.getRentalPrice();
+			Book book = dealedBook.getBook();
 			String bookClassName = book.getTitle();
 			int took = rent.getTook();
 			String isTake = took == 0? "否":"是";
@@ -77,7 +79,9 @@ public class AdminController {
 			int userId = sell.getUserId();
 			String userNum = userService.getById(userId).getUserNum();
 			int dealedBookId = sell.getDealedBookId();
-			double sellPrice = dealedBookService.getById(dealedBookId).getSellingPrice();
+			DealedBook dealedBook = dealedBookService.getById(dealedBookId);
+			totalAmount = totalAmount + dealedBook.getSellingPrice();
+			double sellPrice = dealedBook.getSellingPrice();
 			Date sellTime = sell.getDatetime();
 			String datetime = time.format(sellTime);
 			HashMap<String,String> m = new HashMap<String,String>();
