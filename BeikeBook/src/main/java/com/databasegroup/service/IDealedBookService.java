@@ -14,5 +14,5 @@ public interface IDealedBookService extends IBaseService<DealedBook> {
 	int getAmountOfNoDealedBookBookId(int id);
 	int getAmountOfBookUserId(int id);
 	List<DealedBook> getNoSelledBookByUserId(int id);
-	List<SelledBookFromUser> getSelledBookByUserId(int id);
+	List<DealedBook> getSelledBookByUserId(int id);
 }

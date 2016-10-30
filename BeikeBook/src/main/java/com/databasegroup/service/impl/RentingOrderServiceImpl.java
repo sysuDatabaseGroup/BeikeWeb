@@ -71,6 +71,7 @@ public class RentingOrderServiceImpl implements IRentingOrderService {
 		int amount  = rentingOrder.getAmount();
 		List<DealedBook> dealedBooks = 
 				dealedBookDao.getNoDealedBookByBookIdAndAmount(bookId, amount);
+		if (dealedBooks.size() != amount) throw new RuntimeException("没有足够的书本");
 		for (DealedBook dealedBook : dealedBooks) {
 			dealedBook.setRented(1);
 			dealedBookId.append("" + dealedBook.getId() + '|');

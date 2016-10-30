@@ -69,9 +69,8 @@ public class DealedBookServiceImpl implements IDealedBookService {
 	}
 
 	@Override
-	public List<SelledBookFromUser> getSelledBookByUserId(int id) {
+	public List<DealedBook> getSelledBookByUserId(int id) {
 		return dealedBookDao.getSelledBookByUserId(id);
 	}
-
 
 }

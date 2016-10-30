@@ -9,6 +9,7 @@
 		<result property="wxName" column="wx_name" />
 		<result property="userNum" column="user_num" />
 		<result property="password" column="password" />
+		<result property="withdrawalAmount" column="withdrawal_amount"/>
 		<result property="dorm" column="dorm" />
 		<result property="cityId" column="city_id" />
 		<result property="schoolId" column="school_id" />
@@ -18,7 +19,7 @@
 			select="com.databasegroup.dao.ISchoolDao.getById"/>
 	</resultMap>
 	<sql id="columns">id, wx_photo, wx_name, user_num, password,
-		city_id, school_id, dorm</sql>
+		withdrawal_amount, city_id, school_id, dorm</sql>
 	
 	<select id="getById" parameterType="int"
 		resultMap="userResultMap">
@@ -35,9 +36,9 @@
 	
 	<insert id="insert" parameterType="User">
 		INSERT INTO bk_user (wx_photo, wx_name, user_num, password,
-		city_id, school_id, dorm) VALUES
+		withdrawal_amount, city_id, school_id, dorm) VALUES
 		(#{wxPhoto},#{wxName},#{userNum},#{password},
-		#{cityId},#{schoolId},#{dorm})
+		#{withdrawalAmount},#{cityId},#{schoolId},#{dorm})
 	</insert>
 	
 	<update id="update" parameterType="User">
@@ -46,6 +47,7 @@
 		wx_name=#{wxName},
 		user_num=#{userNum},
 		password=#{password},
+		withdrawal_amount=#{withdrawalAmount},
 		city_id=#{cityId},
 		school_id=#{schoolId},
 		dorm=#{dorm}
@@ -68,5 +70,12 @@
 		SELECT *
 		FROM bk_user
 		WHERE user_num=#{userNum}
+	</select>
+	
+	<select id="getLimitUsers" resultMap="userResultMap">
+		SELECT *
+		FROM bk_user
+		ORDER BY id
+		LIMIT #{start},#{num}
 	</select>
 </mapper>

@@ -30,7 +30,7 @@
 				</a>
 				<a href="alipay">
 				<li>
-					<h6><c:out value="${encashingAmount}"/></h6>
+					<h6><c:out value="${user.withdrawalAmount}"/></h6>
 					<span>可提现费用</span>
 				</li>
 				</a>

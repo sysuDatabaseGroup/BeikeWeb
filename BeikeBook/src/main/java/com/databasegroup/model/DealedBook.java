@@ -1,5 +1,6 @@
 package com.databasegroup.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DealedBook {
@@ -12,6 +13,7 @@ public class DealedBook {
 	private int districtId;
 	private int userId;
 	private Date datetime;
+	private Date selledDatetime;
 	private int selled;
 	private int rented;
 	
@@ -19,7 +21,8 @@ public class DealedBook {
 	public String toString() {
 		return "[" + id + ' ' + book + ' ' + dealedNum + ' ' +
 				sellingPrice + ' ' + rentalPrice + ' ' + districtId + ' ' +
-				userId + ' ' + datetime + ' ' + selled + ']';
+				userId + ' ' + datetime + ' ' + selledDatetime + ' ' +
+				selled + ']';
 	}
 
 	/**
@@ -176,6 +179,20 @@ public class DealedBook {
 	 */
 	public void setRented(int rented) {
 		this.rented = rented;
+	}
+
+	/**
+	 * @return the selledDatetime
+	 */
+	public Date getSelledDatetime() {
+		return selledDatetime;
+	}
+
+	/**
+	 * @param selledDatetime the selledDatetime to set
+	 */
+	public void setSelledDatetime(Date selledDatetime) {
+		this.selledDatetime = selledDatetime;
 	}
 	
 }

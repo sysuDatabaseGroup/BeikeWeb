@@ -6,6 +6,7 @@ public class User {
 	private String wxName;
 	private String userNum;
 	private String password;
+	private double withdrawalAmount;
 	private City city;
 	private School school;
 	private int cityId;
@@ -16,7 +17,7 @@ public class User {
 	public String toString() {
 		return "[" + id + ' ' + wxPhoto + ' ' + wxName + ' ' +
 				userNum + ' ' + password + ' ' + city + ' ' + 
-				school + ' ' + dorm + ']';
+				school + ' ' + dorm + ' ' + withdrawalAmount +  ']';
 	}
 
 	/**
@@ -161,6 +162,20 @@ public class User {
 	 */
 	public void setSchoolId(int schoolId) {
 		this.schoolId = schoolId;
+	}
+
+	/**
+	 * @return the withdrawalAmount
+	 */
+	public double getWithdrawalAmount() {
+		return withdrawalAmount;
+	}
+
+	/**
+	 * @param withdrawalAmount the withdrawalAmount to set
+	 */
+	public void setWithdrawalAmount(double withdrawalAmount) {
+		this.withdrawalAmount = withdrawalAmount;
 	}
 	
 	

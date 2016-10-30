@@ -31,7 +31,7 @@ public class BooksController {
 		if (user == null) return "login";
 		List<DealedBook> noSelledDealedBooks = dealedBookService
 				.getNoSelledBookByUserId(user.getId());
-		List<SelledBookFromUser> selledDealedBooks = dealedBookService
+		List<DealedBook> selledDealedBooks = dealedBookService
 				.getSelledBookByUserId(user.getId());
 		model.addAttribute("noSelledDealedBooks", noSelledDealedBooks);
 		model.addAttribute("selledDealedBooks", selledDealedBooks);

@@ -11,6 +11,7 @@
 		<result property="districtId" column="district_id" />
 		<result property="userId" column="user_id" />
 		<result property="datetime" column="datetime" />
+		<result property="selledDatetime" column="selled_datetime" />
 		<result property="selled" column="selled" />
 		<result property="rented" column="rented" />
 		<result property="bookId" column="book_id" />
@@ -18,18 +19,9 @@
 			select="com.databasegroup.dao.IBookDao.getById" />
 	</resultMap>
 	
-	<resultMap id="selledBookFrUResultMap" type="SelledBookFromUser">
-		<result property="sellingPrice" column="selling_price" />
-		<result property="title" column="title" />
-		<result property="dealedNum" column="dealed_num" />
-		<result property="datetime" column="datetime" />
-		<result property="coverPath" column="cover_path" />
-	</resultMap>
-	
-	
-	
 	<sql id="columns">id, book_id, dealed_num, selling_price,
-		rental_price, district_id, user_id, datetime, selled, rented</sql>
+		rental_price, district_id, user_id, datetime, 
+		selled_datetime, selled, rented</sql>
 	
 	<select id="getById" parameterType="int"
 		resultMap="dealedBookResultMap">
@@ -77,14 +69,11 @@
 	</select>
 	
 	<select id="getSelledBookByUserId" parameterType="int"
-		resultMap="selledBookFrUResultMap">
-		SELECT bdb.selling_price, bb.title, bdb.dealed_num, 
-			bso.datetime, bb.cover_path
-		FROM bk_selling_order bso JOIN bk_dealed_book bdb 
-			ON bso.dealed_book_id = bdb.id 
-			JOIN bk_book bb
-			ON bdb.book_id = bb.id
-		WHERE bdb.user_id=#{id}
+		resultMap="dealedBookResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_dealed_book
+		WHERE selled=1 AND user_id=#{id};
 	</select>
 	
 	<select id="getNoDealedBookByBookIdAndAmount"
@@ -98,9 +87,11 @@
 	
 	<insert id="insert" parameterType="DealedBook" >
 		INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price,
-			rental_price, district_id, user_id, datetime, selled, rented) VALUES
+			rental_price, district_id, user_id, datetime, selled_datetime,
+			selled, rented) VALUES
 		(#{bookId},#{dealedNum},#{sellingPrice},#{rentalPrice},
-		#{districtId},#{userId},#{datetime},#{selled}, #{rented})
+		#{districtId},#{userId},#{datetime},#{selledDatetime},
+		#{selled}, #{rented})
 	</insert>
 	
 	<update id="update" parameterType="DealedBook">
@@ -112,6 +103,7 @@
 		district_id=#{districtId},
 		user_id=#{userId},
 		datetime=#{datetime},
+		selled_datetime=#{selledDatetime},
 		selled=#{selled},
 		rented=#{rented}
 		WHERE id=#{id}

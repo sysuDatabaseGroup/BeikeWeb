@@ -1,6 +1,7 @@
 package com.databasegroup.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -70,8 +71,10 @@ public class SellingOrderServiceImpl implements ISellingOrderService {
 		int amount  = sellingOrder.getAmount();
 		List<DealedBook> dealedBooks = 
 				dealedBookDao.getNoDealedBookByBookIdAndAmount(bookId, amount);
+		if (dealedBooks.size() != amount) throw new RuntimeException("没有足够的书本");
 		for (DealedBook dealedBook : dealedBooks) {
 			dealedBook.setSelled(1);
+			dealedBook.setSelledDatetime(new Date());
 			dealedBookId.append("" + dealedBook.getId() + '|');
 			dealedBookDao.update(dealedBook);
 		}

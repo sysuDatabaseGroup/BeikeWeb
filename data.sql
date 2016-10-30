@@ -70,4 +70,4 @@ INSERT INTO bk_selling_order (user_id, delivery_method_id, dealed_book_id, amoun
 
 INSERT INTO bk_renting_order (user_id, delivery_method_id, dealed_book_id, amount, 
 				datetime, taking_book_num, took, returned) 
-			VALUES (2, 0, 6, 1, '2016-10-29', 'SYSS', 1, 1);
+			VALUES (2, 0, 6, 1, '2016-10-28', 'SYSS', 1, 1);

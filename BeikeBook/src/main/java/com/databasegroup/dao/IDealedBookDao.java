@@ -15,7 +15,7 @@ public interface IDealedBookDao extends IBaseDao<DealedBook> {
 	int getAmountOfNoDealedBookBookId(int id);
 	int getAmountOfBookUserId(int id);
 	List<DealedBook> getNoSelledBookByUserId(int id);
-	List<SelledBookFromUser> getSelledBookByUserId(int id);
+	List<DealedBook> getSelledBookByUserId(int id);
 	List<DealedBook> getNoDealedBookByBookIdAndAmount(
 			@Param("bookId")int bookId, 
 			@Param("amount")int amount);

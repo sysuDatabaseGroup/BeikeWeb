@@ -1,5 +1,6 @@
 <%@ page pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
 						<p><em>书名：</em><c:out value="${i.book.title}"/>
 						<p><em>书籍编号：</em><c:out value="${i.dealedNum}"/></p>
 						<p><em>托管单位：</em><c:out value="${user.school.name}"/></p>
-						<p><em>托管时间：</em><c:out value="${i.datetime}"/></p>
+						<p><em>托管时间：</em><fmt:formatDate type="date" value="${i.datetime}" /></p>
 					</div>
 				</li>
 			</c:forEach>
@@ -37,13 +38,13 @@
 			<c:forEach items="${selledDealedBooks}" var="i">
 				<li>
 					<div id="books_list_sold_img">
-						<img src="<c:url value='${i.coverPath }'/>" alt="" />
+						<img src="<c:url value='${i.book.coverPath }'/>" alt="" />
 					</div>
 					<div id="books_list_sold_info">
 						<p id="books_list_sold_info_price">￥<c:out value="${i.sellingPrice}"/></p>
-						<p><em>书名：</em><c:out value="${i.title}"/>
+						<p><em>书名：</em><c:out value="${i.book.title}"/>
 						<p><em>书籍编号：</em><c:out value="${i.dealedNum}"/></p>
-						<p><em>售出时间：</em><c:out value="${i.datetime}"/></p>
+						<p><em>售出时间：</em><fmt:formatDate type="date" value="${i.selledDatetime}" /></p>
 					</div>
 				</li>
 			</c:forEach>
