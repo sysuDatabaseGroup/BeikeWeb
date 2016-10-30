@@ -96,7 +96,7 @@
 	<div class="sidebar-nav">
         <a href="#dashboard-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>用户管理<i class="icon-chevron-up"></i></a>
         <ul id="dashboard-menu" class="nav nav-list collapse">
-            <li ><a href="user/users.jsp">用户管理</a></li>
+            <li ><a href="userList">用户管理</a></li>
         </ul>
 
         <a href="#error-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-map-marker"></i>托管点管理<i class="icon-chevron-up"></i></a>

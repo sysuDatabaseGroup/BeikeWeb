@@ -17,6 +17,7 @@ public class AdminLoginInterceptor extends HandlerInterceptorAdapter  {
 		  if(uri.contains("login")) {
 		      if(request.getSession().getAttribute("adminUserName") != null) {
 		         response.sendRedirect(request.getContextPath() + "/backend/index");//默认根路径为首页
+				 return true;
 		      } else {
 		         return true;//继续登陆请求
 		      }
@@ -29,7 +30,7 @@ public class AdminLoginInterceptor extends HandlerInterceptorAdapter  {
 		
 		// 最后只剩下登录界面
 		response.sendRedirect(request.getContextPath() + "/backend/login");
-		return true;
+		return false;
 	}
 
 	//整个请求完成，即视图渲染结束后调用，这个时候可以做些资源清理工作，或日志记录等

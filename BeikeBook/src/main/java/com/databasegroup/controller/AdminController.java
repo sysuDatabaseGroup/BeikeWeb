@@ -61,8 +61,7 @@ public class AdminController {
 		for(RentingOrder rent:rentingOrders){
 			int userId = rent.getUserId();
 			String userNum = userService.getById(userId).getUserNum();
-			int dealedBookId = rent.getDealedBookId();
-			DealedBook dealedBook = dealedBookService.getById(dealedBookId);
+			DealedBook dealedBook = rent.getDealedBook();
 			totalAmount = totalAmount + dealedBook.getRentalPrice();
 			Book book = dealedBook.getBook();
 			String bookClassName = book.getTitle();
@@ -79,8 +78,7 @@ public class AdminController {
 		for(SellingOrder sell:sellingOrders){
 			int userId = sell.getUserId();
 			String userNum = userService.getById(userId).getUserNum();
-			int dealedBookId = sell.getDealedBookId();
-			DealedBook dealedBook = dealedBookService.getById(dealedBookId);
+			DealedBook dealedBook = sell.getDealedBook();
 			totalAmount = totalAmount + dealedBook.getSellingPrice();
 			double sellPrice = dealedBook.getSellingPrice();
 			Date sellTime = sell.getDatetime();
@@ -123,7 +121,7 @@ public class AdminController {
 		}
 		request.getSession().setAttribute("adminUserName",name);
 		request.getSession().setAttribute("districtAddr",admin.getDistrict());
-		request.getSession().setAttribute("roleType",admin.getType());
+		request.getSession().setAttribute("roleType",String.valueOf(admin.getType()));
 		//response.sendRedirect(request.getContextPath() + "/admin/index");
 		return "redirect:/backend/index";
 	}
@@ -136,6 +134,33 @@ public class AdminController {
 		return "redirect:/backend/login";
 	}
 	
-	
+	@RequestMapping(value="/userList",method=GET)
+	public String userList(Model model, HttpServletRequest request) {
+		int curPageNo = request.getParameter("pageNo") == null? 1:Integer.parseInt(request.getParameter("pageNo"));
+		model.addAttribute("pageNo",curPageNo);
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		List<User> users = userService.getLimitUsers((curPageNo-1)*10,20);
+		int numOfItem = users.size() > 5? 5:users.size();
+		model.addAttribute("numOfItem",numOfItem);
+		int maxPage = users.size() / 5 + curPageNo;
+		if(users.size() % 5 == 0){
+			maxPage = maxPage - 1;
+		}
+		model.addAttribute("maxPage",maxPage);
+		List<HashMap<String,String> > userinfos = new ArrayList<HashMap<String,String> >();
+		for(User user:users){
+			HashMap<String,String> m = new HashMap<String,String>();
+			m.put("id",user.getId() + "");
+			m.put("userNum",user.getUserNum());
+			m.put("cityName",user.getCity().getName());
+			m.put("schoolName",user.getSchool().getName());
+			m.put("dorm",user.getDorm());
+			userinfos.add(m);
+		}
+		model.addAttribute("userInfos",userinfos);
+		int beginPage = maxPage >= 4? maxPage - 3:1;
+		model.addAttribute("beginPage",beginPage);
+		return "/admin/user/users";
+	}
 
 }

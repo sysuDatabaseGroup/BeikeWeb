@@ -21,7 +21,6 @@ import com.databasegroup.model.DealedBook;
 import com.databasegroup.model.Book;
 import com.databasegroup.model.BookCategory;
 import com.databasegroup.model.User;
-import com.databasegroup.service.IUserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-mybatis.xml")
@@ -30,19 +29,9 @@ public class TestUserDao {
 	@Autowired
 	private IUserDao userDao;
 	
-	@Autowired
-	private IUserService userService;
-	
 	@Test
 	public void userDaoShouldNotBeNull() {
-		assertNotNull(userDao);	
-		assertNotNull(userService);	
-		
-//		User u = new User();
-//		u.setUserNum("1234");
-//		userDao.insert(u);
-		
-//		userService.insertTest();
+		assertNotNull(userDao);
 		
 //		User user = userDao.authUser("usernum", "password");
 //		System.out.println(user);
