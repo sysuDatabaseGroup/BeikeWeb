@@ -34,12 +34,29 @@
     </style>
 	<script type="text/javascript">
 		function saveUser() {
-			var city = document.getElementById("DropDownCity").value;
-			var cityNum = city.options[city.selectedIndex].value;
-			var school = document.getElementById("DropDownSchool").value;
-			var cityNum = school.options[school.selectedIndex].value;
-			var domitory = document.getElementById("DropDownDorm").value;
-			var dorm = domitory.options[domitory.selectedIndex].value;
+			var params = {};
+			var city = document.getElementById("DropDownCity");
+			params["city"] = city.options[city.selectedIndex].value;
+			var school = document.getElementById("DropDownSchool");
+			params["school"] = school.options[school.selectedIndex].value;
+			//var domitory = document.getElementById("DropDownDorm").value;
+			params["dorm"] = document.getElementById("dorm").value;
+			params["userNo"] = document.getElementById("userNo").value;
+			$.ajax({
+				url: "saveUser",
+				type: "POST",
+				dataType: "json",
+				data: params,
+				success: function(res){
+					console.log(res);
+					if(res.code == 0){
+						alert("用户修改成功");
+					}
+					else{
+						alert("错误："+res.msg);
+					}
+				},
+			});
 		}
 	</script>
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -78,14 +95,14 @@
                         </ul>
                     </li>
                 </ul>
-                <a class="brand" href="../index.jsp"><span class="second">贝壳易书管理后台</span></a>
+                <a class="brand" href="index"><span class="second">贝壳易书管理后台</span></a>
         </div>
     </div>
 
     <div class="sidebar-nav">
         <a href="#user-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>用户管理<i class="icon-chevron-up"></i></a>
         <ul id="user-menu" class="nav nav-list collapse">
-            <li ><a href="../user/users.jsp">用户管理</a></li>
+            <li ><a href="userList">用户管理</a></li>
         </ul>
 
         <a href="#city-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-map-marker"></i>托管点管理<i class="icon-chevron-up"></i></a>
@@ -136,7 +153,7 @@
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="btn-toolbar">
-          <button class="btn btn-primary"><i class="icon-save"></i> 保存</button>
+          <button class="btn btn-primary" onclick="saveUser()"><i class="icon-save"></i> 保存</button>
       </div>
       <div class="well">
         <div id="myTabContent" class="tab-content">
@@ -145,31 +162,24 @@
               <label>用户名</label>
               <strong><c:out value="${userNum}"/></strong>
 
-              <label>用户编号</label>
-              <strong><c:out value="${userNo}"/></strong>
-
               <label>城市</label>
               <select name="DropDownTimezone" id="DropDownCity" class="input-xlarge">
                 <option value="0">未选择</option>
-                <option value="1" <c:if test="${cityNum == 1}"><c:out value='selected="selected"'/></c:if>>广州</option>
-                <option value="1" <c:if test="${cityNum == 2}"><c:out value='selected="selected"'/></c:if>>上海</option>
-                <option value="1" <c:if test="${cityNum == 3}"><c:out value='selected="selected"'/></c:if>>深圳</option>
-              </select>
-
+				<c:forEach items="${cities}" var="city">
+                <option value="${city.id}" <c:if test="${cityNum == city.id}"><c:out value='selected="selected"'/></c:if>>${city.name}</option>
+				</c:forEach>
+				   </select>
               <label>学校</label>
               <select name="DropDownTimezone" id="DropDownSchool" class="input-xlarge">
                 <option value="0">未选择</option>
-                <option value="1" <c:if test="${schoolNum == 1}"><c:out value='selected="selected"'/></c:if>>中山大学</option>
-                <option value="1" <c:if test="${schoolNum == 2}"><c:out value='selected="selected"'/></c:if>>华南理工大学</option>
-                <option value="1" <c:if test="${schoolNum == 3}"><c:out value='selected="selected"'/></c:if>>深圳大学</option>
+				<c:forEach items="${schools}" var="school">
+                <option value="${school.id}" <c:if test="${schoolNum == school.id}"><c:out value='selected="selected"'/></c:if>>${school.name}</option>
+				</c:forEach>
               </select>
 
               <label>宿舍</label>
-              <select name="DropDownTimezone" id="DropDownDorm" class="input-xlarge">
-                <option value="0">未选择</option>
-                <option value="1" <c:if test="${fn:contains(dorm, '至善园1号')}"><c:out value='selected="selected"'/></c:if>>至善园1号</option>
-                <option value="2" <c:if test="${fn:contains(dorm, '至善园2号')}"><c:out value='selected="selected"'/></c:if>>至善园2号</option>
-              </select>
+					<input value="${dorm}" name="dorm" id="dorm"/>
+					<input name="userNo" id="userNo" type="hidden" value="${userNo}" />
           </form>
           </div>
         </div>

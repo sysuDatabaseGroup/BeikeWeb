@@ -18,6 +18,7 @@ import com.databasegroup.service.*;
 import com.databasegroup.service.impl.*;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/backend")
@@ -38,6 +39,10 @@ public class AdminController {
 	private IAnnounService announService;
 	@Autowired
 	private IAdminService adminService;
+	@Autowired
+	private ICityService cityService;
+	@Autowired
+	private ISchoolService schoolService;
 
 	@RequestMapping(value="/index",method=GET)
 	public String index(Model model, HttpServletRequest request) {
@@ -61,9 +66,11 @@ public class AdminController {
 		for(RentingOrder rent:rentingOrders){
 			int userId = rent.getUserId();
 			String userNum = userService.getById(userId).getUserNum();
-			DealedBook dealedBook = rent.getDealedBook();
-			totalAmount = totalAmount + dealedBook.getRentalPrice();
-			Book book = dealedBook.getBook();
+			List<DealedBook> dealedBooks = rent.getDealedBooks();
+			for(DealedBook dealedBook:dealedBooks){
+				totalAmount = totalAmount + dealedBook.getRentalPrice();
+			}
+			Book book = bookService.getById(rent.getBookId());
 			String bookClassName = book.getTitle();
 			int took = rent.getTook();
 			String isTake = took == 0? "否":"是";
@@ -78,9 +85,11 @@ public class AdminController {
 		for(SellingOrder sell:sellingOrders){
 			int userId = sell.getUserId();
 			String userNum = userService.getById(userId).getUserNum();
-			DealedBook dealedBook = sell.getDealedBook();
-			totalAmount = totalAmount + dealedBook.getSellingPrice();
-			double sellPrice = dealedBook.getSellingPrice();
+			List<DealedBook> dealedBooks = sell.getDealedBooks();
+			for(DealedBook dealedBook:dealedBooks){
+				totalAmount = totalAmount + dealedBook.getRentalPrice();
+			}
+			double sellPrice = dealedBooks.get(0).getSellingPrice();
 			Date sellTime = sell.getDatetime();
 			String datetime = time.format(sellTime);
 			HashMap<String,String> m = new HashMap<String,String>();
@@ -161,6 +170,78 @@ public class AdminController {
 		int beginPage = maxPage >= 4? maxPage - 3:1;
 		model.addAttribute("beginPage",beginPage);
 		return "/admin/user/users";
+	}
+	
+	@RequestMapping(value="/useredit",method=GET)
+	public String showUser(Model model,HttpServletRequest request) {
+		if(request.getParameter("userNo") == null){
+			return "/admin/404";
+		}
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		User user = userService.getById(userNo);
+		if(user == null){
+			return "/admin/404";
+		}
+		List<City> cities = cityService.getAll();
+		List<School> schools = schoolService.getAll();
+		List<HashMap<String,String> > citiesMap = new ArrayList<HashMap<String,String> >();
+		List<HashMap<String,String> > schoolMap = new ArrayList<HashMap<String,String> >();
+		for(City city:cities){
+			HashMap<String,String> m = new HashMap<String,String>();
+			m.put("id",String.valueOf(city.getId()));
+			m.put("name",city.getName());
+			citiesMap.add(m);
+		}
+		for(School school:schools){
+			HashMap<String,String> m = new HashMap<String,String>();
+			m.put("id",String.valueOf(school.getId()));
+			m.put("name",school.getName());
+			schoolMap.add(m);
+		}
+		model.addAttribute("cities",citiesMap);
+		model.addAttribute("schools",schoolMap);
+		model.addAttribute("schoolNum",user.getSchoolId());
+		model.addAttribute("cityNum",user.getCityId());
+		model.addAttribute("userNum",user.getUserNum());
+		model.addAttribute("dorm",user.getDorm());
+		model.addAttribute("userNo",userNo);
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		return "/admin/user/useredit";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/saveUser",method=POST,produces="text/html;charset=UTF-8")
+	public String saveUser(Model model,HttpServletRequest request) {
+		try{
+			request.setCharacterEncoding("UTF-8");
+			if(request.getParameter("userNo") == null){
+				return "{\"code\": 1,\"msg\":\"missing userNo\"}";
+			}
+			int userNo = Integer.parseInt(request.getParameter("userNo"));
+			User user = userService.getById(userNo);
+			if(user == null){
+				return "{\"code\": 2,\"msg\" :\"the user do not exists\"}";
+			}
+			String cityId = request.getParameter("city");
+			String schoolId = request.getParameter("school");
+			String dorm = request.getParameter("dorm");
+			if(cityId == null||schoolId == null||dorm == null){
+				return "{\"code\": 3,\"msg\"\"missing some parameter\"}";
+			}
+			//City city = cityService.getById(Integer.parseInt(cityId));
+			//School school = schoolService.getById(Integer.parseInt(schoolId));
+			//user.setCity(city);
+			user.setCityId(Integer.parseInt(cityId));
+			//user.setSchool(school);
+			user.setSchoolId(Integer.parseInt(schoolId));
+			user.setDorm(dorm);
+			userService.update(user);
+			return "{\"code\": 0,\"msg\":\"\"}";
+		}catch(Exception e){
+			String msg = e.toString();
+			msg = msg.replace("\"","\\\"");
+			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+		}
 	}
 
 }
