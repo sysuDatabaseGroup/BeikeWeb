@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.databasegroup.dao.IDealedBookDao;
 import com.databasegroup.dao.IRentingOrderDao;
+import com.databasegroup.exception.NoEnoughBooksException;
 import com.databasegroup.model.DealedBook;
 import com.databasegroup.model.RentingOrder;
 import com.databasegroup.model.SellingOrder;
@@ -71,7 +72,10 @@ public class RentingOrderServiceImpl implements IRentingOrderService {
 		int amount  = rentingOrder.getAmount();
 		List<DealedBook> dealedBooks = 
 				dealedBookDao.getNoDealedBookByBookIdAndAmount(bookId, amount);
-		if (dealedBooks.size() != amount) throw new RuntimeException("没有足够的书本");
+		if (dealedBooks.size() != amount) 
+		{
+			throw new NoEnoughBooksException("没有足够的书本");
+		}
 		for (DealedBook dealedBook : dealedBooks) {
 			dealedBook.setRented(1);
 			dealedBookId.append("" + dealedBook.getId() + '|');

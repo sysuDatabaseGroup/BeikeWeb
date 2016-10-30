@@ -21,6 +21,7 @@ import com.databasegroup.model.DealedBook;
 import com.databasegroup.model.Book;
 import com.databasegroup.model.BookCategory;
 import com.databasegroup.model.User;
+import com.databasegroup.service.IUserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-mybatis.xml")
@@ -28,10 +29,42 @@ public class TestUserDao {
 	
 	@Autowired
 	private IUserDao userDao;
+	@Autowired
+	private IUserService userSerivce;
 	
 	@Test
 	public void userDaoShouldNotBeNull() {
 		assertNotNull(userDao);
+		
+		
+		User user = userDao.getById(1);
+		user.setWithdrawalAmount(0);
+		userSerivce.update(user);
+		System.out.println(user);
+		
+		new Thread() {
+			@Override
+			public void run() {
+				int k = 3000;
+				while (k-- > 0) {
+					double x = user.getWithdrawalAmount();
+					x++;
+					user.setWithdrawalAmount(x);
+					userSerivce.update(user);
+				}
+			}
+			
+		}.start();
+
+		int k = 3000;
+		while (k-- > 0) {
+			double x = user.getWithdrawalAmount();
+			x++;
+			user.setWithdrawalAmount(x);
+			userSerivce.update(user);
+		}
+		
+		System.out.println(user);
 		
 //		User user = userDao.authUser("usernum", "password");
 //		System.out.println(user);

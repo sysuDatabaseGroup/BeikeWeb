@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.databasegroup.dao.IDealedBookDao;
 import com.databasegroup.dao.ISellingOrderDao;
+import com.databasegroup.exception.NoEnoughBooksException;
 import com.databasegroup.model.DealedBook;
 import com.databasegroup.model.SellingOrder;
 import com.databasegroup.service.ISellingOrderService;
@@ -71,7 +72,10 @@ public class SellingOrderServiceImpl implements ISellingOrderService {
 		int amount  = sellingOrder.getAmount();
 		List<DealedBook> dealedBooks = 
 				dealedBookDao.getNoDealedBookByBookIdAndAmount(bookId, amount);
-		if (dealedBooks.size() != amount) throw new RuntimeException("没有足够的书本");
+		if (dealedBooks.size() != amount) 
+		{
+			throw new NoEnoughBooksException("没有足够的书本");
+		}
 		for (DealedBook dealedBook : dealedBooks) {
 			dealedBook.setSelled(1);
 			dealedBook.setSelledDatetime(new Date());
