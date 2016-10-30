@@ -5,6 +5,7 @@ import java.util.Date;
 public class DealedBook {
 	private int id;
 	private Book book;
+	private int bookId;
 	private String dealedNum;
 	private double sellingPrice;
 	private double rentalPrice;
@@ -19,6 +20,20 @@ public class DealedBook {
 		return "[" + id + ' ' + book + ' ' + dealedNum + ' ' +
 				sellingPrice + ' ' + rentalPrice + ' ' + districtId + ' ' +
 				userId + ' ' + datetime + ' ' + selled + ']';
+	}
+
+	/**
+	 * @return the bookId
+	 */
+	public int getBookId() {
+		return bookId;
+	}
+
+	/**
+	 * @param bookId the bookId to set
+	 */
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
 	}
 
 	/**

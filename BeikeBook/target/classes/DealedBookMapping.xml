@@ -13,6 +13,7 @@
 		<result property="datetime" column="datetime" />
 		<result property="selled" column="selled" />
 		<result property="rented" column="rented" />
+		<result property="bookId" column="book_id" />
 		<association property="book" column="book_id"
 			select="com.databasegroup.dao.IBookDao.getById" />
 	</resultMap>
@@ -84,6 +85,15 @@
 			JOIN bk_book bb
 			ON bdb.book_id = bb.id
 		WHERE bdb.user_id=#{id}
+	</select>
+	
+	<select id="getNoDealedBookByBookIdAndAmount"
+		resultMap="dealedBookResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_dealed_book
+		WHERE book_id=#{bookId} AND selled=0 AND rented =0
+		LIMIT #{amount}
 	</select>
 	
 	<insert id="insert" parameterType="DealedBook" >

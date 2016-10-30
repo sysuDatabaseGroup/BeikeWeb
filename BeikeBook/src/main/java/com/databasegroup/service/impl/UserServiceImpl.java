@@ -70,7 +70,7 @@ public class UserServiceImpl implements IUserService {
 //		announDao.insert(a);
 //		User u = new User();
 //		u.setUserNum("1234");
-//		userDao.insert(u);
+////		userDao.insert(u);
 //	}
 
 }

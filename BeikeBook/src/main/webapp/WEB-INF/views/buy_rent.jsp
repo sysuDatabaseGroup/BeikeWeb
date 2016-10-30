@@ -12,22 +12,22 @@
 			<c:forEach items="${orders}" var="i">
 				<li>
 					<div id="buy_rent_img">
-						<img src="<c:url value='${i.dealedBook.book.coverPath }'/>" alt="" />
+						<img src="<c:url value='${i.dealedBooks[0].book.coverPath }'/>" alt="" />
 					</div>
 					<div id="buy_rent_info">
 						<p id="books_list_sold_info_price">
 						￥
 						<c:choose>
 							<c:when test="${i.isRenting > 0}">
-								<c:out value="${i.dealedBook.sellingPrice }"/>
+								<c:out value="${i.dealedBooks[0].sellingPrice }"/>
 							</c:when>
 							<c:otherwise>
-								<c:out value="${i.dealedBook.rentalPrice }"/>
+								<c:out value="${i.dealedBooks[0].rentalPrice }"/>
 							</c:otherwise>
 						</c:choose>
 						</p>
-						<p><em>书名：</em><c:out value="${i.dealedBook.book.title}"/>
-						<p><em>书籍编号：</em><c:out value="${i.dealedBook.dealedNum}"/></p>
+						<p><em>书名：</em><c:out value="${i.dealedBooks[0].book.title}"/>
+						<p><em>书籍编号：</em><c:out value="${i.dealedBooks[0].dealedNum}"/></p>
 						<c:choose>
 							<c:when test="${i.isRenting > 0}">
 								<p><em>购买时间：</em><c:out value="${i.datetime}"/></p>

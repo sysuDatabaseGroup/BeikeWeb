@@ -1,13 +1,19 @@
 package com.databasegroup.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
 	
 	protected int id;
 	protected int userId;
 	protected int deliveryMethodId;
-	protected DealedBook dealedBook;
+	// 标记这个订单所买的书
+	protected int bookId;
+	protected List<DealedBook> dealedBooks;
+	// 由于订单里包含对应课本的数目，所以dealedBookId字段也应该包含多本书，所以设计成字符串
+	// 每本书用 | 来分隔组成一个字符串
+	protected String dealedBookIds;
 	protected int amount;
 	protected Date datetime;
 	protected String takingBookNum;
@@ -16,7 +22,7 @@ public class Order {
 	@Override
 	public String toString() {
 		return "[" + id + ' ' + userId + ' ' + deliveryMethodId + ' '
-				+ dealedBook + ' ' + amount + ' ' + datetime + ' ' +
+				+ dealedBooks + ' ' + amount + ' ' + datetime + ' ' +
 				takingBookNum + ' ' + isRenting + ']';
 	}
 
@@ -63,19 +69,7 @@ public class Order {
 	}
 
 
-	/**
-	 * @return the dealedBook
-	 */
-	public DealedBook getDealedBook() {
-		return dealedBook;
-	}
-
-	/**
-	 * @param dealedBook the dealedBook to set
-	 */
-	public void setDealedBook(DealedBook dealedBook) {
-		this.dealedBook = dealedBook;
-	}
+	
 
 	/**
 	 * @return the amount
@@ -133,5 +127,48 @@ public class Order {
 		this.isRenting = isRenting;
 	}
 
+	/**
+	 * @return the dealedBooks
+	 */
+	public List<DealedBook> getDealedBooks() {
+		return dealedBooks;
+	}
+
+	/**
+	 * @param dealedBooks the dealedBooks to set
+	 */
+	public void setDealedBooks(List<DealedBook> dealedBooks) {
+		this.dealedBooks = dealedBooks;
+	}
+
+	/**
+	 * @return the dealedBookIds
+	 */
+	public String getDealedBookIds() {
+		return dealedBookIds;
+	}
+
+	/**
+	 * @param dealedBookIds the dealedBookIds to set
+	 */
+	public void setDealedBookIds(String dealedBookIds) {
+		this.dealedBookIds = dealedBookIds;
+	}
+
+	/**
+	 * @return the bookId
+	 */
+	public int getBookId() {
+		return bookId;
+	}
+
+	/**
+	 * @param bookId the bookId to set
+	 */
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
+	}
+
+	
 	
 }

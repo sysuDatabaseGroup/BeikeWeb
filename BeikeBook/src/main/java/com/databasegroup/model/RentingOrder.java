@@ -10,7 +10,7 @@ public class RentingOrder extends Order {
 	@Override
 	public String toString() {
 		return "[" + id + ' ' + userId + ' ' + deliveryMethodId + ' '
-				+ dealedBook + ' ' + amount + ' ' + datetime + ' ' +
+				+ dealedBooks + ' ' + amount + ' ' + datetime + ' ' +
 				takingBookNum + ' ' + took + ' ' + returned + ' ' +
 				isRenting + ']';
 	}

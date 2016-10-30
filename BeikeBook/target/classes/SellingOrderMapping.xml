@@ -13,8 +13,7 @@
 		<result property="takingBookNum" column="taking_book_num" />
 		<result property="payed" column="payed"  />
 		<result property="isRenting" column="id"/>
-		<association property="dealedBook" column="dealed_book_id" 
-			select="com.databasegroup.dao.IDealedBookDao.getById"/>
+		<result property="dealedBookIds" column="dealed_book_id"/>
 	</resultMap>
 	
 	<sql id="columns">id, user_id, delivery_method_id, dealed_book_id,
@@ -44,8 +43,8 @@
 	
 	<insert id="insert" parameterType="SellingOrder" >
 		INSERT INTO bk_selling_order (user_id, delivery_method_id, 
-		dealed_book_id, amount, datetime, taking_book_num, payed) VALUES
-		(#{userId},#{deliveryMethodId},#{dealedBookId},#{amount},
+			dealed_book_id, amount, datetime, taking_book_num, payed) VALUES
+		(#{userId},#{deliveryMethodId},#{dealedBookIds},#{amount},
 		#{datetime},#{takingBookNum},#{payed})
 	</insert>
 	
@@ -53,7 +52,7 @@
 		UPDATE bk_selling_order SET
 		user_id=#{userId},
 		delivery_method_id=#{deliveryMethodId},
-		dealed_book_id=#{dealedBookId},
+		dealed_book_id=#{dealedBookIds},
 		amount=#{amount},
 		datetime=#{datetime},
 		taking_book_num=#{takingBookNum},

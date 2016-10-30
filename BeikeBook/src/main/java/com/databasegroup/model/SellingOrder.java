@@ -8,7 +8,7 @@ public class SellingOrder extends Order {
 	@Override
 	public String toString() {
 		return "[" + id + ' ' + userId + ' ' + deliveryMethodId + ' ' +
-				dealedBook + ' ' + amount + ' ' + datetime + ' '
+				dealedBooks + ' ' + amount + ' ' + datetime + ' '
 				+ ' ' + takingBookNum + ' ' + payed + ' ' + isRenting +
 				']';
 	}

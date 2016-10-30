@@ -14,6 +14,7 @@
 		<result property="edition" column="edition" />
 		<result property="sellingPrice" column="selling_price" />
 		<result property="rentalPrice" column="rental_price" />
+		<result property="deliveryMethodId" column="delivery_method_id" />
 		<association property="method" column="delivery_method_id"
 			select="com.databasegroup.dao.IDeliveryMethodDao.getById" />
 	</resultMap>

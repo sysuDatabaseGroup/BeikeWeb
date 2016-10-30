@@ -20,6 +20,7 @@ import com.databasegroup.model.SellingOrder;
 import com.databasegroup.model.User;
 import com.databasegroup.service.IDeliveryMethodService;
 import com.databasegroup.service.IDistrictService;
+import com.databasegroup.service.IRentingOrderService;
 import com.databasegroup.service.ISellingOrderService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +28,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SuccessController {
-	
+
 	@Autowired
 	private ISellingOrderService sellingOrderService;
+	@Autowired
+	private IRentingOrderService rentingOrderService;
 	@Autowired
 	private IDistrictService districtService;
 
@@ -48,16 +51,17 @@ public class SuccessController {
 		
 		sellingOrder.setUserId(user.getId());
 		sellingOrder.setDeliveryMethodId(delieryMethodId);  //
-		sellingOrder.setDealedBook(dealedBook);
+		sellingOrder.setBookId(dealedBook.getBookId());  //
 		sellingOrder.setAmount(bookNum_input);
 		sellingOrder.setDatetime(new Date());
+		// 取书号：学校编号+日期+待售书的ID
 		sellingOrder.setTakingBookNum( "" +
 				user.getSchool().getNum() +
 				new SimpleDateFormat("yyyyMMdd").format(new Date()) +
 				String.format("%05d", dealedBook.getId())
 					);
 		
-//		sellingOrderService.insert(sellingOrder);
+		sellingOrderService.insertOrder(sellingOrder);
 		
 		model.addAttribute("district", district);
 		model.addAttribute("dealedBook", dealedBook);
@@ -82,7 +86,7 @@ public class SuccessController {
 		RentingOrder rentingOrder = new RentingOrder();
 		rentingOrder.setUserId(user.getId());
 		rentingOrder.setDeliveryMethodId(delieryMethodId);  //
-		rentingOrder.setDealedBook(dealedBook);
+		rentingOrder.setBookId(dealedBook.getBookId());
 		rentingOrder.setAmount(bookNum_input);
 		rentingOrder.setDatetime(new Date());
 		rentingOrder.setTakingBookNum( "" +
@@ -93,7 +97,7 @@ public class SuccessController {
 		rentingOrder.setTook(1);
 		rentingOrder.setReturned(1);
 		
-//		rentingOrderService.insert(rentalOrder);
+		rentingOrderService.insertOrder(rentingOrder);
 		
 		model.addAttribute("district", district);
 		model.addAttribute("dealedBook", dealedBook);

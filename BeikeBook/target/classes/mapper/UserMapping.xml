@@ -10,6 +10,8 @@
 		<result property="userNum" column="user_num" />
 		<result property="password" column="password" />
 		<result property="dorm" column="dorm" />
+		<result property="cityId" column="city_id" />
+		<result property="schoolId" column="school_id" />
 		<association property="city" column="city_id"
 			select="com.databasegroup.dao.ICityDao.getById" />
 		<association property="school" column="school_id" 

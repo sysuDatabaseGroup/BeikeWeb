@@ -32,6 +32,9 @@ public class TestDealedBookDao {
 		assertNotNull(bookDao);
 		
 //		System.out.println(
+//				bookDao.getNoDealedBookByBookIdAndAmount(1, 2));
+		
+//		System.out.println(
 //				bookDao.getAmountONoDealedfBookBookId(2));;
 		
 //		DealedBook book = bookDao.getById(1);

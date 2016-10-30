@@ -8,6 +8,7 @@ public class Book {
 	private String title;
 	private String coverPath;
 	private DeliveryMethod method;
+	private int deliveryMethodId;
 	private String press;
 	private String author;
 	private String edition;
@@ -17,7 +18,8 @@ public class Book {
 	@Override
 	public String toString() {
 		return "[" + id + ' ' + bookCategoryId + ' ' + title + ' ' +
-				coverPath + ' ' + method + ' ' + press + ' ' +
+				coverPath + ' ' + method + ' ' + deliveryMethodId 
+				+ ' ' + press + ' ' +
 				author + ' ' + edition + ' ' + sellingPrice + ' ' + 
 				rentalPrice + ']';
 	}

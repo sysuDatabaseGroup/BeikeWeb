@@ -78,8 +78,8 @@ $(function(){
 			<span>配送方式</span>
 			<span id="delivery">
 				<select name="delieryMethodId">
-				  <option value ="0">自提  ￥<c:out value="0"/></option>
-				  <option value ="1">上门配送  ￥<c:out value="5"/></option>
+				  <option value ="1">自提  ￥<c:out value="0"/></option>
+				  <option value ="2">上门配送  ￥<c:out value="5"/></option>
 				</select>
 			</span>		
 		</div>

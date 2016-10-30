@@ -10,4 +10,6 @@ import com.databasegroup.model.User;
 
 public interface ISellingOrderService extends IBaseService<SellingOrder> {
 	List<SellingOrder> getSellingOrdersByUserId(int id);
+	void insertOrder(SellingOrder sellingOrder);
+	SellingOrder getOrderById(int id);
 }

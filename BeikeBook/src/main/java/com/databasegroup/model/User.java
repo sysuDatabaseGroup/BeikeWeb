@@ -8,6 +8,8 @@ public class User {
 	private String password;
 	private City city;
 	private School school;
+	private int cityId;
+	private int schoolId;
 	private String dorm;
 	
 	@Override
@@ -131,6 +133,34 @@ public class User {
 	 */
 	public void setDorm(String dorm) {
 		this.dorm = dorm;
+	}
+
+	/**
+	 * @return the cityId
+	 */
+	public int getCityId() {
+		return cityId;
+	}
+
+	/**
+	 * @param cityId the cityId to set
+	 */
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
+	}
+
+	/**
+	 * @return the schoolId
+	 */
+	public int getSchoolId() {
+		return schoolId;
+	}
+
+	/**
+	 * @param schoolId the schoolId to set
+	 */
+	public void setSchoolId(int schoolId) {
+		this.schoolId = schoolId;
 	}
 	
 	
