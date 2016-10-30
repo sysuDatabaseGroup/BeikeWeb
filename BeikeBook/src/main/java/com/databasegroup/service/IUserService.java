@@ -10,4 +10,5 @@ import com.databasegroup.model.User;
 public interface IUserService extends IBaseService<User> {
 	boolean authUser(String usernum, String password);
 	User getUserByUserNum(@Param("userNum")String usernum);
+//	void insertTest();
 }
