@@ -70,7 +70,7 @@
 						</li>
 					</ul></li>
 			</ul>
-			<a class="brand" href="../index.jsp"><span class="second">贝壳易书管理后台</span>
+			<a class="brand" href="index"><span class="second">贝壳易书管理后台</span>
 			</a>
 		</div>
 	</div>
@@ -81,7 +81,7 @@
 			class="icon-chevron-up"></i>
 		</a>
 		<ul id="user-menu" class="nav nav-list collapse">
-			<li><a href="../user/users.jsp">用户管理</a>
+			<li><a href="/backend/userList">用户管理</a>
 			</li>
 		</ul>
 
@@ -166,7 +166,7 @@
 							<tr>
 								<th>#</th>
 								<th>用户名</th>
-								<th>用户编号</th>
+								<!--<th>用户编号</th>-->
 								<th>城市</th>
 								<th>学校</th>
 								<th>宿舍</th>
@@ -174,13 +174,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${userInfos}" var="i" begin="${pageNo*5}" end="${pageNo*5 + 5}">
+							<c:forEach items="${userInfos}" var="i" begin="0" end="${numOfItem}">
 								<tr>
 									<td><c:out value="${i.id}" />
 									</td>
 									<td><c:out value="${i.userNum}" />
-									</td>
-									<td><c:out value="${i.userNo}" />
 									</td>
 									<td><c:out value="${i.cityName}" />
 									</td>
@@ -188,7 +186,7 @@
 									</td>
 									<td><c:out value="${i.dorm}" />
 									</td>
-									<td><a href="useredit.jsp?userNo=${i.userNo}"><i class="icon-pencil"></i><span>编辑</span>
+									<td><a href="useredit?userNo=${i.id}"><i class="icon-pencil"></i><span>编辑</span>
 									</a></td>
 								</tr>
 							</c:forEach>
@@ -198,18 +196,38 @@
 
 				<div class="pagination">
 					<ul>
+						<c:choose>
+						<c:when test="${pageNo > 1}">
 						<li><a href="user.jsp?pageNo=${pageNo - 1}">Prev</a>
 						</li>
+						</c:when>
+						<c:otherwise>
+						<li><a href="user.jsp?pageNo=${pageNo}">Prev</a>
+						</li>
+						</c:otherwise>
+						</c:choose>
+						<c:forEach var="i" begin="${beginPage}" end="${maxPage}">
+						<c:choose>
+						<c:when test="${i==pageNo}">
 						<li><span><c:out value="${pageNo}"/></span>
 						</li>
-						<li><a href="user.jsp?pageNo=${pageNo + 1}"><c:out value="${pageNo+1}"/></a>
+						</c:when>
+						<c:otherwise>
+						<li><a href="user.jsp?pageNo=${i}"><c:out value="${i}"/></a>
 						</li>
-						<li><a href="user.jsp?pageNo=${pageNo +　2}"><c:out value="${pageNo+2}"/></a>
+						</c:otherwise>
+						</c:choose>
+						</c:forEach>
+						<c:choose>
+						<c:when test="${pageNo==maxPage}">
+						<li><a href="user.jsp?pageNo=${pageNo}">Next</a>
 						</li>
-						<li><a href="user.jsp?pageNo=${pageNo + 3}"><c:out value="${pageNo+3}"/></a>
-						</li>
+						</c:when>
+						<c:otherwise>
 						<li><a href="user.jsp?pageNo=${pageNo + 1}">Next</a>
 						</li>
+						</c:otherwise>
+						</c:choose>
 					</ul>
 				</div>
 			</div>

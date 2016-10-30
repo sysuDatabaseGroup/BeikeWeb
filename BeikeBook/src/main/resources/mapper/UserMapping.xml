@@ -69,4 +69,11 @@
 		FROM bk_user
 		WHERE user_num=#{userNum}
 	</select>
+	
+	<select id="getLimitUsers" resultMap="userResultMap">
+		SELECT *
+		FROM bk_user
+		ORDER BY id
+		LIMIT #{start},#{num}
+	</select>
 </mapper>
