@@ -54,12 +54,14 @@ public class SuccessController {
 		sellingOrder.setBookId(dealedBook.getBookId());  //
 		sellingOrder.setAmount(bookNum_input);
 		sellingOrder.setDatetime(new Date());
+		sellingOrder.setPayed(1);
 		// 取书号：学校编号+日期+待售书的ID
 		sellingOrder.setTakingBookNum( "" +
 				user.getSchool().getNum() +
 				new SimpleDateFormat("yyyyMMdd").format(new Date()) +
 				String.format("%05d", dealedBook.getId())
 					);
+		
 		
 		sellingOrderService.insertOrder(sellingOrder);
 		

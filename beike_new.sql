@@ -24,7 +24,6 @@ CREATE TABLE `bk_announ` (
 DROP TABLE IF EXISTS `bk_banner`;
 CREATE TABLE `bk_banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-
   `pic_path` varchar(200) NOT NULL DEFAULT '/images/banner/default.png',
   `title` varchar(30) NOT NULL,
   `link` varchar(255) NOT NULL,
@@ -62,7 +61,9 @@ CREATE TABLE `bk_book` (
   `rental_price` double(5,0) NOT NULL, 
   PRIMARY KEY (`id`),
   FOREIGN KEY (book_category_id) REFERENCES bk_book_category(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY (delivery_method_id) REFERENCES bk_delivery_method(id) ON DELETE NO ACTION ON UPDATE NO ACTION
+  FOREIGN KEY (delivery_method_id) REFERENCES bk_delivery_method(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CHECK(selling_price >= 0),
+  CHECK(rental_price >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -84,7 +85,9 @@ CREATE TABLE `bk_dealed_book` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (book_id) REFERENCES bk_book(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (district_id) REFERENCES bk_district(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY (user_id) REFERENCES bk_user(id) ON DELETE NO ACTION ON UPDATE NO ACTION
+  FOREIGN KEY (user_id) REFERENCES bk_user(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CHECK(selling_price >= 0),
+  CHECK(rental_price >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -122,7 +125,8 @@ CREATE TABLE `bk_delivery_method` (
   `id` int(11) NOT NULL AUTO_INCREMENT, 
   `name` varchar(10) NOT NULL, 
   `price` int(2) NOT NULL, 
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  CHECK(price >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -135,7 +139,8 @@ CREATE TABLE `bk_encashment` (
   `alipay_name` varchar(30) NOT NULL,
   `encashing_amount` int(3) NOT NULL,  
   `phone` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  CHECK(encashing_amount >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -169,7 +174,8 @@ CREATE TABLE `bk_selling_order` (
   `payed` int(11) DEFAULT '0', 
   PRIMARY KEY (`id`),
   FOREIGN KEY (user_id) REFERENCES bk_user(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY (delivery_method_id) REFERENCES bk_delivery_method(id) ON DELETE NO ACTION ON UPDATE NO ACTION
+  FOREIGN KEY (delivery_method_id) REFERENCES bk_delivery_method(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CHECK(amount >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -188,7 +194,8 @@ CREATE TABLE `bk_renting_order` (
   `returned` int(1) NOT NULL DEFAULT '0', 
   PRIMARY KEY (`id`),
   FOREIGN KEY (user_id) REFERENCES bk_user(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY (delivery_method_id) REFERENCES bk_delivery_method(id) ON DELETE NO ACTION ON UPDATE NO ACTION
+  FOREIGN KEY (delivery_method_id) REFERENCES bk_delivery_method(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CHECK(amount >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -201,14 +208,15 @@ CREATE TABLE `bk_user` (
   `wx_name` varchar(50) DEFAULT NULL,
   `user_num` varchar(20) NOT NULL,
   `password` varchar(50) DEFAULT NULL, -- 临时
-  `withdrawal_amount` double(5,0) DEFAULT 0, -- 临时
+  `withdrawal_amount` double(5,0) DEFAULT 0, -- 少check约束
   `city_id` int(11) DEFAULT NULL,
   `school_id` int(11) DEFAULT NULL,
   `dorm` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (city_id) REFERENCES bk_city(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (school_id) REFERENCES bk_school(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  UNIQUE(user_num)
+  UNIQUE(user_num),
+  CHECK(withdrawal_amount >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -222,6 +230,17 @@ CREATE TABLE `bk_admin` (
   `districtAddr` varchar(255) NOT NULL,
   `type` int(2) NOT NULL,
     PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `bk_BILL`
+-- ----------------------------
+DROP TABLE IF EXISTS `bk_bill`;
+CREATE TABLE `bk_bill` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `info` text NOT NULL,
+  `amount` double(5,0) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;

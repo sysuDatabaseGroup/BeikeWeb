@@ -59,4 +59,9 @@ public class UserServiceImpl implements IUserService {
 		return userDao.getLimitUsers(start,num);
 	}
 
+	@Override
+	public void addEncashingAmount(int userId, double amount) {
+		userDao.addEncashingAmount(userId, amount);
+	}
+
 }

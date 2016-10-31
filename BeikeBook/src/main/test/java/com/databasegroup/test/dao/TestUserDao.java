@@ -47,21 +47,17 @@ public class TestUserDao {
 			public void run() {
 				int k = 3000;
 				while (k-- > 0) {
-					double x = user.getWithdrawalAmount();
-					x++;
-					user.setWithdrawalAmount(x);
-					userSerivce.update(user);
+					userSerivce.addEncashingAmount(user.getId(), 
+							1);
 				}
 			}
 			
 		}.start();
 
-		int k = 3000;
+		int k = 5000;
 		while (k-- > 0) {
-			double x = user.getWithdrawalAmount();
-			x++;
-			user.setWithdrawalAmount(x);
-			userSerivce.update(user);
+			userSerivce.addEncashingAmount(user.getId(), 
+					1);
 		}
 		
 		System.out.println(user);

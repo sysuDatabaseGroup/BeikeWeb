@@ -13,4 +13,6 @@ public interface IUserDao extends IBaseDao<User> {
 					@Param("password")String password);
 	User getUserByUserNum(@Param("userNum")String usernum);
 	List<User> getLimitUsers(@Param("start")int start,@Param("num")int num);
+	void addEncashingAmount(@Param("userId") int userId, 
+			@Param("amount") double amount);
 }

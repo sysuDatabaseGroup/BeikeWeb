@@ -82,6 +82,8 @@
 		<tx:attributes>
 			<tx:method name="insert*" propagation="REQUIRED" />
 			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="add*" propagation="REQUIRED"/>
+			<tx:method name="reduce*" propagation="REQUIRED"/>
 		</tx:attributes>
 	</tx:advice>
 </beans>  

@@ -49,25 +49,17 @@ INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price, rental_price, di
 			VALUES (1, "11111", 22.5, 4, 1, 1, CURDATE());
 INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price, rental_price, district_id, user_id, datetime) 
 			VALUES (1, "11111", 14.5, 3, 2, 1, CURDATE());
-INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price, rental_price, district_id, user_id, datetime, selled) 
-			VALUES (1, "11111", 17.5, 3.5, 2, 1, CURDATE(), 1);
+INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price, rental_price, district_id, user_id, datetime) 
+			VALUES (1, "11111", 17.5, 3.5, 2, 1, CURDATE());
 INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price, rental_price, district_id, user_id, datetime) 
 			VALUES (1, "11111", 14.5, 3, 3, 1, CURDATE());
 INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price, rental_price, district_id, user_id, datetime) 
 			VALUES (1, "11111", 27.5, 4.5, 1, 1, CURDATE());
-INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price, rental_price, district_id, user_id, datetime, rented) 
-			VALUES (2, "11111", 25.5, 4, 1, 1, CURDATE(), 1);
+INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price, rental_price, district_id, user_id, datetime) 
+			VALUES (2, "11111", 25.5, 4, 1, 1, CURDATE());
 INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price, rental_price, district_id, user_id, datetime) 
 			VALUES (2, "11111", 23.5, 3, 1, 1, CURDATE());
 INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price, rental_price, district_id, user_id, datetime) 
 			VALUES (2, "11111", 28.5, 4.5, 3, 1, CURDATE());
 INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price, rental_price, district_id, user_id, datetime) 
 			VALUES (2, "11111", 23.5, 3.5, 2, 1, CURDATE());
-
-INSERT INTO bk_selling_order (user_id, delivery_method_id, dealed_book_id, amount, 
-				datetime, taking_book_num, payed) 
-			VALUES (2, 0, 3, 1, '2016-10-29', 'SYSSSSSSS', 1);
-
-INSERT INTO bk_renting_order (user_id, delivery_method_id, dealed_book_id, amount, 
-				datetime, taking_book_num, took, returned) 
-			VALUES (2, 0, 6, 1, '2016-10-28', 'SYSS', 1, 1);

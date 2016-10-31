@@ -54,6 +54,13 @@
 		WHERE id=#{id}
 	</update>
 	
+	<update id="addEncashingAmount" parameterType="User">
+		UPDATE bk_user SET
+		withdrawal_amount=withdrawal_amount+#{amount}
+		WHERE id=#{userId}
+	</update>
+	
+	
 	<delete id="delete" parameterType="User">
 		DELETE
 		FROM bk_user
