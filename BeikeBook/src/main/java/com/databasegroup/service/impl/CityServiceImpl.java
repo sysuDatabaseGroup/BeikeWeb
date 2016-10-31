@@ -40,4 +40,9 @@ public class CityServiceImpl implements ICityService {
 		// TODO Auto-generated method stub
 		return cityDao.getCityByCityNum(cityNum);
 	}
+	
+	@Override
+	public List<City> getLimitCities(int start,int num) {
+		return cityDao.getLimitCities(start,num);
+	}
 }

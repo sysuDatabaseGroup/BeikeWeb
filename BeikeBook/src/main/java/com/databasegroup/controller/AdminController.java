@@ -67,8 +67,10 @@ public class AdminController {
 			int userId = rent.getUserId();
 			String userNum = userService.getById(userId).getUserNum();
 			List<DealedBook> dealedBooks = rent.getDealedBooks();
-			for(DealedBook dealedBook:dealedBooks){
-				totalAmount = totalAmount + dealedBook.getRentalPrice();
+			if(dealedBooks != null){
+				for(DealedBook dealedBook:dealedBooks){
+					totalAmount = totalAmount + dealedBook.getRentalPrice();
+				}
 			}
 			Book book = bookService.getById(rent.getBookId());
 			String bookClassName = book.getTitle();
@@ -148,7 +150,7 @@ public class AdminController {
 		int curPageNo = request.getParameter("pageNo") == null? 1:Integer.parseInt(request.getParameter("pageNo"));
 		model.addAttribute("pageNo",curPageNo);
 		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
-		List<User> users = userService.getLimitUsers((curPageNo-1)*10,20);
+		List<User> users = userService.getLimitUsers((curPageNo-1)*5,20);
 		int numOfItem = users.size() > 5? 5:users.size();
 		model.addAttribute("numOfItem",numOfItem);
 		int maxPage = users.size() / 5 + curPageNo;
@@ -242,6 +244,25 @@ public class AdminController {
 			msg = msg.replace("\"","\\\"");
 			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
 		}
+	}
+	
+	@RequestMapping(value="/cityList", method=GET)
+	public String cityList(Model model, HttpServletRequest request) {
+		int curPageNo = request.getParameter("pageNo") == null? 1:Integer.parseInt(request.getParameter("pageNo"));
+		model.addAttribute("pageNo",curPageNo);
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		List<City> cities = cityService.getLimitCities((curPageNo-1)*5,20);
+		int numOfItem = cities.size() > 5? 5:cities.size();
+		model.addAttribute("numOfItem",numOfItem);
+		int maxPage = cities.size() / 5 + curPageNo;
+		if(cities.size() % 5 == 0){
+			maxPage = maxPage - 1;
+		}
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("cityInfos",cities);
+		int beginPage = maxPage >= 4? maxPage - 3:1;
+		model.addAttribute("beginPage",beginPage);
+		return "/admin/city/city";
 	}
 
 }
