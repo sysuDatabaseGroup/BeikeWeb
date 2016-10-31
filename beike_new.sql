@@ -82,6 +82,7 @@ CREATE TABLE `bk_dealed_book` (
   `selled_datetime` date DEFAULT '1970-10-10',
   `selled` int(1) DEFAULT '0', 
   `rented` int(1) DEFAULT '0',  -- 
+  `encashed` int(1) DEFAULT '0',  -- 
   PRIMARY KEY (`id`),
   FOREIGN KEY (book_id) REFERENCES bk_book(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (district_id) REFERENCES bk_district(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -135,10 +136,12 @@ CREATE TABLE `bk_delivery_method` (
 DROP TABLE IF EXISTS `bk_encashment`;  -- 旧表名：Money
 CREATE TABLE `bk_encashment` (
   `id` int(11) NOT NULL AUTO_INCREMENT, 
+  `user_id` int(11) NOT NULL,
   `alipay_account` varchar(30) NOT NULL,
   `alipay_name` varchar(30) NOT NULL,
   `encashing_amount` int(3) NOT NULL,  
   `phone` varchar(20) NOT NULL,
+  `encashed` int(1) DEFAULT 0,
   PRIMARY KEY (`id`),
   CHECK(encashing_amount >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -208,7 +211,7 @@ CREATE TABLE `bk_user` (
   `wx_name` varchar(50) DEFAULT NULL,
   `user_num` varchar(20) NOT NULL,
   `password` varchar(50) DEFAULT NULL, -- 临时
-  `withdrawal_amount` double(5,0) DEFAULT 0, -- 少check约束
+  `withdrawal_amount` double(5,0) DEFAULT 0, -- 
   `city_id` int(11) DEFAULT NULL,
   `school_id` int(11) DEFAULT NULL,
   `dorm` varchar(10) DEFAULT NULL,
