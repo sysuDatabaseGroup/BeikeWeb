@@ -50,14 +50,14 @@ public class TestSellingOrderDao {
 		dealedBook.setUserId(1);
 		dealedBook.setDatetime(new Date());
 		
-		for (int i = 1; i <= 1000; i++)
+		for (int i = 1; i <= 2000; i++)
 			dealedBookDao.insert(dealedBook);
 		
 		SellingOrder order = new SellingOrder();
 		order.setUserId(2);
 		order.setDeliveryMethodId(1);  //
 		order.setBookId(dealedBook.getBookId());  //
-		order.setAmount(5);
+		order.setAmount(1);
 		order.setDatetime(new Date());
 		order.setPayed(1);
 		// 取书号：学校编号+日期+待售书的ID
@@ -66,17 +66,21 @@ public class TestSellingOrderDao {
 				new SimpleDateFormat("yyyyMMdd").format(new Date()) +
 				String.format("%05d", dealedBook.getId())
 					);
-		
+		long time = System.currentTimeMillis();
 		new Thread() {
 			@Override
 			public void run() {
-				for (int i = 1; i <= 100; i++)
+				for (int i = 1; i <= 200; i++) {
 					sellingOrderService.insertOrder(order);
+				}
 			}
 		}.start();
 		
-		for (int i = 1; i <= 100; i++)
+		for (int i = 1; i <= 200; i++) {
 			sellingOrderService.insertOrder(order);
+		}
+		
+		System.out.println(System.currentTimeMillis() - time);
 		
 //		SellingOrder sell = sellingOrderDao.getById(2);
 //		sell.setTakingBookNum("update");

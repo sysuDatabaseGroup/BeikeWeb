@@ -18,6 +18,8 @@ import com.databasegroup.service.ISellingOrderService;
 @Service("sellingOrderService")
 public class SellingOrderServiceImpl implements ISellingOrderService {
 	
+	private static int i = 0;
+	
 	@Resource
 	private ISellingOrderDao sellingOrderDao;
 	
