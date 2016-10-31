@@ -232,16 +232,5 @@ CREATE TABLE `bk_admin` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
---  Table structure for `bk_BILL`
--- ----------------------------
-DROP TABLE IF EXISTS `bk_bill`;
-CREATE TABLE `bk_bill` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `info` text NOT NULL,
-  `amount` double(5,0) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 SET FOREIGN_KEY_CHECKS = 1;
 
