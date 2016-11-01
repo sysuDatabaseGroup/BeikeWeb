@@ -29,7 +29,7 @@
         </div>
         
         <ul class="breadcrumb">
-            <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
+            <li><a href="<c:url value='/backend/index' />">首页</a><span class="divider">/</span></li>
             <li>托管点管理<span class="divider">/</span></li>
             <li class="active">城市</li>
         </ul>
@@ -58,7 +58,7 @@
 				<td><c:out value="${i.getName()}" /></td>
 				<td><c:out value="${i.getNum()}" /></td>
 				<td>
-				    <a href="cityedit?id=${i.getId()}"><i class="icon-pencil"></i><span>编辑</span></a>
+				    <a href="<c:url value='/backend/cityedit?id=${i.getId()}' />"><i class="icon-pencil"></i><span>编辑</span></a>
 				    <a href="#myModal" role="button" data-toggle="modal" style="margin-left:5px;"><i class="icon-remove"></i><span>删除</span></a>
 				</td>
 			</tr>

@@ -42,19 +42,19 @@
                         </ul>
                     </li>
                 </ul>
-                <a class="brand" href="index"><span class="second">贝壳易书管理后台</span></a>
+                <a class="brand" href="<c:url value='/backend/index' />"><span class="second">贝壳易书管理后台</span></a>
         </div>
     </div>
 	
     <div class="sidebar-nav">
         <a href="#user-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>用户管理<i class="icon-chevron-up"></i></a>
         <ul id="user-menu" class="nav nav-list collapse">
-            <li ><a href="userList">用户管理</a></li>
+            <li ><a href="<c:url value='/backend/userList' />">用户管理</a></li>
         </ul>
 
         <a href="#city-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-map-marker"></i>托管点管理<i class="icon-chevron-up"></i></a>
         <ul id="city-menu" class="nav nav-list collapse">
-            <li ><a href="cityList">城市管理</a></li>
+            <li ><a href="<c:url value='/backend/cityList' />">城市管理</a></li>
             <li ><a href="../city/school.jsp">学校管理</a></li>
             <li ><a href="../city/district.jsp">托管点管理</a></li>
         </ul>

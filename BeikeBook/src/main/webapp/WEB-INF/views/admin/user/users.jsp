@@ -186,7 +186,7 @@
 									</td>
 									<td><c:out value="${i.dorm}" />
 									</td>
-									<td><a href="useredit?userNo=${i.id}"><i class="icon-pencil"></i><span>编辑</span>
+									<td><a href="<c:url value='/backend/useredit?userNo=${i.id}' />"><i class="icon-pencil"></i><span>编辑</span>
 									</a></td>
 								</tr>
 							</c:forEach>
