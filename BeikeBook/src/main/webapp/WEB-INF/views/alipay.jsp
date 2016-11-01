@@ -11,7 +11,7 @@
 		<span id="alipay_method">提现方式</span>
 		<span id="alipay_tip">可提现余额    <em>￥<c:out value="${user.withdrawalAmount}"/></em></span>
 	</div>
-
+	<form action="<c:url value='/alipay'/>" method="post">
 	<div class="alipay_info">
 		<input type="text" name="alipayAccount" id="account" placeholder="请输入支付宝账号" required />
 		<input type="text" name="alipayName" id="aliname" placeholder="请输入真实姓名" required />
@@ -26,7 +26,8 @@
 	<div class="clearbox"></div>
 	
 	<input type="submit" name="alipay_apply" id="alipay_apply" value="申请提现" />
-
+	</form>
+	<c:out value="${message}"></c:out>
 	<footer class="footer">
 		<div id="logo"></div>
 	</footer>

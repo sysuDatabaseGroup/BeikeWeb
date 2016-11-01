@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>贝壳图书管理后台登陆</title>
-<link href="/admin/stylesheets/style_log.css" rel="stylesheet" type="text/css">
+<link href="<c:url value='/admin/stylesheets/style_log.css' />" rel="stylesheet" type="text/css">
 <style>
 .rem_sub{
 display: inline-block;

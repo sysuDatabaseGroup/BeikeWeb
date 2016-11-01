@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.databasegroup.dao.ICityDao;
+import com.databasegroup.dao.IDealedBookDao;
 import com.databasegroup.dao.IUserDao;
 import com.databasegroup.model.City;
 import com.databasegroup.model.User;
@@ -18,6 +19,9 @@ public class UserServiceImpl implements IUserService {
 	
 	@Resource
 	private IUserDao userDao;
+	
+	@Resource
+	private IDealedBookDao dealedBookDao;
 
 	@Override
 	public void insert(User entity) {
@@ -62,6 +66,16 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public void addEncashingAmount(int userId, double amount) {
 		userDao.addEncashingAmount(userId, amount);
+	}
+	
+	@Override
+	public User updateUserEncashingAmount(int userId) {
+		double encashingAmount = 
+				dealedBookDao.getEncashingAmountByUserId(userId);
+		User user = userDao.getById(userId);
+		user.setWithdrawalAmount(encashingAmount);
+		userDao.update(user);
+		return user;
 	}
 
 }

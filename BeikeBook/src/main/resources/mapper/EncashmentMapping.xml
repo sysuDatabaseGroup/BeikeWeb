@@ -6,14 +6,16 @@
 
 	<resultMap id="encashmentResultMap" type="Encashment">
 		<id property="id" column="id"/>
+		<result property="userId" column="user_id" />
 		<result property="alipayAccount" column="alipay_account" />
 		<result property="alipayName" column="alipay_name" />
 		<result property="encashingAmount" column="encashing_amount" />
 		<result property="phone" column="phone" />
+		<result property="encashed" column="encashed" />
 	</resultMap>
 	
-	<sql id="columns">id, alipay_account, alipay_name,
-		encashing_amount, phone</sql>
+	<sql id="columns">id, user_id, alipay_account, alipay_name,
+		encashing_amount, phone, encashed</sql>
 	
 	<select id="getById" parameterType="int"
 		resultMap="encashmentResultMap">
@@ -37,17 +39,20 @@
 	</select>
 	
 	<insert id="insert" parameterType="Encashment" >
-		INSERT INTO bk_encashment (alipay_account, alipay_name,
-			encashing_amount, phone) VALUES
-		(#{alipayAccount},#{alipayName},#{encashingAmount},#{phone})
+		INSERT INTO bk_encashment (user_id,alipay_account, alipay_name,
+			encashing_amount, phone, encashed) VALUES
+		(#{userId},#{alipayAccount},#{alipayName},#{encashingAmount},
+		#{phone},#{encashed})
 	</insert>
 	
 	<update id="update" parameterType="Encashment">
 		UPDATE bk_encashment SET
+		user_id=#{userId},
 		alipay_account=#{alipayAccount},
 		alipay_name=#{alipayName},
 		encashing_amount=#{encashingAmount},
-		phone=#{phone}
+		phone=#{phone},
+		encashed=#{encashed}
 		WHERE id=#{id}
 	</update>
 	

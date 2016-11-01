@@ -43,8 +43,9 @@
 					<c:if test="${i.isRenting == 0}">
 						<div class="clearbox"></div> 
 						<fmt:formatDate var="rentedDay" pattern="D" type="date" value="${i.datetime}" />
+						<fmt:parseNumber var="w" integerOnly="true" type="number" value="${((currentTime-rentedDay+15)/30)*i.amount}" />
 						<span id="buy_rent_info_tip">已租用<c:out value="${currentTime-rentedDay+1}" /><em>天</em>
-						扣除费用<em style="color:#be2222;"><c:out value="${((currentTime-rentedDay+15)/30)*i.amount}"/>元</em></span>
+						扣除费用<em style="color:#be2222;"><c:out value="${w}"/>元</em></span>
 					</c:if>
 				</li>
 			</c:forEach>

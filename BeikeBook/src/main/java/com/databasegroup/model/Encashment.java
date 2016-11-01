@@ -2,15 +2,18 @@ package com.databasegroup.model;
 
 public class Encashment {
 	private int id;
+	private int userId;
 	private String alipayAccount;
 	private String alipayName;
-	private int encashingAmount;
+	private double encashingAmount;
 	private String phone;
+	private int encashed;
 	
 	@Override
 	public String toString() {
-		return "[" + id + ' ' + alipayAccount + ' ' + 
-				alipayName + ' ' + encashingAmount + ' ' + phone + ']';
+		return "[" + id + ' ' + userId + ' ' + alipayAccount + ' ' + 
+				alipayName + ' ' + encashingAmount + ' ' + phone + ' ' +
+				encashed + ']';
 	}
 
 	/**
@@ -58,14 +61,14 @@ public class Encashment {
 	/**
 	 * @return the encashingAmount
 	 */
-	public int getEncashingAmount() {
+	public double getEncashingAmount() {
 		return encashingAmount;
 	}
 
 	/**
 	 * @param encashingAmount the encashingAmount to set
 	 */
-	public void setEncashingAmount(int encashingAmount) {
+	public void setEncashingAmount(double encashingAmount) {
 		this.encashingAmount = encashingAmount;
 	}
 
@@ -81,6 +84,34 @@ public class Encashment {
 	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	/**
+	 * @return the userId
+	 */
+	public int getUserId() {
+		return userId;
+	}
+
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	/**
+	 * @return the encashed
+	 */
+	public int getEncashed() {
+		return encashed;
+	}
+
+	/**
+	 * @param encashed the encashed to set
+	 */
+	public void setEncashed(int encashed) {
+		this.encashed = encashed;
 	}
 	
 	

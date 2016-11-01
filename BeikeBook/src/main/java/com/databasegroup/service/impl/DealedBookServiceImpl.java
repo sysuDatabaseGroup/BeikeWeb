@@ -73,4 +73,14 @@ public class DealedBookServiceImpl implements IDealedBookService {
 		return dealedBookDao.getSelledBookByUserId(id);
 	}
 
+	@Override
+	public double getEncashingAmountByUserId(int userId) {
+		return dealedBookDao.getEncashingAmountByUserId(userId);
+	}
+
+	@Override
+	public void setEncashedByUser(int userId) {
+		dealedBookDao.setEncashedByUser(userId);
+	}
+
 }

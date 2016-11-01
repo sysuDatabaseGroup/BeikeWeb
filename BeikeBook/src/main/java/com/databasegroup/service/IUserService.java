@@ -12,4 +12,5 @@ public interface IUserService extends IBaseService<User> {
 	User getUserByUserNum(@Param("userNum")String usernum);
 	List<User> getLimitUsers(@Param("start")int start,@Param("num")int num);
 	void addEncashingAmount(int userId, double amount);
+	User updateUserEncashingAmount(int userId);
 }

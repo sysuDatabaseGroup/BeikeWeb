@@ -14,7 +14,7 @@ $(function(){
 		if ($value <= <c:out value="${amountOfBooks}"/>) {
 			$('#bookNum_input').val($value);
 			$('#num').html($value);
-			$('#method_sum_price').html($value*<c:out value="${dealedBook.sellingPrice}"/>);
+			$('#method_sum_price').html($value*<c:out value="${dealedBook.book.sellingPrice}"/>);
 		}
 	});
 	$('#reduce').click(function(){
@@ -23,7 +23,7 @@ $(function(){
 			var $value=parseInt($('#bookNum_input').val())-1;
 			$('#bookNum_input').val($value);
 			$('#num').html($value);
-			$('#method_sum_price').html($value*<c:out value="${dealedBook.sellingPrice}"/>);
+			$('#method_sum_price').html($value*<c:out value="${dealedBook.book.sellingPrice}"/>);
 		}
 	});
 });
@@ -53,7 +53,7 @@ $(function(){
 				<span>库存： <c:out value="${amountOfBooks}" /> 本书</span>
 			</div>
 			<div id="info_bookNum">
-				<span id="info_bookNum_price">￥<c:out value="${dealedBook.sellingPrice}"/>/本</span>
+				<span id="info_bookNum_price">￥<c:out value="${dealedBook.book.sellingPrice}"/>/本</span>
 			</div>
 			<div class="clearbox"></div>
 		</div>
@@ -74,7 +74,7 @@ $(function(){
 	<div class="pay_method">
 		<div id="pay_method_top">
 			<span>总价</span>
-			<span id="method_sum">￥<em id="method_sum_price"><c:out value="${dealedBook.sellingPrice+price}"/></em></span>
+			<span id="method_sum">￥<em id="method_sum_price"><c:out value="${dealedBook.book.sellingPrice+price}"/></em></span>
 		</div>
 		<div id="pay_method_bottom">
 			<input type="submit" id="paying" name="paying" value="在线支付" />

@@ -19,4 +19,6 @@ public interface IDealedBookDao extends IBaseDao<DealedBook> {
 	List<DealedBook> getNoDealedBookByBookIdAndAmount(
 			@Param("bookId")int bookId, 
 			@Param("amount")int amount);
+	double getEncashingAmountByUserId(@Param("userId")int userId);
+	void setEncashedByUser(@Param("userId")int userId);
 }

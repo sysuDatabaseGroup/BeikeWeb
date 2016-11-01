@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.databasegroup.model.BookCategory;
+import com.databasegroup.model.User;
 import com.databasegroup.service.IUserService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,9 +35,11 @@ public class LoginController {
 			@RequestParam String password,
 			Model model) {
 		if (userService.authUser(username, password)) {
+			User user = userService.getUserByUserNum(username);
+			user = userService.updateUserEncashingAmount(user.getId());
 			request.getSession()
 					.setAttribute("user", 
-					userService.getUserByUserNum(username));
+					user);
 			if(request.getSession()
 					.getAttribute("lastPage") != null) {
 				String uri = request.getSession()

@@ -22,8 +22,6 @@ INSERT INTO bk_user (wx_name, user_num, password, city_id, school_id, dorm)
 			VALUES ("微信昵称", "1234", '1234', 1, 1, '至善园八号412');
 INSERT INTO bk_user (wx_name, user_num, password, city_id, school_id, dorm) 
 			VALUES ("微信昵称", "1", '1', 1, 1, '至善园八号412');
-INSERT INTO bk_encashment (alipay_account, alipay_name, encashing_amount, phone) 
-			VALUES ("支付宝账号1", "支付宝本人", 100, '13555555555');
 
 INSERT INTO bk_announ (title, content) VALUES ('公告标题1', '公告内容1');
 INSERT INTO bk_announ (title, content) VALUES ('公告标题2', '公告内容2');
@@ -63,14 +61,5 @@ INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price, rental_price, di
 			VALUES (2, "11111", 28.5, 4.5, 3, 1, CURDATE());
 INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price, rental_price, district_id, user_id, datetime) 
 			VALUES (2, "11111", 23.5, 3.5, 2, 1, CURDATE());
-<<<<<<< HEAD
-
-INSERT INTO bk_selling_order (user_id, delivery_method_id, dealed_book_id, amount, 
-				datetime, taking_book_num, payed) 
-			VALUES (2, 0, 3, 1, '2016-10-29', 'SYSSSSSSS', 1);
-
-INSERT INTO bk_renting_order (user_id, delivery_method_id, dealed_book_id, amount, 
-				datetime, taking_book_num, took, returned) 
-			VALUES (2, 0, 6, 1, '2016-10-29', 'SYSS', 1, 1);
 
 INSERT INTO `bk_admin` VALUES (1,'root','ICy5YqxZB1uWSwcVLSNLcA==','中山大学',0);

@@ -33,7 +33,7 @@
 		</div>
 		<div id="detail_info">
 			<h4><c:out value="${bookInfo.book.title}"/></h4>
-			<span id="info_price"><em>￥</em><c:out value="${bookInfo.sellingPrice}"/> <em>/本</em></span>
+			<span id="info_price"><em>￥</em><c:out value="${bookInfo.book.sellingPrice}"/> <em>/本</em></span>
 			<span id="info_service">支持： 上门配送 ｜ 自取 ｜ 租用</span>
 		</div>
 		<div id="detail_book">

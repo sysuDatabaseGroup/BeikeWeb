@@ -52,4 +52,11 @@
 		FROM bk_city
 		WHERE id=#{id}
 	</delete> 
+
+	<select id="getLimitCities" resultMap="cityResultMap">
+		SELECT *
+		FROM bk_city
+		ORDER BY id
+		LIMIT #{start},#{num}
+	</select>
 </mapper>

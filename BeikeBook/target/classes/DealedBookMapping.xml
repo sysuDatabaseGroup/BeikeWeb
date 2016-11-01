@@ -86,6 +86,20 @@
 		FOR UPDATE
 	</select>
 	
+	<select id="getEncashingAmountByUserId" parameterType="int"
+		resultType="double">
+		SELECT IFNULL(SUM(bb.selling_price)*0.2, 0)
+		FROM bk_dealed_book bdb JOIN bk_book bb ON bdb.book_id=bb.id
+		WHERE bdb.selled=1 AND bdb.encashed=0 AND bdb.user_id=#{userId}
+	</select>
+	
+	<update id="setEncashedByUser" parameterType="int">
+		UPDATE bk_dealed_book
+		SET encashed=1
+		WHERE selled=1 AND encashed=0 AND user_id=#{userId}
+	</update>
+	
+	
 	<insert id="insert" parameterType="DealedBook" >
 		INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price,
 			rental_price, district_id, user_id, datetime, selled_datetime,
