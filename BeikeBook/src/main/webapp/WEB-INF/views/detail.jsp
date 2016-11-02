@@ -22,24 +22,43 @@
 
 <div class="option">
 	<span id="option_what"></span>
-	<a href="<c:url value='/pay/${bookInfo.id}'/>"><span id="option_buy">购买旧书</span></a>
-	<a href="<c:url value='/rent/${bookInfo.id}'/>"><span id="option_rent">租书（热）</span></a>
+	<a href="
+	<c:choose >
+		<c:when test='${dealedBookId != -1}'>
+			<c:url value='/pay/${dealedBookId}' />
+		</c:when>
+		<c:otherwise>
+			<c:url value='#' />
+		</c:otherwise>
+	</c:choose>
+	">
+	<span id="option_buy">购买旧书</span></a>
+	<a href="
+	<c:choose >
+		<c:when test='${dealedBookId != -1}'>
+			<c:url value='/rent/${dealedBookId}' />
+		</c:when>
+		<c:otherwise>
+			<c:url value='#' />
+		</c:otherwise>
+	</c:choose>
+	"><span id="option_rent">租书（热）</span></a>
 </div>
 
 <div class="container">
 	<div class="detail">
 		<div id="detail_img">
-			<img src="<c:url value='${bookInfo.book.coverPath}' />" alt="" />
+			<img src="<c:url value='${bookInfo.coverPath}' />" alt="" />
 		</div>
 		<div id="detail_info">
-			<h4><c:out value="${bookInfo.book.title}"/></h4>
-			<span id="info_price"><em>￥</em><c:out value="${bookInfo.book.sellingPrice}"/> <em>/本</em></span>
+			<h4><c:out value="${bookInfo.title}"/></h4>
+			<span id="info_price"><em>￥</em><c:out value="${bookInfo.sellingPrice}"/> <em>/本</em></span>
 			<span id="info_service">支持： 上门配送 ｜ 自取 ｜ 租用</span>
 		</div>
 		<div id="detail_book">
-			<span>版本：<em><c:out value="${bookInfo.book.edition}"/></em></span>
-			<span>作者：<em><c:out value="${bookInfo.book.author}"/></em></span>
-			<span>出版社：<em><c:out value="${bookInfo.book.press}"/></em></span>
+			<span>版本：<em><c:out value="${bookInfo.edition}"/></em></span>
+			<span>作者：<em><c:out value="${bookInfo.author}"/></em></span>
+			<span>出版社：<em><c:out value="${bookInfo.press}"/></em></span>
 		</div>
 	</div>
 

@@ -11,4 +11,8 @@ import com.databasegroup.model.User;
 
 public interface IBookService extends IBaseService<Book> {
 	List<Book> getNoSelledAndNoRentedBooks();
+	List<Book> getByBookCategoryId(
+			@Param("bookCategoryId") int bookCategoryId);
+	List<Book> getByBookTitle(
+			@Param("bookTitle") String bookTitle);
 }

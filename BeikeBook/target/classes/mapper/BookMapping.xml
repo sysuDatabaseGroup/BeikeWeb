@@ -46,6 +46,22 @@
 		WHERE bdb.selled=0 AND bdb.rented=0;
 	</select>
 	
+	<select id="getByBookCategoryId"
+		resultMap="bookResultMap">
+		SELECT bb.*
+		FROM bk_book bb JOIN bk_book_category bbc 
+				ON bb.book_category_id= bbc.id
+		WHERE bbc.id = #{bookCategoryId}
+	</select>
+	
+	<select id="getByBookTitle"
+		resultMap="bookResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_book
+		WHERE title REGEXP #{bookTitle}
+	</select>
+	
 	<insert id="insert" parameterType="Book" >
 		INSERT INTO bk_book (book_category_id, title,
 			cover_path, delivery_method_id, press, author, edition,

@@ -12,6 +12,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.databasegroup.model.BookCategory;
+import com.databasegroup.model.DealedBook;
 import com.databasegroup.model.District;
 import com.databasegroup.model.DistrictStoredSituation;
 import com.databasegroup.model.User;
@@ -33,10 +34,17 @@ public class DetailController {
 
 	@Autowired
 	private IDistrictService districtService;
+	
+	@Autowired
+	private IBookService bookService;
 
 	@RequestMapping(value = "/{id}", method = GET)
 	public String detail(@PathVariable int id, HttpServletRequest request, Model model) {
-		model.addAttribute("bookInfo", dealedBookService.getNoSelledAndNoRentedBookByBookId(id));
+		DealedBook dealedBook = dealedBookService
+				.getNoSelledAndNoRentedBookByBookId(id);
+		int dealedBookId = dealedBook == null ? -1 : dealedBook.getId();
+		model.addAttribute("dealedBookId", dealedBookId);
+		model.addAttribute("bookInfo", bookService.getById(id));
 		List<DistrictStoredSituation> districtSituation = 
 				districtService.getSituationByBookId(id);
 		model.addAttribute("districtSituation", 

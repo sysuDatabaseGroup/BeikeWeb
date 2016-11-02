@@ -73,24 +73,6 @@ $(function(){
 		</form>
 		<a href="<c:url value='/center'/>"><span id="header_center"></span></a>
 	</header>>
-	<div class="slider">
-		<div id="slider_pic">
-			<ul id="pic_ul">
-				<!-- 需要替换images/pic.jpg -->
-				<li><img src="<c:url value='/images/banner/default.png'/>" alt="" /></li>
-				<li><img src="<c:url value='/images/banner/default.png'/>" alt="" /></li>
-				<li><img src="<c:url value='/images/banner/default.png'/>" alt="" /></li>
-			</ul>
-		</div>
-		<div id="slider_list">
-			<ul id="list_ul">
-				<!-- 需要替换str -->
-				<li class="on"><p>活动1</p></li>
-				<li><p>活动2</p></li>
-				<li><p>活动3</p></li>
-			</ul>
-		</div>
-	</div>
 	<div class="side">
 		<h2>书籍列表</h2>
 		<span>书籍支持上门自取或校内配送</span>

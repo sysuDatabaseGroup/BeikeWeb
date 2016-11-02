@@ -42,7 +42,7 @@ content: "*";
 <body class="login" mycollectionplug="bind">
 	<div class="login_m">
 		<div style="text-align: center; font-size: 30px;font-family: '微软雅黑';margin-bottom: 15px;">贝壳图书管理后台</div>
-		<form class="login_boder" action="/backend/login" method="POST">
+		<form class="login_boder" action="<c:url value='/backend/login' />" method="POST">
 			<div class="login_padding" id="login_model">
 
 				<h2>用户名</h2>

@@ -28,11 +28,14 @@ public class IndexController {
 	private IBookService bookService;
 	
 	@RequestMapping(value={"/","/index"},method=GET)
-	public String index(Model model) {
-		model.addAttribute("bookCategories", 
+	public String index(Model model,
+				HttpServletRequest request) {
+		if (request.getSession().getAttribute("bookCategories") == null) {
+		request.getSession().setAttribute("bookCategories",
 				bookCategoryService.getAll());
+		}
 		model.addAttribute("bookInfos", 
-				bookService.getNoSelledAndNoRentedBooks());
+				bookService.getAll());
 		return "index";
 	}
 	

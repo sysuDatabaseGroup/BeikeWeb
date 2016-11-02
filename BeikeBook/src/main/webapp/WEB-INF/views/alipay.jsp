@@ -15,9 +15,9 @@
 	<div class="alipay_info">
 		<input type="text" name="alipayAccount" id="account" placeholder="请输入支付宝账号" required />
 		<input type="text" name="alipayName" id="aliname" placeholder="请输入真实姓名" required />
+		<input type="text" name="phone" id="phone" placeholder="请输入手机号码" required />
 		<div id="alipay_info_message">
 			<span>短信验证码</span>
-			<input type="text" name="phone" id="phone" placeholder="请输入手机号码" required />
 			<input type="text" name="message" id="message" placeholder="请输入验证码" required />
 			<span id="message_btn">获取验证码</span>
 		</div>

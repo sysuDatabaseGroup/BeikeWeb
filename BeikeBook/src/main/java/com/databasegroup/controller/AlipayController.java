@@ -56,17 +56,14 @@ public class AlipayController {
 			Model model) {
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) return "login";
-		if (user.getWithdrawalAmount() != 0) {
 			Encashment encashment = new Encashment();
-			encashment.setUserId(user.getId());
 			encashment.setAlipayAccount(alipayAccount);
 			encashment.setAlipayName(alipayName);
 			encashment.setPhone(phone);
-			encashment.setEncashingAmount(user.getWithdrawalAmount());
 			
 			// 事务处理
-			transactionMethod.insertEncashment(encashment, user.getId());
-			
+			if (transactionMethod
+					.insertEncashment(encashment, user.getId())) {
 			user.setWithdrawalAmount(0);
 			request.getSession().setAttribute("user", user);
 			model.addAttribute("message", "提现成功！");
