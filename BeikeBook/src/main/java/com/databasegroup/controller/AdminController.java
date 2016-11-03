@@ -134,7 +134,7 @@ public class AdminController {
 		request.getSession().setAttribute("districtAddr",admin.getDistrict());
 		request.getSession().setAttribute("roleType",String.valueOf(admin.getType()));
 		//response.sendRedirect(request.getContextPath() + "/admin/index");
-		return "redirect:/backend/index";
+		return "redirect:"+request.getContextPath()+"/backend/index";
 	}
 	
 	@RequestMapping(value="/logout",method={GET,POST})
@@ -142,7 +142,7 @@ public class AdminController {
 		request.getSession().setAttribute("adminUserName",null);
 		request.getSession().setAttribute("districtAddr",null);
 		request.getSession().setAttribute("roleType",null);
-		return "redirect:/backend/login";
+		return "redirect:"+request.getContextPath()+"/backend/login";
 	}
 	
 	@RequestMapping(value="/userList",method=GET)
@@ -262,7 +262,114 @@ public class AdminController {
 		model.addAttribute("cityInfos",cities);
 		int beginPage = maxPage >= 4? maxPage - 3:1;
 		model.addAttribute("beginPage",beginPage);
-		return "/admin/city/city";
+		model.addAttribute("page","city/city.jsp");
+		return "/admin/layout";
 	}
+	
+	@RequestMapping(value="/cityadd",method={GET,POST})
+	public String cityAdd(Model model, HttpServletRequest request) {
+		model.addAttribute("page","city/cityadd.jsp");
+		String get = new String("GET");
+		if(request.getMethod().equals(get)){
+			return "/admin/layout";
+		}
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String name = request.getParameter("name");
+			String num = request.getParameter("num");
+			if(name == null||num == null||
+				name.length() == 0||num.length() == 0){
+				model.addAttribute("error_msg","请填写所有信息");
+				return "/admin/layout";
+			}
+			City city = new City();
+			city.setName(name);
+			city.setNum(num);
+			cityService.insert(city);
+			model.addAttribute("success_msg","添加成功！");
+			return "/admin/layout";
+		}catch(Exception e){
+			return "/admin/404";
+		}
+	}
+
+	@RequestMapping(value="/cityedit", method=GET)
+	public String cityEdit(Model model, HttpServletRequest request) {
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		model.addAttribute("page","city/cityedit.jsp");
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			if(str_id == null){
+				return "/admin/404";
+			}
+			int id = Integer.parseInt(str_id);
+			City city = cityService.getById(id);
+			if(city == null){
+				return "/admin/404";
+			}
+			model.addAttribute("cityName",city.getName());
+			model.addAttribute("cityAbbreviate",city.getNum());
+			return "/admin/layout";
+		}catch(Exception e){
+			return "/admin/404";
+		}
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/savecity",method=POST)
+	public String saveCity(Model model, HttpServletRequest request) {
+		try{
+			request.setCharacterEncoding("UTF-8");
+			//model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+			//model.addAttribute("page","city/cityedit.")
+			String str_id = request.getParameter("id");
+			String name = request.getParameter("name");
+			String num = request.getParameter("num");
+			if(str_id == null||name == null||num == null||
+				str_id.length() == 0||name.length() == 0||num.length() == 0){
+				return "{\"code\": 1, \"msg\": \"缺少信息\"}";
+			}
+			int id = Integer.parseInt(str_id);
+			City city = cityService.getById(id);
+			if(city == null){
+				return "{\"code\": 2, \"msg\": \"城市不存在\"}";
+			}
+			city.setName(name);
+			city.setNum(num);
+			cityService.update(city);
+			return "{\"code\": 0,\"msg\": \"\"}";
+		}catch(Exception e){
+			String msg = e.toString();
+			msg = msg.replace("\"","\\\"");
+			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deletecity",method=POST)
+	public String deleteCity(Model model, HttpServletRequest request) {
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			if(str_id == null||str_id.length() == 0){
+				return "{\"code\": 1, \"msg\": \"缺少id\"}";
+			}
+			int id = Integer.parseInt(str_id);
+			City city = cityService.getById(id);
+			if(city == null){
+				return "{\"code\": 2, \"msg\": \"城市不存在\"}";
+			}
+			schoolService.deleteByCityId(id);
+			cityService.delete(id);
+			return "{\"code\": 0,\"msg\": \"\"}";
+		}catch(Exception e){
+			String msg = e.toString();
+			msg = msg.replace("\"","\\\"");
+			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+		}
+	}
+	
+	
 
 }

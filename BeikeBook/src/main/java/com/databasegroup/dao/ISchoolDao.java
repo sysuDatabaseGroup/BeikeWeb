@@ -6,4 +6,5 @@ import com.databasegroup.model.School;
 
 @Repository
 public interface ISchoolDao extends IBaseDao<School> {
+	void deleteByCityId(int id);
 }

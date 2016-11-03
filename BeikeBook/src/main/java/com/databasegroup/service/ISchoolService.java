@@ -9,4 +9,5 @@ import com.databasegroup.model.School;
 import com.databasegroup.model.User;
 
 public interface ISchoolService extends IBaseService<School> {
+	void deleteByCityId(int id);
 }

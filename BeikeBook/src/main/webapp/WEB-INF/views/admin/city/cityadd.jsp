@@ -56,9 +56,9 @@
 		</c:if>
         <form id="city" method="POST" action="cityadd">
             <label>城市名</label>
-            <input type="text" name="cityName" id="cityName" class="input-xlarge">
+            <input type="text" name="name" id="cityName" class="input-xlarge">
             <label>城市缩写</label>
-            <input type="text" name="cityNum" id="cityNum" class="input-xlarge">
+            <input type="text" name="num" id="cityNum" class="input-xlarge">
         </form>
       </div>
   </div>

@@ -40,4 +40,9 @@ public class SchoolServiceImpl implements ISchoolService {
 	public List<School> getAll() {
 		return schoolDao.getAll();
 	}
+	
+	@Override
+	public void deleteByCityId(int id) {
+		schoolDao.deleteByCityId(id);
+	}
 }
