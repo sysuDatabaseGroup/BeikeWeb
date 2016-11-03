@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.databasegroup.dao.IBookDao;
 import com.databasegroup.dao.IDealedBookDao;
 import com.databasegroup.dao.IRentingOrderDao;
 import com.databasegroup.exception.NoEnoughBooksException;
@@ -23,6 +24,9 @@ public class RentingOrderServiceImpl implements IRentingOrderService {
 	
 	@Resource
 	private IDealedBookDao dealedBookDao;
+	
+	@Resource
+	private IBookDao bookDao;
 
 	@Override
 	public void insert(RentingOrder entity) {
@@ -69,6 +73,10 @@ public class RentingOrderServiceImpl implements IRentingOrderService {
 	public void insertOrder(RentingOrder rentingOrder) {
 		StringBuilder dealedBookId = new StringBuilder();
 		int bookId = rentingOrder.getBookId();
+		
+		// 锁住这本书
+		bookDao.getById(bookId);
+		
 		int amount  = rentingOrder.getAmount();
 		List<DealedBook> dealedBooks = 
 				dealedBookDao.getNoDealedBookByBookIdAndAmount(bookId, amount);

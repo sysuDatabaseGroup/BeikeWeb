@@ -83,7 +83,6 @@
 		FROM bk_dealed_book
 		WHERE book_id=#{bookId} AND selled=0 AND rented =0
 		LIMIT #{amount}
-		FOR UPDATE
 	</select>
 	
 	<select id="getEncashingAmountByUserId" parameterType="int"

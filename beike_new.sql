@@ -139,7 +139,7 @@ CREATE TABLE `bk_encashment` (
   `user_id` int(11) NOT NULL,
   `alipay_account` varchar(30) NOT NULL,
   `alipay_name` varchar(30) NOT NULL,
-  `encashing_amount` int(3) NOT NULL,  
+  `encashing_amount` double(4) NOT NULL,  
   `phone` varchar(20) NOT NULL,
   `encashed` int(1) DEFAULT 0,
   PRIMARY KEY (`id`),

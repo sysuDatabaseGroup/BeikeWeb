@@ -28,6 +28,7 @@
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_book WHERE id=#{id}
+		FOR UPDATE
 	</select>
 	
 	<select id="getAll"
