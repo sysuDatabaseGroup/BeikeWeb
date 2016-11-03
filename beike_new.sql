@@ -99,6 +99,7 @@ CREATE TABLE `bk_city` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(10) NOT NULL,
   `num` varchar(10) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -139,9 +140,9 @@ CREATE TABLE `bk_encashment` (
   `user_id` int(11) NOT NULL,
   `alipay_account` varchar(30) NOT NULL,
   `alipay_name` varchar(30) NOT NULL,
-  `encashing_amount` double(4) NOT NULL,  
+  `encashing_amount` double NOT NULL,  
   `phone` varchar(20) NOT NULL,
-  `encashed` int(1) DEFAULT 0,
+  `encashed` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   CHECK(encashing_amount >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -156,6 +157,7 @@ CREATE TABLE `bk_school` (
   `num` varchar(10) NOT NULL,
   `admin` varchar(20) DEFAULT NULL,
   `password` varchar(20) DEFAULT NULL,
+  `status` int(1) NOT NULL DEFAULT 0,
   `city_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (city_id) REFERENCES bk_city(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
