@@ -28,6 +28,13 @@
 		WHERE status=0
 	</select>
 	
+	<select id="getByAdmin" parameterType="String" resultMap="schoolResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_school
+		WHERE admin=#{admin} and status=0
+	</select>
+	
 	<insert id="insert" parameterType="School" >
 		INSERT INTO bk_school (name, num, admin,
 			password, city_id) VALUES
@@ -56,4 +63,20 @@
 		status=1
 		WHERE city_id=#{cityId}
 	</delete>
+	
+	<select id="getLimitSchools" resultMap="schoolResultMap">
+		SELECT *
+		FROM bk_school
+		WHERE status=0
+		ORDER BY id
+		LIMIT #{start},#{num}
+	</select>
+	
+	<select id="getLimitSchoolsByAdmin" resultMap="schoolResultMap">
+		SELECT *
+		FROM bk_school
+		WHERE status=0 and admin=#{admin}
+		ORDER BY id
+		LIMIT #{start},#{num}
+	</select>
 </mapper>

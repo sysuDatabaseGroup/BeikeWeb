@@ -51,4 +51,9 @@ public class DistrictServiceImpl implements IDistrictService {
 	public List<DistrictStoredSituation> getSituationByBookId(int id) {
 		return districtDao.getSituationByBookId(id);
 	}
+	
+	@Override
+	public void deleteBySchoolId(int id) {
+		districtDao.deleteBySchoolId(id);
+	}
 }

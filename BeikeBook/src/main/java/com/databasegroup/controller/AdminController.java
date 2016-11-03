@@ -43,6 +43,16 @@ public class AdminController {
 	private ICityService cityService;
 	@Autowired
 	private ISchoolService schoolService;
+	@Autowired
+	private IDistrictService districtService;
+	
+	private String str2MD5(String msg) throws Exception{
+		MessageDigest md = MessageDigest.getInstance("md5");
+		byte[] buf = md.digest(msg.getBytes());
+		BASE64Encoder encoder = new BASE64Encoder();
+		String encode_msg = encoder.encode(buf);
+		return encode_msg;
+	}
 
 	@RequestMapping(value="/index",method=GET)
 	public String index(Model model, HttpServletRequest request) {
@@ -117,10 +127,7 @@ public class AdminController {
 		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
-		MessageDigest md = MessageDigest.getInstance("md5");
-		byte[] buf = md.digest(password.getBytes());
-		BASE64Encoder encoder = new BASE64Encoder();
-		String encode_pw = encoder.encode(buf);
+		String encode_pw = str2MD5(password);
 		Admin admin = adminService.getByName(name);
 		if(admin == null){
 			model.addAttribute("error_msg","用户不存在");
@@ -248,6 +255,10 @@ public class AdminController {
 	
 	@RequestMapping(value="/cityList", method=GET)
 	public String cityList(Model model, HttpServletRequest request) {
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		if(Integer.parseInt(roleType) != 0){
+			return "/admin/404";
+		}
 		int curPageNo = request.getParameter("pageNo") == null? 1:Integer.parseInt(request.getParameter("pageNo"));
 		model.addAttribute("pageNo",curPageNo);
 		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
@@ -268,7 +279,12 @@ public class AdminController {
 	
 	@RequestMapping(value="/cityadd",method={GET,POST})
 	public String cityAdd(Model model, HttpServletRequest request) {
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		if(Integer.parseInt(roleType) != 0){
+			return "/admin/404";
+		}
 		model.addAttribute("page","city/cityadd.jsp");
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
 		String get = new String("GET");
 		if(request.getMethod().equals(get)){
 			return "/admin/layout";
@@ -295,6 +311,10 @@ public class AdminController {
 
 	@RequestMapping(value="/cityedit", method=GET)
 	public String cityEdit(Model model, HttpServletRequest request) {
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		if(Integer.parseInt(roleType) != 0){
+			return "/admin/404";
+		}
 		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
 		model.addAttribute("page","city/cityedit.jsp");
 		try{
@@ -319,6 +339,10 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value="/savecity",method=POST)
 	public String saveCity(Model model, HttpServletRequest request) {
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		if(Integer.parseInt(roleType) != 0){
+			return "/admin/404";
+		}
 		try{
 			request.setCharacterEncoding("UTF-8");
 			//model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
@@ -349,6 +373,10 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value="/deletecity",method=POST)
 	public String deleteCity(Model model, HttpServletRequest request) {
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		if(Integer.parseInt(roleType) != 0){
+			return "/admin/404";
+		}
 		try{
 			request.setCharacterEncoding("UTF-8");
 			String str_id = request.getParameter("id");
@@ -370,6 +398,208 @@ public class AdminController {
 		}
 	}
 	
+	@RequestMapping(value="/schoolList", method=GET)
+	public String schoolList(Model model, HttpServletRequest request) {
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		if(Integer.parseInt(roleType) != 0){
+			return "/admin/404";
+		}
+		int curPageNo = request.getParameter("pageNo") == null? 1:Integer.parseInt(request.getParameter("pageNo"));
+		model.addAttribute("pageNo",curPageNo);
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		List<School> schools = schoolService.getLimitSchools((curPageNo-1)*5,20);
+		if(schools == null){
+			schools = new ArrayList<School>();
+		}
+		int numOfItem = schools.size() > 5? 5:schools.size();
+		model.addAttribute("numOfItem",numOfItem);
+		int maxPage = schools.size() / 5 + curPageNo;
+		if(schools.size() % 5 == 0){
+			maxPage = maxPage - 1;
+		}
+		HashMap<Integer,String> cities = new HashMap<Integer,String>();
+		for(School school:schools){
+			City city = cityService.getById(school.getCityId());
+			cities.put(school.getId(),city.getName());
+		}
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("schoolInfos",schools);
+		model.addAttribute("cities",cities);
+		int beginPage = maxPage >= 4? maxPage - 3:1;
+		model.addAttribute("beginPage",beginPage);
+		model.addAttribute("page","city/school.jsp");
+		return "/admin/layout";
+	}
 	
+	@RequestMapping(value="/schooladd",method={GET,POST})
+	public String schoolAdd(Model model, HttpServletRequest request) {
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		if(Integer.parseInt(roleType) != 0){
+			return "/admin/404";
+		}
+		model.addAttribute("page","city/schooladd.jsp");
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		model.addAttribute("roleType",(String)request.getSession().getAttribute("roleType"));
+		List<City> cities = cityService.getAll();
+		model.addAttribute("cityInfos",cities);
+		String get = new String("GET");
+		if(request.getMethod().equals(get)){
+			return "/admin/layout";
+		}
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String name = request.getParameter("name");
+			String num = request.getParameter("num");
+			String cityId = request.getParameter("city");
+			String adminName = request.getParameter("admin");
+			String password = request.getParameter("password");
+			String repassword = request.getParameter("repassword");
+			if(name == null||num == null||cityId == null||adminName == null||password == null||repassword == null||
+				name.length() == 0||num.length() == 0||cityId.length() == 0||adminName.length() == 0||password.length() == 0||repassword.length() == 0){
+				model.addAttribute("error_msg","请填写所有信息");
+				return "/admin/layout";
+			}
+			City city = cityService.getById(Integer.parseInt(cityId));
+			if(city == null){
+				model.addAttribute("error_msg","城市不存在");
+				return "/admin/layout";
+			}
+			Admin admin = adminService.getByName(adminName);
+			if(admin != null){
+				model.addAttribute("error_msg","该账户已存在");
+				return "/admin/layout";
+			}
+			if(!password.equals(repassword)){
+				model.addAttribute("error_msg","两次密码输入不一致");
+				return "/admin/layout";
+			}
+			School school = new School();
+			String encode_pw = str2MD5(password);
+			Admin newAdmin = new Admin(adminName,encode_pw,name,1);
+			school.setName(name);
+			school.setNum(num);
+			school.setAdmin(adminName);
+			school.setCityId(Integer.parseInt(cityId));
+			schoolService.insert(school);
+			adminService.insert(newAdmin);
+			model.addAttribute("success_msg","添加成功！");
+			return "/admin/layout";
+		}catch(Exception e){
+			//String msg = e.toString();
+			//msg = msg.replace("\"","\\\"");
+			//model.addAttribute("error_msg","");
+			return "/admin/404";
+		}
+	}
+	
+	@RequestMapping(value="/schooledit", method=GET)
+	public String schoolEdit(Model model, HttpServletRequest request) {
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		if(Integer.parseInt(roleType) != 0){
+			return "/admin/404";
+		}
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		model.addAttribute("page","city/schooledit.jsp");
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			if(str_id == null){
+				return "/admin/404";
+			}
+			int id = Integer.parseInt(str_id);
+			School school = schoolService.getById(id);
+			if(school == null){
+				return "/admin/404";
+			}
+			List<City> cities = cityService.getAll();
+			model.addAttribute("schoolId",school.getId());
+			model.addAttribute("schoolName",school.getName());
+			model.addAttribute("schoolNum",school.getNum());
+			model.addAttribute("cityId",school.getCityId());
+			model.addAttribute("schoolAdmin",school.getAdmin());
+			model.addAttribute("cities",cities);
+			return "/admin/layout";
+		}catch(Exception e){
+			return "/admin/404";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/saveschool",method=POST)
+	public String saveSchool(Model model, HttpServletRequest request) {
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		if(Integer.parseInt(roleType) != 0){
+			return "/admin/404";
+		}
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			String name = request.getParameter("name");
+			String num = request.getParameter("num");
+			String cityId = request.getParameter("city");
+			String password = request.getParameter("password");
+			String repassword = request.getParameter("repassword");
+			if(str_id == null||name == null||num == null||cityId == null||
+				str_id.length() == 0||name.length() == 0||num.length() == 0||cityId.length() == 0){
+				return "{\"code\": 1, \"msg\": \"缺少信息\"}";
+			}
+			int id = Integer.parseInt(str_id);
+			School school = schoolService.getById(id);
+			if(school == null){
+				return "{\"code\": 2, \"msg\": \"该学校不存在\"}";
+			}
+			City city = cityService.getById(Integer.parseInt(cityId));
+			if(city == null){
+				return "{\"code\": 2, \"msg\": \"城市不存在\"}";
+			}
+			if(password != null&&password.length() > 0){
+				if(!password.equals(repassword)){
+					return "{\"code\": 3, \"msg\": \"两次密码输入不一致\"}";
+				}
+				Admin admin = adminService.getByName(school.getAdmin());
+				String encode_pw = str2MD5(password);
+				admin.setPassword(encode_pw);
+				adminService.update(admin);
+			}
+			school.setName(name);
+			school.setNum(num);
+			school.setCityId(Integer.parseInt(cityId));
+			schoolService.update(school);
+			return "{\"code\": 0,\"msg\": \"\"}";
+		}catch(Exception e){
+			String msg = e.toString();
+			msg = msg.replace("\"","\\\"");
+			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deleteschool",method=POST)
+	public String deleteSchool(Model model, HttpServletRequest request) {
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		if(Integer.parseInt(roleType) != 0){
+			return "/admin/404";
+		}
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			if(str_id == null||str_id.length() == 0){
+				return "{\"code\": 1, \"msg\": \"缺少id\"}";
+			}
+			int id = Integer.parseInt(str_id);
+			School school = schoolService.getById(id);
+			if(school == null){
+				return "{\"code\": 2, \"msg\": \"该学校不存在\"}";
+			}
+			districtService.deleteBySchoolId(id);
+			adminService.deleteByName(school.getAdmin());
+			schoolService.delete(id);
+			return "{\"code\": 0,\"msg\": \"\"}";
+		}catch(Exception e){
+			String msg = e.toString();
+			msg = msg.replace("\"","\\\"");
+			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+		}
+	}
 
 }

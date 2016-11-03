@@ -10,6 +10,6 @@ import com.databasegroup.model.DistrictStoredSituation;
 @Repository
 public interface IDistrictDao extends IBaseDao<District> {
 	List<District> getDistrictBySchoolId(int id);
-	
+	void deleteBySchoolId(int id);
 	List<DistrictStoredSituation> getSituationByBookId(int id);
 }

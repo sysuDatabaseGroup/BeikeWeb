@@ -115,6 +115,7 @@ CREATE TABLE `bk_district` (
   `deliver_name` varchar(10) NOT NULL,
   `deliver_phone` varchar(20) NOT NULL,
   `school_id` int(11) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   FOREIGN KEY (school_id) REFERENCES bk_school(id) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

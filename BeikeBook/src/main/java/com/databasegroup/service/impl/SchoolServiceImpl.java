@@ -45,4 +45,19 @@ public class SchoolServiceImpl implements ISchoolService {
 	public void deleteByCityId(int id) {
 		schoolDao.deleteByCityId(id);
 	}
+	
+	@Override
+	public School getByAdmin(String admin){
+		return schoolDao.getByAdmin(admin);
+	}
+	
+	@Override
+	public List<School> getLimitSchools(int start,int num) {
+		return schoolDao.getLimitSchools(start,num);
+	}
+	
+	@Override
+	public List<School> getLimitSchoolsByAdmin(int start,int num,String admin) {
+		return schoolDao.getLimitSchoolsByAdmin(start,num,admin);
+	}
 }
