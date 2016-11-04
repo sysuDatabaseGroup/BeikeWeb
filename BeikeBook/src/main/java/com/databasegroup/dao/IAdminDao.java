@@ -7,5 +7,6 @@ import com.databasegroup.model.Admin;
 @Repository
 public interface IAdminDao extends IBaseDao<Admin> {
 	public Admin getByName(String name);
+	public void deleteByName(String name);
 
 }

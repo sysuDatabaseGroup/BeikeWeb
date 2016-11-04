@@ -16,14 +16,14 @@
 		resultMap="cityResultMap">
 		SELECT
 		<include refid="columns"></include>
-		FROM bk_city WHERE id=#{id}
+		FROM bk_city WHERE id=#{id} and status=0
 	</select>
 	
 	<select id="getAll"
 		resultMap="cityResultMap">
 		SELECT
 		<include refid="columns"></include>
-		FROM bk_city
+		FROM bk_city WHERE status=0
 	</select>
 	
 	<select id="getCityByCityNum" parameterType="String"
@@ -31,7 +31,7 @@
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_city
-		WHERE num=#{num}
+		WHERE num=#{num} and status=0
 	</select>
 	
 	<insert id="insert" parameterType="City"
@@ -47,15 +47,16 @@
 		WHERE id=#{id}
 	</update>
 	
-	<delete id="delete" parameterType="City">
-		DELETE
-		FROM bk_city
+	<delete id="delete" parameterType="int">
+		UPDATE bk_city SET
+		status=1
 		WHERE id=#{id}
 	</delete> 
 
 	<select id="getLimitCities" resultMap="cityResultMap">
 		SELECT *
 		FROM bk_city
+		WHERE status=0
 		ORDER BY id
 		LIMIT #{start},#{num}
 	</select>

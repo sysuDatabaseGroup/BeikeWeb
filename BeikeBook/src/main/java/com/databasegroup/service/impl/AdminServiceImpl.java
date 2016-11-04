@@ -27,6 +27,10 @@ public class AdminServiceImpl implements IAdminService {
 	public void delete(int id) {
 		adminDao.delete(id);
 	}
+	
+	public void deleteByName(String name){
+		adminDao.deleteByName(name);
+	}
 
 	public Admin getById(int id) {
 		return adminDao.getById(id);

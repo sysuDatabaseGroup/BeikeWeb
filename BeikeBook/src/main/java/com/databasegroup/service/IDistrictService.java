@@ -12,4 +12,5 @@ import com.databasegroup.model.User;
 public interface IDistrictService extends IBaseService<District> {
 	List<District> getDistrictBySchoolId(int id);
 	List<DistrictStoredSituation> getSituationByBookId(int id);
+	void deleteBySchoolId(int id);
 }
