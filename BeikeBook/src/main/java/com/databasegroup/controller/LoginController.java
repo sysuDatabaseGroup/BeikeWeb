@@ -50,7 +50,7 @@ public class LoginController {
 				return "redirect:/";
 			}
 		} else {
-			model.addAttribute("message", "账号密码错误！");
+			model.addAttribute("message", "账号或密码错误！");
 			return "/login";
 		}
 	}

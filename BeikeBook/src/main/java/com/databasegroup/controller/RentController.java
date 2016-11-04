@@ -29,6 +29,7 @@ public class RentController {
 			Model model) {
 		DealedBook dealedBook = 
 				dealedBookService.getById(dealedBookId);
+		if (dealedBook == null) return "redirect:/index";
 		int amountOfBooks = dealedBookService
 				.getAmountOfNoDealedBookBookId(dealedBook.getBook().getId());
 		model.addAttribute("dealedBook", dealedBook);

@@ -1,4 +1,5 @@
 package com.databasegroup.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,54 +23,53 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping(value="/alipay")
+@RequestMapping(value = "/alipay")
 public class AlipayController {
-	
+
 	@Resource
 	private IUserService userService;
-	
+
 	@Resource
 	private IEncashmentService encashmentService;
-	
+
 	@Resource
 	private IDealedBookService dealedBookService;
-	
+
 	@Resource
 	private TransactionMethod transactionMethod;
-	
-	@RequestMapping(method=GET)
+
+	@RequestMapping(method = GET)
 	public String alipay(HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute("user");
-		if (user == null) return "login";
+		if (user == null)
+			return "login";
 		user = userService.updateUserEncashingAmount(user.getId());
-		request.getSession()
-				.setAttribute("user", 
-				user);
+		request.getSession().setAttribute("user", user);
 		return "alipay";
 	}
-	
-	@RequestMapping(method=POST)
-	public String encashing(HttpServletRequest request,
+
+	@RequestMapping(method = POST)
+	public String encashing(
+			HttpServletRequest request, 
 			@RequestParam String alipayAccount,
-			@RequestParam String alipayName,
-			@RequestParam String phone,
-			Model model) {
+			@RequestParam String alipayName, 
+			@RequestParam String phone, Model model) {
 		User user = (User) request.getSession().getAttribute("user");
-		if (user == null) return "login";
-			Encashment encashment = new Encashment();
-			encashment.setAlipayAccount(alipayAccount);
-			encashment.setAlipayName(alipayName);
-			encashment.setPhone(phone);
-			
-			// 事务处理
-			if (transactionMethod
-					.insertEncashment(encashment, user.getId())) {
+		if (user == null)
+			return "login";
+		Encashment encashment = new Encashment();
+		encashment.setAlipayAccount(alipayAccount);
+		encashment.setAlipayName(alipayName);
+		encashment.setPhone(phone);
+
+		// 事务处理
+		if (transactionMethod.insertEncashment(encashment, user.getId())) {
 			user.setWithdrawalAmount(0);
 			request.getSession().setAttribute("user", user);
 			model.addAttribute("message", "提现成功！");
 		} else {
 			model.addAttribute("message", "金额不足，不得提现！");
 		}
-		return "alipay";
+		return "encashing_status";
 	}
 }

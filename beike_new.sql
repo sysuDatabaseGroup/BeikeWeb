@@ -57,8 +57,8 @@ CREATE TABLE `bk_book` (
   `press` varchar(30) NOT NULL,  
   `author` varchar(10) NOT NULL,
   `edition` varchar(10) NOT NULL, 
-  `selling_price` double(5,0) NOT NULL, 
-  `rental_price` double(5,0) NOT NULL, 
+  `selling_price` double(5,1) NOT NULL, 
+  `rental_price` double(5,1) NOT NULL, 
   PRIMARY KEY (`id`),
   FOREIGN KEY (book_category_id) REFERENCES bk_book_category(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (delivery_method_id) REFERENCES bk_delivery_method(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -74,8 +74,8 @@ CREATE TABLE `bk_dealed_book` (
   `id` int(11) NOT NULL AUTO_INCREMENT, 
   `book_id` int(11) NOT NULL,   
   `dealed_num` varchar(20) NOT NULL,   -- 城市编号+学校编号+仓库编号+用户编号+书编号
-  `selling_price` double(5,0) NOT NULL, 
-  `rental_price` double(5,0) NOT NULL, 
+  `selling_price` double(5,1) NOT NULL, 
+  `rental_price` double(5,1) NOT NULL, 
   `district_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `datetime` date NOT NULL,
@@ -139,7 +139,7 @@ CREATE TABLE `bk_encashment` (
   `user_id` int(11) NOT NULL,
   `alipay_account` varchar(30) NOT NULL,
   `alipay_name` varchar(30) NOT NULL,
-  `encashing_amount` double(4) NOT NULL,  
+  `encashing_amount` double(5,1) NOT NULL,  
   `phone` varchar(20) NOT NULL,
   `encashed` int(1) DEFAULT 0,
   PRIMARY KEY (`id`),
@@ -211,7 +211,7 @@ CREATE TABLE `bk_user` (
   `wx_name` varchar(50) DEFAULT NULL,
   `user_num` varchar(20) NOT NULL,
   `password` varchar(50) DEFAULT NULL, -- 临时
-  `withdrawal_amount` double(5,0) DEFAULT 0, -- 
+  `withdrawal_amount` double(5,1) DEFAULT 0, -- 
   `city_id` int(11) DEFAULT NULL,
   `school_id` int(11) DEFAULT NULL,
   `dorm` varchar(10) DEFAULT NULL,
