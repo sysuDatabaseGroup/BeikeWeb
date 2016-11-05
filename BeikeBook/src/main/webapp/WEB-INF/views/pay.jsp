@@ -11,20 +11,36 @@ $(function(){
 	/* 购买书本书添加 */
 	$('#add').click(function(){
 		var $value=parseInt($('#bookNum_input').val())+1;
+		var $deliveryValue = $('#deliveryMethodId').val();
+		$deliveryValue = $deliveryValue==1 ? 0 : 5;
 		if ($value <= <c:out value="${amountOfBooks}"/>) {
 			$('#bookNum_input').val($value);
 			$('#num').html($value);
-			$('#method_sum_price').html($value*<c:out value="${dealedBook.book.sellingPrice}"/>);
+			$('#method_sum_price').html(
+					($deliveryValue + $value*<c:out value="${dealedBook.book.sellingPrice}"/>).toFixed(1)
+					);
 		}
 	});
 	$('#reduce').click(function(){
 		var $value=$('#bookNum_input').val();
+		var $deliveryValue = $('#deliveryMethodId').val();
+		$deliveryValue = $deliveryValue==1 ? 0 : 5;
 		if($value>1){
 			var $value=parseInt($('#bookNum_input').val())-1;
 			$('#bookNum_input').val($value);
 			$('#num').html($value);
-			$('#method_sum_price').html($value*<c:out value="${dealedBook.book.sellingPrice}"/>);
+			$('#method_sum_price').html(
+					($deliveryValue + $value*<c:out value="${dealedBook.book.sellingPrice}"/>).toFixed(1)
+					);
 		}
+	});
+	$('#deliveryMethodId').change(function() {
+		var $value=$('#bookNum_input').val();
+		var $deliveryValue = $('#deliveryMethodId').val();
+		$deliveryValue = $deliveryValue==1 ? 0 : 5;
+		$('#method_sum_price').html(
+				($deliveryValue + $value*<c:out value="${dealedBook.book.sellingPrice}"/>).toFixed(1)
+		);
 	});
 });
 
@@ -60,7 +76,7 @@ $(function(){
 		<div id="pay_info_bottom">
 			<span>配送方式</span>
 			<span id="delivery">
-				<select name="delieryMethodId">
+				<select id="deliveryMethodId" name="deliveryMethodId">
 				  <option value ="1">自提  ￥<c:out value="0"/></option>
 				  <option value ="2">上门配送  ￥<c:out value="5"/></option>
 				</select>
@@ -74,7 +90,7 @@ $(function(){
 	<div class="pay_method">
 		<div id="pay_method_top">
 			<span>总价</span>
-			<span id="method_sum">￥<em id="method_sum_price"><c:out value="${dealedBook.book.sellingPrice+price}"/></em></span>
+			<span id="method_sum">￥<em id="method_sum_price"><c:out value="${dealedBook.book.sellingPrice}"/></em></span>
 		</div>
 		<div id="pay_method_bottom">
 			<input type="submit" id="paying" name="paying" value="在线支付" />

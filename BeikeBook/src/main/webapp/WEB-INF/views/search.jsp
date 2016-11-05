@@ -72,7 +72,7 @@ $(function(){
 			<input type="search" name="bookTitle" id="header_search" placeholder="热门搜索：大英 毛概 高数" required="required" />
 		<a href="<c:url value='/center'/>"><span id="header_center"></span></a>
 		</form>
-	</header>>
+	</header>
 	<div class="side">
 		<h2>书籍列表</h2>
 		<span>书籍支持上门自取或校内配送</span>

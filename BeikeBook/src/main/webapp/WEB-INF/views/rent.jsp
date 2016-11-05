@@ -11,23 +11,38 @@ $(function(){
 	$('.what_rent').show();
 	/* 购买书本书添加 */
 	$('#add').click(function(){
+		var $deliveryValue = $('#deliveryMethodId').val();
+		$deliveryValue = $deliveryValue==1 ? 0 : 5;
 		var $value=parseInt($('#bookNum_input').val())+1;
 		if ($value <= <c:out value="${amountOfBooks}"/>) {
 			$('#bookNum_input').val($value);
 			$('#num').html($value);
-			$('#method_sum_price').html($value*<c:out value="${dealedBook.rentalPrice}"/>);
+			$('#method_sum_price').html(
+					($deliveryValue + $value*<c:out value="${dealedBook.book.rentalPrice}"/>).toFixed(1)	
+					);
 		}
 	});
 	$('#reduce').click(function(){
+		var $deliveryValue = $('#deliveryMethodId').val();
+		$deliveryValue = $deliveryValue==1 ? 0 : 5;
 		var $value=$('#bookNum_input').val();
 		if($value>1){
 			var $value=parseInt($('#bookNum_input').val())-1;
 			$('#bookNum_input').val($value);
 			$('#num').html($value);
-			$('#method_sum_price').html($value*<c:out value="${dealedBook.rentalPrice}"/>);
+			$('#method_sum_price').html(
+					($deliveryValue + $value*<c:out value="${dealedBook.book.rentalPrice}"/>).toFixed(1)	
+					);
 		}
 	});
-	
+	$('#deliveryMethodId').change(function() {
+		var $value=$('#bookNum_input').val();
+		var $deliveryValue = $('#deliveryMethodId').val();
+		$deliveryValue = $deliveryValue==1 ? 0 : 5;
+		$('#method_sum_price').html(
+				($deliveryValue + $value*<c:out value="${dealedBook.book.rentalPrice}"/>).toFixed(1)	
+				);
+	});
 });
 
 </script>
@@ -70,14 +85,14 @@ $(function(){
 				<span>库存： <c:out value="${amountOfBooks}" /> 本书</span>
 			</div>
 			<div id="info_bookNum">
-				<span id="info_bookNum_price">￥<c:out value="${dealedBook.rentalPrice}"/>/本</span>
+				<span id="info_bookNum_price">￥<c:out value="${dealedBook.book.rentalPrice}"/>/本</span>
 			</div>
 			<div class="clearbox"></div>
 		</div>
 		<div id="pay_info_bottom">
 			<span>配送方式</span>
 			<span id="delivery">
-				<select name="delieryMethodId">
+				<select id="deliveryMethodId" name="deliveryMethodId">
 				  <option value ="1">自提  ￥<c:out value="0"/></option>
 				  <option value ="2">上门配送  ￥<c:out value="5"/></option>
 				</select>
@@ -90,7 +105,7 @@ $(function(){
 	<div class="pay_method">
 		<div id="pay_method_top">
 			<span>总价</span>
-			<span id="method_sum">￥<em id="method_sum_price"><c:out value="${dealedBook.rentalPrice+price}"/></em></span>
+			<span id="method_sum">￥<em id="method_sum_price"><c:out value="${dealedBook.book.rentalPrice}"/></em></span>
 		</div>
 		<div id="pay_method_bottom">
 			<span id="rent_tip">＊至租书日起，每一个月扣除1元，超出15天算0.5元</span>

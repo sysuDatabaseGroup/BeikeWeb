@@ -52,4 +52,10 @@
 		FROM bk_admin
 		WHERE id=#{adminID}
 	</delete> 
+	
+	<delete id="deleteByName" parameterType="String">
+		DELETE
+		FROM bk_admin
+		WHERE name=#{name}
+	</delete> 
 </mapper>

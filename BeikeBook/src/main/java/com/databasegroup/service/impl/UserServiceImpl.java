@@ -25,6 +25,9 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public void insert(User entity) {
+		if (entity.getWxPhoto() == null || entity.getWxPhoto().length() == 0) {
+			entity.setWxPhoto("/images/user/default.png");
+		}
 		userDao.insert(entity);
 	}
 

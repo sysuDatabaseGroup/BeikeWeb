@@ -10,10 +10,9 @@
 <body>
 	<div class="wrong">
 		<div class="box">
-			<div id="icon"></div>
-			<span>不好意思，出了一些问题 T-T</span>
-			<a href="<c:url value='/index' />">
-				<input type="button" id="back" value="首页"  >
+			<span>${message}</span>
+			<a href="<c:url value='/login' />">
+				<input type="button" id="back" value="登录"  >
 			</a>
 		</div>
 	</div>

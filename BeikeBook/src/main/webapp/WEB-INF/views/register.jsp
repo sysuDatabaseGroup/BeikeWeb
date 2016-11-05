@@ -38,6 +38,11 @@
 					<input type="password" name="repassword" id="repassword"  required="required">
 					<span id="tip">* 两次密码输入不同</span>
 				</label>
+				<label>
+					<span>宿舍</span>
+					<input type="text" name="dorm" required="required">
+				</label>
+				<label>${message}</label>
 				<input type="submit" id="submit" value="注册">
 			</form>
 			<div class="boxTip">

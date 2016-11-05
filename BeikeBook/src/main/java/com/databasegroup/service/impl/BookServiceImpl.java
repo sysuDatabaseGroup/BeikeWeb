@@ -27,6 +27,9 @@ public class BookServiceImpl implements IBookService {
 
 	@Override
 	public void insert(Book entity) {
+		if (entity.getCoverPath() == null || entity.getCoverPath().length() == 0) {
+			entity.setCoverPath("/images/user/default.png");
+		}
 		bookDao.insert(entity);
 	}
 

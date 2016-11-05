@@ -76,9 +76,15 @@
 	</update>
 
 	<delete id="delete" parameterType="District">
-		DELETE
-		FROM bk_district
+		UPDATE bk_district SET
+		status=1
 		WHERE
 		id=#{id}
+	</delete>
+	
+	<delete id="deleteBySchoolId" parameterType="int">
+		UPDATE bk_district SET
+		status=1
+		WHERE school_id=#{schoolId}
 	</delete>
 </mapper>

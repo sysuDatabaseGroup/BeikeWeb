@@ -18,13 +18,21 @@
 		resultMap="schoolResultMap">
 		SELECT
 		<include refid="columns"></include>
-		FROM bk_school WHERE id=#{id}
+		FROM bk_school WHERE id=#{id} and status=0
 	</select>
 	
 	<select id="getAll" resultMap="schoolResultMap">
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_school
+		WHERE status=0
+	</select>
+	
+	<select id="getByAdmin" parameterType="String" resultMap="schoolResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_school
+		WHERE admin=#{admin} and status=0
 	</select>
 	
 	<insert id="insert" parameterType="School" >
@@ -44,9 +52,31 @@
 		WHERE id=#{id}
 	</update>
 	
-	<delete id="delete" parameterType="School">
-		DELETE
-		FROM bk_school
+	<delete id="delete" parameterType="int">
+		UPDATE bk_school SET
+		status=1
 		WHERE id=#{id}
 	</delete> 
+	
+	<delete id="deleteByCityId" parameterType="int">
+		UPDATE bk_school SET
+		status=1
+		WHERE city_id=#{cityId}
+	</delete>
+	
+	<select id="getLimitSchools" resultMap="schoolResultMap">
+		SELECT *
+		FROM bk_school
+		WHERE status=0
+		ORDER BY id
+		LIMIT #{start},#{num}
+	</select>
+	
+	<select id="getLimitSchoolsByAdmin" resultMap="schoolResultMap">
+		SELECT *
+		FROM bk_school
+		WHERE status=0 and admin=#{admin}
+		ORDER BY id
+		LIMIT #{start},#{num}
+	</select>
 </mapper>

@@ -24,6 +24,9 @@ public class BookCategoryServiceImpl implements IBookCategoryService {
 
 	@Override
 	public void insert(BookCategory entity) {
+		if (entity.getIconPath() == null || entity.getIconPath().length() == 0) {
+			entity.setIconPath("/images/bookCategory/default.png");
+		}
 		bookCategoryDao.insert(entity);
 	}
 

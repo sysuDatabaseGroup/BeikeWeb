@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.databasegroup.dao.ICityDao;
@@ -49,6 +50,7 @@ public class DealedBookServiceImpl implements IDealedBookService {
 	}
 
 	@Override
+	@Cacheable("dealedBookCache")
 	public DealedBook getNoSelledAndNoRentedBookByBookId(int id) {
 		return dealedBookDao.getNoSelledAndNoRentedBookByBookId(id);
 	}

@@ -66,12 +66,12 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
-	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+	<!-- 事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	<!-- spring declarative transaction management -->
+	<!-- spring 声明式事务管理 -->
 	<aop:config>
 		<aop:pointcut id="allServiceMethods" 
 			expression="execution(* com.databasegroup.service.impl.*.*(..))" />
