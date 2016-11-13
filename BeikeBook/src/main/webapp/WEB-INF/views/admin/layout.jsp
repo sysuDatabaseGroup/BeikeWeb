@@ -38,7 +38,7 @@
 
                         <ul class="dropdown-menu">
                             <li><a tabindex="-1" href="#">我的账户信息</a></li>
-                            <li><a tabindex="-1" href="logout">退出</a></li>
+                            <li><a tabindex="-1" href="<c:url value='/backend/logout' />">退出</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -55,8 +55,8 @@
         <a href="#city-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-map-marker"></i>托管点管理<i class="icon-chevron-up"></i></a>
         <ul id="city-menu" class="nav nav-list collapse">
             <li ><a href="<c:url value='/backend/cityList' />">城市管理</a></li>
-            <li ><a href="../city/school.jsp">学校管理</a></li>
-            <li ><a href="../city/district.jsp">托管点管理</a></li>
+            <li ><a href="<c:url value='/backend/schoolList' />">学校管理</a></li>
+            <li ><a href="<c:url value='/backend/districtList' />">托管点管理</a></li>
         </ul>
 
         <a href="#book-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-book"></i>书籍管理<i class="icon-chevron-up"></i></a>
