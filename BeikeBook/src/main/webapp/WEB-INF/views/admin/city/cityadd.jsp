@@ -33,9 +33,9 @@
         </div>
         
         <ul class="breadcrumb">
-            <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
+            <li><a href="index">首页</a><span class="divider">/</span></li>
             <li>托管点管理<span class="divider">/</span></li>
-            <li><a href="city.jsp">城市</a><span class="divider">/</span></li>
+            <li><a href="cityList">城市</a><span class="divider">/</span></li>
             <li class="active">增加城市</li>
         </ul>
 

@@ -25,9 +25,9 @@
         </div>
 
         <ul class="breadcrumb">
-            <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
+            <li><a href="index">首页</a><span class="divider">/</span></li>
             <li>托管点管理<span class="divider">/</span></li>
-            <li><a href="city.jsp">城市</a><span class="divider">/</span></li>
+            <li><a href="cityList">城市</a><span class="divider">/</span></li>
             <li class="active">编辑城市</li>
         </ul>
 
@@ -36,7 +36,7 @@
                     
 <div class="btn-toolbar">
     <button onclick="save()" class="btn btn-primary"><i class="icon-save"></i> 修改</button>
-    <a href="#myModal" data-toggle="modal" class="btn">删除</a>
+    <a onclick="deleteConfirm(${id},'${cityName}');return false;" href="" class="btn">删除</a>
 </div>
 
 <div class="well">
@@ -59,11 +59,11 @@
     <h3 id="myModalLabel">删除城市？</h3>
   </div>
   <div class="modal-body">
-    <p class="error-text"><i class="icon-warning-sign modal-icon"></i>确认删除城市［深圳］？</p>
+    <p class="error-text" id="confirm_msg"><i class="icon-warning-sign modal-icon"></i>确认删除城市［深圳］？</p>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
-    <button class="btn btn-danger" data-dismiss="modal">删除</button>
+    <button class="btn btn-danger" onclick="deleteCity()">删除</button>
   </div>
 </div>
             </div>
@@ -90,6 +90,31 @@ function save()
             }
         },
     });
+}
+function deleteConfirm(id,name){
+	var msg = '<i class="icon-warning-sign modal-icon"></i>确认删除城市['+name+"]?";
+	document.getElementById("confirm_msg").innerHTML = msg;
+	document.getElementById("myModal").setAttribute("delete_id",id+"");
+	//alert("11");
+	$("#myModal").modal('show');
+}
+
+function deleteCity() {
+	var params = {"id":document.getElementById("myModal").getAttribute("delete_id")};
+	$.ajax({
+		url: "deletecity",
+		type: "POST",
+		dataType: "json",
+		data: params,
+		success: function(res){
+			if(res.code == 0){
+				location.href = 'cityList';
+			}
+			else{
+				alert(res.msg);
+			}
+		},
+	});
 }
 </script>
 

@@ -330,6 +330,7 @@ public class AdminController {
 			}
 			model.addAttribute("cityName",city.getName());
 			model.addAttribute("cityAbbreviate",city.getNum());
+			model.addAttribute("id",str_id);
 			return "/admin/layout";
 		}catch(Exception e){
 			return "/admin/404";
@@ -594,6 +595,210 @@ public class AdminController {
 			districtService.deleteBySchoolId(id);
 			adminService.deleteByName(school.getAdmin());
 			schoolService.delete(id);
+			return "{\"code\": 0,\"msg\": \"\"}";
+		}catch(Exception e){
+			String msg = e.toString();
+			msg = msg.replace("\"","\\\"");
+			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+		}
+	}
+	
+	@RequestMapping(value="/districtList", method=GET)
+	public String districtList(Model model, HttpServletRequest request) {
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		int curPageNo = request.getParameter("pageNo") == null? 1:Integer.parseInt(request.getParameter("pageNo"));
+		model.addAttribute("pageNo",curPageNo);
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		List<District> districts = new ArrayList<District>();
+		if(Integer.parseInt(roleType) != 0){
+			String adminName = (String)request.getSession().getAttribute("adminUserName");
+			School school = schoolService.getByAdmin(adminName);
+			districts = districtService.getLimitDistrictsBySchool(school.getId(),(curPageNo-1)*5,20);
+		}
+		else{
+			districts = districtService.getLimitDistricts((curPageNo-1)*5,20);
+		}
+		if(districts == null){
+			districts = new ArrayList<District>();
+		}
+		int numOfItem = districts.size() > 5? 5:districts.size();
+		model.addAttribute("numOfItem",numOfItem);
+		int maxPage = districts.size() / 5 + curPageNo;
+		if(districts.size() % 5 == 0){
+			maxPage = maxPage - 1;
+		}
+		HashMap<Integer,String> schoolMapper = new HashMap<Integer,String>();
+		for(District district:districts){
+			School school = schoolService.getById(district.getSchoolId());
+			schoolMapper.put(school.getId(),school.getName());
+		}
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("districtInfos",districts);
+		model.addAttribute("schoolMapper",schoolMapper);
+		int beginPage = maxPage >= 4? maxPage - 3:1;
+		model.addAttribute("beginPage",beginPage);
+		model.addAttribute("page","city/district.jsp");
+		return "/admin/layout";
+	}
+    
+	@RequestMapping(value="/districtadd",method={GET,POST})
+	public String districtAdd(Model model, HttpServletRequest request) {
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		boolen isRoot = (Integer.parseInt(roleType) == 0)
+		if(Integer.parseInt(roleType) == 0){
+			List<School> schools = schoolService.getAll();
+			model.addAttribute("schoolInfos",schools);
+		}
+		else{
+			String adminName = (String)request.getSession().getAttribute("adminUserName");
+			School curschool = schoolService.getByAdmin(adminName);
+			model.addAttribute("curschoolId",curschool.getId());
+		}
+		model.addAttribute("page","city/districtadd.jsp");
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		model.addAttribute("roleType",(String)request.getSession().getAttribute("roleType"));
+		model.addAttribute("isRoot",isRoot);
+		String get = new String("GET");
+		if(request.getMethod().equals(get)){
+			return "/admin/layout";
+		}
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String name = request.getParameter("name");
+			String schoolId = request.getParameter("school");
+			String address = request.getParameter("address");
+			if(name == null||schoolId == null||address == null||
+				name.length() == 0||schoolId.length() == 0||address.length() == 0){
+				model.addAttribute("error_msg","请填写所有信息");
+				return "/admin/layout";
+			}
+			School school = schoolService.getById(Integer.parseInt(schoolId));
+			if(school == null){
+				model.addAttribute("error_msg","所选学校不存在");
+				return "/admin/layout";
+			}
+			District district = new District();
+			district.setName(name);
+			district.setNum(1);
+			district.setAddress(address);
+			district.setSchoolId(schoolId);
+			district.setDeliverName("");
+			district.setDeliverPhone("");
+			districtService.insert(district);
+			model.addAttribute("success_msg","添加成功！");
+			return "/admin/layout";
+		}catch(Exception e){
+			//String msg = e.toString();
+			//msg = msg.replace("\"","\\\"");
+			//model.addAttribute("error_msg","");
+			return "/admin/404";
+		}
+	}
+	
+	@RequestMapping(value="/districtedit", method=GET)
+	public String districtEdit(Model model, HttpServletRequest request) {
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		model.addAttribute("page","city/districtedit.jsp");
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			if(str_id == null){
+				return "/admin/404";
+			}
+			int id = Integer.parseInt(str_id);
+			District district = districtService.getById(id);
+			if(district == null){
+				return "/admin/404";
+			}
+			if(Integer.parseInt(roleType) != 0){
+				String adminName = (String)request.getSession().getAttribute("adminUserName");
+				School school = schoolService.getById(district.getSchoolId());
+				if(!school.getAdmin().equals(adminName)){
+					return "/admin/404";
+				}
+			}
+			boolen isRoot = (Integer.parseInt(roleType) == 0)
+			if(Integer.parseInt(roleType) == 0){
+				List<School> schools = schoolService.getAll();
+				model.addAttribute("schools",schools);
+			}
+			model.addAttribute("districtId",district.getId());
+			model.addAttribute("districtName",district.getName());
+			model.addAttribute("address",district.getAddress());
+			model.addAttribute("schoolId",district.getSchoolId());
+			model.addAttribute("isRoot",isRoot);
+			return "/admin/layout";
+		}catch(Exception e){
+			return "/admin/404";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/savedistrict",method=POST)
+	public String saveDistrict(Model model, HttpServletRequest request) {
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			String name = request.getParameter("name");
+			String address = request.getParameter("address");
+			String schoolId = request.getParameter("school");
+			if(str_id == null||name == null||address == null||schoolId == null||
+				str_id.length() == 0||name.length() == 0||address.length() == 0||schoolId.length() == 0){
+				return "{\"code\": 1, \"msg\": \"缺少信息\"}";
+			}
+			int id = Integer.parseInt(str_id);
+			District district = districtService.getById(id);
+			if(district == null){
+				return "{\"code\": 2, \"msg\": \"该仓库不存在\"}";
+			}
+			School school = schoolService.getById(Integer.parseInt(schoolId));
+			if(cischoolty == null){
+				return "{\"code\": 2, \"msg\": \"该学校不存在\"}";
+			}
+			if(Integer.parseInt(roleType) != 0){
+				String adminName = (String)request.getSession().getAttribute("adminUserName");
+				School myschool = schoolService.getById(district.getSchoolId());
+				if(!myschool.getAdmin().equals(adminName)){
+					return "{\"code\": 3, \"msg\": \"权限不足\"}";
+				}
+			}
+			district.setName(name);
+			district.setAddress(address);
+			district.setSchoolId(Integer.parseInt(schoolId));
+			districtService.update(district);
+			return "{\"code\": 0,\"msg\": \"\"}";
+		}catch(Exception e){
+			String msg = e.toString();
+			msg = msg.replace("\"","\\\"");
+			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deletedistrict",method=POST)
+	public String deleteDistrict(Model model, HttpServletRequest request) {
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			if(str_id == null||str_id.length() == 0){
+				return "{\"code\": 1, \"msg\": \"缺少id\"}";
+			}
+			int id = Integer.parseInt(str_id);
+			District district = schoolService.getById(id);
+			if(district == null){
+				return "{\"code\": 2, \"msg\": \"该学校不存在\"}";
+			}
+			if(Integer.parseInt(roleType) != 0){
+				String adminName = (String)request.getSession().getAttribute("adminUserName");
+				School myschool = schoolService.getById(district.getSchoolId());
+				if(!myschool.getAdmin().equals(adminName)){
+					return "{\"code\": 3, \"msg\": \"权限不足\"}";
+				}
+			}
+			districtService.delete(id);
 			return "{\"code\": 0,\"msg\": \"\"}";
 		}catch(Exception e){
 			String msg = e.toString();

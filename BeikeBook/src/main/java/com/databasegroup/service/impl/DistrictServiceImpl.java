@@ -56,4 +56,14 @@ public class DistrictServiceImpl implements IDistrictService {
 	public void deleteBySchoolId(int id) {
 		districtDao.deleteBySchoolId(id);
 	}
+	
+	@Override
+	public List<District> getLimitDistricts(int start,int num) {
+		return districtDao.getLimitDistricts(start,num);
+	}
+	
+	@Override
+	public List<District> getLimitDistrictsBySchool(int schoolId,int start,int num) {
+		return districtDao.getLimitDistrictsBySchool(schoolId,start,num);
+	}
 }
