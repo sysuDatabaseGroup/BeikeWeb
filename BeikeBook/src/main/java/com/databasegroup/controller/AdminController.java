@@ -644,7 +644,7 @@ public class AdminController {
 	@RequestMapping(value="/districtadd",method={GET,POST})
 	public String districtAdd(Model model, HttpServletRequest request) {
 		String roleType = (String)request.getSession().getAttribute("roleType");
-		boolen isRoot = (Integer.parseInt(roleType) == 0)
+		boolean isRoot = (Integer.parseInt(roleType) == 0);
 		if(Integer.parseInt(roleType) == 0){
 			List<School> schools = schoolService.getAll();
 			model.addAttribute("schoolInfos",schools);
@@ -681,7 +681,7 @@ public class AdminController {
 			district.setName(name);
 			district.setNum(1);
 			district.setAddress(address);
-			district.setSchoolId(schoolId);
+			district.setSchoolId(Integer.parseInt(schoolId));
 			district.setDeliverName("");
 			district.setDeliverPhone("");
 			districtService.insert(district);
@@ -718,7 +718,7 @@ public class AdminController {
 					return "/admin/404";
 				}
 			}
-			boolen isRoot = (Integer.parseInt(roleType) == 0)
+			boolean isRoot = (Integer.parseInt(roleType) == 0);
 			if(Integer.parseInt(roleType) == 0){
 				List<School> schools = schoolService.getAll();
 				model.addAttribute("schools",schools);
@@ -754,7 +754,7 @@ public class AdminController {
 				return "{\"code\": 2, \"msg\": \"该仓库不存在\"}";
 			}
 			School school = schoolService.getById(Integer.parseInt(schoolId));
-			if(cischoolty == null){
+			if(school == null){
 				return "{\"code\": 2, \"msg\": \"该学校不存在\"}";
 			}
 			if(Integer.parseInt(roleType) != 0){
@@ -787,7 +787,7 @@ public class AdminController {
 				return "{\"code\": 1, \"msg\": \"缺少id\"}";
 			}
 			int id = Integer.parseInt(str_id);
-			District district = schoolService.getById(id);
+			District district = districtService.getById(id);
 			if(district == null){
 				return "{\"code\": 2, \"msg\": \"该学校不存在\"}";
 			}
