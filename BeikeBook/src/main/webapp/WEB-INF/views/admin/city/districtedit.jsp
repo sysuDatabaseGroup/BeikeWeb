@@ -48,7 +48,7 @@
             <select name="school" id="DropDownDorm" class="input-xlarge">
               <option value="0">未选择</option>
 					<c:forEach items="${schools}" var="school">
-              <option value="school.getId()" <c:if test="${schoolId == school.getId9)}"><c:out value='selected="selected"'/></c:if>>${school.getName()}</option>
+              <option value="${school.getId()}" <c:if test="${schoolId == school.getId()}"><c:out value='selected="selected"'/></c:if>>${school.getName()}</option>
               </c:forEach>
             </select>
 				</c:when>
@@ -84,7 +84,7 @@
 function save()
 {
     var params = {};
-    params.name = document.getElementById("schoolName").value;
+    params.name = document.getElementById("districtName").value;
     params.address = document.getElementById("address").value;
     var selectList = document.getElementById("DropDownDorm");
 	if(selectList){

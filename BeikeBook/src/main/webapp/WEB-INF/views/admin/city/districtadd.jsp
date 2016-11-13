@@ -17,6 +17,15 @@
             color: #fff;
             font-weight: bold;
         }
+		.error{
+			color: red;
+		}
+		.error:before{
+			content: "*";
+		}
+		.success{
+			color: green;
+		}
     </style>
     
     <div class="content">
@@ -46,7 +55,7 @@
 		<c:if test="${! empty success_msg}">
 		<div class="success">${success_msg}</div>
 		</c:if>
-        <form id="district">
+        <form id="district" method="POST" action="districtadd">
             <label>托管点名</label>
             <input type="text" name="name" class="input-xlarge" placeholder="格式：xx托管点">
              <label>所在学校</label>

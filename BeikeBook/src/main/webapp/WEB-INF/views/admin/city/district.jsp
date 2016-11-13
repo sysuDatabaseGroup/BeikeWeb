@@ -35,7 +35,7 @@
             <div class="row-fluid">
                     
 <div class="btn-toolbar">
-    <a href="districtadd.jsp" style="color:#fff;"><button class="btn btn-primary"><i class="icon-plus"></i> 增加托管点</button></a>
+    <a href="districtadd" style="color:#fff;"><button class="btn btn-primary"><i class="icon-plus"></i> 增加托管点</button></a>
 </div>
 
 <div class="well">
@@ -106,7 +106,7 @@
 <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">删除学校？</h3>
+        <h3 id="myModalLabel">删除托管点？</h3>
     </div>
     <div class="modal-body">
         <p id="confirm_msg" class="error-text"><i class="icon-warning-sign modal-icon"></i>确认删除学校［深圳大学］？</p>
@@ -121,7 +121,7 @@
     </div>
 	<script>
 		function deleteConfirm(id,name){
-			var msg = '<i class="icon-warning-sign modal-icon"></i>确认删除仓库['+name+"]?";
+			var msg = '<i class="icon-warning-sign modal-icon"></i>确认删除托管点['+name+"]?";
 			document.getElementById("confirm_msg").innerHTML = msg;
 			document.getElementById("myModal").setAttribute("delete_id",id+"");
 			//alert("11");
@@ -137,7 +137,7 @@
 				data: params,
 				success: function(res){
 					if(res.code == 0){
-						location.reload(true);
+						//location.reload(true);
 					}
 					else{
 						alert(res.msg);
