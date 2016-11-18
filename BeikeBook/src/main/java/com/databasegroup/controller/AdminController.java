@@ -953,5 +953,182 @@ public class AdminController {
 			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
 		}
 	}
+	
+	@RequestMapping(value="/booksList", method=GET)
+	public String booksList(Model model, HttpServletRequest request) {
+		int curPageNo = request.getParameter("pageNo") == null? 1:Integer.parseInt(request.getParameter("pageNo"));
+		model.addAttribute("pageNo",curPageNo);
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		List<Book> books = bookService.getLimitBooks((curPageNo-1)*5,20);
+		int numOfItem = books.size() > 5? 5:books.size();
+		model.addAttribute("numOfItem",numOfItem);
+		int maxPage = books.size() / 5 + curPageNo;
+		if(books.size() % 5 == 0){
+			maxPage = maxPage - 1;
+		}
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("bookInfos",books);
+		int beginPage = maxPage >= 4? maxPage - 3:1;
+		model.addAttribute("beginPage",beginPage);
+		model.addAttribute("page","book/books.jsp");
+		return "/admin/layout";
+	}
+	
+	@RequestMapping(value="/booksadd",method={GET,POST})
+	public String booksAdd(@RequestParam(value = "file", required=false) MultipartFile file, Model model, HttpServletRequest request) {
+		model.addAttribute("page","book/booksadd.jsp");
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		String get = new String("GET");
+		if(request.getMethod().equals(get)){
+			List<BookCategory> categories = bookCategoryService.getAll();
+			model.addAttribute("categoryInfos",categories);
+			return "/admin/layout";
+		}
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String name = request.getParameter("name");
+			String author = request.getParameter("author");
+			String press = request.getParameter("press");
+			String edition = request.getParameter("edition");
+			String sellingPrice_str = request.getParameter("sellingPrice");
+			String rentalPrice_str = request.getParameter("rentalPrice");
+			String categoryId = request.getParameter("category");
+			if(name == null||author == null||press == null||edition == null||sellingPrice_str == null||rentalPrice_str == null||categoryId == null||
+				name.length() == 0||author.length() == 0||press.length() == 0||edition.length() == 0||sellingPrice_str.length() == 0||
+				rentalPrice_str.length() == 0||categoryId.length() == 0){
+				model.addAttribute("error_msg","请填写所有信息");
+				return "/admin/layout";
+			}
+			if(file == null||file.isEmpty()){
+				model.addAttribute("error_msg","没有上传文件");
+				return "/admin/layout";
+			}
+			uploadFile fileHelper = new uploadFile(request);
+			String uuid =  UUID.randomUUID().toString();
+			if(!fileHelper.saveFileToWeb(file,uuid)){
+				model.addAttribute("error_msg","保存失败，path："+fileHelper.pathRoot+uuid);
+				return "/admin/layout";
+			}
+			Book book = new Book();
+			book.setTitle(name);
+			book.setPress(press);
+			book.setAuthor(author);
+			book.setEdition(edition);
+			book.setSellingPrice(Double.parseDouble(sellingPrice_str));
+			book.setRentalPrice(Double.parseDouble(rentalPrice_str));
+			book.setMethodId(1);
+			book.setCoverPath("/images/"+uuid);
+			book.setBookCategoryId(Integer.parseInt(categoryId));
+			bookService.insert(book);
+			model.addAttribute("success_msg","添加成功！");
+			return "/admin/layout";
+		}catch(Exception e){
+			String msg = e.toString();
+			msg = msg.replace("\"","\\\"");
+			model.addAttribute("error_msg",msg);
+			return "/admin/layout";
+			//return "/admin/404";
+		}
+	}
+
+	@RequestMapping(value="/booksedit", method=GET)
+	public String booksEdit(Model model, HttpServletRequest request) {
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		model.addAttribute("page","book/booksedit.jsp");
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			if(str_id == null){
+				return "/admin/404";
+			}
+			int id = Integer.parseInt(str_id);
+			Book book = bookService.getById(id);
+			if(book == null){
+				return "/admin/404";
+			}
+			List<BookCategory> categories = bookCategoryService.getAll();
+			model.addAttribute("book",book);
+			model.addAttribute("categoryInfos",categories);
+			return "/admin/layout";
+		}catch(Exception e){
+			return "/admin/404";
+		}
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/savebooks",method=POST,produces = {"application/json;charset=UTF-8"})
+	public String saveBooks(Model model, HttpServletRequest request,@RequestParam(value = "file", required = false) MultipartFile file) {
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			String name = request.getParameter("name");
+			String author = request.getParameter("author");
+			String press = request.getParameter("press");
+			String edition = request.getParameter("edition");
+			String sellingPrice_str = request.getParameter("sellingPrice");
+			String rentalPrice_str = request.getParameter("rentalPrice");
+			String categoryId = request.getParameter("category");
+			boolean lackInfo = (name == null||author == null||press == null||edition == null||sellingPrice_str == null||rentalPrice_str == null||categoryId == null||
+				name.length() == 0||author.length() == 0||press.length() == 0||edition.length() == 0||sellingPrice_str.length() == 0||
+				rentalPrice_str.length() == 0||categoryId.length() == 0);
+			if(str_id == null||str_id.length() == 0){
+				return "{\"code\": 1, \"msg\": \"缺少信息\"}";
+			}
+			if(lackInfo && file == null){
+				return "{\"code\": 1, \"msg\": \"缺少信息\"}";
+			}
+			int id = Integer.parseInt(str_id);
+			Book book = bookService.getById(id);
+			if(book == null){
+				return "{\"code\": 2, \"msg\": \"书类不存在\"}";
+			}
+			if(!lackInfo){
+				book.setTitle(name);
+				book.setPress(press);
+				book.setAuthor(author);
+				book.setEdition(edition);
+				book.setSellingPrice(Double.parseDouble(sellingPrice_str));
+				book.setRentalPrice(Double.parseDouble(rentalPrice_str));
+				book.setBookCategoryId(Integer.parseInt(categoryId));
+			}
+			if(file != null){
+				uploadFile fileHelper = new uploadFile(request);
+				String uuid = UUID.randomUUID().toString();
+				if(!fileHelper.saveFileToWeb(file,uuid)){
+					return "{\"code\": 3, \"msg\": \"上传文件失败\"}";
+				}
+				book.setCoverPath("/images/"+uuid);
+			}
+			bookService.update(book);
+			return "{\"code\": 0,\"msg\": \"\"}";
+		}catch(Exception e){
+			String msg = e.toString();
+			msg = msg.replace("\"","\\\"");
+			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deletebooks",method=POST,produces = {"application/json;charset=UTF-8"})
+	public String deleteBooks(Model model, HttpServletRequest request) {
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			if(str_id == null||str_id.length() == 0){
+				return "{\"code\": 1, \"msg\": \"缺少id\"}";
+			}
+			int id = Integer.parseInt(str_id);
+			Book book = bookService.getById(id);
+			if(book == null){
+				return "{\"code\": 2, \"msg\": \"书单不存在\"}";
+			}
+			bookService.delete(id);
+			return "{\"code\": 0,\"msg\": \"\"}";
+		}catch(Exception e){
+			String msg = e.toString();
+			msg = msg.replace("\"","\\\"");
+			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+		}
+	}
 
 }

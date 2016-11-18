@@ -165,4 +165,8 @@ public class Book {
 		this.rentalPrice = rentalPrice;
 	}
 	
+	public void setMethodId(int methodId) {
+		this.deliveryMethodId = methodId;
+	}
+	
 }

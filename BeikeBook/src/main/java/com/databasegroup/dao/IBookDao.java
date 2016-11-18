@@ -14,4 +14,5 @@ public interface IBookDao extends IBaseDao<Book> {
 			@Param("bookCategoryId") int bookCategoryId);
 	List<Book> getByBookTitle(
 			@Param("bookTitle") String bookTitle);
+	List<Book> getLimitBooks(@Param("start")int start,@Param("num")int num);
 }

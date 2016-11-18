@@ -67,5 +67,10 @@ public class BookServiceImpl implements IBookService {
 	public List<Book> getByBookTitle(String bookTitle) {
 		return bookDao.getByBookTitle(bookTitle);
 	}
+	
+	@Override
+	public List<Book> getLimitBooks(int start,int num) {
+		return bookDao.getLimitBooks(start,num);
+	}
 
 }

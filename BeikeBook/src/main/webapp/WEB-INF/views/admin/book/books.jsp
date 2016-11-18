@@ -31,7 +31,7 @@
         </div>
         
         <ul class="breadcrumb">
-            <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
+            <li><a href="index">首页</a><span class="divider">/</span></li>
             <li>书籍管理<span class="divider">/</span></li>
             <li class="active">书单</li>
         </ul>
@@ -40,8 +40,8 @@
             <div class="row-fluid">
                     
 <div class="btn-toolbar">
-    <a href="booksadd.jsp" style="color:#fff;"><button class="btn btn-primary"><i class="icon-plus"></i> 增加书单</button></a>
-    <a href="bookadd.jsp" style="color:#fff;"><button class="btn btn-danger"><i class="icon-plus"></i> 增加书本</button></a>
+    <a href="booksadd" style="color:#fff;"><button class="btn btn-primary"><i class="icon-plus"></i> 增加书单</button></a>
+    <a href="dealedbookadd" style="color:#fff;"><button class="btn btn-danger"><i class="icon-plus"></i> 增加书本</button></a>
 </div>
 
 <div class="well">
@@ -61,20 +61,20 @@
         </tr>
       </thead>
       <tbody>
-		<c:forEach items="${bookInfos}" var="i" begin="${pageNo*5}" end="${pageNo*5 + 5}">
+		<c:forEach items="${bookInfos}" var="i" begin="0" end="${numOfItem}">
 			<tr>
-				<td><c:out value="${i.bookClassID}" /></td>
-				<td><c:out value="${i.bookClassName}" /></td>
-				<td><img src="booksimages/${i.bookClassImg}" alt="" /></td>
-				<td><c:out value="${i.author}" /></td>
-				<td><c:out value="${i.company}" /></td>
-				<td><c:out value="${i.version}" /></td>
-				<td><c:out value="${i.sellPrice}" /></td>
-				<td><c:out value="${i.borrowPrice}" /></td>
-				<td><c:out value="${i.bookNum}" /></td>
+				<td><c:out value="${i.getId()}" /></td>
+				<td><c:out value="${i.getTitle()}" /></td>
+				<td><img src="${i.getCoverPath()}" alt="" /></td>
+				<td><c:out value="${i.getAuthor()}" /></td>
+				<td><c:out value="${i.getPress()}" /></td>
+				<td><c:out value="${i.getEdition()}" /></td>
+				<td><c:out value="${i.getSellingPrice()}" /></td>
+				<td><c:out value="${i.getRentalPrice()}" /></td>
+				<td><c:out value="${bookCount.get(i.getId())}" /></td>
 				<td>
-				    <a href="booksedit.jsp"><i class="icon-pencil"></i><span>编辑</span></a>
-				    <a href="#myModal" role="button" data-toggle="modal" style="margin-left:5px;"><i class="icon-remove"></i><span>删除</span></a>
+				    <a href="booksedit?id=${i.getId()}"><i class="icon-pencil"></i><span>编辑</span></a>
+				    <a onclick="deleteConfirm(${i.getId()},'${i.getTitle()}');return false;" href="" style="margin-left:5px;"><i class="icon-remove"></i><span>删除</span></a>
 				</td>
 			</tr>
 		</c:forEach>
@@ -83,12 +83,38 @@
 </div>
 <div class="pagination">
     <ul>
-        <li><a href="books.jsp?pageNo=${pageNo - 1}">Prev</a></li>
-        <li><span><c:out value="${pageNo}"/></span></li>
-        <li><a href="books.jsp?pageNo=${pageNo + 1}"><c:out value="${pageNo+1}"/></a></li>
-        <li><a href="books.jsp?pageNo=${pageNo + 2}"><c:out value="${pageNo+2}"/></a></li>
-        <li><a href="books.jsp?pageNo=${pageNo + 3}"><c:out value="${pageNo+3}"/></a></li>
-        <li><a href="books.jsp?pageNo=${pageNo + 1}">Next</a></li>
+		<c:choose>
+		<c:when test="${pageNo > 1}">
+		<li><a href="userList?pageNo=${pageNo - 1}">Prev</a>
+		</li>
+		</c:when>
+		<c:otherwise>
+		<li><a href="userList?pageNo=${pageNo}">Prev</a>
+		</li>
+		</c:otherwise>
+		</c:choose>
+		<c:forEach var="i" begin="${beginPage}" end="${maxPage}">
+		<c:choose>
+		<c:when test="${i==pageNo}">
+		<li><span><c:out value="${pageNo}"/></span>
+		</li>
+		</c:when>
+		<c:otherwise>
+		<li><a href="userList?pageNo=${i}"><c:out value="${i}"/></a>
+		</li>
+		</c:otherwise>
+		</c:choose>
+		</c:forEach>
+		<c:choose>
+		<c:when test="${pageNo==maxPage}">
+		<li><a href="userList?pageNo=${pageNo}">Next</a>
+		</li>
+		</c:when>
+		<c:otherwise>
+		<li><a href="userList?pageNo=${pageNo + 1}">Next</a>
+		</li>
+		</c:otherwise>
+		</c:choose>
     </ul>
 </div>
 
@@ -98,14 +124,40 @@
         <h3 id="myModalLabel">删除书单？</h3>
     </div>
     <div class="modal-body">
-        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>确认删除书单［毛泽东与邓小平理论知识］？</p>
+        <p class="error-text" id="confirm_msg"><i class="icon-warning-sign modal-icon"></i>确认删除书单［毛泽东与邓小平理论知识］？</p>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
-        <button class="btn btn-danger" data-dismiss="modal">删除</button>
+        <button class="btn btn-danger" onclick="deleteBook()">删除</button>
     </div>
 </div>
             </div>
         </div>
     </div>
-
+	<script>
+		function deleteConfirm(id,name){
+			var msg = '<i class="icon-warning-sign modal-icon"></i>确认删除书单['+name+"]?";
+			document.getElementById("confirm_msg").innerHTML = msg;
+			document.getElementById("myModal").setAttribute("delete_id",id+"");
+			//alert("11");
+			$("#myModal").modal('show');
+		}
+		
+		function deleteBook() {
+			var params = {"id":document.getElementById("myModal").getAttribute("delete_id")};
+			$.ajax({
+				url: "deletebooks",
+				type: "POST",
+				dataType: "json",
+				data: params,
+				success: function(res){
+					if(res.code == 0){
+						location.reload(true);
+					}
+					else{
+						alert(res.msg);
+					}
+				},
+			});
+		}
+	</script>
