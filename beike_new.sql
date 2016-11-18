@@ -41,6 +41,7 @@ CREATE TABLE `bk_book_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(10) NOT NULL, 
   `icon_path` varchar(100) NOT NULL DEFAULT '/images/bookCategory/default.png', 
+  `status` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -59,6 +60,7 @@ CREATE TABLE `bk_book` (
   `edition` varchar(10) NOT NULL, 
   `selling_price` double(5,1) NOT NULL, 
   `rental_price` double(5,1) NOT NULL, 
+  `status` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   FOREIGN KEY (book_category_id) REFERENCES bk_book_category(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (delivery_method_id) REFERENCES bk_delivery_method(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -83,6 +85,7 @@ CREATE TABLE `bk_dealed_book` (
   `selled` int(1) DEFAULT '0', 
   `rented` int(1) DEFAULT '0',  -- 
   `encashed` int(1) DEFAULT '0',  -- 
+  `status` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   FOREIGN KEY (book_id) REFERENCES bk_book(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (district_id) REFERENCES bk_district(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
