@@ -9,4 +9,5 @@ import com.databasegroup.model.City;
 import com.databasegroup.model.User;
 
 public interface IBookCategoryService extends IBaseService<BookCategory> {
+	List<BookCategory> getLimitCategories(@Param("start")int start,@Param("num")int num);
 }

@@ -16,7 +16,7 @@
 		resultMap="bookCategoryResultMap">
 		SELECT
 		<include refid="columns"></include>
-		FROM bk_book_category WHERE id=#{id}
+		FROM bk_book_category WHERE id=#{id} and status=0
 	</select>
 	
 	<select id="getAll"
@@ -24,6 +24,7 @@
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_book_category
+		WHERE status=0
 	</select>
 	
 	<insert id="insert" parameterType="BookCategory">
@@ -39,8 +40,16 @@
 	</update>
 	
 	<delete id="delete" parameterType="BookCategory">
-		DELETE
-		FROM bk_book_category
+		UPDATE bk_book_category SET
+		status=1
 		WHERE id=#{id}
 	</delete> 
+	
+	<select id="getLimitCategories" resultMap="bookCategoryResultMap">
+		SELECT *
+		FROM bk_book_category
+		WHERE status=0
+		ORDER BY id
+		LIMIT #{start},#{num}
+	</select>
 </mapper>

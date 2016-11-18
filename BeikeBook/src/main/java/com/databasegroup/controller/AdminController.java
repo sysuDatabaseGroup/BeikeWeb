@@ -16,9 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.databasegroup.model.*;
 import com.databasegroup.service.*;
 import com.databasegroup.service.impl.*;
+import com.databasegroup.utils.uploadFile;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/backend")
@@ -45,6 +48,8 @@ public class AdminController {
 	private ISchoolService schoolService;
 	@Autowired
 	private IDistrictService districtService;
+	@Autowired
+	private IBookCategoryService bookCategoryService;
 	
 	private String str2MD5(String msg) throws Exception{
 		MessageDigest md = MessageDigest.getInstance("md5");
@@ -338,7 +343,7 @@ public class AdminController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value="/savecity",method=POST)
+	@RequestMapping(value="/savecity",method=POST,produces = {"application/json;charset=UTF-8"})
 	public String saveCity(Model model, HttpServletRequest request) {
 		String roleType = (String)request.getSession().getAttribute("roleType");
 		if(Integer.parseInt(roleType) != 0){
@@ -372,7 +377,7 @@ public class AdminController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/deletecity",method=POST)
+	@RequestMapping(value="/deletecity",method=POST,produces = {"application/json;charset=UTF-8"})
 	public String deleteCity(Model model, HttpServletRequest request) {
 		String roleType = (String)request.getSession().getAttribute("roleType");
 		if(Integer.parseInt(roleType) != 0){
@@ -526,7 +531,7 @@ public class AdminController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/saveschool",method=POST)
+	@RequestMapping(value="/saveschool",method=POST,produces = {"application/json;charset=UTF-8"})
 	public String saveSchool(Model model, HttpServletRequest request) {
 		String roleType = (String)request.getSession().getAttribute("roleType");
 		if(Integer.parseInt(roleType) != 0){
@@ -575,7 +580,7 @@ public class AdminController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/deleteschool",method=POST)
+	@RequestMapping(value="/deleteschool",method=POST,produces = {"application/json;charset=UTF-8"})
 	public String deleteSchool(Model model, HttpServletRequest request) {
 		String roleType = (String)request.getSession().getAttribute("roleType");
 		if(Integer.parseInt(roleType) != 0){
@@ -735,7 +740,7 @@ public class AdminController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/savedistrict",method=POST)
+	@RequestMapping(value="/savedistrict",method=POST,produces = {"application/json;charset=UTF-8"})
 	public String saveDistrict(Model model, HttpServletRequest request) {
 		String roleType = (String)request.getSession().getAttribute("roleType");
 		try{
@@ -777,7 +782,7 @@ public class AdminController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/deletedistrict",method=POST)
+	@RequestMapping(value="/deletedistrict",method=POST,produces = {"application/json;charset=UTF-8"})
 	public String deleteDistrict(Model model, HttpServletRequest request) {
 		String roleType = (String)request.getSession().getAttribute("roleType");
 		try{
@@ -799,6 +804,148 @@ public class AdminController {
 				}
 			}
 			districtService.delete(id);
+			return "{\"code\": 0,\"msg\": \"\"}";
+		}catch(Exception e){
+			String msg = e.toString();
+			msg = msg.replace("\"","\\\"");
+			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+		}
+	}
+	
+	@RequestMapping(value="/categoryList", method=GET)
+	public String categoryList(Model model, HttpServletRequest request) {
+		//String roleType = (String)request.getSession().getAttribute("roleType");
+		int curPageNo = request.getParameter("pageNo") == null? 1:Integer.parseInt(request.getParameter("pageNo"));
+		model.addAttribute("pageNo",curPageNo);
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		List<BookCategory> categories = bookCategoryService.getLimitCategories((curPageNo-1)*5,20);
+		int numOfItem = categories.size() > 5? 5:categories.size();
+		model.addAttribute("numOfItem",numOfItem);
+		int maxPage = categories.size() / 5 + curPageNo;
+		if(categories.size() % 5 == 0){
+			maxPage = maxPage - 1;
+		}
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("classInfos",categories);
+		int beginPage = maxPage >= 4? maxPage - 3:1;
+		model.addAttribute("beginPage",beginPage);
+		model.addAttribute("page","book/class.jsp");
+		return "/admin/layout";
+	}
+	
+	@RequestMapping(value="/categoryadd",method={GET,POST})
+	public String categoryAdd(@RequestParam(value = "file", required=false) MultipartFile file, Model model, HttpServletRequest request) {
+		//String roleType = (String)request.getSession().getAttribute("roleType");
+		model.addAttribute("page","book/classadd.jsp");
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		String get = new String("GET");
+		if(request.getMethod().equals(get)){
+			return "/admin/layout";
+		}
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String name = request.getParameter("name");
+			if(name == null||name.length() == 0){
+				model.addAttribute("error_msg","请填写所有信息");
+				return "/admin/layout";
+			}
+			if(file == null||file.isEmpty()){
+				model.addAttribute("error_msg","没有文件");
+				return "/admin/layout";
+			}
+			uploadFile fileHelper = new uploadFile(request);
+			String uuid =  UUID.randomUUID().toString();
+			if(!fileHelper.saveFileToWeb(file,uuid)){
+				model.addAttribute("error_msg","保存失败，path："+fileHelper.pathRoot+uuid);
+				return "/admin/layout";
+			}
+			BookCategory bookCategory = new BookCategory();
+			bookCategory.setTitle(name);
+			bookCategory.setIconPath("/images/"+uuid);
+			bookCategoryService.insert(bookCategory);
+			model.addAttribute("success_msg","添加成功！");
+			return "/admin/layout";
+		}catch(Exception e){
+			return "/admin/404";
+		}
+	}
+
+	@RequestMapping(value="/categoryedit", method=GET)
+	public String categoryEdit(Model model, HttpServletRequest request) {
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		model.addAttribute("page","book/classedit.jsp");
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			if(str_id == null){
+				return "/admin/404";
+			}
+			int id = Integer.parseInt(str_id);
+			BookCategory bookCategory = bookCategoryService.getById(id);
+			if(bookCategory == null){
+				return "/admin/404";
+			}
+			model.addAttribute("categoryTitle",bookCategory.getTitle());
+			model.addAttribute("id",str_id);
+			return "/admin/layout";
+		}catch(Exception e){
+			return "/admin/404";
+		}
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/savecategory",method=POST,produces = {"application/json;charset=UTF-8"})
+	public String saveCategory(Model model, HttpServletRequest request,@RequestParam(value = "file", required = false) MultipartFile file) {
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			String name = request.getParameter("name");
+			if(str_id == null||str_id.length() == 0){
+				return "{\"code\": 1, \"msg\": \"缺少信息\"}";
+			}
+			if((name == null||name.length() == 0) && file == null){
+				return "{\"code\": 1, \"msg\": \"缺少信息\"}";
+			}
+			int id = Integer.parseInt(str_id);
+			BookCategory bookCategory = bookCategoryService.getById(id);
+			if(bookCategory == null){
+				return "{\"code\": 2, \"msg\": \"书类不存在\"}";
+			}
+			if(name != null && name.length() > 0){
+				bookCategory.setTitle(name);
+			}
+			if(file != null){
+				uploadFile fileHelper = new uploadFile(request);
+				String uuid = UUID.randomUUID().toString();
+				if(!fileHelper.saveFileToWeb(file,uuid)){
+					return "{\"code\": 3, \"msg\": \"上传文件失败\"}";
+				}
+				bookCategory.setIconPath("/images/"+uuid);
+			}
+			bookCategoryService.update(bookCategory);
+			return "{\"code\": 0,\"msg\": \"\"}";
+		}catch(Exception e){
+			String msg = e.toString();
+			msg = msg.replace("\"","\\\"");
+			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deletecategory",method=POST,produces = {"application/json;charset=UTF-8"})
+	public String deleteCategory(Model model, HttpServletRequest request) {
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			if(str_id == null||str_id.length() == 0){
+				return "{\"code\": 1, \"msg\": \"缺少id\"}";
+			}
+			int id = Integer.parseInt(str_id);
+			BookCategory bookCategory = bookCategoryService.getById(id);
+			if(bookCategory == null){
+				return "{\"code\": 2, \"msg\": \"城市不存在\"}";
+			}
+			bookCategoryService.delete(id);
 			return "{\"code\": 0,\"msg\": \"\"}";
 		}catch(Exception e){
 			String msg = e.toString();

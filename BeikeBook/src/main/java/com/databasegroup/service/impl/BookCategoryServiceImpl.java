@@ -49,4 +49,9 @@ public class BookCategoryServiceImpl implements IBookCategoryService {
 	public List<BookCategory> getAll() {
 		return bookCategoryDao.getAll();
 	}
+	
+	@Override
+	public List<BookCategory> getLimitCategories(int start,int num) {
+		return bookCategoryDao.getLimitCategories(start,num);
+	}
 }
