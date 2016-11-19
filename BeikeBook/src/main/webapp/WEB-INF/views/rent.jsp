@@ -11,9 +11,9 @@ $(function(){
 	$('.what_rent').show();
 	/* 购买书本书添加 */
 	$('#add').click(function(){
-		var $deliveryValue = $('#deliveryMethodId').val();
-		$deliveryValue = $deliveryValue==1 ? 0 : 5;
 		var $value=parseInt($('#bookNum_input').val())+1;
+		var $delivery = $('#deliveryMethod').val().split(',');
+		var $deliveryValue = parseFloat($delivery[1]);
 		if ($value <= <c:out value="${amountOfBooks}"/>) {
 			$('#bookNum_input').val($value);
 			$('#num').html($value);
@@ -23,9 +23,9 @@ $(function(){
 		}
 	});
 	$('#reduce').click(function(){
-		var $deliveryValue = $('#deliveryMethodId').val();
-		$deliveryValue = $deliveryValue==1 ? 0 : 5;
-		var $value=$('#bookNum_input').val();
+		var $value=parseInt($('#bookNum_input').val())+1;
+		var $delivery = $('#deliveryMethod').val().split(',');
+		var $deliveryValue = parseFloat($delivery[1]);
 		if($value>1){
 			var $value=parseInt($('#bookNum_input').val())-1;
 			$('#bookNum_input').val($value);
@@ -35,10 +35,10 @@ $(function(){
 					);
 		}
 	});
-	$('#deliveryMethodId').change(function() {
-		var $value=$('#bookNum_input').val();
-		var $deliveryValue = $('#deliveryMethodId').val();
-		$deliveryValue = $deliveryValue==1 ? 0 : 5;
+	$('#deliveryMethod').change(function() {
+		var $value=parseInt($('#bookNum_input').val())+1;
+		var $delivery = $('#deliveryMethod').val().split(',');
+		var $deliveryValue = parseFloat($delivery[1]);
 		$('#method_sum_price').html(
 				($deliveryValue + $value*<c:out value="${dealedBook.book.rentalPrice}"/>).toFixed(1)	
 				);
@@ -92,9 +92,12 @@ $(function(){
 		<div id="pay_info_bottom">
 			<span>配送方式</span>
 			<span id="delivery">
-				<select id="deliveryMethodId" name="deliveryMethodId">
-				  <option value ="1">自提  ￥<c:out value="0"/></option>
-				  <option value ="2">上门配送  ￥<c:out value="5"/></option>
+				<select id="deliveryMethod" name="deliveryMethod">
+					<c:forEach items="${deliveryMethods}" var="method">
+					<option value ="<c:out value='${method.id},${method.price}' />">
+						 <c:out value='${method.name}' /> ￥<c:out value='${method.price}' />
+					</option>
+				  	</c:forEach>
 				</select>
 			</span>		
 		</div>

@@ -27,7 +27,7 @@
 		resultMap="bookResultMap">
 		SELECT
 		<include refid="columns"></include>
-		FROM bk_book WHERE id=#{id}
+		FROM bk_book WHERE id=#{id} and status=0
 		FOR UPDATE
 	</select>
 	
@@ -36,6 +36,7 @@
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_book
+		where status=0
 	</select>
 	
 	<select id="getNoSelledAndNoRentedBooks"
@@ -44,7 +45,7 @@
 			bb.delivery_method_id, bb.press, bb.author, bb.edition,
 			bb.selling_price, bb.rental_price
 		FROM bk_book bb JOIN bk_dealed_book bdb ON bb.id=bdb.book_id
-		WHERE bdb.selled=0 AND bdb.rented=0;
+		WHERE bdb.selled=0 AND bdb.rented=0 and bb.status=0
 	</select>
 	
 	<select id="getByBookCategoryId"
@@ -52,7 +53,7 @@
 		SELECT bb.*
 		FROM bk_book bb JOIN bk_book_category bbc 
 				ON bb.book_category_id= bbc.id
-		WHERE bbc.id = #{bookCategoryId}
+		WHERE bbc.id = #{bookCategoryId} and bb.status=0
 	</select>
 	
 	<select id="getByBookTitle"
@@ -60,7 +61,7 @@
 		SELECT
 		<include refid="columns"></include>
 		FROM bk_book
-		WHERE title REGEXP #{bookTitle}
+		WHERE title REGEXP #{bookTitle} and status=0
 	</select>
 	
 	<insert id="insert" parameterType="Book" >
@@ -82,13 +83,21 @@
 		author=#{author},
 		edition=#{edition},
 		selling_price=#{sellingPrice},
-		rental_price=#{sellingPrice}
+		rental_price=#{rentalPrice}
 		WHERE id=#{id}
 	</update>
 	
 	<delete id="delete" parameterType="Book">
-		DELETE
-		FROM bk_book
-		WHERE id=#{ud}
+		UPDATE bk_book SET
+		status=1
+		WHERE id=#{id}
 	</delete> 
+	
+	<select id="getLimitBooks" resultMap="bookResultMap">
+		SELECT *
+		FROM bk_book
+		WHERE status=0
+		ORDER BY id
+		LIMIT #{start},#{num}
+	</select>
 </mapper>

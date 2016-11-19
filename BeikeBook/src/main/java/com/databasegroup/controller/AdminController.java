@@ -59,7 +59,7 @@ public class AdminController {
 		return encode_msg;
 	}
 
-	@RequestMapping(value="/index",method=GET)
+	@RequestMapping(value={"/index", "/"},method=GET)
 	public String index(Model model, HttpServletRequest request) {
 		model.addAttribute("loginStatus",true);
 		model.addAttribute("roleType",(String)request.getSession().getAttribute("roleType"));
@@ -146,7 +146,7 @@ public class AdminController {
 		request.getSession().setAttribute("districtAddr",admin.getDistrict());
 		request.getSession().setAttribute("roleType",String.valueOf(admin.getType()));
 		//response.sendRedirect(request.getContextPath() + "/admin/index");
-		return "redirect:"+request.getContextPath()+"/backend/index";
+		return "redirect:/backend/index";
 	}
 	
 	@RequestMapping(value="/logout",method={GET,POST})
@@ -154,7 +154,7 @@ public class AdminController {
 		request.getSession().setAttribute("adminUserName",null);
 		request.getSession().setAttribute("districtAddr",null);
 		request.getSession().setAttribute("roleType",null);
-		return "redirect:"+request.getContextPath()+"/backend/login";
+		return "redirect:/backend/login";
 	}
 	
 	@RequestMapping(value="/userList",method=GET)

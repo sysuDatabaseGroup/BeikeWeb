@@ -61,6 +61,7 @@ $(function(){
 <body>
 <div class="bookClass">
 	<ul id="bookClass_ul">
+		<li><a href="<c:url value='/index' />"><span>首页</span></a></li>
 		<c:forEach items="${bookCategories}" var="i">
 		<li><a href="<c:url value='/search?bookCategoryId=${i.id}' />"><span><c:out value="${i.title}"/></span></a></li>
 		</c:forEach>

@@ -1,5 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,53 +63,53 @@
 
                         <ul class="dropdown-menu">
                             <li><a tabindex="-1" href="#">我的账户信息</a></li>
-                            <li><a tabindex="-1" href="sign-in.jsp">退出</a></li>
+                            <li><a tabindex="-1" href="#">退出</a></li>
                         </ul>
                     </li>
                 </ul>
-                <a class="brand" href="../index.jsp"><span class="second">贝壳易书管理后台</span></a>
+                <a class="brand" href="<c:url value='/backend/index'/>"><span class="second">贝壳易书管理后台</span></a>
         </div>
     </div>
 
     <div class="sidebar-nav">
-        <a href="#user-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>用户管理<i class="icon-chevron-up"></i></a>
-        <ul id="user-menu" class="nav nav-list collapse">
-            <li ><a href="../user/users.jsp">用户管理</a></li>
+        <a href="#dashboard-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>用户管理<i class="icon-chevron-up"></i></a>
+        <ul id="dashboard-menu" class="nav nav-list collapse">
+            <li ><a href="<c:url value='/backend/users' />">用户管理</a></li>
         </ul>
 
-        <a href="#city-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-map-marker"></i>托管点管理<i class="icon-chevron-up"></i></a>
-        <ul id="city-menu" class="nav nav-list collapse">
-            <li ><a href="../city/city.jsp">城市管理</a></li>
-            <li ><a href="../city/school.jsp">学校管理</a></li>
-            <li ><a href="../city/district.jsp">托管点管理</a></li>
+        <a href="#error-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-map-marker"></i>托管点管理<i class="icon-chevron-up"></i></a>
+        <ul id="error-menu" class="nav nav-list collapse">
+            <li ><a href="<c:url value='/backend/city' />">城市管理</a></li>
+            <li ><a href="<c:url value='/backend/school' />">学校管理</a></li>
+            <li ><a href="<c:url value='/backend/district' />">托管点管理</a></li>
         </ul>
 
-        <a href="#book-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-book"></i>书籍管理<i class="icon-chevron-up"></i></a>
-        <ul id="book-menu" class="nav nav-list collapse">
-            <li ><a href="../book/class.jsp">书类</a></li>
-            <li ><a href="../book/books.jsp">书单</a></li>
-            <li ><a href="../book/bookadd.jsp">添加书本</a></li>
+        <a href="#legal-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-book"></i>书籍管理<i class="icon-chevron-up"></i></a>
+        <ul id="legal-menu" class="nav nav-list collapse">
+            <li ><a href="<c:url value='/backend/book_category' />">书类</a></li>
+            <li ><a href="<c:url value='/backend/books' />">书单</a></li>
+            <li ><a href="<c:url value='/backend/booksadd' />">添加书本</a></li>
         </ul>
 
-        <a href="#order-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>订单情况<i class="icon-chevron-up"></i></a>
-        <ul id="order-menu" class="nav nav-list collapse">
-            <li ><a href="../order/sell.jsp">买书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/borrow.jsp">租书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/allorder.jsp">全部订单（买书）</a></li>
-            <li ><a href="../order/allorder_borrow.jsp">全部订单（租书）</a></li>
+        <a href="#accounts-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>订单情况<i class="icon-chevron-up"></i></a>
+        <ul id="accounts-menu" class="nav nav-list collapse">
+            <li ><a href="<c:url value='/backend/sell' />">出售<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
+            <li ><a href="<c:url value='/backend/rent' />">出租<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
+            <li ><a href="<c:url value='/backend/selling_order' />">全部订单（买书）</a></li>
+            <li ><a href="<c:url value='/backend/renting_order' />">全部订单（租书）</a></li>
         </ul>
 
-        <a href="../banner/banner.jsp" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
+        <a href="<c:url value='/backend/banner' />" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
 
         <a href="#money-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>提现申请<i class="icon-chevron-up"></i></a>
         <ul id="money-menu" class="nav nav-list collapse">
-            <li ><a href="../money/money.jsp">未结算</a></li>
-            <li ><a href="../money/all_money.jsp">所有提现</a></li>
+            <li ><a href="<c:url value='/backend/encashment' />">未结算</a></li>
+            <li ><a href="<c:url value='/backend/all_encashment' />">所有提现</a></li>
         </ul>
 
-        <a href="../method/method.jsp" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
+        <a href="<c:url value='/backend/method' />" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
 
-        <a href="../announ/announ.jsp" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
+        <a href="<c:url value='/backend/announ' />" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
     </div>
     
     
@@ -117,7 +119,7 @@
         </div>
         
         <ul class="breadcrumb">
-            <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
+            <li><a href="<c:url value='/backend/index'/>">首页</a><span class="divider">/</span></li>
             <li>活动推广<span class="divider">/</span></li>
             <li class="active">活动列表</li>
         </ul>
@@ -126,7 +128,7 @@
             <div class="row-fluid">
                     
 <div class="btn-toolbar">
-    <a href="banneradd.jsp" style="color:#fff;"><button class="btn btn-danger"><i class="icon-plus"></i> 增加活动</button></a>
+    <a href="<c:url value='/backend/banner_add'/>" style="color:#fff;"><button class="btn btn-danger"><i class="icon-plus"></i> 增加活动</button></a>
 </div>
 
 <div class="well">
@@ -138,19 +140,35 @@
           <th>活动图片</th>
           <th>活动链接</th>
           <th>添加日期</th>
+          <th>优先级</th>
           <th style="width:100px;">操作</th>
         </tr>
       </thead>
+      
+      <!-- 防止页数为空或负数 -->
+      <c:if test="${empty page or page < 1}">
+      	<c:set var="page" value="1"/>
+      </c:if>
+      
+      <!--  每页显示多少个记录 -->
+      <c:set var="count" value="10" />
+      <fmt:parseNumber var="pagenum" integerOnly="true" type="number" value="${fn:length(banners)/count+1}" />
+      
+      <c:if test="${pagenum <= 1}">
+      	<c:set var="pagenum" value="1"/>
+      </c:if>
+      
       <tbody>
-		<c:forEach items="${bannerInfos}" var="i" begin="${pageNo*5}" end="${pageNo*5 + 5}">
+		<c:forEach items="${banners}" var="i" begin="${(page-1)*count}" end="${(page-1)*count + count-1}">
 			<tr>
-				<td><c:out value="${i.bannerID}" /></td>
-				<td><c:out value="${i.bannerTitle}" /></td>
-				<td><img src="bannerimages/${i.bannerPic}" alt="" /></td>
+				<td><c:out value="${i.id}" /></td>
+				<td><c:out value="${i.title}" /></td>
+				<td><img src="<c:url value='${i.picPath}'/>" alt="" /></td>
 				<td><c:out value="${i.link}" /></td>
-				<td><c:out value="${i.datetime}" /></td>
+				<td><fmt:formatDate type="date" value="${i.datetime}" /></td>
+				<td><c:out value="${i.prior}" /></td>
 				<td>
-				    <a href="banneredit.jsp"><i class="icon-pencil"></i><span>编辑</span></a>
+				    <a href="<c:url value='/backend/banner_edit/${i.id}' />"><i class="icon-pencil"></i><span>编辑</span></a>
 				    <a href="#myModal" role="button" data-toggle="modal" style="margin-left:5px;"><i class="icon-remove"></i><span>删除</span></a>
 				</td>
 			</tr>
@@ -161,12 +179,29 @@
 
 <div class="pagination">
     <ul>
-        <li><a href="banner.jsp?pageNo=${pageNo - 1}">Prev</a></li>
-        <li><span><c:out value="${pageNo}"/></span></li>
-        <li><a href="banner.jsp?pageNo=${pageNo + 1}"><c:out value="${pageNo+1}"/></a></li>
-        <li><a href="banner.jsp?pageNo=${pageNo + 2}"><c:out value="${pageNo+2}"/></a></li>
-        <li><a href="banner.jsp?pageNo=${pageNo + 3}"><c:out value="${pageNo+3}"/></a></li>
-        <li><a href="banner.jsp?pageNo=${pageNo + 1}">Next</a></li>
+   		 <c:choose>
+    		<c:when test="${page == 1}">
+				<li><a href="#">上一页 </a></li>
+				<li><a href="#">1</a></li>
+    		</c:when>
+    		<c:otherwise>
+				<li><a href="<c:url value='/backend/banner/${page-1}' />">上一页</a></li>
+				<li><a href="<c:url value='/backend/banner/1' />">1</a></li>
+				<c:if test="${page != 2}">
+					<li><span>...</span></li>
+					<li><a href="<c:url value='/backend/banner/${page-1}' />">${page-1}</a></li>
+				</c:if>
+				<li><a href="javascript:;" style="color: #6CF;">${page}</a></li>
+    		</c:otherwise>
+    	</c:choose>
+		<c:if test="${page != pagenum}">
+			<c:if test="${page+1 != pagenum}">
+				<li><a href="<c:url value='/backend/banner/${page+1}' />">${page+1}</a></li>
+				<li><span>...</span></li>
+			</c:if>
+			<li><a href="<c:url value='/backend/banner/${pagenum}' />">${pagenum}</a></li>
+			<li><a href="<c:url value='/backend/banner/${page+1}' />">下一页</a></li>
+		</c:if>
     </ul>
 </div>
 

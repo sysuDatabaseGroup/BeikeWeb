@@ -42,7 +42,14 @@
 		pic_path=#{picPath},
 		title=#{title},
 		link=#{link},
-		datetime=#{datetime},
+		prior=#{prior}
+		WHERE id=#{id}
+	</update>
+	
+	<update id="updateExceptPic" parameterType="Banner">
+		UPDATE bk_banner SET
+		title=#{title},
+		link=#{link},
 		prior=#{prior}
 		WHERE id=#{id}
 	</update>

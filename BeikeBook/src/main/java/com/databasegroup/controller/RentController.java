@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.databasegroup.model.BookCategory;
 import com.databasegroup.model.DealedBook;
 import com.databasegroup.service.IDealedBookService;
+import com.databasegroup.service.IDeliveryMethodService;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,9 @@ public class RentController {
 	
 	@Autowired
 	IDealedBookService dealedBookService;
+
+	@Autowired
+	private IDeliveryMethodService deliveryMethodService;
 	
 	@RequestMapping(value="/{dealedBookId}",method = GET)
 	public String rent(@PathVariable int dealedBookId,
@@ -30,6 +34,10 @@ public class RentController {
 		DealedBook dealedBook = 
 				dealedBookService.getById(dealedBookId);
 		if (dealedBook == null) return "redirect:/index";
+		if (request.getSession().getAttribute("deliveryMethods") == null) {
+			request.getSession().setAttribute("deliveryMethods", 
+					deliveryMethodService.getAll());
+		}
 		int amountOfBooks = dealedBookService
 				.getAmountOfNoDealedBookBookId(dealedBook.getBook().getId());
 		model.addAttribute("dealedBook", dealedBook);

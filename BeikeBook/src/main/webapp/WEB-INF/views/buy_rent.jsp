@@ -1,7 +1,7 @@
 <%@ page pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:formatDate var="currentTime" pattern="D" type="date" value="<%=new java.util.Date() %>" />
+<c:set var="current" value="<%=new java.util.Date() %>" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,13 +38,28 @@
 								<p><em>租书时间：</em><fmt:formatDate type="date" value="${i.datetime}" /></p>
 							</c:otherwise>
 						</c:choose>
+						<p><em>取书号：</em><c:out value="${i.takingBookNum}"/></p>
+						<c:if test="${i.isRenting == 0}">
+							<p><em>归还：</em>
+								<c:choose>
+								<c:when test="${i.returned == 0}">
+									<c:out value="未归还" />
+								</c:when>
+								<c:otherwise>
+									<c:out value="已归还" />
+								</c:otherwise>
+							</c:choose>
+							</p>
+						</c:if>
 					</div>
 					<span id="buy_rent_num">x<c:out value="${i.amount}"/></span>
 					<c:if test="${i.isRenting == 0}">
 						<div class="clearbox"></div> 
-						<fmt:formatDate var="rentedDay" pattern="D" type="date" value="${i.datetime}" />
-						<fmt:parseNumber var="w" integerOnly="true" type="number" value="${((currentTime-rentedDay+15)/30)*i.amount}" />
-						<span id="buy_rent_info_tip">已租用<c:out value="${currentTime-rentedDay+1}" /><em>天</em>
+						<c:set var="days" value="${(current.time-i.datetime.time)/(1000*3600*24)}" />
+						<fmt:parseNumber var="day" integerOnly="true" type="number" value="${days}" />
+						<fmt:parseNumber var="y" integerOnly="true" type="number" value="${(day+15)/30}" />
+						<fmt:parseNumber var="w" integerOnly="true" type="number" value="${y*i.amount}" />
+						<span id="buy_rent_info_tip">已租用<c:out value="${day+1}" /><em>天</em>
 						扣除费用<em style="color:#be2222;"><c:out value="${w}"/>元</em></span>
 					</c:if>
 				</li>

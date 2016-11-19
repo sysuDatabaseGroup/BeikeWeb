@@ -19,9 +19,9 @@ INSERT INTO bk_district (name, num, address, deliver_name, deliver_phone, school
 
 
 INSERT INTO bk_user (wx_name, user_num, password, city_id, school_id, dorm) 
-			VALUES ("微信昵称", "1234", '1234', 1, 1, '至善园八号412');
+			VALUES ("林泽鹏", "1234", '1234', 1, 1, '至善园八号412');
 INSERT INTO bk_user (wx_name, user_num, password, city_id, school_id, dorm) 
-			VALUES ("微信昵称", "1", '1', 1, 1, '至善园八号412');
+			VALUES ("陈大海", "1", '1', 1, 1, '至善园八号412');
 
 INSERT INTO bk_announ (title, content) VALUES ('公告标题1', '公告内容1');
 INSERT INTO bk_announ (title, content) VALUES ('公告标题2', '公告内容2');

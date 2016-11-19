@@ -10,6 +10,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.databasegroup.model.BookCategory;
+import com.databasegroup.model.BooksViewSellingBook;
+import com.databasegroup.model.BooksViewSoldBook;
 import com.databasegroup.model.DealedBook;
 import com.databasegroup.model.SelledBookFromUser;
 import com.databasegroup.model.User;
@@ -29,12 +31,15 @@ public class BooksController {
 			Model model) {
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) return "login";
-		List<DealedBook> noSelledDealedBooks = dealedBookService
-				.getNoSelledBookByUserId(user.getId());
-		List<DealedBook> selledDealedBooks = dealedBookService
-				.getSelledBookByUserId(user.getId());
-		model.addAttribute("noSelledDealedBooks", noSelledDealedBooks);
-		model.addAttribute("selledDealedBooks", selledDealedBooks);
+		List<BooksViewSellingBook> booksViewSellingBooks = 
+				dealedBookService
+				.getBooksViewSellingBooksByUserId(user.getId());
+		List<BooksViewSoldBook> booksViewSoldBooks = 
+				dealedBookService
+				.getBooksViewSoldBooksByUserId(user.getId());
+		
+		model.addAttribute("booksViewSellingBooks", booksViewSellingBooks);
+		model.addAttribute("booksViewSoldBooks", booksViewSoldBooks);
 		return "books";
 	}
 }

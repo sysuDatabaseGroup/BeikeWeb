@@ -10,7 +10,14 @@
 	<div class="success">
 		<span id="success_icon"></span>
 		<h2>支付成功</h2>
-		<span>明早11点放置至 <c:out value="${district.address}"/>处</span>
+		<c:choose>
+			<c:when test="${rentingOrder.deliveryMethodId == 1}">
+				<span>请于三日内到 <c:out value="${district.name}"/> 领取书本</span>
+			</c:when>
+			<c:otherwise>
+				<span>届时将送到你的宿舍 <c:out value="${user.dorm}"/> </span>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	
 	<div class="success_book">
@@ -19,9 +26,10 @@
 		</div>
 		<div id="success_book_info">
 			<p>书名：<em><c:out value="${dealedBook.book.title}"/></em></p>
-			<p>取书号：<em><c:out value="${rentingOrder.takingBookNum}"/></em></p>
-			<!-- <p>配送员：<em><c:out value="${deliverName}(${deliverPhone})"/></em></p> -->
-			<p>地址：<em><c:out value="${district.address}"/></em></p>
+			<c:if test="${rentingOrder.deliveryMethodId == 1}">
+				<p>取书号：<em><c:out value="${rentingOrder.takingBookNum}"/></em></p>
+				<p>地址：<em><c:out value="${district.address}"/></em></p>
+			</c:if>
 		</div>
 		<div class="clearbox"></div>
 	</div>

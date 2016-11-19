@@ -1,16 +1,14 @@
 package com.databasegroup.model;
 
-import java.util.Date;
-
 public class SellingOrder extends Order {
+	
 	private int payed;
 
 	@Override
 	public String toString() {
-		return "[" + id + ' ' + userId + ' ' + deliveryMethodId + ' ' +
-				dealedBooks + ' ' + amount + ' ' + datetime + ' '
-				+ ' ' + takingBookNum + ' ' + payed + ' ' + isRenting +
-				']';
+		return "[" + id + ' ' + userId + ' ' + deliveryMethodId + ' '
+				+ dealedBooks + ' ' + amount + ' ' + datetime + ' ' +
+				takingBookNum + ' ' + isRenting + ' ' + payed + ']';
 	}
 
 	/**
@@ -21,11 +19,11 @@ public class SellingOrder extends Order {
 	}
 
 	/**
-	 * @param payed
-	 *            the payed to set
+	 * @param payed the payed to set
 	 */
 	public void setPayed(int payed) {
 		this.payed = payed;
 	}
-
+	
+	
 }

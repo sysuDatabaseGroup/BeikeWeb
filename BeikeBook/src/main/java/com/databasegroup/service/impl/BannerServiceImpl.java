@@ -40,4 +40,10 @@ public class BannerServiceImpl implements IBannerService {
 	public List<Banner> getAll() {
 		return bannerDao.getAll();
 	}
+	
+
+	@Override
+	public void updateExceptPic(Banner banner) {
+		bannerDao.updateExceptPic(banner);
+	}
 }

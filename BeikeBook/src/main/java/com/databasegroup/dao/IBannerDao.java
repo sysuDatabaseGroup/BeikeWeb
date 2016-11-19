@@ -6,5 +6,5 @@ import com.databasegroup.model.Banner;
 
 @Repository
 public interface IBannerDao extends IBaseDao<Banner> {
-
+	void updateExceptPic(Banner banner);
 }

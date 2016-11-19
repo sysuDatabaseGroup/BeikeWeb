@@ -46,11 +46,11 @@ public class SuccessController {
 		SellingOrder sellingOrder = new SellingOrder();
 		District district = districtService
 				.getById(dealedBook.getDistrictId());
-		int delieryMethodId = Integer.parseInt(
-				request.getParameter("delieryMethodId"));
+		int deliveryMethodId = Integer.parseInt(
+				request.getParameter("deliveryMethod").split(",")[0]);
 		
 		sellingOrder.setUserId(user.getId());
-		sellingOrder.setDeliveryMethodId(delieryMethodId);  //
+		sellingOrder.setDeliveryMethodId(deliveryMethodId);  //
 		sellingOrder.setBookId(dealedBook.getBookId());  //
 		sellingOrder.setAmount(bookNum_input);
 		sellingOrder.setDatetime(new Date());
@@ -82,12 +82,12 @@ public class SuccessController {
 		User user = (User) request.getSession().getAttribute("user");
 		District district = districtService
 				.getById(dealedBook.getDistrictId());
-		int delieryMethodId = Integer.parseInt(
-				request.getParameter("delieryMethodId"));
+		int deliveryMethodId = Integer.parseInt(
+				request.getParameter("deliveryMethod").split(",")[0]);
 
 		RentingOrder rentingOrder = new RentingOrder();
 		rentingOrder.setUserId(user.getId());
-		rentingOrder.setDeliveryMethodId(delieryMethodId);  //
+		rentingOrder.setDeliveryMethodId(deliveryMethodId);  //
 		rentingOrder.setBookId(dealedBook.getBookId());
 		rentingOrder.setAmount(bookNum_input);
 		rentingOrder.setDatetime(new Date());
@@ -97,7 +97,6 @@ public class SuccessController {
 				String.format("%05d", dealedBook.getId())
 					);
 		rentingOrder.setTook(1);
-		rentingOrder.setReturned(1);
 		
 		rentingOrderService.insertOrder(rentingOrder);
 		

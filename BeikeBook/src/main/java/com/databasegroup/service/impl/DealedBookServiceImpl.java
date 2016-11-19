@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.databasegroup.dao.ICityDao;
 import com.databasegroup.dao.IDealedBookDao;
 import com.databasegroup.dao.IUserDao;
+import com.databasegroup.model.BooksViewSellingBook;
+import com.databasegroup.model.BooksViewSoldBook;
 import com.databasegroup.model.City;
 import com.databasegroup.model.DealedBook;
 import com.databasegroup.model.SelledBookFromUser;
@@ -83,6 +85,16 @@ public class DealedBookServiceImpl implements IDealedBookService {
 	@Override
 	public void setEncashedByUser(int userId) {
 		dealedBookDao.setEncashedByUser(userId);
+	}
+
+	@Override
+	public List<BooksViewSellingBook> getBooksViewSellingBooksByUserId(int id) {
+		return dealedBookDao.getBooksViewSellingBooksByUserId(id);
+	}
+
+	@Override
+	public List<BooksViewSoldBook> getBooksViewSoldBooksByUserId(int id) {
+		return dealedBookDao.getBooksViewSoldBooksByUserId(id);
 	}
 
 }

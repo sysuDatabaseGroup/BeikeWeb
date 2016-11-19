@@ -38,6 +38,30 @@
 		WHERE id=#{id};
 	</select>
 	
+	<select id="getNoEncashed"
+		resultMap="encashmentResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_encashment
+		WHERE encashed = 0
+	</select>
+	
+	<select id="getEncashed"
+		resultMap="encashmentResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_encashment
+		WHERE encashed = 1
+	</select>
+	
+	<select id="getEncashedByAlipayAccount"
+		resultMap="encashmentResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_encashment
+		WHERE encashed = 1 AND alipay_account REGEXP #{alipayAccount}
+	</select>
+	
 	<insert id="insert" parameterType="Encashment" >
 		INSERT INTO bk_encashment (user_id,alipay_account, alipay_name,
 			encashing_amount, phone, encashed) VALUES

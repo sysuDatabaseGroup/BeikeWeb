@@ -5,6 +5,36 @@
   <head>
     <title>贝壳易书管理后台</title>
     <%@ include file="../meta_link_script.jsp"  %>
+    <script src="<c:url value='/admin/js/ajaxfileupload.js'/>"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+		$("#add").click(function(){
+			$.ajaxFileUpload
+            (
+                {
+                    url: '/BeikeBook/backend/banner_add', //用于文件上传的服务器端请求地址
+                    secureuri: false, //是否需要安全协议，一般设置为false
+                    fileElementId: 'picFile', //文件上传域的ID
+                    dataType: 'txt', //返回值类型 一般设置为json
+                    data : { 
+                    	title : $("#title").val(),
+                    	link : $("#link").val(),
+                    	prior : $("#prior").val(),
+                	},
+                    success: function (data, status)  //服务器成功响应处理函数
+                    {
+                    	alert("数据: " + data + "\n状态: " + status);
+                        window.location.replace("/BeikeBook/backend/banner");
+                    },
+                    error: function (data, status, e)//服务器响应失败处理函数
+                    {
+                        alert(e);
+                    }
+                }
+            )
+		});
+    });
+    </script>
     <!-- Demo page code -->
 
     <style type="text/css">
@@ -56,53 +86,53 @@
 
                         <ul class="dropdown-menu">
                             <li><a tabindex="-1" href="#">我的账户信息</a></li>
-                            <li><a tabindex="-1" href="sign-in.jsp">退出</a></li>
+                            <li><a tabindex="-1" href="#">退出</a></li>
                         </ul>
                     </li>
                 </ul>
-                <a class="brand" href="../index.jsp"><span class="second">贝壳易书管理后台</span></a>
+                <a class="brand" href="<c:url value='/backend/index'/>"><span class="second">贝壳易书管理后台</span></a>
         </div>
     </div>
 
     <div class="sidebar-nav">
-        <a href="#user-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>用户管理<i class="icon-chevron-up"></i></a>
-        <ul id="user-menu" class="nav nav-list collapse">
-            <li ><a href="../user/users.jsp">用户管理</a></li>
+        <a href="#dashboard-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>用户管理<i class="icon-chevron-up"></i></a>
+        <ul id="dashboard-menu" class="nav nav-list collapse">
+            <li ><a href="<c:url value='/backend/users' />">用户管理</a></li>
         </ul>
 
-        <a href="#city-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-map-marker"></i>托管点管理<i class="icon-chevron-up"></i></a>
-        <ul id="city-menu" class="nav nav-list collapse">
-            <li ><a href="../city/city.jsp">城市管理</a></li>
-            <li ><a href="../city/school.jsp">学校管理</a></li>
-            <li ><a href="../city/district.jsp">托管点管理</a></li>
+        <a href="#error-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-map-marker"></i>托管点管理<i class="icon-chevron-up"></i></a>
+        <ul id="error-menu" class="nav nav-list collapse">
+            <li ><a href="<c:url value='/backend/city' />">城市管理</a></li>
+            <li ><a href="<c:url value='/backend/school' />">学校管理</a></li>
+            <li ><a href="<c:url value='/backend/district' />">托管点管理</a></li>
         </ul>
 
-        <a href="#book-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-book"></i>书籍管理<i class="icon-chevron-up"></i></a>
-        <ul id="book-menu" class="nav nav-list collapse">
-            <li ><a href="../book/class.jsp">书类</a></li>
-            <li ><a href="../book/books.jsp">书单</a></li>
-            <li ><a href="../book/bookadd.jsp">添加书本</a></li>
+        <a href="#legal-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-book"></i>书籍管理<i class="icon-chevron-up"></i></a>
+        <ul id="legal-menu" class="nav nav-list collapse">
+            <li ><a href="<c:url value='/backend/book_category' />">书类</a></li>
+            <li ><a href="<c:url value='/backend/books' />">书单</a></li>
+            <li ><a href="<c:url value='/backend/booksadd' />">添加书本</a></li>
         </ul>
 
-        <a href="#order-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>订单情况<i class="icon-chevron-up"></i></a>
-        <ul id="order-menu" class="nav nav-list collapse">
-            <li ><a href="../order/sell.jsp">买书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/borrow.jsp">租书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/allorder.jsp">全部订单（买书）</a></li>
-            <li ><a href="../order/allorder_borrow.jsp">全部订单（租书）</a></li>
+        <a href="#accounts-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>订单情况<i class="icon-chevron-up"></i></a>
+        <ul id="accounts-menu" class="nav nav-list collapse">
+            <li ><a href="<c:url value='/backend/sell' />">出售<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
+            <li ><a href="<c:url value='/backend/rent' />">出租<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
+            <li ><a href="<c:url value='/backend/selling_order' />">全部订单（买书）</a></li>
+            <li ><a href="<c:url value='/backend/renting_order' />">全部订单（租书）</a></li>
         </ul>
 
-        <a href="../banner/banner.jsp" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
+        <a href="<c:url value='/backend/banner' />" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
 
         <a href="#money-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>提现申请<i class="icon-chevron-up"></i></a>
         <ul id="money-menu" class="nav nav-list collapse">
-            <li ><a href="../money/money.jsp">未结算</a></li>
-            <li ><a href="../money/all_money.jsp">所有提现</a></li>
+            <li ><a href="<c:url value='/backend/encashment' />">未结算</a></li>
+            <li ><a href="<c:url value='/backend/all_encashment' />">所有提现</a></li>
         </ul>
 
-        <a href="../method/method.jsp" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
+        <a href="<c:url value='/backend/method' />" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
 
-        <a href="../announ/announ.jsp" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
+        <a href="<c:url value='/backend/announ' />" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
     </div>
     
      <div class="content">
@@ -111,9 +141,9 @@
         </div>
 
         <ul class="breadcrumb">
-            <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
+            <li><a href="<c:url value='/backend/index'/>">首页</a><span class="divider">/</span></li>
             <li>活动推广<span class="divider">/</span></li>
-            <li><a href="banner.jsp">活动列表</a><span class="divider">/</span></li>
+            <li><a href="<c:url value="/backend/banner" />">活动列表</a><span class="divider">/</span></li>
             <li class="active">添加活动</li>
         </ul>
 
@@ -121,21 +151,19 @@
             <div class="row-fluid">
                     
 <div class="btn-toolbar">
-    <button class="btn btn-primary"><i class="icon-save"></i> 添加</button>
+    <button id="add" class="btn btn-primary"><i class="icon-save"></i> 添加</button>
 </div>
 <div class="well">
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active in" id="home">
-        <form id="banner">
             <label>活动标题</label>
-            <input type="text" class="input-xlarge">
+            <input id="title" type="text" class="input-xlarge">
             <label>活动链接</label>
-            <input type="text" class="input-xlarge">
+            <input id="link" type="text" class="input-xlarge">
             <label>活动封面图</label>
-            <input type="file" class="file" value="浏览" >
+            <input name="picFile" id="picFile" accept="image/*" type="file" class="file" value="浏览" >
             <label>排序</label>
-            <input type="text" class="input-small"><span> 输入数字，范围在”1-99“</span>
-        </form>
+            <input id="prior" type="text" class="input-small"><span> 输入数字，范围在”1-99“</span>
       </div>
   </div>
 

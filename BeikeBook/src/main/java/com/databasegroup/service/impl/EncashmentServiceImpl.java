@@ -45,4 +45,19 @@ public class EncashmentServiceImpl implements IEncashmentService {
 	public double getEncashingAmountById(int id) {
 		return encashmentDao.getEncashingAmountById(id);
 	}
+
+	@Override
+	public List<Encashment> getNoEncashed() {
+		return encashmentDao.getNoEncashed();
+	}
+
+	@Override
+	public List<Encashment> getEncashed() {
+		return encashmentDao.getEncashed();
+	}
+
+	@Override
+	public List<Encashment> getEncashedByAlipayAccount(String alipayAccount) {
+		return encashmentDao.getEncashedByAlipayAccount(alipayAccount);
+	}
 }

@@ -19,6 +19,25 @@
 			select="com.databasegroup.dao.IBookDao.getById" />
 	</resultMap>
 	
+	<resultMap id="sellingBookMap" type="BooksViewSellingBook">
+		<id property="dealedNums" column="dealed_nums" />
+		<result property="title" column="title" />
+		<result property="districtName" column="district_name" />
+		<result property="schoolName" column="school_name" />
+		<result property="datetime" column="datetime" />
+		<result property="coverPath" column="cover_path" />
+		<result property="amount" column="amount" />
+	</resultMap>
+	
+	<resultMap id="soldBookMap" type="BooksViewSoldBook">
+		<id property="dealedNums" column="dealed_nums" />
+		<result property="title" column="title" />
+		<result property="sellingPrice" column="selling_price" />
+		<result property="selledDatetime" column="selled_datetime" />
+		<result property="coverPath" column="cover_path" />
+		<result property="amount" column="amount" />
+	</resultMap>
+	
 	<sql id="columns">id, book_id, dealed_num, selling_price,
 		rental_price, district_id, user_id, datetime, 
 		selled_datetime, selled, rented</sql>
@@ -87,9 +106,35 @@
 	
 	<select id="getEncashingAmountByUserId" parameterType="int"
 		resultType="double">
-		SELECT IFNULL(SUM(bb.selling_price)*0.2, 0)
+		SELECT IFNULL(SUM(bb.selling_price), 0)
 		FROM bk_dealed_book bdb JOIN bk_book bb ON bdb.book_id=bb.id
 		WHERE bdb.selled=1 AND bdb.encashed=0 AND bdb.user_id=#{userId}
+	</select>
+	
+	<select id="getBooksViewSellingBooksByUserId" 
+		parameterType="int"
+		resultMap="sellingBookMap">
+		SELECT GROUP_CONCAT(bdb.dealed_num) dealed_nums ,bb.title, 
+			bb.cover_path,datetime,COUNT(*) amount, 
+			bd.name district_name ,bs.name school_name
+		FROM bk_dealed_book bdb
+			JOIN bk_district bd ON bdb.district_id = bd.id 
+			JOIN bk_school bs ON bd.school_id=bs.id
+		    JOIN bk_book bb ON bdb.book_id = bb.id
+		WHERE selled=0 AND user_id=#{id}
+		GROUP BY datetime,bdb.book_id
+	</select>
+	
+	<select id="getBooksViewSoldBooksByUserId" 
+		parameterType="int"
+		resultMap="soldBookMap">
+		SELECT GROUP_CONCAT(bdb.dealed_num) dealed_nums,bb.title, 
+			bb.selling_price,bb.cover_path,bdb.selled_datetime,
+			COUNT(*) amount
+		FROM bk_dealed_book bdb
+		    JOIN bk_book bb ON bdb.book_id = bb.id
+		WHERE selled=1 AND user_id=#{id}
+		GROUP BY bdb.selled_datetime,bdb.book_id;
 	</select>
 	
 	<update id="setEncashedByUser" parameterType="int">

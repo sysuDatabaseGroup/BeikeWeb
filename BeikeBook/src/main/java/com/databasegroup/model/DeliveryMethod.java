@@ -3,7 +3,7 @@ package com.databasegroup.model;
 public class DeliveryMethod {
 	private int id;
 	private String name;
-	private int price;
+	private double price;
 	
 	@Override
 	public String toString() {
@@ -41,14 +41,14 @@ public class DeliveryMethod {
 	/**
 	 * @return the price
 	 */
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
 	/**
 	 * @param price the price to set
 	 */
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 }

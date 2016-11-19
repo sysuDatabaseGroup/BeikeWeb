@@ -10,4 +10,8 @@ import com.databasegroup.model.User;
 
 public interface IEncashmentService extends IBaseService<Encashment> {
 	double getEncashingAmountById(int id);
+	List<Encashment> getNoEncashed();
+	List<Encashment> getEncashed();
+	List<Encashment> getEncashedByAlipayAccount(
+			@Param("alipayAccount") String alipayAccount);
 }
