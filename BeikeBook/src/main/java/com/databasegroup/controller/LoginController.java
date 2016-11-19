@@ -34,8 +34,11 @@ public class LoginController {
 			@RequestParam String username,
 			@RequestParam String password,
 			Model model) {
-		if (userService.authUser(username, password)) {
-			User user = userService.getUserByUserNum(username);
+		User user = new User();
+		user.setUserNum(username);
+		user.setPassword(password);
+		if (userService.authUser(user)) {
+			user = userService.getUserByUserNum(username);
 			user = userService.updateUserEncashingAmount(user.getId());
 			request.getSession()
 					.setAttribute("user", 

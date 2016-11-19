@@ -71,11 +71,27 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<!-- 加密User的bean -->
+	<bean id="encryptUser" class="com.databasegroup.aop.EncryptUser"></bean>
+	
 	<!-- spring 声明式事务管理 -->
 	<aop:config>
 		<aop:pointcut id="allServiceMethods" 
 			expression="execution(* com.databasegroup.service.impl.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="allServiceMethods" />
+		
+		<!-- 加密user -->
+		<aop:aspect ref="encryptUser">
+			<aop:pointcut expression="execution (* com.databasegroup.service.IUserService.insert(com.databasegroup.model.User))
+				and args(user)" 
+				id="encryp"/>
+			<aop:pointcut expression="execution (* com.databasegroup.service.IUserService.authUser(com.databasegroup.model.User))
+				and args(user)" 
+				id="encryp2"/>
+			<aop:before pointcut-ref="encryp" method="encrypUser"/>
+			<aop:before pointcut-ref="encryp2" method="encrypUser"/>
+		</aop:aspect>
 	</aop:config>
 
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">

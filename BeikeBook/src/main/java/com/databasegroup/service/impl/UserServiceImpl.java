@@ -52,8 +52,8 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public boolean authUser(String usernum, String password) {
-		return userDao.authUser(usernum, password) != null;
+	public boolean authUser(User user) {
+		return userDao.authUser(user.getUserNum(), user.getPassword()) != null;
 	}
 
 	@Override
