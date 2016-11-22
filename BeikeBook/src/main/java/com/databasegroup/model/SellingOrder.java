@@ -3,6 +3,7 @@ package com.databasegroup.model;
 public class SellingOrder extends Order {
 	
 	private int payed;
+	private int took;
 
 	@Override
 	public String toString() {
@@ -25,5 +26,12 @@ public class SellingOrder extends Order {
 		this.payed = payed;
 	}
 	
+	public int getTook() {
+		return took;
+	}
+	
+	public void setTook(int took) {
+		this.took = took;
+	}
 	
 }

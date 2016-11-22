@@ -109,4 +109,15 @@ public class RentingOrderServiceImpl implements IRentingOrderService {
 		order.setDealedBooks(dealedBooks);
 		return order;
 	}
+
+	@Override
+	public List<RentingOrder> getLimitNoTookOrders(int start,int num,String take_num){
+		return rentingOrderDao.getLimitNoTookOrders(start,num,take_num);
+	}
+
+	@Override
+	public List<RentingOrder> getLimitOrders(int start,int num,String take_num){
+		return rentingOrderDao.getLimitOrders(start,num,take_num);
+	}
+
 }

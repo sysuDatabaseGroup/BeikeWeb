@@ -112,4 +112,14 @@ public class SellingOrderServiceImpl implements ISellingOrderService {
 		order.setDealedBooks(dealedBooks);
 		return order;
 	}
+
+	@Override
+	public List<SellingOrder> getLimitNoTookOrders(int start,int num,String take_num){
+		return sellingOrderDao.getLimitNoTookOrders(start,num,take_num);
+	}
+
+	@Override
+	public List<SellingOrder> getLimitOrders(int start,int num,String take_num){
+		return sellingOrderDao.getLimitOrders(start,num,take_num);
+	}
 }

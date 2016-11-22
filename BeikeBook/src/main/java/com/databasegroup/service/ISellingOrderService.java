@@ -12,4 +12,6 @@ public interface ISellingOrderService extends IBaseService<SellingOrder> {
 	List<SellingOrder> getSellingOrdersByUserId(int id);
 	void insertOrder(SellingOrder sellingOrder);
 	SellingOrder getOrderById(int id);
+	List<SellingOrder> getLimitNoTookOrders(@Param("start")int start,@Param("num")int num,@Param("take_num")String take_num);
+	List<SellingOrder> getLimitOrders(@Param("start")int start,@Param("num")int num,@Param("take_num")String take_num);
 }

@@ -7,7 +7,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.*;
 import java.text.*;
-import java.security.MessageDigest; 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.security.MessageDigest;
 import sun.misc.BASE64Encoder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +52,9 @@ public class AdminController {
 	private IDistrictService districtService;
 	@Autowired
 	private IBookCategoryService bookCategoryService;
-	
+	@Autowired
+	private IDeliveryMethodService deliveryMethodService;
+
 	private String str2MD5(String msg) throws Exception{
 		MessageDigest md = MessageDigest.getInstance("md5");
 		byte[] buf = md.digest(msg.getBytes());
@@ -58,6 +62,22 @@ public class AdminController {
 		String encode_msg = encoder.encode(buf);
 		return encode_msg;
 	}
+
+    private String getFullUrl(HttpServletRequest request){
+        String url = "";
+        url = request.getScheme() +"://" + request.getServerName()  
+                        + ":" +request.getServerPort() 
+                        + request.getServletPath();
+        if (request.getQueryString() != null){
+            url += "?" + request.getQueryString();
+			url += "&";
+        }
+		else{
+			url += "?";
+		}
+        return url;
+    }
+
 
 	@RequestMapping(value={"/index", "/"},method=GET)
 	public String index(Model model, HttpServletRequest request) {
@@ -73,7 +93,7 @@ public class AdminController {
 		List<User> userModels = userService.getAll();
 		model.addAttribute("numUsers",userModels.size());
 		Date dateTime = new Date();
-		SimpleDateFormat time=new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
+		SimpleDateFormat time=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		model.addAttribute("dataTime",time.format(dateTime));
 		double totalAmount = 0;
 		model.addAttribute("circulatingFund",totalAmount);
@@ -122,7 +142,7 @@ public class AdminController {
 
 		return "/admin/index";
 	}
-	
+
 	@RequestMapping(value="/login",method={GET,POST})
 	public String login(Model model, HttpServletRequest request) throws Exception{
 		String get = new String("GET");
@@ -148,7 +168,7 @@ public class AdminController {
 		//response.sendRedirect(request.getContextPath() + "/admin/index");
 		return "redirect:/backend/index";
 	}
-	
+
 	@RequestMapping(value="/logout",method={GET,POST})
 	public String logout(HttpServletRequest request) {
 		request.getSession().setAttribute("adminUserName",null);
@@ -156,7 +176,7 @@ public class AdminController {
 		request.getSession().setAttribute("roleType",null);
 		return "redirect:/backend/login";
 	}
-	
+
 	@RequestMapping(value="/userList",method=GET)
 	public String userList(Model model, HttpServletRequest request) {
 		int curPageNo = request.getParameter("pageNo") == null? 1:Integer.parseInt(request.getParameter("pageNo"));
@@ -185,7 +205,7 @@ public class AdminController {
 		model.addAttribute("beginPage",beginPage);
 		return "/admin/user/users";
 	}
-	
+
 	@RequestMapping(value="/useredit",method=GET)
 	public String showUser(Model model,HttpServletRequest request) {
 		if(request.getParameter("userNo") == null){
@@ -222,7 +242,7 @@ public class AdminController {
 		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
 		return "/admin/user/useredit";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="/saveUser",method=POST,produces="text/html;charset=UTF-8")
 	public String saveUser(Model model,HttpServletRequest request) {
@@ -257,7 +277,7 @@ public class AdminController {
 			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
 		}
 	}
-	
+
 	@RequestMapping(value="/cityList", method=GET)
 	public String cityList(Model model, HttpServletRequest request) {
 		String roleType = (String)request.getSession().getAttribute("roleType");
@@ -281,7 +301,7 @@ public class AdminController {
 		model.addAttribute("page","city/city.jsp");
 		return "/admin/layout";
 	}
-	
+
 	@RequestMapping(value="/cityadd",method={GET,POST})
 	public String cityAdd(Model model, HttpServletRequest request) {
 		String roleType = (String)request.getSession().getAttribute("roleType");
@@ -375,7 +395,7 @@ public class AdminController {
 			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
 		}
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="/deletecity",method=POST,produces = {"application/json;charset=UTF-8"})
 	public String deleteCity(Model model, HttpServletRequest request) {
@@ -403,7 +423,7 @@ public class AdminController {
 			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
 		}
 	}
-	
+
 	@RequestMapping(value="/schoolList", method=GET)
 	public String schoolList(Model model, HttpServletRequest request) {
 		String roleType = (String)request.getSession().getAttribute("roleType");
@@ -436,7 +456,7 @@ public class AdminController {
 		model.addAttribute("page","city/school.jsp");
 		return "/admin/layout";
 	}
-	
+
 	@RequestMapping(value="/schooladd",method={GET,POST})
 	public String schoolAdd(Model model, HttpServletRequest request) {
 		String roleType = (String)request.getSession().getAttribute("roleType");
@@ -497,7 +517,7 @@ public class AdminController {
 			return "/admin/404";
 		}
 	}
-	
+
 	@RequestMapping(value="/schooledit", method=GET)
 	public String schoolEdit(Model model, HttpServletRequest request) {
 		String roleType = (String)request.getSession().getAttribute("roleType");
@@ -529,7 +549,7 @@ public class AdminController {
 			return "/admin/404";
 		}
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="/saveschool",method=POST,produces = {"application/json;charset=UTF-8"})
 	public String saveSchool(Model model, HttpServletRequest request) {
@@ -578,7 +598,7 @@ public class AdminController {
 			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
 		}
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="/deleteschool",method=POST,produces = {"application/json;charset=UTF-8"})
 	public String deleteSchool(Model model, HttpServletRequest request) {
@@ -607,7 +627,7 @@ public class AdminController {
 			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
 		}
 	}
-	
+
 	@RequestMapping(value="/districtList", method=GET)
 	public String districtList(Model model, HttpServletRequest request) {
 		String roleType = (String)request.getSession().getAttribute("roleType");
@@ -645,7 +665,7 @@ public class AdminController {
 		model.addAttribute("page","city/district.jsp");
 		return "/admin/layout";
 	}
-    
+
 	@RequestMapping(value="/districtadd",method={GET,POST})
 	public String districtAdd(Model model, HttpServletRequest request) {
 		String roleType = (String)request.getSession().getAttribute("roleType");
@@ -699,7 +719,7 @@ public class AdminController {
 			return "/admin/404";
 		}
 	}
-	
+
 	@RequestMapping(value="/districtedit", method=GET)
 	public String districtEdit(Model model, HttpServletRequest request) {
 		String roleType = (String)request.getSession().getAttribute("roleType");
@@ -738,7 +758,7 @@ public class AdminController {
 			return "/admin/404";
 		}
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="/savedistrict",method=POST,produces = {"application/json;charset=UTF-8"})
 	public String saveDistrict(Model model, HttpServletRequest request) {
@@ -780,7 +800,7 @@ public class AdminController {
 			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
 		}
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="/deletedistrict",method=POST,produces = {"application/json;charset=UTF-8"})
 	public String deleteDistrict(Model model, HttpServletRequest request) {
@@ -811,7 +831,7 @@ public class AdminController {
 			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
 		}
 	}
-	
+
 	@RequestMapping(value="/categoryList", method=GET)
 	public String categoryList(Model model, HttpServletRequest request) {
 		//String roleType = (String)request.getSession().getAttribute("roleType");
@@ -832,7 +852,7 @@ public class AdminController {
 		model.addAttribute("page","book/class.jsp");
 		return "/admin/layout";
 	}
-	
+
 	@RequestMapping(value="/categoryadd",method={GET,POST})
 	public String categoryAdd(@RequestParam(value = "file", required=false) MultipartFile file, Model model, HttpServletRequest request) {
 		//String roleType = (String)request.getSession().getAttribute("roleType");
@@ -930,7 +950,7 @@ public class AdminController {
 			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
 		}
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="/deletecategory",method=POST,produces = {"application/json;charset=UTF-8"})
 	public String deleteCategory(Model model, HttpServletRequest request) {
@@ -953,7 +973,7 @@ public class AdminController {
 			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
 		}
 	}
-	
+
 	@RequestMapping(value="/booksList", method=GET)
 	public String booksList(Model model, HttpServletRequest request) {
 		int curPageNo = request.getParameter("pageNo") == null? 1:Integer.parseInt(request.getParameter("pageNo"));
@@ -973,7 +993,7 @@ public class AdminController {
 		model.addAttribute("page","book/books.jsp");
 		return "/admin/layout";
 	}
-	
+
 	@RequestMapping(value="/booksadd",method={GET,POST})
 	public String booksAdd(@RequestParam(value = "file", required=false) MultipartFile file, Model model, HttpServletRequest request) {
 		model.addAttribute("page","book/booksadd.jsp");
@@ -1107,7 +1127,7 @@ public class AdminController {
 			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
 		}
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="/deletebooks",method=POST,produces = {"application/json;charset=UTF-8"})
 	public String deleteBooks(Model model, HttpServletRequest request) {
@@ -1130,5 +1150,403 @@ public class AdminController {
 			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
 		}
 	}
+
+	@RequestMapping(value="/dealedbookadd",method={GET,POST})
+	public String dealedBookAdd(Model model, HttpServletRequest request) {
+		model.addAttribute("page","book/bookadd.jsp");
+		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+		String roleType = (String)request.getSession().getAttribute("roleType");
+		List<District> districts = null;
+		School school = null;
+		if(Integer.parseInt(roleType) != 0){
+			String adminName = (String)request.getSession().getAttribute("adminUserName");
+			school = schoolService.getByAdmin(adminName);
+			districts = districtService.getDistrictBySchoolId(school.getId());
+		}
+		else{
+			districts = districtService.getAll();
+		}
+		if(districts == null){
+			districts = new ArrayList<District>();
+		}
+		model.addAttribute("districtInfos",districts);
+		String get = new String("GET");
+		if(request.getMethod().equals(get)){
+			return "/admin/layout";
+		}
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String name = request.getParameter("name");
+			String book_id = request.getParameter("book_id");
+			String district_id = request.getParameter("district");
+			String user_num = request.getParameter("user");
+			if(name == null||book_id == null||district_id == null||user_num == null||
+				name.length() == 0||book_id.length() == 0||district_id.length() == 0||user_num.length() == 0){
+				model.addAttribute("error_msg","请填写所有信息");
+				return "/admin/layout";
+			}
+			District district = districtService.getById(Integer.parseInt(district_id));
+			if(district == null||(Integer.parseInt(roleType) != 0&&district.getSchoolId() != school.getId())){
+				model.addAttribute("error_msg","非法仓库");
+				return "/admin/layout";
+			}
+			User user = userService.getUserByUserNum(user_num);
+			if(user == null){
+				model.addAttribute("error_msg","非法托管者");
+				return "/admin/layout";
+			}
+			Book book = bookService.getById(Integer.parseInt(book_id));
+			if(book == null){
+				model.addAttribute("error_msg","找不到对应图书");
+				return "/admin/layout";
+			}
+			Date date = new Date();
+			DealedBook dealedBook = new DealedBook();
+			dealedBook.setUserId(user.getId());
+			dealedBook.setBookId(Integer.parseInt(book_id));
+			dealedBook.setDistrictId(district.getId());
+			dealedBook.setDealedNum(district_id+"-"+user_num+"-"+book_id);
+			dealedBook.setSellingPrice(book.getSellingPrice());
+			dealedBook.setRentalPrice(book.getRentalPrice());
+			dealedBook.setDatetime(date);
+			dealedBookService.insert(dealedBook);
+			model.addAttribute("success_msg","添加成功！");
+			return "/admin/layout";
+		}catch(Exception e){
+			String msg = e.toString();
+			msg = msg.replace("\"","\\\"");
+			model.addAttribute("error_msg",msg);
+			return "/admin/layout";
+			//return "/admin/404";
+		}
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/searchbooks",method=POST,produces = {"text/html;charset=UTF-8"})
+	public String searchBooks(Model model, HttpServletRequest request) {
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String name = request.getParameter("name");
+			if(name == null||name.length() == 0){
+				return "";
+			}
+			List<Book> books = bookService.searchByName(name+"%");
+			if(books == null){
+				return "";
+			}
+			String res = "";
+			for(Book book:books){
+				res = res + "<li data-id='"+book.getId()+"'>"+book.getTitle()+"</li>";
+			}
+			return res;
+		}catch(Exception e){
+			String msg = e.toString();
+			msg = msg.replace("\"","\\\"");
+			return msg;
+		}
+	}
+	
+	@RequestMapping(value="/rentOrderList", method=GET)
+	public String rentOrderList(Model model, HttpServletRequest request) {
+		try{
+			int curPageNo = request.getParameter("pageNo") == null? 1:Integer.parseInt(request.getParameter("pageNo"));
+			String take_book_num = request.getParameter("take_book_num") == null? "":request.getParameter("take_book_num");
+			take_book_num += "%";
+			model.addAttribute("pageNo",curPageNo);
+			model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+			List<RentingOrder> rentOrders = rentingOrderService.getLimitNoTookOrders((curPageNo-1)*5,20,take_book_num);
+			int numOfItem = rentOrders.size() > 5? 5:rentOrders.size();
+			model.addAttribute("numOfItem",numOfItem);
+			int maxPage = rentOrders.size() / 5 + curPageNo;
+			if(rentOrders.size() % 5 == 0){
+				maxPage = maxPage - 1;
+			}
+			HashMap<Integer,String> bookName = new HashMap<Integer,String>();
+			HashMap<Integer,Double> prices = new HashMap<Integer,Double>();
+			HashMap<Integer,String> methodName = new HashMap<Integer,String>();
+			HashMap<Integer,String> formatedDate = new HashMap<Integer,String>();
+			for(RentingOrder order:rentOrders){
+				Book book = bookService.getById(order.getBookId());
+				int amount = order.getAmount();
+				DeliveryMethod method = deliveryMethodService.getById(order.getDeliveryMethodId());
+				int id = order.getId();
+				bookName.put(id,book.getTitle());
+				prices.put(id,amount * book.getRentalPrice());
+				methodName.put(id,method.getName());
+				formatedDate.put(id,new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(order.getDatetime()));
+			}
+			String fullUrl = getFullUrl(request);
+			model.addAttribute("preUrl",fullUrl);
+			model.addAttribute("maxPage",maxPage);
+			model.addAttribute("rentInfos",rentOrders);
+			int beginPage = maxPage >= 4? maxPage - 3:1;
+			model.addAttribute("beginPage",beginPage);
+			model.addAttribute("bookName",bookName);
+			model.addAttribute("prices",prices);
+			model.addAttribute("methodName",methodName);
+			model.addAttribute("formatedDate",formatedDate);
+			model.addAttribute("redirectUrl",URLEncoder.encode(fullUrl,"UTF-8"));
+			model.addAttribute("page","order/borrow.jsp");
+			return "/admin/layout";
+		}catch(Exception e){
+			return "/admin/404";
+		}
+	}
+	
+	@RequestMapping(value="/sellOrderList", method=GET)
+	public String sellOrderList(Model model, HttpServletRequest request) {
+		try{
+			int curPageNo = request.getParameter("pageNo") == null? 1:Integer.parseInt(request.getParameter("pageNo"));
+			String take_book_num = request.getParameter("take_book_num") == null? "":request.getParameter("take_book_num");
+			take_book_num += "%";
+			model.addAttribute("pageNo",curPageNo);
+			model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+			List<SellingOrder> sellOrders = sellingOrderService.getLimitNoTookOrders((curPageNo-1)*5,20,take_book_num);
+			int numOfItem = sellOrders.size() > 5? 5:sellOrders.size();
+			model.addAttribute("numOfItem",numOfItem);
+			int maxPage = sellOrders.size() / 5 + curPageNo;
+			if(sellOrders.size() % 5 == 0){
+				maxPage = maxPage - 1;
+			}
+			HashMap<Integer,String> bookName = new HashMap<Integer,String>();
+			HashMap<Integer,Double> prices = new HashMap<Integer,Double>();
+			HashMap<Integer,String> methodName = new HashMap<Integer,String>();
+			HashMap<Integer,String> formatedDate = new HashMap<Integer,String>();
+			for(SellingOrder order:sellOrders){
+				Book book = bookService.getById(order.getBookId());
+				int amount = order.getAmount();
+				DeliveryMethod method = deliveryMethodService.getById(order.getDeliveryMethodId());
+				int id = order.getId();
+				bookName.put(id,book.getTitle());
+				prices.put(id,amount * book.getSellingPrice());
+				methodName.put(id,method.getName());
+				formatedDate.put(id,new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(order.getDatetime()));
+			}
+			String fullUrl = getFullUrl(request);
+			model.addAttribute("preUrl",fullUrl);
+			model.addAttribute("maxPage",maxPage);
+			model.addAttribute("sellInfos",sellOrders);
+			int beginPage = maxPage >= 4? maxPage - 3:1;
+			model.addAttribute("beginPage",beginPage);
+			model.addAttribute("bookName",bookName);
+			model.addAttribute("prices",prices);
+			model.addAttribute("methodName",methodName);
+			model.addAttribute("formatedDate",formatedDate);
+			model.addAttribute("redirectUrl",URLEncoder.encode(fullUrl,"UTF-8"));
+			model.addAttribute("page","order/sell.jsp");
+			return "/admin/layout";
+		}catch(Exception e){
+			return "/admin/404";
+		}
+	}
+	
+	@RequestMapping(value="/totalSellOrderList", method={GET,POST})
+	public String totalSellOrderList(Model model, HttpServletRequest request) {
+		try{
+			int curPageNo = request.getParameter("pageNo") == null? 1:Integer.parseInt(request.getParameter("pageNo"));
+			String take_book_num = request.getParameter("take_book_num") == null? "":request.getParameter("take_book_num");
+			take_book_num += "%";
+			model.addAttribute("pageNo",curPageNo);
+			model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+			List<SellingOrder> sellOrders = sellingOrderService.getLimitOrders((curPageNo-1)*5,20,take_book_num);
+			int numOfItem = sellOrders.size() > 5? 5:sellOrders.size();
+			model.addAttribute("numOfItem",numOfItem);
+			int maxPage = sellOrders.size() / 5 + curPageNo;
+			if(sellOrders.size() % 5 == 0){
+				maxPage = maxPage - 1;
+			}
+			HashMap<Integer,String> bookName = new HashMap<Integer,String>();
+			HashMap<Integer,Double> prices = new HashMap<Integer,Double>();
+			HashMap<Integer,String> methodName = new HashMap<Integer,String>();
+			HashMap<Integer,String> formatedDate = new HashMap<Integer,String>();
+			for(SellingOrder order:sellOrders){
+				Book book = bookService.getById(order.getBookId());
+				int amount = order.getAmount();
+				DeliveryMethod method = deliveryMethodService.getById(order.getDeliveryMethodId());
+				int id = order.getId();
+				bookName.put(id,book.getTitle());
+				prices.put(id,amount * book.getSellingPrice());
+				methodName.put(id,method.getName());
+				formatedDate.put(id,new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(order.getDatetime()));
+			}
+			String fullUrl = getFullUrl(request);
+			model.addAttribute("preUrl",fullUrl);
+			model.addAttribute("maxPage",maxPage);
+			model.addAttribute("sellInfos",sellOrders);
+			int beginPage = maxPage >= 4? maxPage - 3:1;
+			model.addAttribute("beginPage",beginPage);
+			model.addAttribute("bookName",bookName);
+			model.addAttribute("prices",prices);
+			model.addAttribute("methodName",methodName);
+			model.addAttribute("formatedDate",formatedDate);
+			model.addAttribute("redirectUrl",URLEncoder.encode(fullUrl,"UTF-8"));
+			model.addAttribute("page","order/allorder.jsp");
+			return "/admin/layout";
+		}catch(Exception e){
+			return "/admin/404";
+		}
+	}
+	
+	@RequestMapping(value="/totalRentOrderList", method=GET)
+	public String totalRentOrderList(Model model, HttpServletRequest request) {
+		try{
+			int curPageNo = request.getParameter("pageNo") == null? 1:Integer.parseInt(request.getParameter("pageNo"));
+			String take_book_num = request.getParameter("take_book_num") == null? "":request.getParameter("take_book_num");
+			take_book_num += "%";
+			model.addAttribute("pageNo",curPageNo);
+			model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
+			List<RentingOrder> rentOrders = rentingOrderService.getLimitOrders((curPageNo-1)*5,20,take_book_num);
+			int numOfItem = rentOrders.size() > 5? 5:rentOrders.size();
+			model.addAttribute("numOfItem",numOfItem);
+			int maxPage = rentOrders.size() / 5 + curPageNo;
+			if(rentOrders.size() % 5 == 0){
+				maxPage = maxPage - 1;
+			}
+			HashMap<Integer,String> bookName = new HashMap<Integer,String>();
+			HashMap<Integer,Double> prices = new HashMap<Integer,Double>();
+			HashMap<Integer,String> methodName = new HashMap<Integer,String>();
+			HashMap<Integer,String> formatedDate = new HashMap<Integer,String>();
+			for(RentingOrder order:rentOrders){
+				Book book = bookService.getById(order.getBookId());
+				int amount = order.getAmount();
+				DeliveryMethod method = deliveryMethodService.getById(order.getDeliveryMethodId());
+				int id = order.getId();
+				bookName.put(id,book.getTitle());
+				prices.put(id,amount * book.getRentalPrice());
+				methodName.put(id,method.getName());
+				formatedDate.put(id,new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(order.getDatetime()));
+			}
+			String fullUrl = getFullUrl(request);
+			model.addAttribute("preUrl",fullUrl);
+			model.addAttribute("maxPage",maxPage);
+			model.addAttribute("rentInfos",rentOrders);
+			int beginPage = maxPage >= 4? maxPage - 3:1;
+			model.addAttribute("beginPage",beginPage);
+			model.addAttribute("bookName",bookName);
+			model.addAttribute("prices",prices);
+			model.addAttribute("methodName",methodName);
+			model.addAttribute("formatedDate",formatedDate);
+			model.addAttribute("redirectUrl",URLEncoder.encode(fullUrl,"UTF-8"));
+			model.addAttribute("page","order/allorder_borrow.jsp");
+			return "/admin/layout";
+		}catch(Exception e){
+			return "/admin/404";
+		}
+	}
+
+	@RequestMapping(value="/rentOrderDone",method={GET,POST})
+	public String rentOrderDone(Model model, HttpServletRequest request) {
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			if(str_id == null||str_id.length() == 0){
+				return "/admin/404";
+			}
+			String url = request.getParameter("redirectUrl");
+			if(url == null||url.length() == 0){
+				return "/admin/404";
+			}
+			int id = Integer.parseInt(str_id);
+			RentingOrder order = rentingOrderService.getById(id);
+			if(order == null){
+				return "/admin/404";
+			}
+			order.setTook(1);
+			rentingOrderService.update(order);
+			String real_url = URLDecoder.decode(url,"UTF-8");
+			return "redirect:"+real_url;
+		}catch(Exception e){
+			//String msg = e.toString();
+			//msg = msg.replace("\"","\\\"");
+			//return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+			return "/admin/404";
+		}
+	}
+
+	@RequestMapping(value="/sellOrderDone",method={GET,POST})
+	public String sellOrderDone(Model model, HttpServletRequest request) {
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			if(str_id == null||str_id.length() == 0){
+				return "/admin/404";
+			}
+			String url = request.getParameter("redirectUrl");
+			if(url == null||url.length() == 0){
+				return "/admin/404";
+			}
+			int id = Integer.parseInt(str_id);
+			SellingOrder order = sellingOrderService.getById(id);
+			if(order == null){
+				return "/admin/404";
+			}
+			order.setTook(1);
+			sellingOrderService.update(order);
+			String real_url = URLDecoder.decode(url,"UTF-8");
+			return "redirect:"+real_url;
+		}catch(Exception e){
+			//String msg = e.toString();
+			//msg = msg.replace("\"","\\\"");
+			//return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+			return "/admin/404";
+		}
+	}
+
+	@RequestMapping(value="/deleteSellOrder",method={GET,POST})
+	public String deleteSellOrder(Model model, HttpServletRequest request) {
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			if(str_id == null||str_id.length() == 0){
+				return "/admin/404";
+			}
+			String url = request.getParameter("redirectUrl");
+			if(url == null||url.length() == 0){
+				return "/admin/404";
+			}
+			int id = Integer.parseInt(str_id);
+			SellingOrder order = sellingOrderService.getById(id);
+			if(order == null){
+				return "/admin/404";
+			}
+			sellingOrderService.delete(id);
+			String real_url = URLDecoder.decode(url,"UTF-8");
+			return "redirect:"+real_url;
+		}catch(Exception e){
+			//String msg = e.toString();
+			//msg = msg.replace("\"","\\\"");
+			//return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+			return "/admin/404";
+		}
+	}
+
+	@RequestMapping(value="/deleteRentOrder",method={GET,POST})
+	public String deleteRentOrder(Model model, HttpServletRequest request) {
+		try{
+			request.setCharacterEncoding("UTF-8");
+			String str_id = request.getParameter("id");
+			if(str_id == null||str_id.length() == 0){
+				return "/admin/404";
+			}
+			String url = request.getParameter("redirectUrl");
+			if(url == null||url.length() == 0){
+				return "/admin/404";
+			}
+			int id = Integer.parseInt(str_id);
+			RentingOrder order = rentingOrderService.getById(id);
+			if(order == null){
+				return "/admin/404";
+			}
+			rentingOrderService.delete(id);
+			String real_url = URLDecoder.decode(url,"UTF-8");
+			return "redirect:"+real_url;
+		}catch(Exception e){
+			//String msg = e.toString();
+			//msg = msg.replace("\"","\\\"");
+			//return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+			return "/admin/404";
+		}
+	}
+
 
 }

@@ -181,6 +181,7 @@ CREATE TABLE `bk_selling_order` (
   `datetime` date NOT NULL,
   `taking_book_num` varchar(20) NOT NULL, 
   `payed` int(11) DEFAULT '0', 
+  `took` int(1) NOT NULL DEFAULT '0', 
   PRIMARY KEY (`id`),
   FOREIGN KEY (user_id) REFERENCES bk_user(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (delivery_method_id) REFERENCES bk_delivery_method(id) ON DELETE NO ACTION ON UPDATE NO ACTION,

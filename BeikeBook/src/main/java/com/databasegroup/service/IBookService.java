@@ -16,4 +16,5 @@ public interface IBookService extends IBaseService<Book> {
 	List<Book> getByBookTitle(
 			@Param("bookTitle") String bookTitle);
 	List<Book> getLimitBooks(@Param("start")int start,@Param("num")int num);
+	List<Book> searchByName(@Param("name") String name);
 }

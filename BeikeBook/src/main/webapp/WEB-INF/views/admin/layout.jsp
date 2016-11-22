@@ -61,17 +61,17 @@
 
         <a href="#book-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-book"></i>书籍管理<i class="icon-chevron-up"></i></a>
         <ul id="book-menu" class="nav nav-list collapse">
-            <li ><a href="../book/class.jsp">书类</a></li>
-            <li ><a href="../book/books.jsp">书单</a></li>
-            <li ><a href="../book/bookadd.jsp">添加书本</a></li>
+            <li ><a href="<c:url value='/backend/categoryList' />">书类</a></li>
+            <li ><a href="<c:url value='/backend/booksList' />">书单</a></li>
+            <li ><a href="<c:url value='/backend/dealedbookadd' />">添加托管书本</a></li>
         </ul>
 
         <a href="#order-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>订单情况<i class="icon-chevron-up"></i></a>
         <ul id="order-menu" class="nav nav-list collapse">
-            <li ><a href="../order/sell.jsp">买书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/borrow.jsp">租书<span class="label label-info" style="float:right;margin-top:2px;">+3</span></a></li>
-            <li ><a href="../order/allorder.jsp">全部订单（买书）</a></li>
-            <li ><a href="../order/allorder_borrow.jsp">全部订单（租书）</a></li>
+            <li ><a href="<c:url value='/backend/sellOrderList' />">待处理（买书）</a></li>
+            <li ><a href="<c:url value='/backend/rentOrderList' />">待处理（租书）</a></li>
+            <li ><a href="<c:url value='/backend/totalSellOrderList' />">全部订单（买书）</a></li>
+            <li ><a href="<c:url value='/backend/totalRentOrderList' />">全部订单（租书）</a></li>
         </ul>
 
         <a href="../banner/banner.jsp" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
