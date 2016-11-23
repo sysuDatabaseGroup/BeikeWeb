@@ -24,8 +24,9 @@
 				<input type="submit" id="submit" value="登录">
 			</form>
 			<div class="boxTip">
+				<a href="<c:url value='/index' />"><span>首页</span></a>
 				<a href="<c:url value='/register' />"><span>注册账号</span></a>
-				<a href="#"><span>忘记密码？</span></a>
+				<!-- <a href="#"><span>忘记密码？</span></a> -->
 			</div>
 		</div>
 	</div>

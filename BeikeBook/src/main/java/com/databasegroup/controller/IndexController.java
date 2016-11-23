@@ -9,7 +9,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.databasegroup.model.Banner;
 import com.databasegroup.model.BookCategory;
+import com.databasegroup.service.IBannerService;
 import com.databasegroup.service.IBookCategoryService;
 import com.databasegroup.service.IBookService;
 import com.databasegroup.service.IDealedBookService;
@@ -25,6 +27,9 @@ public class IndexController {
 	private IBookCategoryService bookCategoryService;
 	
 	@Autowired
+	private IBannerService bannerService;
+	
+	@Autowired
 	private IBookService bookService;
 	
 	@RequestMapping(value={"/","/index"},method=GET)
@@ -34,6 +39,9 @@ public class IndexController {
 		request.getSession().setAttribute("bookCategories",
 				bookCategoryService.getAll());
 		}
+		List<Banner> banners = bannerService.getOrderByPrior();
+		
+		model.addAttribute("banners", banners);
 		model.addAttribute("bookInfos", 
 				bookService.getAll());
 		return "index";

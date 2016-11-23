@@ -46,4 +46,9 @@ public class BannerServiceImpl implements IBannerService {
 	public void updateExceptPic(Banner banner) {
 		bannerDao.updateExceptPic(banner);
 	}
+
+	@Override
+	public List<Banner> getOrderByPrior() {
+		return bannerDao.getOrderByPrior();
+	}
 }

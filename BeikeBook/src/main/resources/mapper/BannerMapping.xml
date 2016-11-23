@@ -29,6 +29,13 @@
 		<include refid="columns"></include>
 		FROM bk_banner
 	</select>
+	
+	<select id="getOrderByPrior" resultMap="bannerResultMap">
+		SELECT *
+		FROM bk_banner
+		WHERE prior > 0
+		ORDER BY prior DESC
+	</select>
 
 	<insert id="insert" parameterType="Banner" >
 		INSERT

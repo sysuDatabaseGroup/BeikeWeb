@@ -89,12 +89,8 @@
 			<aop:pointcut expression="execution (* com.databasegroup.service.IUserService.authUser(com.databasegroup.model.User))
 				and args(user)" 
 				id="encryp2"/>
-			<aop:pointcut expression="execution (* com.databasegroup.service.IUserService.update(com.databasegroup.model.User))
-				and args(user)" 
-				id="encryp3"/>
 			<aop:before pointcut-ref="encryp" method="encrypUser"/>
 			<aop:before pointcut-ref="encryp2" method="encrypUser"/>
-			<aop:before pointcut-ref="encryp3" method="encrypUser"/>
 		</aop:aspect>
 	</aop:config>
 

@@ -21,10 +21,10 @@
 						￥
 						<c:choose>
 							<c:when test="${i.isRenting > 0}">
-								<c:out value="${i.dealedBooks[0].sellingPrice }"/>
+								<c:out value="${i.dealedBooks[0].book.sellingPrice }"/>
 							</c:when>
 							<c:otherwise>
-								<c:out value="${i.dealedBooks[0].rentalPrice }"/>
+								<c:out value="${i.dealedBooks[0].book.rentalPrice }"/>
 							</c:otherwise>
 						</c:choose>
 						</p>

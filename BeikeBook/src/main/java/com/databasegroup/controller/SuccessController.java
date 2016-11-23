@@ -22,6 +22,7 @@ import com.databasegroup.service.IDeliveryMethodService;
 import com.databasegroup.service.IDistrictService;
 import com.databasegroup.service.IRentingOrderService;
 import com.databasegroup.service.ISellingOrderService;
+import com.databasegroup.utils.OrderNumberAndTakingNumUtil;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,11 +57,8 @@ public class SuccessController {
 		sellingOrder.setDatetime(new Date());
 		sellingOrder.setPayed(1);
 		// 取书号：学校编号+日期+待售书的ID
-		sellingOrder.setTakingBookNum( "" +
-				user.getSchool().getNum() +
-				new SimpleDateFormat("yyyyMMdd").format(new Date()) +
-				String.format("%05d", dealedBook.getId())
-					);
+		sellingOrder.setTakingBookNum(OrderNumberAndTakingNumUtil
+				.getTakingNum());
 		
 		
 		sellingOrderService.insertOrder(sellingOrder);
@@ -91,11 +89,8 @@ public class SuccessController {
 		rentingOrder.setBookId(dealedBook.getBookId());
 		rentingOrder.setAmount(bookNum_input);
 		rentingOrder.setDatetime(new Date());
-		rentingOrder.setTakingBookNum( "" +
-				user.getSchool().getNum() +
-				new SimpleDateFormat("yyyyMMdd").format(new Date()) +
-				String.format("%05d", dealedBook.getId())
-					);
+		rentingOrder.setTakingBookNum(OrderNumberAndTakingNumUtil
+				.getTakingNum());
 		rentingOrder.setTook(1);
 		
 		rentingOrderService.insertOrder(rentingOrder);

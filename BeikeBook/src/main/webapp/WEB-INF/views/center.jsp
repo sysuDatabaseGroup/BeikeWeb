@@ -41,15 +41,15 @@
 		<ul id="center_info_ul">
 			<li>
 				<span>城市</span>
-				<span id="city" class="center_info_item"><c:out value="${user.city.name}"/></span>
+				<a href="<c:url value='/user_information' />"><span id="city" class="center_info_item"><c:out value="${user.city.name}"/></span></a>
 			</li>
 			<li>
 				<span>学校</span>
-				<span id="school" class="center_info_item"><c:out value="${user.school.name}"/></span>
+				<a href="<c:url value='/user_information' />"><span id="school" class="center_info_item"><c:out value="${user.school.name}"/></span></a>
 			</li>
 			<li>
 				<span>宿舍</span>
-				<span id="dorm" class="center_info_item"><c:out value="${user.dorm}"/></span>
+				<a href="<c:url value='/user_information' />"><span id="dorm" class="center_info_item"><c:out value="${user.dorm}"/></span></a>
 			</li>
 		</ul>
 	</div>

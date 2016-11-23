@@ -39,6 +39,14 @@
 					<span id="tip">* 两次密码输入不同</span>
 				</label>
 				<label>
+					<span>城市</span>
+					<input value="广州" type="text" disabled="disabled" name="city" required="required">
+				</label>
+				<label>
+					<span>学校</span>
+					<input value="中山大学" type="text" disabled="disabled" name="school" required="required">
+				</label>
+				<label>
 					<span>宿舍</span>
 					<input type="text" name="dorm" required="required">
 				</label>
@@ -46,6 +54,7 @@
 				<input type="submit" id="submit" value="注册">
 			</form>
 			<div class="boxTip">
+				<a href="<c:url value='/index' />"><span>首页</span></a>
 				<a href="<c:url value='/login'/>"><span>已有账号？</span></a>
 			</div>
 		</div>

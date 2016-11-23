@@ -10,4 +10,5 @@ import com.databasegroup.model.User;
 
 public interface IBannerService extends IBaseService<Banner> {
 	void updateExceptPic(Banner banner);
+	List<Banner> getOrderByPrior();
 }

@@ -61,9 +61,9 @@ $(function(){
 <body>
 <div class="bookClass">
 	<ul id="bookClass_ul">
-		<li><a href="<c:url value='/index' />"><span>首页</span></a></li>
+		<a href="<c:url value='/index' />"><li><span>首页</span></li></a>
 		<c:forEach items="${bookCategories}" var="i">
-		<li><a href="<c:url value='/search?bookCategoryId=${i.id}' />"><span><c:out value="${i.title}"/></span></a></li>
+		<a href="<c:url value='/search?bookCategoryId=${i.id}' />"><li><span><c:out value="${i.title}"/></span></li></a>
 		</c:forEach>
 	</ul>
 </div>
@@ -72,23 +72,25 @@ $(function(){
 		<span id="header_class"></span>
 			<input type="search" name="bookTitle" id="header_search" placeholder="热门搜索：大英 毛概 高数" required="required" />
 		<a href="<c:url value='/center'/>"><span id="header_center"></span></a>
+		<span style="float: right">退出</span>
 		</form>
 	</header>
 	<div class="slider">
 		<div id="slider_pic">
 			<ul id="pic_ul">
-				<!-- 需要替换images/pic.jpg -->
-				<li><img src="<c:url value='/images/banner/default.png'/>" alt="" /></li>
-				<li><img src="<c:url value='/images/banner/default.png'/>" alt="" /></li>
-				<li><img src="<c:url value='/images/banner/default.png'/>" alt="" /></li>
+				<c:forEach items="${banners}" var="banner" begin="0" end="2">
+				<li>
+					<a href="<c:url value='${banner.link}' />"><img src="<c:url value='${banner.picPath}'/>" alt="" /></a>
+				</li>
+				</c:forEach>
 			</ul>
 		</div>
 		<div id="slider_list">
 			<ul id="list_ul">
-				<!-- 需要替换str -->
-				<li class="on"><p>活动1</p></li>
-				<li><p>活动2</p></li>
-				<li><p>活动3</p></li>
+				<c:forEach items="${banners}" var="banner" begin="0" end="2">
+				<li><p>${banner.title}</p></li>
+				</c:forEach>
+			
 			</ul>
 		</div>
 	</div>
