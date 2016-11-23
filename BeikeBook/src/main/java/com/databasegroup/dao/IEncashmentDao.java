@@ -14,4 +14,5 @@ public interface IEncashmentDao extends IBaseDao<Encashment> {
 	List<Encashment> getEncashed();
 	List<Encashment> getEncashedByAlipayAccount(
 			@Param("alipayAccount") String alipayAccount);
+	void setEncashedById(int id);
 }

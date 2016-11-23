@@ -85,4 +85,9 @@
 		FROM bk_encashment
 		WHERE id=#{id}
 	</delete> 
+	<update id="setEncashedById" parameterType="int">
+		UPDATE bk_encashment SET
+		encashed=1
+		WHERE id=#{id}
+	</update>
 </mapper>

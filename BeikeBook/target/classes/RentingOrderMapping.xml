@@ -66,4 +66,22 @@
 		FROM bk_renting_order
 		WHERE id=#{id}
 	</delete> 
+
+	<select id="getLimitNoTookOrders" resultMap="rentingOrderResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_renting_order
+		WHERE took=0 AND taking_book_num like #{take_num}
+		ORDER BY id
+		LIMIT #{start},#{num}
+	</select>
+
+	<select id="getLimitOrders" resultMap="rentingOrderResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_renting_order
+		WHERE taking_book_num like #{take_num}
+		ORDER BY id
+		LIMIT #{start},#{num}
+	</select>
 </mapper>

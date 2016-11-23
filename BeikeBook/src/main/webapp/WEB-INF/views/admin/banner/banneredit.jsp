@@ -8,7 +8,7 @@
 			$.ajaxFileUpload
             (
                 {
-                    url: '/BeikeBook/backend/banner_edit', //用于文件上传的服务器端请求地址
+                    url: '/backend/banner_edit', //用于文件上传的服务器端请求地址
                     secureuri: false, //是否需要安全协议，一般设置为false
                     fileElementId: 'picFile', //文件上传域的ID
                     dataType: 'txt', //返回值类型 一般设置为json
@@ -20,8 +20,8 @@
                 	},
                     success: function (data, status)  //服务器成功响应处理函数
                     {
-                    	alert("数据: " + data + "\n状态: " + status);
-                        window.location.replace("/BeikeBook/backend/banner");
+                    	alert(data);
+                        window.location.replace("/backend/banner");
                     },
                     error: function (data, status, e)//服务器响应失败处理函数
                     {
@@ -112,7 +112,7 @@
     <h3 id="myModalLabel">删除活动？</h3>
   </div>
   <div class="modal-body">
-    <p class="error-text"><i class="icon-warning-sign modal-icon"></i>确认删除活动［义务助学活动］？</p>
+    <p class="error-text"><i class="icon-warning-sign modal-icon"></i>确认删除活动？</p>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>

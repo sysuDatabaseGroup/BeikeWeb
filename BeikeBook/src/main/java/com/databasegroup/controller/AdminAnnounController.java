@@ -29,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/backend")
 public class AdminAnnounController {
 	
+	public static final int COUNT = 10;
+	
 	@Resource
 	private IAnnounService announService;
 	
@@ -37,6 +39,7 @@ public class AdminAnnounController {
 				Model model,
 				HttpServletRequest request) {
 		List<Announ> announs = announService.getAll();
+				
 		model.addAttribute("announs", announs);
 		model.addAttribute("page","announ/announ.jsp");
 		return "/admin/layout";

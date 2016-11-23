@@ -1,6 +1,19 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<script type="text/javascript">
+    $(document).ready(function(){
+    	$("button").click(function(){
+    	   if(confirm("确认结算")){
+    		   $.post("/backend/encash",{
+   				id : $(this).val()
+	   			}, function(data,status){
+	   				alert("数据: " + data + "\n状态: " + status);
+	   				window.location.replace('/backend/encashment');
+	   			});
+    	   }
+    	});
+    });
+    </script>
     <style type="text/css">
         #line-chart {
             height:300px;
@@ -30,7 +43,7 @@
         </div>
         
         <ul class="breadcrumb">
-            <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
+            <li><a href="<c:url value='/backend/index' />">首页</a><span class="divider">/</span></li>
             <li>提现管理<span class="divider">/</span></li>
             <li class="active">提现列表（未结算）</li>
         </ul>
@@ -53,16 +66,17 @@
           <th style="width:100px;">操作</th>
         </tr>
       </thead>
+      
       <tbody>
-       	<c:forEach items="sellInfos" var="i" begin="${pageNo*5}" end="${pageNo*5 + 5}">
-       		<tr>
+       	<c:forEach items="${encashments}" var="i">
+			<tr>
        			<td><c:out value="${i.id}"/></td>
        			<td><c:out value="${i.alipayName}"/></td>
        			<td><c:out value="${i.alipayAccount}"/></td>
-       			<td><c:out value="${i.moneyNum}"/></td>
+       			<td><c:out value="${i.encashingAmount}"/></td>
        			<td><c:out value="${i.phone}"/></td>
 				<td>
-				    <a href="success.php"><i class="icon-ok"></i><span>已结算</span></a>
+				    <a href="#"><button id="encash" value="${i.id}">结算</button></a>
 				</td>
        		</tr>
        	</c:forEach>
@@ -71,12 +85,6 @@
 </div>
 <div class="pagination">
     <ul>
-        <li><a href="money.jsp?pageNo=${pageNo - 1}">Prev</a></li>
-        <li><span><c:out value="${pageNo}"/></span></li>
-        <li><a href="money.jsp?pageNo=${pageNo + 1}"><c:out value="${pageNo+1}"/></a></li>
-        <li><a href="money.jsp?pageNo=${pageNo + 2}"><c:out value="${pageNo+2}"/></a></li>
-        <li><a href="money.jsp?pageNo=${pageNo + 3}"><c:out value="${pageNo+3}"/></a></li>
-        <li><a href="money.jsp?pageNo=${pageNo + 1}">Next</a></li>
     </ul>
 </div>
 

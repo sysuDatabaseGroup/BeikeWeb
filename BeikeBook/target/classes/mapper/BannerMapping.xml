@@ -34,7 +34,7 @@
 		INSERT
 		INTO bk_banner (pic_path, title,
 		link, datetime, prior) VALUES
-		(#{picPath},#{title},#{link},#{datetime},#{prior})
+		(#{picPath},#{title},#{link},CURDATE(),#{prior})
 	</insert>
 
 	<update id="update" parameterType="Banner">

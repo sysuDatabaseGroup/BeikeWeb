@@ -87,4 +87,20 @@
 		status=1
 		WHERE school_id=#{schoolId}
 	</delete>
+	
+	<select id="getLimitDistricts" resultMap="districtResultMap">
+		SELECT *
+		FROM bk_district
+		WHERE status=0
+		ORDER BY id
+		LIMIT #{start},#{num}
+	</select>
+	
+	<select id="getLimitDistrictsBySchool" resultMap="districtResultMap">
+		SELECT *
+		FROM bk_district
+		WHERE status=0 and school_id=#{schoolId}
+		ORDER BY id
+		LIMIT #{start},#{num}
+	</select>
 </mapper>

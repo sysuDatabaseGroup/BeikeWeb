@@ -30,7 +30,7 @@
         </div>
         
         <ul class="breadcrumb">
-            <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
+            <li><a href="<c:url value='/backend/index' />">首页</a><span class="divider">/</span></li>
             <li>提现管理<span class="divider">/</span></li>
             <li class="active">提现列表（所有）</li>
         </ul>
@@ -42,8 +42,8 @@
 </div>
 
 <div class="well">
-    <form class="form-search">
-          <input type="text" class="input-medium search-query">
+    	<form action="<c:url value='/backend/all_encashment_search' />" method="GET" class="form-search">
+          <input name="alipayAccount" type="text" class="input-medium search-query">
           <button type="submit" class="btn">搜索支付宝账户</button>
         </form>
     <table class="table">
@@ -56,16 +56,17 @@
           <th>手机号码</th>
         </tr>
       </thead>
+      
       <tbody>
-       	<c:forEach items="sellInfos" var="i" begin="${pageNo*5}" end="${pageNo*5 + 5}">
-       		<tr>
+       	<c:forEach items="${encashments}" var="i">
+			<tr>
        			<td><c:out value="${i.id}"/></td>
        			<td><c:out value="${i.alipayName}"/></td>
        			<td><c:out value="${i.alipayAccount}"/></td>
-       			<td><c:out value="${i.moneyNum}"/></td>
+       			<td><c:out value="${i.encashingAmount}"/></td>
        			<td><c:out value="${i.phone}"/></td>
 				<td>
-				    <a href="success.php"><i class="icon-ok"></i><span>已结算</span></a>
+				    <a href="#"><i class="icon-ok"></i><span>已结算</span></a>
 				</td>
        		</tr>
        	</c:forEach>
@@ -74,12 +75,6 @@
 </div>
 <div class="pagination">
     <ul>
-        <li><a href="all_money.jsp?pageNo=${pageNo - 1}">Prev</a></li>
-        <li><span><c:out value="${pageNo}"/></span></li>
-        <li><a href="all_money.jsp?pageNo=${pageNo + 1}"><c:out value="${pageNo+1}"/></a></li>
-        <li><a href="all_money.jsp?pageNo=${pageNo + 2}"><c:out value="${pageNo+2}"/></a></li>
-        <li><a href="all_money.jsp?pageNo=${pageNo + 3}"><c:out value="${pageNo+3}"/></a></li>
-        <li><a href="all_money.jsp?pageNo=${pageNo + 1}">Next</a></li>
     </ul>
 </div>
 

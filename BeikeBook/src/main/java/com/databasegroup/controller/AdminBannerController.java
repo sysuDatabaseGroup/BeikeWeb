@@ -43,7 +43,8 @@ public class AdminBannerController {
 	public String banner(Model model) {
 		List<Banner> banners = bannerService.getAll();
 		model.addAttribute("banners", banners);
-		return "/admin/banner/banner";
+		model.addAttribute("page","banner/banner.jsp");
+		return "/admin/layout";
 	}
 	
 	@RequestMapping(value="/banner/{page}",method=GET)
@@ -89,6 +90,7 @@ public class AdminBannerController {
 		banner.setPicPath(picPath);
 		bannerService.insert(banner);
 		
+		response.setContentType("text/html");
 		try {
 			response.getWriter().write("添加成功");
 		} catch (IOException e) {

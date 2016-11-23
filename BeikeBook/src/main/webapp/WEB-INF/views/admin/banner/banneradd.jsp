@@ -5,10 +5,17 @@
     <script type="text/javascript">
     $(document).ready(function(){
 		$("#add").click(function(){
+			if($("#title").val().length == 0 || 
+        			$("#link").val().length == 0|| 
+        			$("#prior").val().length == 0|| 
+        			$("#picFile").val().length == 0) {
+        		alert("请补全所有数据");
+        		return;
+        	}
 			$.ajaxFileUpload
             (
                 {
-                    url: '/BeikeBook/backend/banner_add', //用于文件上传的服务器端请求地址
+                    url: '/backend/banner_add', //用于文件上传的服务器端请求地址
                     secureuri: false, //是否需要安全协议，一般设置为false
                     fileElementId: 'picFile', //文件上传域的ID
                     dataType: 'txt', //返回值类型 一般设置为json
@@ -19,8 +26,8 @@
                 	},
                     success: function (data, status)  //服务器成功响应处理函数
                     {
-                    	alert("数据: " + data + "\n状态: " + status);
-                        window.location.replace("/BeikeBook/backend/banner");
+                    	alert(data);
+                        window.location.replace("/backend/banner");
                     },
                     error: function (data, status, e)//服务器响应失败处理函数
                     {

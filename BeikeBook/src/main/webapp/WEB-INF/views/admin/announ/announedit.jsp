@@ -1,5 +1,27 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script type="text/javascript">
+    $(document).ready(function(){
+		$("#update").click(function(){
+			$.post("/backend/announ_edit",{
+				id : $("#id").val(),
+				title : $("#title").val(),
+				content : $("#content").val()
+			}, function(data,status){
+				alert(data);
+				window.location.replace('/backend/announ');
+			});
+		});
+		$("#delete").click(function(){
+			$.post("/backend/announ_delete",{
+				id : $("#id").val()
+			}, function(data,status){
+				alert(data);
+				window.location.replace('/backend/announ');
+			});
+		});
+    });
+    </script>
     <style type="text/css">
         #line-chart {
             height:300px;
@@ -24,9 +46,9 @@
         </div>
 
         <ul class="breadcrumb">
-            <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
+            <li><a href="<c:url value="/backend/index" />">首页</a><span class="divider">/</span></li>
             <li>公告管理<span class="divider">/</span></li>
-            <li><a href="announ.jsp">公告</a><span class="divider">/</span></li>
+            <li><a href="<c:url value="/backend/announ" />">公告</a><span class="divider">/</span></li>
             <li class="active">编辑公告</li>
         </ul>
 
@@ -34,19 +56,18 @@
             <div class="row-fluid">
                     
 <div class="btn-toolbar">
-    <button class="btn btn-primary"><i class="icon-save"></i> 修改</button>
+    <button id="update" class="btn btn-primary"><i class="icon-save"></i> 修改</button>
     <a href="#myModal" data-toggle="modal" class="btn">删除</a>
 </div>
 
 <div class="well">
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active in" id="home">
-        <form id="announ">
+        	<input id="id" name="id" hidden="true" value="<c:out value='${id}'/>">
             <label>公告标题</label>
-            <input type="text" value="${announTitle}" class="input-xlarge">
+            <input id="title" name="title" type="text" value="<c:out value='${announ.title}' />" class="input-xlarge">
             <label>公告内容</label>
-            <textarea class="input-xlarge"><c:out value="${announContent}"/></textarea>
-        </form>
+            <textarea id="content" name="content" class="input-xlarge"><c:out value='${announ.title}' /></textarea>
       </div>
   </div>
 </div>
@@ -57,11 +78,11 @@
     <h3 id="myModalLabel">删除公告？</h3>
   </div>
   <div class="modal-body">
-    <p class="error-text"><i class="icon-warning-sign modal-icon"></i>确认删除公告［期末收书活动通知］？</p>
+    <p class="error-text"><i class="icon-warning-sign modal-icon"></i>确认删除公告？</p>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
-    <button class="btn btn-danger" data-dismiss="modal">删除</button>
+    <button id="delete" class="btn btn-danger" data-dismiss="modal">删除</button>
   </div>
 </div>
             </div>

@@ -4,11 +4,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.databasegroup.model.BookCategory;
 import com.databasegroup.model.Encashment;
@@ -53,8 +55,20 @@ public class AdminEncashmentController {
 		List<Encashment> encashments = encashmentService
 				.getEncashedByAlipayAccount(alipayAccount);
 		model.addAttribute("encashments", encashments);
-		model.addAttribute("page","encashment/all_encashment.jsp");
+		model.addAttribute("page","money/all_money.jsp");
 		return "/admin/layout";
+	}
+	
+	@RequestMapping(value="/encash",method=POST)
+	public void encash(@RequestParam int id,
+			HttpServletResponse response) {
+		encashmentService.setEncashedById(id);
+		try {
+			response.getWriter().write("结算成功！");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

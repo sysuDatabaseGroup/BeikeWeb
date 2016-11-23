@@ -14,10 +14,11 @@
 		<result property="payed" column="payed"  />
 		<result property="isRenting" column="id"/>
 		<result property="dealedBookIds" column="dealed_book_id"/>
+		<result property="took" column="took"/>
 	</resultMap>
 	
 	<sql id="columns">id, user_id, delivery_method_id, dealed_book_id,
-		amount, datetime, taking_book_num, payed</sql>
+		amount, datetime, taking_book_num, payed, took</sql>
 	
 	<select id="getById" parameterType="int"
 		resultMap="sellingOrderResultMap">
@@ -56,7 +57,8 @@
 		amount=#{amount},
 		datetime=#{datetime},
 		taking_book_num=#{takingBookNum},
-		payed=#{payed}
+		payed=#{payed},
+		took=#{took}
 		WHERE id=#{id}
 	</update>
 	
@@ -65,4 +67,22 @@
 		FROM bk_selling_order
 		WHERE id=#{id}
 	</delete> 
+
+	<select id="getLimitNoTookOrders" resultMap="sellingOrderResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_selling_order
+		WHERE took=0 AND taking_book_num like #{take_num}
+		ORDER BY id
+		LIMIT #{start},#{num}
+	</select>
+
+	<select id="getLimitOrders" resultMap="sellingOrderResultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM bk_selling_order
+		WHERE taking_book_num like #{take_num}
+		ORDER BY id
+		LIMIT #{start},#{num}
+	</select>
 </mapper>

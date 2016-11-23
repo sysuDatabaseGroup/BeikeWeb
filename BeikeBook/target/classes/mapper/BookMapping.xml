@@ -100,4 +100,11 @@
 		ORDER BY id
 		LIMIT #{start},#{num}
 	</select>
+	
+	<select id="searchByName" resultMap="bookResultMap">
+		SELECT *
+		FROM bk_book
+		WHERE status=0 and title like #{name}
+		ORDER BY id
+	</select>
 </mapper>

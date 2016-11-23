@@ -30,7 +30,7 @@ public class TestUserDao {
 	@Autowired
 	private IUserDao userDao;
 	@Autowired
-	private IUserService userSerivce;
+	private IUserService userService;
 	
 	@Test
 	public void userDaoShouldNotBeNull() {
@@ -39,7 +39,7 @@ public class TestUserDao {
 		
 //		User user = userDao.getById(1);
 //		user.setWithdrawalAmount(0);
-//		userSerivce.update(user);
+//		userService.update(user);
 //		System.out.println(user);
 //		
 //		new Thread() {
@@ -47,7 +47,7 @@ public class TestUserDao {
 //			public void run() {
 //				int k = 3000;
 //				while (k-- > 0) {
-//					userSerivce.addEncashingAmount(user.getId(), 
+//					userService.addEncashingAmount(user.getId(), 
 //							1);
 //				}
 //			}
@@ -56,7 +56,7 @@ public class TestUserDao {
 //
 //		int k = 5000;
 //		while (k-- > 0) {
-//			userSerivce.addEncashingAmount(user.getId(), 
+//			userService.addEncashingAmount(user.getId(), 
 //					1);
 //		}
 //		
@@ -65,21 +65,21 @@ public class TestUserDao {
 //		User user = userDao.authUser("usernum", "password");
 //		System.out.println(user);
 		
-//		User user = userDao.getById(2);
-//		user.setWxName("update");
-//		userDao.update(user);
-//		System.out.println(user);
+		User user = userService.getById(2);
+		user.setPassword("update");
+		userService.update(user);
+		System.out.println(user);
 		
-		User user = new User();
-		user.setCityId(1);
-		user.setDorm("Dorm");
-		user.setSchoolId(1);
-		user.setUserNum("UserNum");
-		user.setPassword("Password");
-		user.setWxName("wx_name");
-		user.setWxPhoto("wx_photo");
-		
-		userSerivce.insert(user);
+//		User user = new User();
+//		user.setCityId(1);
+//		user.setDorm("Dorm");
+//		user.setSchoolId(1);
+//		user.setUserNum("UserNum");
+//		user.setPassword("Password");
+//		user.setWxName("wx_name");
+//		user.setWxPhoto("wx_photo");
+//		
+//		userService.insert(user);
 //		
 //		user = userDao.getById(1);
 //		
