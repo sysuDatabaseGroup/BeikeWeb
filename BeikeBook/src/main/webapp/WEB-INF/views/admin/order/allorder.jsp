@@ -68,23 +68,22 @@
           		<tr>
 					<td><c:out value="${i.getId()}" /></td>
 					<td><c:out value="${bookName.get(i.getId())}" /></td>
-					<td><c:out value="${i.userNum}" /></td>
+					<td><c:out value="${userNum.get(i.getId())}" /></td>
 					<td><c:out value="${i.getAmount()}" /></td>
 					<td><c:out value="${prices.get(i.getId())}" /></td>
 					<td><c:out value="${methodName.get(i.getId())}" /></td>
 					<td><c:out value="${i.getTakingBookNum()}" /></td>
 					<td><c:out value="${formatedDate.get(i.getId())}" /></td>
-					<td><span class="btn-danger" style="padding:5px;">
+					<td>
 						<c:choose>
-							<c:when test="${i.getTook() == 1}">已领取</c:when>
-							<c:otherwise>未领取</c:otherwise>
-						</c:choose></span>
+						<c:when test="${i.getTook() == 1}">
+						<span style="padding:5px;">已领取</span>
+						</c:when>
+						<c:otherwise><button class="btn-danger" style="padding:5px;" onclick="location.href='sellOrderDone?url=${redirectUrl}&id=${i.getId()}'">未领取</button></c:otherwise>
+						</c:choose>
 					</td>
 					<td>
-						<c:if test="${i.getTook() == 0}">
-						<a href="rentOrderDone?url=${redirectUrl}&id=${i.getId()}"><i class="icon-edit"></i><span>已领取</span></a>
-						</c:if>
-						<a href="deleteRentOrder?url=${redirectUrl}&id=${i.getId()}"><i class="icon-edit"></i><span>删除</span></a>
+						<a href="deleteSellOrder?url=${redirectUrl}&id=${i.getId()}"><span>删除</span></a>
 					</td>
           		</tr>
           	</c:forEach>

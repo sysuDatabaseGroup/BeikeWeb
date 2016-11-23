@@ -120,7 +120,7 @@ public class AdminBannerController {
 		}
 		
 		try {
-			response.getWriter().write("修改成功");
+			response.getWriter().write("{\"msg\":\"修改成功\"}");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

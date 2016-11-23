@@ -1272,8 +1272,13 @@ public class AdminController {
 			HashMap<Integer,Double> prices = new HashMap<Integer,Double>();
 			HashMap<Integer,String> methodName = new HashMap<Integer,String>();
 			HashMap<Integer,String> formatedDate = new HashMap<Integer,String>();
+			HashMap<Integer,String> userNum = new HashMap<Integer,String>();
 			for(RentingOrder order:rentOrders){
-				Book book = bookService.getById(order.getBookId());
+				String[] dealedIds = order.getDealedBookIds().split("|");
+				int dealedId = Integer.parseInt(dealedIds[0]);
+				DealedBook dealedBook = dealedBookService.getById(dealedId);
+				Book book = bookService.getById(dealedBook.getBookId());
+				User user = userService.getById(order.getUserId());
 				int amount = order.getAmount();
 				DeliveryMethod method = deliveryMethodService.getById(order.getDeliveryMethodId());
 				int id = order.getId();
@@ -1281,6 +1286,7 @@ public class AdminController {
 				prices.put(id,amount * book.getRentalPrice());
 				methodName.put(id,method.getName());
 				formatedDate.put(id,new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(order.getDatetime()));
+				userNum.put(id,user.getUserNum());
 			}
 			String fullUrl = getFullUrl(request);
 			model.addAttribute("preUrl",fullUrl);
@@ -1292,6 +1298,7 @@ public class AdminController {
 			model.addAttribute("prices",prices);
 			model.addAttribute("methodName",methodName);
 			model.addAttribute("formatedDate",formatedDate);
+			model.addAttribute("userNum",userNum);
 			model.addAttribute("redirectUrl",URLEncoder.encode(fullUrl,"UTF-8"));
 			model.addAttribute("page","order/borrow.jsp");
 			return "/admin/layout";
@@ -1319,15 +1326,21 @@ public class AdminController {
 			HashMap<Integer,Double> prices = new HashMap<Integer,Double>();
 			HashMap<Integer,String> methodName = new HashMap<Integer,String>();
 			HashMap<Integer,String> formatedDate = new HashMap<Integer,String>();
+			HashMap<Integer,String> userNum = new HashMap<Integer,String>();
 			for(SellingOrder order:sellOrders){
-				Book book = bookService.getById(order.getBookId());
+				String[] dealedIds = order.getDealedBookIds().split("|");
+				int dealedId = Integer.parseInt(dealedIds[0]);
+				DealedBook dealedBook = dealedBookService.getById(dealedId);
+				Book book = bookService.getById(dealedBook.getBookId());
+				User user = userService.getById(order.getUserId());
 				int amount = order.getAmount();
-				DeliveryMethod method = deliveryMethodService.getById(order.getDeliveryMethodId());
+				DeliveryMethod mymethod = deliveryMethodService.getById(order.getDeliveryMethodId());
 				int id = order.getId();
 				bookName.put(id,book.getTitle());
 				prices.put(id,amount * book.getSellingPrice());
-				methodName.put(id,method.getName());
+				methodName.put(id,mymethod.getName());
 				formatedDate.put(id,new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(order.getDatetime()));
+				userNum.put(id,user.getUserNum());
 			}
 			String fullUrl = getFullUrl(request);
 			model.addAttribute("preUrl",fullUrl);
@@ -1338,12 +1351,21 @@ public class AdminController {
 			model.addAttribute("bookName",bookName);
 			model.addAttribute("prices",prices);
 			model.addAttribute("methodName",methodName);
+			model.addAttribute("userNum",userNum);
 			model.addAttribute("formatedDate",formatedDate);
 			model.addAttribute("redirectUrl",URLEncoder.encode(fullUrl,"UTF-8"));
 			model.addAttribute("page","order/sell.jsp");
 			return "/admin/layout";
 		}catch(Exception e){
+			//e.printStackTrace();
 			return "/admin/404";
+			/*String msg = "";
+			for(StackTraceElement elem : e.getStackTrace()) {
+				msg = msg + elem + "\n";
+			}
+			model.addAttribute("error_msg",msg);
+			model.addAttribute("page","order/sell.jsp");
+			return "/admin/layout";*/
 		}
 	}
 
@@ -1366,8 +1388,13 @@ public class AdminController {
 			HashMap<Integer,Double> prices = new HashMap<Integer,Double>();
 			HashMap<Integer,String> methodName = new HashMap<Integer,String>();
 			HashMap<Integer,String> formatedDate = new HashMap<Integer,String>();
+			HashMap<Integer,String> userNum = new HashMap<Integer,String>();
 			for(SellingOrder order:sellOrders){
-				Book book = bookService.getById(order.getBookId());
+				String[] dealedIds = order.getDealedBookIds().split("|");
+				int dealedId = Integer.parseInt(dealedIds[0]);
+				DealedBook dealedBook = dealedBookService.getById(dealedId);
+				Book book = bookService.getById(dealedBook.getBookId());
+				User user = userService.getById(order.getUserId());
 				int amount = order.getAmount();
 				DeliveryMethod method = deliveryMethodService.getById(order.getDeliveryMethodId());
 				int id = order.getId();
@@ -1375,6 +1402,7 @@ public class AdminController {
 				prices.put(id,amount * book.getSellingPrice());
 				methodName.put(id,method.getName());
 				formatedDate.put(id,new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(order.getDatetime()));
+				userNum.put(id,user.getUserNum());
 			}
 			String fullUrl = getFullUrl(request);
 			model.addAttribute("preUrl",fullUrl);
@@ -1386,6 +1414,7 @@ public class AdminController {
 			model.addAttribute("prices",prices);
 			model.addAttribute("methodName",methodName);
 			model.addAttribute("formatedDate",formatedDate);
+			model.addAttribute("userNum",userNum);
 			model.addAttribute("redirectUrl",URLEncoder.encode(fullUrl,"UTF-8"));
 			model.addAttribute("page","order/allorder.jsp");
 			return "/admin/layout";
@@ -1413,8 +1442,13 @@ public class AdminController {
 			HashMap<Integer,Double> prices = new HashMap<Integer,Double>();
 			HashMap<Integer,String> methodName = new HashMap<Integer,String>();
 			HashMap<Integer,String> formatedDate = new HashMap<Integer,String>();
+			HashMap<Integer,String> userNum = new HashMap<Integer,String>();
 			for(RentingOrder order:rentOrders){
-				Book book = bookService.getById(order.getBookId());
+				String[] dealedIds = order.getDealedBookIds().split("|");
+				int dealedId = Integer.parseInt(dealedIds[0]);
+				DealedBook dealedBook = dealedBookService.getById(dealedId);
+				Book book = bookService.getById(dealedBook.getBookId());
+				User user = userService.getById(order.getUserId());
 				int amount = order.getAmount();
 				DeliveryMethod method = deliveryMethodService.getById(order.getDeliveryMethodId());
 				int id = order.getId();
@@ -1422,6 +1456,7 @@ public class AdminController {
 				prices.put(id,amount * book.getRentalPrice());
 				methodName.put(id,method.getName());
 				formatedDate.put(id,new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(order.getDatetime()));
+				userNum.put(id,user.getUserNum());
 			}
 			String fullUrl = getFullUrl(request);
 			model.addAttribute("preUrl",fullUrl);
@@ -1433,6 +1468,7 @@ public class AdminController {
 			model.addAttribute("prices",prices);
 			model.addAttribute("methodName",methodName);
 			model.addAttribute("formatedDate",formatedDate);
+			model.addAttribute("userNum",userNum);
 			model.addAttribute("redirectUrl",URLEncoder.encode(fullUrl,"UTF-8"));
 			model.addAttribute("page","order/allorder_borrow.jsp");
 			return "/admin/layout";
@@ -1449,7 +1485,7 @@ public class AdminController {
 			if(str_id == null||str_id.length() == 0){
 				return "/admin/404";
 			}
-			String url = request.getParameter("redirectUrl");
+			String url = request.getParameter("url");
 			if(url == null||url.length() == 0){
 				return "/admin/404";
 			}
@@ -1463,10 +1499,14 @@ public class AdminController {
 			String real_url = URLDecoder.decode(url,"UTF-8");
 			return "redirect:"+real_url;
 		}catch(Exception e){
-			//String msg = e.toString();
-			//msg = msg.replace("\"","\\\"");
-			//return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
-			return "/admin/404";
+			String msg = "";
+			for(StackTraceElement elem : e.getStackTrace()) {
+				msg = msg + elem + "\n";
+			}
+			model.addAttribute("error_msg",msg);
+			model.addAttribute("page","order/sell.jsp");
+			return "/admin/layout";
+			//return "/admin/404";
 		}
 	}
 
@@ -1478,7 +1518,7 @@ public class AdminController {
 			if(str_id == null||str_id.length() == 0){
 				return "/admin/404";
 			}
-			String url = request.getParameter("redirectUrl");
+			String url = request.getParameter("url");
 			if(url == null||url.length() == 0){
 				return "/admin/404";
 			}
@@ -1492,9 +1532,9 @@ public class AdminController {
 			String real_url = URLDecoder.decode(url,"UTF-8");
 			return "redirect:"+real_url;
 		}catch(Exception e){
-			//String msg = e.toString();
-			//msg = msg.replace("\"","\\\"");
-			//return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+			/*String msg = e.toString();
+			msg = msg.replace("\"","\\\"");
+			return "{\"code\": 4,\"msg\": \"" + msg + "\"}";*/
 			return "/admin/404";
 		}
 	}
@@ -1507,7 +1547,7 @@ public class AdminController {
 			if(str_id == null||str_id.length() == 0){
 				return "/admin/404";
 			}
-			String url = request.getParameter("redirectUrl");
+			String url = request.getParameter("url");
 			if(url == null||url.length() == 0){
 				return "/admin/404";
 			}
@@ -1520,9 +1560,13 @@ public class AdminController {
 			String real_url = URLDecoder.decode(url,"UTF-8");
 			return "redirect:"+real_url;
 		}catch(Exception e){
-			//String msg = e.toString();
-			//msg = msg.replace("\"","\\\"");
-			//return "{\"code\": 4,\"msg\": \"" + msg + "\"}";
+			/*String msg = "";
+			for(StackTraceElement elem : e.getStackTrace()) {
+				msg = msg + elem + "\n";
+			}
+			model.addAttribute("error_msg",msg);
+			model.addAttribute("page","order/sell.jsp");
+			return "/admin/layout";*/
 			return "/admin/404";
 		}
 	}
@@ -1535,7 +1579,7 @@ public class AdminController {
 			if(str_id == null||str_id.length() == 0){
 				return "/admin/404";
 			}
-			String url = request.getParameter("redirectUrl");
+			String url = request.getParameter("url");
 			if(url == null||url.length() == 0){
 				return "/admin/404";
 			}

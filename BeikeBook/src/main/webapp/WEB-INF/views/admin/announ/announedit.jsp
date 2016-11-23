@@ -67,7 +67,7 @@
             <label>公告标题</label>
             <input id="title" name="title" type="text" value="<c:out value='${announ.title}' />" class="input-xlarge">
             <label>公告内容</label>
-            <textarea id="content" name="content" class="input-xlarge"><c:out value='${announ.title}' /></textarea>
+            <textarea id="content" name="content" class="input-xlarge"><c:out value='${announ.content}' /></textarea>
       </div>
   </div>
 </div>
