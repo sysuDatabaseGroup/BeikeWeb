@@ -61,7 +61,7 @@ public class SellingOrderServiceImpl implements ISellingOrderService {
 				sellingOrderDao.getSellingOrdersByUserId(id);
 		for (SellingOrder order : sellingOrders) {
 			String dealedBookId = 
-					order.getDealedBookIds().split("|")[0];
+					order.getDealedBookIds().split("\\|")[0];
 			DealedBook dealedBook = dealedBookDao
 					.getById(Integer.parseInt(dealedBookId));
 			List<DealedBook> dealedBooks = new ArrayList<>();
@@ -102,7 +102,7 @@ public class SellingOrderServiceImpl implements ISellingOrderService {
 	@Override
 	public SellingOrder getOrderById(int id) {
 		SellingOrder order = sellingOrderDao.getById(id);
-		String[] dealedBookIds = order.getDealedBookIds().split("|");
+		String[] dealedBookIds = order.getDealedBookIds().split("\\|");
 		List<DealedBook> dealedBooks = new ArrayList<>();
 		// 从字段dealed_book_id 取出相应的待售书的信息
 		for (String strId : dealedBookIds) {

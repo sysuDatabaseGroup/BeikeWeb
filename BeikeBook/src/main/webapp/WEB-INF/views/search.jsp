@@ -72,6 +72,9 @@ $(function(){
 		<span id="header_class"></span>
 			<input type="search" name="bookTitle" id="header_search" placeholder="热门搜索：大英 毛概 高数" required="required" />
 		<a href="<c:url value='/center'/>"><span id="header_center"></span></a>
+		<c:if test="${!empty user }">
+			<a href="<c:url value='/logout' />"><span style="float: right">退出</span></a>
+		</c:if>
 		</form>
 	</header>
 	<div class="side">
@@ -95,7 +98,6 @@ $(function(){
 	<footer class="footer">
 		<div id="logo"></div>
 		<div id="aboutus">
-			<span>贝壳易书是我们几位在校大学生创办的旧书交易平台，我们希望可以利用我们平台，让同学们的旧书交易变得更加简便。毕竟每一学期课本钱真的太贵了，还是买二手书划算！</span>
 		</div>
 	</footer>
 </body>	
