@@ -55,7 +55,7 @@
         <a href="#city-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-map-marker"></i>托管点管理<i class="icon-chevron-up"></i></a>
         <ul id="city-menu" class="nav nav-list collapse">
             <li ><a href="<c:url value='/backend/cityList' />">城市管理</a></li>
-            <li ><a href="<c:url value='/backend/schoolList' />">学校管理</a></li>
+            <!--<li ><a href="<c:url value='/backend/schoolList' />">学校管理</a></li>-->
             <li ><a href="<c:url value='/backend/districtList' />">托管点管理</a></li>
         </ul>
 

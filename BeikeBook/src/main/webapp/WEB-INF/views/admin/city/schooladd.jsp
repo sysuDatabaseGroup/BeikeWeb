@@ -55,7 +55,7 @@
 		<c:if test="${! empty success_msg}">
 		<div class="success">${success_msg}</div>
 		</c:if>
-        <form id="school">
+        <form id="school" method="POST" action="schooladd">
             <label>学校</label>
             <input type="text" name="name" class="input-xlarge">
             <label>学校缩写</label>
