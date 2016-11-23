@@ -96,18 +96,23 @@ public class AdminController {
 		SimpleDateFormat time=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		model.addAttribute("dataTime",time.format(dateTime));
 		double totalAmount = 0;
-		model.addAttribute("circulatingFund",totalAmount);
 		List<HashMap<String , String> > rentinfos = new ArrayList<HashMap<String,String> >();
 		for(RentingOrder rent:rentingOrders){
 			int userId = rent.getUserId();
 			String userNum = userService.getById(userId).getUserNum();
-			List<DealedBook> dealedBooks = rent.getDealedBooks();
+			String[] dealedIds = rent.getDealedBookIds().split("|");
+			List<DealedBook> dealedBooks = new ArrayList<DealedBook>();
+			for(String t_dealedId:dealedIds){
+				dealedBooks.add(dealedBookService.getById(Integer.parseInt(t_dealedId)));
+			}
 			if(dealedBooks != null){
 				for(DealedBook dealedBook:dealedBooks){
-					totalAmount = totalAmount + dealedBook.getRentalPrice();
+					totalAmount = totalAmount + dealedBook.getBook().getRentalPrice();
 				}
 			}
-			Book book = bookService.getById(rent.getBookId());
+			int dealedId = Integer.parseInt(dealedIds[0]);
+			DealedBook dealedBook = dealedBookService.getById(dealedId);
+			Book book = bookService.getById(dealedBook.getBookId());
 			String bookClassName = book.getTitle();
 			int took = rent.getTook();
 			String isTake = took == 0? "否":"是";
@@ -122,11 +127,15 @@ public class AdminController {
 		for(SellingOrder sell:sellingOrders){
 			int userId = sell.getUserId();
 			String userNum = userService.getById(userId).getUserNum();
-			List<DealedBook> dealedBooks = sell.getDealedBooks();
-			for(DealedBook dealedBook:dealedBooks){
-				totalAmount = totalAmount + dealedBook.getRentalPrice();
+			String[] dealedIds = sell.getDealedBookIds().split("|");
+			List<DealedBook> dealedBooks = new ArrayList<DealedBook>();
+			for(String t_dealedId:dealedIds){
+				dealedBooks.add(dealedBookService.getById(Integer.parseInt(t_dealedId)));
 			}
-			double sellPrice = dealedBooks.get(0).getSellingPrice();
+			for(DealedBook dealedBook:dealedBooks){
+				totalAmount = totalAmount + dealedBook.getBook().getSellingPrice();
+			}
+			double sellPrice = dealedBooks.get(0).getBook().getSellingPrice();
 			Date sellTime = sell.getDatetime();
 			String datetime = time.format(sellTime);
 			HashMap<String,String> m = new HashMap<String,String>();
@@ -144,6 +153,7 @@ public class AdminController {
 		    String announContent = announs.get(announs.size()-1).getContent();
 		    model.addAttribute("announContent",announContent);
         }
+		model.addAttribute("circulatingFund",totalAmount);
 		model.addAttribute("page","index.jsp");
 		return "/admin/layout";
 	}
