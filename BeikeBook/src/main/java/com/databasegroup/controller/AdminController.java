@@ -1494,7 +1494,7 @@ public class AdminController {
 			if(order == null){
 				return "/admin/404";
 			}
-			order.setTook(1);
+			order.setTook(2);
 			rentingOrderService.update(order);
 			String real_url = URLDecoder.decode(url,"UTF-8");
 			return "redirect:"+real_url;

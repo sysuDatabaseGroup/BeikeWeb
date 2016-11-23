@@ -76,7 +76,7 @@
           <td><c:out value="${formatedDate.get(i.getId())}" /></td>
           <td>
 						<c:choose>
-						<c:when test="${i.getTook() == 1}">
+						<c:when test="${i.getTook() > 1}">
 						<span style="padding:5px;">已领取</span>
 						</c:when>
 						<c:otherwise><button class="btn-danger" style="padding:5px;" onclick="location.href='rentOrderDone?url=${redirectUrl}&id=${i.getId()}'">未领取</button></c:otherwise>
