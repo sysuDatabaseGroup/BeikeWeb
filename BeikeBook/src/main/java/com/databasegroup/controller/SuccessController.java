@@ -91,7 +91,6 @@ public class SuccessController {
 		rentingOrder.setDatetime(new Date());
 		rentingOrder.setTakingBookNum(OrderNumberAndTakingNumUtil
 				.getTakingNum());
-		rentingOrder.setTook(1);
 		
 		rentingOrderService.insertOrder(rentingOrder);
 		
