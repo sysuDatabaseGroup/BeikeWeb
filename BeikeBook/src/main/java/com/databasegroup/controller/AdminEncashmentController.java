@@ -34,7 +34,8 @@ public class AdminEncashmentController {
 				HttpServletRequest request) {
 		List<Encashment> encashments = encashmentService.getNoEncashed();
 		model.addAttribute("encashments", encashments);
-		return "/admin/encashment/encashment";
+		model.addAttribute("page","money/money.jsp");
+		return "/admin/layout";
 	}
 	
 	@RequestMapping(value="/all_encashment",method=GET)
@@ -42,7 +43,8 @@ public class AdminEncashmentController {
 				HttpServletRequest request) {
 		List<Encashment> encashments = encashmentService.getEncashed();
 		model.addAttribute("encashments", encashments);
-		return "/admin/encashment/all_encashment";
+		model.addAttribute("page","money/all_money.jsp");
+		return "/admin/layout";
 	}
 	
 	@RequestMapping(value="/all_encashment_search",method=GET)
@@ -51,7 +53,8 @@ public class AdminEncashmentController {
 		List<Encashment> encashments = encashmentService
 				.getEncashedByAlipayAccount(alipayAccount);
 		model.addAttribute("encashments", encashments);
-		return "/admin/encashment/all_encashment";
+		model.addAttribute("page","encashment/all_encashment.jsp");
+		return "/admin/layout";
 	}
 	
 }

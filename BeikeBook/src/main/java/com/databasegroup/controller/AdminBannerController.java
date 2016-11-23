@@ -52,12 +52,14 @@ public class AdminBannerController {
 				HttpServletRequest request) {
 		List<Banner> banners = bannerService.getAll();
 		model.addAttribute("banners", banners);
-		return "/admin/banner/banner";
+		model.addAttribute("page","banner/banner.jsp");
+		return "/admin/layout";
 	}
 	
 	@RequestMapping(value="/banner_add",method=GET)
-	public String bannerAdd() {
-		return "/admin/banner/banneradd";
+	public String bannerAdd(Model model) {
+		model.addAttribute("page","banner/banneradd.jsp");
+		return "/admin/layout";
 	}
 	
 	@RequestMapping(value="/banner_edit/{id}",method=GET)
@@ -66,7 +68,8 @@ public class AdminBannerController {
 			Model model) {
 		Banner banner = bannerService.getById(id);
 		model.addAttribute("banner", banner);
-		return "/admin/banner/banneredit";
+		model.addAttribute("page","banner/banneredit.jsp");
+		return "/admin/layout";
 	}
 	
 	@RequestMapping(value="/banner_add",method=POST)

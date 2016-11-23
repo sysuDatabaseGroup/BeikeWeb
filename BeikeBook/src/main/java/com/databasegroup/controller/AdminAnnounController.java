@@ -38,7 +38,8 @@ public class AdminAnnounController {
 				HttpServletRequest request) {
 		List<Announ> announs = announService.getAll();
 		model.addAttribute("announs", announs);
-		return "/admin/announ/announ";
+		model.addAttribute("page","announ/announ.jsp");
+		return "/admin/layout";
 	}
 	
 	@RequestMapping(value="/announ/{page}",method=GET)
@@ -47,13 +48,15 @@ public class AdminAnnounController {
 				HttpServletRequest request) {
 		List<Announ> announs = announService.getAll();
 		model.addAttribute("announs", announs);
-		return "/admin/announ/announ";
+		model.addAttribute("page","announ/announ.jsp");
+		return "/admin/layout";
 	}
 	
 	@RequestMapping(value="/announ_add",method=GET)
 	public String announAdd(Model model,
 				HttpServletRequest request) {
-		return "/admin/announ/announadd";
+		model.addAttribute("page","announ/announadd.jsp");
+		return "/admin/layout";
 	}
 	
 	@RequestMapping(value="/announ_edit/{id}",method=GET)
@@ -63,7 +66,8 @@ public class AdminAnnounController {
 			HttpServletRequest request) {
 		Announ announ = announService.getById(id);
 		model.addAttribute("announ", announ);
-		return "/admin/announ/announedit";
+		model.addAttribute("page","announ/announedit.jsp");
+		return "/admin/layout";
 	}
 	
 	@RequestMapping(value="/announ_add",method=POST)

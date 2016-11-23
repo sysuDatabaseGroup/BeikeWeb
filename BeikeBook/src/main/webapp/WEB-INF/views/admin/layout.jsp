@@ -37,7 +37,7 @@
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li><a tabindex="-1" href="#">我的账户信息</a></li>
+                            <!--<li><a tabindex="-1" href="#">我的账户信息</a></li>-->
                             <li><a tabindex="-1" href="<c:url value='/backend/logout' />">退出</a></li>
                         </ul>
                     </li>
@@ -74,17 +74,17 @@
             <li ><a href="<c:url value='/backend/totalRentOrderList' />">全部订单（租书）</a></li>
         </ul>
 
-        <a href="../banner/banner.jsp" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
+        <a href="<c:url value='/backend/banner' />" class="nav-header" ><i class="icon-gift"></i>活动推广</a>
 
         <a href="#money-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-star"></i>提现申请<i class="icon-chevron-up"></i></a>
         <ul id="money-menu" class="nav nav-list collapse">
-            <li ><a href="../money/money.jsp">未结算</a></li>
-            <li ><a href="../money/all_money.jsp">所有提现</a></li>
+            <li ><a href="<c:url value='/backend/encashment' />">未结算</a></li>
+            <li ><a href="<c:url value='/backend/all_encashment' />">所有提现</a></li>
         </ul>
 
-        <a href="../method/method.jsp" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
+        <a href="<c:url value='/backend/method' />" class="nav-header" ><i class="icon-tags"></i>配送方式</a>
 
-        <a href="../announ/announ.jsp" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
+        <a href="<c:url value='/backend/announ' />" class="nav-header" ><i class="icon-edit"></i>公告管理</a>
     </div>
 	
 <c:import url="${page}"></c:import>

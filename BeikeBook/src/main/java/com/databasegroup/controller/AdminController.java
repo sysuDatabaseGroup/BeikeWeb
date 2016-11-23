@@ -139,8 +139,8 @@ public class AdminController {
 		List<Announ> announs = announService.getAll();
 		String announContent = announs.get(announs.size()-1).getContent();
 		model.addAttribute("announContent",announContent);
-
-		return "/admin/index";
+		model.addAttribute("page","index.jsp");
+		return "/admin/layout";
 	}
 
 	@RequestMapping(value="/login",method={GET,POST})
@@ -203,7 +203,8 @@ public class AdminController {
 		model.addAttribute("userInfos",userinfos);
 		int beginPage = maxPage >= 4? maxPage - 3:1;
 		model.addAttribute("beginPage",beginPage);
-		return "/admin/user/users";
+		model.addAttribute("page","user/users.jsp");
+		return "/admin/layout";
 	}
 
 	@RequestMapping(value="/useredit",method=GET)
@@ -240,7 +241,8 @@ public class AdminController {
 		model.addAttribute("dorm",user.getDorm());
 		model.addAttribute("userNo",userNo);
 		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
-		return "/admin/user/useredit";
+		model.addAttribute("page","user/useredit.jsp");
+		return "/admin/layout";
 	}
 
 	@ResponseBody

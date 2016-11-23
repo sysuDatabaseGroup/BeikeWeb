@@ -37,7 +37,8 @@ public class AdminMethodController {
 				HttpServletRequest request) {
 		List<DeliveryMethod> methods = deliveryMethodService.getAll();
 		model.addAttribute("methods", methods);
-		return "/admin/method/method";
+		model.addAttribute("page","method/method.jsp");
+		return "/admin/layout";
 	}
 	
 	@RequestMapping(value="/method/{page}",method=GET)
@@ -46,13 +47,15 @@ public class AdminMethodController {
 				HttpServletRequest request) {
 		List<DeliveryMethod> methods = deliveryMethodService.getAll();
 		model.addAttribute("methods", methods);
-		return "/admin/method/method";
+		model.addAttribute("page","method/method.jsp");
+		return "/admin/layout";
 	}
 	
 	@RequestMapping(value="/method_add",method=GET)
 	public String methodAdd(Model model,
 				HttpServletRequest request) {
-		return "/admin/method/methodadd";
+		model.addAttribute("page","method/methodadd.jsp");
+		return "/admin/layout";
 	}
 	
 	@RequestMapping(value="/method_edit/{id}",method=GET)
@@ -62,7 +65,8 @@ public class AdminMethodController {
 			HttpServletRequest request) {
 		DeliveryMethod method = deliveryMethodService.getById(id);
 		model.addAttribute("method", method);
-		return "/admin/method/methodedit";
+		model.addAttribute("page","method/methodedit.jsp");
+		return "/admin/layout";
 	}
 	
 	@RequestMapping(value="/method_add",method=POST)
