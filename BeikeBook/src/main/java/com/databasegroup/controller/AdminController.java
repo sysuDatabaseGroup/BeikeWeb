@@ -199,7 +199,7 @@ public class AdminController {
 		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
 		List<User> users = userService.getLimitUsers((curPageNo-1)*5,20);
 		int numOfItem = users.size() > 5? 5:users.size();
-		model.addAttribute("numOfItem",numOfItem);
+		model.addAttribute("numOfItem",numOfItem-1-1);
 		int maxPage = users.size() / 5 + curPageNo;
 		if(users.size() % 5 == 0){
 			maxPage = maxPage - 1;
@@ -306,7 +306,7 @@ public class AdminController {
 		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
 		List<City> cities = cityService.getLimitCities((curPageNo-1)*5,20);
 		int numOfItem = cities.size() > 5? 5:cities.size();
-		model.addAttribute("numOfItem",numOfItem);
+		model.addAttribute("numOfItem",numOfItem-1);
 		int maxPage = cities.size() / 5 + curPageNo;
 		if(cities.size() % 5 == 0){
 			maxPage = maxPage - 1;
@@ -455,7 +455,7 @@ public class AdminController {
 			schools = new ArrayList<School>();
 		}
 		int numOfItem = schools.size() > 5? 5:schools.size();
-		model.addAttribute("numOfItem",numOfItem);
+		model.addAttribute("numOfItem",numOfItem-1);
 		int maxPage = schools.size() / 5 + curPageNo;
 		if(schools.size() % 5 == 0){
 			maxPage = maxPage - 1;
@@ -664,7 +664,7 @@ public class AdminController {
 			districts = new ArrayList<District>();
 		}
 		int numOfItem = districts.size() > 5? 5:districts.size();
-		model.addAttribute("numOfItem",numOfItem);
+		model.addAttribute("numOfItem",numOfItem-1);
 		int maxPage = districts.size() / 5 + curPageNo;
 		if(districts.size() % 5 == 0){
 			maxPage = maxPage - 1;
@@ -857,7 +857,7 @@ public class AdminController {
 		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
 		List<BookCategory> categories = bookCategoryService.getLimitCategories((curPageNo-1)*5,20);
 		int numOfItem = categories.size() > 5? 5:categories.size();
-		model.addAttribute("numOfItem",numOfItem);
+		model.addAttribute("numOfItem",numOfItem-1);
 		int maxPage = categories.size() / 5 + curPageNo;
 		if(categories.size() % 5 == 0){
 			maxPage = maxPage - 1;
@@ -998,7 +998,7 @@ public class AdminController {
 		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
 		List<Book> books = bookService.getLimitBooks((curPageNo-1)*5,20);
 		int numOfItem = books.size() > 5? 5:books.size();
-		model.addAttribute("numOfItem",numOfItem);
+		model.addAttribute("numOfItem",numOfItem-1);
 		int maxPage = books.size() / 5 + curPageNo;
 		if(books.size() % 5 == 0){
 			maxPage = maxPage - 1;
@@ -1016,9 +1016,9 @@ public class AdminController {
 		model.addAttribute("page","book/booksadd.jsp");
 		model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
 		String get = new String("GET");
+		List<BookCategory> categories = bookCategoryService.getAll();
+		model.addAttribute("categoryInfos",categories);
 		if(request.getMethod().equals(get)){
-			List<BookCategory> categories = bookCategoryService.getAll();
-			model.addAttribute("categoryInfos",categories);
 			return "/admin/layout";
 		}
 		try{
@@ -1271,9 +1271,15 @@ public class AdminController {
 			take_book_num += "%";
 			model.addAttribute("pageNo",curPageNo);
 			model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
-			List<RentingOrder> rentOrders = rentingOrderService.getLimitNoTookOrders((curPageNo-1)*5,20,take_book_num);
+			List<RentingOrder> allRentOrders = rentingOrderService.getLimitOrders((curPageNo-1)*5,20,take_book_num);
+			List<RentingOrder> rentOrders = new ArrayList<RentingOrder>();
+			for(RentingOrder order:allRentOrders){
+				if(order.getTook() <= 1){
+					rentOrders.add(order);
+				}
+			}
 			int numOfItem = rentOrders.size() > 5? 5:rentOrders.size();
-			model.addAttribute("numOfItem",numOfItem);
+			model.addAttribute("numOfItem",numOfItem-1);
 			int maxPage = rentOrders.size() / 5 + curPageNo;
 			if(rentOrders.size() % 5 == 0){
 				maxPage = maxPage - 1;
@@ -1327,7 +1333,7 @@ public class AdminController {
 			model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
 			List<SellingOrder> sellOrders = sellingOrderService.getLimitNoTookOrders((curPageNo-1)*5,20,take_book_num);
 			int numOfItem = sellOrders.size() > 5? 5:sellOrders.size();
-			model.addAttribute("numOfItem",numOfItem);
+			model.addAttribute("numOfItem",numOfItem-1);
 			int maxPage = sellOrders.size() / 5 + curPageNo;
 			if(sellOrders.size() % 5 == 0){
 				maxPage = maxPage - 1;
@@ -1389,7 +1395,7 @@ public class AdminController {
 			model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
 			List<SellingOrder> sellOrders = sellingOrderService.getLimitOrders((curPageNo-1)*5,20,take_book_num);
 			int numOfItem = sellOrders.size() > 5? 5:sellOrders.size();
-			model.addAttribute("numOfItem",numOfItem);
+			model.addAttribute("numOfItem",numOfItem-1);
 			int maxPage = sellOrders.size() / 5 + curPageNo;
 			if(sellOrders.size() % 5 == 0){
 				maxPage = maxPage - 1;
@@ -1443,7 +1449,7 @@ public class AdminController {
 			model.addAttribute("districtAddrStr",(String)request.getSession().getAttribute("districtAddr"));
 			List<RentingOrder> rentOrders = rentingOrderService.getLimitOrders((curPageNo-1)*5,20,take_book_num);
 			int numOfItem = rentOrders.size() > 5? 5:rentOrders.size();
-			model.addAttribute("numOfItem",numOfItem);
+			model.addAttribute("numOfItem",numOfItem-1);
 			int maxPage = rentOrders.size() / 5 + curPageNo;
 			if(rentOrders.size() % 5 == 0){
 				maxPage = maxPage - 1;

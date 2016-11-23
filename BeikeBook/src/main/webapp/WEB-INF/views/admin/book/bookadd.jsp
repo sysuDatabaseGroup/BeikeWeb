@@ -57,9 +57,9 @@
         </div>
         
         <ul class="breadcrumb">
-            <li><a href="../index.jsp">首页</a><span class="divider">/</span></li>
+            <li><a href="index">首页</a><span class="divider">/</span></li>
             <li>书籍管理<span class="divider">/</span></li>
-            <li><a href="books.jsp">书单</a><span class="divider">/</span></li>
+            <li><a href="booksList">书单</a><span class="divider">/</span></li>
             <li class="active">添加书本</li>
         </ul>
 
