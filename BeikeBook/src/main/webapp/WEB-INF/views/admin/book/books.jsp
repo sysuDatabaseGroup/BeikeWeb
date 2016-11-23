@@ -85,11 +85,11 @@
     <ul>
 		<c:choose>
 		<c:when test="${pageNo > 1}">
-		<li><a href="userList?pageNo=${pageNo - 1}">Prev</a>
+		<li><a href="booksList?pageNo=${pageNo - 1}">Prev</a>
 		</li>
 		</c:when>
 		<c:otherwise>
-		<li><a href="userList?pageNo=${pageNo}">Prev</a>
+		<li><a href="booksList?pageNo=${pageNo}">Prev</a>
 		</li>
 		</c:otherwise>
 		</c:choose>
@@ -100,18 +100,18 @@
 		</li>
 		</c:when>
 		<c:otherwise>
-		<li><a href="userList?pageNo=${i}"><c:out value="${i}"/></a>
+		<li><a href="booksList?pageNo=${i}"><c:out value="${i}"/></a>
 		</li>
 		</c:otherwise>
 		</c:choose>
 		</c:forEach>
 		<c:choose>
 		<c:when test="${pageNo==maxPage}">
-		<li><a href="userList?pageNo=${pageNo}">Next</a>
+		<li><a href="booksList?pageNo=${pageNo}">Next</a>
 		</li>
 		</c:when>
 		<c:otherwise>
-		<li><a href="userList?pageNo=${pageNo + 1}">Next</a>
+		<li><a href="booksList?pageNo=${pageNo + 1}">Next</a>
 		</li>
 		</c:otherwise>
 		</c:choose>

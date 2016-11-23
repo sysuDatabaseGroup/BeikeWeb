@@ -65,8 +65,8 @@ public class AdminController {
 
     private String getFullUrl(HttpServletRequest request){
         String url = "";
-        url = request.getScheme() +"://" + request.getServerName()  
-                        + ":" +request.getServerPort() 
+        url = request.getScheme() +"://" + request.getServerName()
+                        + ":" +request.getServerPort()
                         + request.getServletPath();
         if (request.getQueryString() != null){
             url += "?" + request.getQueryString();
@@ -137,8 +137,13 @@ public class AdminController {
 		}
 		model.addAttribute("sellInfos",sellInfos);
 		List<Announ> announs = announService.getAll();
-		String announContent = announs.get(announs.size()-1).getContent();
-		model.addAttribute("announContent",announContent);
+        if(announs == null||announs.size() == 0){
+            model.addAttribute("announContent","");
+        }
+        else{
+		    String announContent = announs.get(announs.size()-1).getContent();
+		    model.addAttribute("announContent",announContent);
+        }
 		model.addAttribute("page","index.jsp");
 		return "/admin/layout";
 	}
@@ -1247,7 +1252,7 @@ public class AdminController {
 			return msg;
 		}
 	}
-	
+
 	@RequestMapping(value="/rentOrderList", method=GET)
 	public String rentOrderList(Model model, HttpServletRequest request) {
 		try{
@@ -1294,7 +1299,7 @@ public class AdminController {
 			return "/admin/404";
 		}
 	}
-	
+
 	@RequestMapping(value="/sellOrderList", method=GET)
 	public String sellOrderList(Model model, HttpServletRequest request) {
 		try{
@@ -1341,7 +1346,7 @@ public class AdminController {
 			return "/admin/404";
 		}
 	}
-	
+
 	@RequestMapping(value="/totalSellOrderList", method={GET,POST})
 	public String totalSellOrderList(Model model, HttpServletRequest request) {
 		try{
@@ -1388,7 +1393,7 @@ public class AdminController {
 			return "/admin/404";
 		}
 	}
-	
+
 	@RequestMapping(value="/totalRentOrderList", method=GET)
 	public String totalRentOrderList(Model model, HttpServletRequest request) {
 		try{
