@@ -56,7 +56,7 @@ CREATE TABLE `bk_book` (
   `cover_path` varchar(100) NOT NULL DEFAULT '/images/book/default.png', 
   `delivery_method_id` int(11) NOT NULL, -- ?????????????
   `press` varchar(30) NOT NULL,  
-  `author` varchar(10) NOT NULL,
+  `author` varchar(40) NOT NULL,
   `edition` varchar(10) NOT NULL, 
   `selling_price` double(5,1) NOT NULL, 
   `rental_price` double(5,1) NOT NULL, 

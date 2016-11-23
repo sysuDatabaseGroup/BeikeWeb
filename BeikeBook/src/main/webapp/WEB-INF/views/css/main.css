@@ -1462,8 +1462,18 @@ body,html{
 		}
 
 /** city **/
-
-
+#quit{
+	display: block;
+	width: 80%;
+	max-width: 480px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 5px;
+	background: #ccc;
+	text-align: center;
+	color: #fff;
+	margin: 25px auto;
+}
 
 
 

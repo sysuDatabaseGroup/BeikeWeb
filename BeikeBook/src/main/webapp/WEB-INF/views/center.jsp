@@ -70,12 +70,15 @@
 					<span id="school" class="center_option_item">你想知道的这里都有</span>
 				</li>
 			</a>
-			<a href="index">
+			<a href="<c:url value='/index' />">
 				<li>
 					<h6 id="icon_buyBook"></h6>
 					<span>继续购书</span>
 					<span id="school" class="center_option_item">前往首页</span>
 				</li>
+			</a>
+			<a href="<c:url value='/logout' />">
+				<span id="quit">注销用户</span>
 			</a>
 		</ul>		
 	</div>	

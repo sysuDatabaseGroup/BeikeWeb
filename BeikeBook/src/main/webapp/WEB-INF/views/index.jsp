@@ -72,9 +72,6 @@ $(function(){
 		<span id="header_class"></span>
 			<input type="search" name="bookTitle" id="header_search" placeholder="热门搜索：大英 毛概 高数" required="required" />
 		<a href="<c:url value='/center'/>"><span id="header_center"></span></a>
-		<c:if test="${!empty user }">
-			<a href="<c:url value='/logout' />"><span style="float: right">退出</span></a>
-		</c:if>
 		</form>
 	</header>
 	<div class="slider">

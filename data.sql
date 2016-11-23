@@ -40,6 +40,18 @@ INSERT INTO bk_book (cover_path,book_category_id, title, delivery_method_id, pre
 			VALUES ('/images/book/network.jpg',1, "计算机网络", 2, '电子工业出版社', '谢希仁', '第6版', 13.5, 19);
 INSERT INTO bk_book (cover_path,book_category_id, title, delivery_method_id, press, author, edition, selling_price, rental_price) 
 			VALUES ('/images/book/baiyexing.jpg',2, "白夜行", 2, '南海出版公司', '[日] 东野圭吾 ', '第1版', 12.5, 17.5);
+INSERT INTO bk_book (cover_path,book_category_id, title, delivery_method_id, press, author, edition, selling_price, rental_price) 
+			VALUES ('/images/book/baiyexing.jpg',2, "毛泽东思想和中国特色社会主义理论体系概论", 2, '高等教育出版社', '编写组 ', '2013年版', 10.5, 16);
+INSERT INTO bk_book (cover_path,book_category_id, title, delivery_method_id, press, author, edition, selling_price, rental_price) 
+			VALUES ('/images/book/baiyexing.jpg',2, "白夜行", 2, '南海出版公司', '[日] 东野圭吾 ', '第1版', 12.5, 17.5);
+INSERT INTO bk_book (cover_path,book_category_id, title, delivery_method_id, press, author, edition, selling_price, rental_price) 
+			VALUES ('/images/book/baiyexing.jpg',2, "白夜行", 2, '南海出版公司', '[日] 东野圭吾 ', '第1版', 12.5, 17.5);
+INSERT INTO bk_book (cover_path,book_category_id, title, delivery_method_id, press, author, edition, selling_price, rental_price) 
+			VALUES ('/images/book/baiyexing.jpg',2, "白夜行", 2, '南海出版公司', '[日] 东野圭吾 ', '第1版', 12.5, 17.5);
+INSERT INTO bk_book (cover_path,book_category_id, title, delivery_method_id, press, author, edition, selling_price, rental_price) 
+			VALUES ('/images/book/baiyexing.jpg',2, "白夜行", 2, '南海出版公司', '[日] 东野圭吾 ', '第1版', 12.5, 17.5);
+INSERT INTO bk_book (cover_path,book_category_id, title, delivery_method_id, press, author, edition, selling_price, rental_price) 
+			VALUES ('/images/book/baiyexing.jpg',2, "白夜行", 2, '南海出版公司', '[日] 东野圭吾 ', '第1版', 12.5, 17.5);
 
 INSERT INTO bk_dealed_book (book_id, dealed_num, selling_price, rental_price, district_id, user_id, datetime) 
 			VALUES (1, "GZSYSU01", 0, 0, 1, 1, CURDATE());
