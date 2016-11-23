@@ -100,7 +100,7 @@ public class AdminController {
 		for(RentingOrder rent:rentingOrders){
 			int userId = rent.getUserId();
 			String userNum = userService.getById(userId).getUserNum();
-			String[] dealedIds = rent.getDealedBookIds().split("|");
+			String[] dealedIds = rent.getDealedBookIds().split("\\|");
 			List<DealedBook> dealedBooks = new ArrayList<DealedBook>();
 			for(String t_dealedId:dealedIds){
 				dealedBooks.add(dealedBookService.getById(Integer.parseInt(t_dealedId)));
@@ -127,7 +127,7 @@ public class AdminController {
 		for(SellingOrder sell:sellingOrders){
 			int userId = sell.getUserId();
 			String userNum = userService.getById(userId).getUserNum();
-			String[] dealedIds = sell.getDealedBookIds().split("|");
+			String[] dealedIds = sell.getDealedBookIds().split("\\|");
 			List<DealedBook> dealedBooks = new ArrayList<DealedBook>();
 			for(String t_dealedId:dealedIds){
 				dealedBooks.add(dealedBookService.getById(Integer.parseInt(t_dealedId)));
@@ -1284,7 +1284,7 @@ public class AdminController {
 			HashMap<Integer,String> formatedDate = new HashMap<Integer,String>();
 			HashMap<Integer,String> userNum = new HashMap<Integer,String>();
 			for(RentingOrder order:rentOrders){
-				String[] dealedIds = order.getDealedBookIds().split("|");
+				String[] dealedIds = order.getDealedBookIds().split("\\|");
 				int dealedId = Integer.parseInt(dealedIds[0]);
 				DealedBook dealedBook = dealedBookService.getById(dealedId);
 				Book book = bookService.getById(dealedBook.getBookId());
@@ -1338,7 +1338,7 @@ public class AdminController {
 			HashMap<Integer,String> formatedDate = new HashMap<Integer,String>();
 			HashMap<Integer,String> userNum = new HashMap<Integer,String>();
 			for(SellingOrder order:sellOrders){
-				String[] dealedIds = order.getDealedBookIds().split("|");
+				String[] dealedIds = order.getDealedBookIds().split("\\|");
 				int dealedId = Integer.parseInt(dealedIds[0]);
 				DealedBook dealedBook = dealedBookService.getById(dealedId);
 				Book book = bookService.getById(dealedBook.getBookId());
@@ -1400,7 +1400,7 @@ public class AdminController {
 			HashMap<Integer,String> formatedDate = new HashMap<Integer,String>();
 			HashMap<Integer,String> userNum = new HashMap<Integer,String>();
 			for(SellingOrder order:sellOrders){
-				String[] dealedIds = order.getDealedBookIds().split("|");
+				String[] dealedIds = order.getDealedBookIds().split("\\|");
 				int dealedId = Integer.parseInt(dealedIds[0]);
 				DealedBook dealedBook = dealedBookService.getById(dealedId);
 				Book book = bookService.getById(dealedBook.getBookId());
@@ -1454,7 +1454,7 @@ public class AdminController {
 			HashMap<Integer,String> formatedDate = new HashMap<Integer,String>();
 			HashMap<Integer,String> userNum = new HashMap<Integer,String>();
 			for(RentingOrder order:rentOrders){
-				String[] dealedIds = order.getDealedBookIds().split("|");
+				String[] dealedIds = order.getDealedBookIds().split("\\|");
 				int dealedId = Integer.parseInt(dealedIds[0]);
 				DealedBook dealedBook = dealedBookService.getById(dealedId);
 				Book book = bookService.getById(dealedBook.getBookId());
